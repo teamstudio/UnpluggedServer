@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='utf-8'?>
+<form name='Device' alias='Device' xmlns='http://www.lotus.com/dxl' version='9.0'
+ replicaid='C1257AC00076B554' publicaccess='false' designerversion='8.5.2'
+ inherit='true' renderpassthrough='true'>
+<noteinfo noteid='27e' unid='0EEC313ACE1C6E828525789300572C41' sequence='24'>
+<created><datetime dst='true'>20110517T115209,61-04</datetime></created>
+<modified><datetime dst='true'>20130515T115638,95+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115638,94+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115638,94+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223638,13+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<globals><code event='options'><lotusscript>Option Public
+Use "libSettings"
+</lotusscript></code><code event='declarations'><lotusscript>Dim g_isEnabledOnOpen As Integer
+Dim g_origKey As String</lotusscript></code></globals><code event='windowtitle'><formula
+>@If(@IsNewDoc &amp; @IsDocBeingLoaded; "New Device";
+@IsAvailable("ID");"Device: " + ID;"&lt;Not Available&gt;")</formula></code><code
+ event='queryopen'><lotusscript>Sub Queryopen(Source As Notesuidocument, Mode As Integer, Isnewdoc As Variant, Continue As Variant)
+	If Not Isnewdoc Then
+		g_isEnabledOnOpen= ( Source.Document.GetItemValue("Active")(0) = "1" )
+		g_origKey = Source.Document.GetItemValue("ID")(0) 
+	End If
+End Sub
+</lotusscript></code><code event='querysave'><lotusscript>Sub Querysave(Source As Notesuidocument, Continue As Variant)
+	Const VALIDATETITLE = "Missing Required Field"
+	Dim doc As NotesDocument, vw As NotesView,  vec As NotesViewEntryCollection, ve As NotesViewEntry, isDupe As Boolean
+	source.Refresh
+	Set doc = source.document
+	
+	Dim sID As String
+	sID = doc.GetItemValue("ID")(0)
+	
+	If doc.GetItemValue("UserName")(0) = "" Then
+		Continue = False
+		Msgbox "Username field is required", 48, VALIDATETITLE 
+		Source.GotoField("UserName")
+		Exit Sub
+	End If
+	
+	If sID = "" Then
+		Continue = False
+		Msgbox "Device ID field is required", 48, VALIDATETITLE  
+		Source.GotoField("ID")
+		Exit Sub
+	End If
+	
+	Set vw = doc.ParentDatabase.GetView("DevicesAllLU")
+	vw.Refresh
+	
+	Set vec = vw.GetAllEntriesByKey(sID, True)
+	If vec.Count &gt; 0 Then
+		Set ve = vec.GetFirstEntry
+		Do While Not ve Is Nothing
+			Dim veId As String, docId As String
+			If Strcomp(ve.NoteID, doc.NoteID, 1) &lt;&gt; 0 Then
+				isDupe = True
+				Exit Do
+			End If
+			Set ve = vec.GetNextEntry(ve)
+		Loop
+	End If
+	
+	If isDupe Then
+		If source.IsNewDoc Then 
+			If ( 6 &lt;&gt; Messagebox("Device already defined.  Create?", 4+32+256 , "Warning: Duplicate") ) Then
+				continue = False
+			End If
+		Elseif doc.GetItemValue("ID")(0)   &lt;&gt;  g_origKey  Then
+			If ( 6 &lt;&gt; Messagebox("Device already defined.  Save changes?", 4+32+256 , "Warning: Duplicate") ) Then
+				continue = False
+			End If
+		Else
+			Messagebox "Warning: Device is defined more than once.", 64 , "Warning: Duplicate" 
+		End If
+	End If
+	
+	
+	If continue Then
+		If Source.Document.GetItemValue("Active")(0) = "1" Then
+			If Not g_isEnabledOnOpen Then
+				Continue = UIEnableDevices( Source )
+				If Continue Then
+					g_isEnabledOnOpen= ( Source.Document.GetItemValue("Active")(0) = "1" )
+				End If
+			End If
+		End If
+	End If
+	
+	Delete doc  'get rid of doc b/c notes caches it so 2 saves on new doc doesn't pick up note id on second save...	
+End Sub</lotusscript></code>
+<body><richtext>
+<pardef id='1'/>
+<par def='1'><run><font size='9pt'/>	</run></par>
+<pardef id='2' leftmargin='1in' rightmargin='96%' hide='preview previewedit'/><subformref
+ name='(Header) | sfrmHeader'/>
+<par def='1'><run><font style='bold' color='#bf4100'/></run></par>
+<par def='1'><run><font size='14pt' style='bold' color='#0060a0'/>Device:  </run><run
+><font size='14pt' style='bold' color='#0060a0'/><computedtext><code event='value'><formula
+>@If(@IsNewDoc &amp; @IsDocBeingLoaded; "New Device";
+@IsAvailable("ID");ID;"&lt;Not Available&gt;")</formula></code></computedtext></run><run
+><font size='14pt' style='bold' color='#0060a0'/></run></par>
+<par def='1'><run><font size='6pt' style='bold' color='#bf4100'/></run></par>
+<table widthtype='fitmargins' rowspacing='0.0500in' columnspacing='0.1500in'
+ refwidth='8.8313in'><tablecolumn width='1.8451in'/><tablecolumn width='6.3861in'
+ sizetofit='true'/>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<pardef id='4' keepwithnext='true' keeptogether='true'/>
+<par def='4'><run><font size='9pt' style='bold'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<pardef id='5' keepwithnext='true' keeptogether='true'/>
+<par def='5'><run><font size='9pt' style='bold' color='#f7f7f7'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='4'><run><font size='9pt' style='bold'/>Username:</run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<pardef id='6' keepwithnext='true' keeptogether='true'/>
+<par def='6'><run><font size='9pt' color='#f7f7f7'/></run><run><font size='9pt'/><field
+ choicesdialog='addressbook' lookupeachchar='false' lookupaddressonrefresh='false'
+ type='names' kind='editable' name='UserName'><code event='defaultvalue'><formula
+>UserName</formula></code><code event='inputtranslation'><formula>@Trim(UserName)</formula></code></field></run><run
+><font size='9pt' color='#f7f7f7'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<pardef id='7' hide='read print preview' tabs='L2.2500in' keepwithnext='true'
+ keeptogether='true'/>
+<par def='7'><run><font size='9pt' color='gray'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<pardef id='8' tabs='L2.2500in' keepwithnext='true' keeptogether='true'/>
+<par def='8'><run><font size='9pt' color='#f7f7f7'/> </run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='4'><run><font size='9pt' style='bold'/>Enabled?</run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<pardef id='9' keepwithnext='true' keeptogether='true'/>
+<par def='9'><run><font size='9pt' color='#f7f7f7'/></run><run><font size='9pt'/><field
+ borderstyle='none' lookupeachchar='false' lookupaddressonrefresh='false'
+ type='keyword' kind='editable' name='Active'><keywords helperbutton='false'
+ columns='2' ui='radiobutton'><textlist><text>Yes|1</text><text>No|0</text></textlist></keywords><code
+ event='defaultvalue'><formula>"1"</formula></code></field></run><run><font
+ size='9pt' color='#f7f7f7'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='4'><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='5'><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='4'><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<pardef id='10' align='right' keepwithnext='true' keeptogether='true'/>
+<par def='10'/></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='4'><run><font size='9pt' style='bold'/>Device ID:</run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='5'><run><font size='9pt' color='#f7f7f7'/></run><run><font size='9pt'/><field
+ type='text' kind='editable' name='ID'><code event='defaultvalue'><formula
+>""</formula></code><code event='inputtranslation'><formula>@Trim(ID)</formula></code></field></run><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='9' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'
+ color='#f7f7f7'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='4'><run><font size='9pt' color='#f7f7f7'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='9'><run><font size='9pt' color='#f7f7f7'/></run></par></tablecell></tablerow></table>
+<pardef id='3' firstlineleftmargin='1in' tabs='L2.2500in'/>
+<par def='3'/></richtext></body>
+<item name='$SubForm_RepIDs' sign='true'><text>0000000000000000</text></item>
+<item name='$$ScriptName' summary='false' sign='true'><text>Device</text></item></form>
+

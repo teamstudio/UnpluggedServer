@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='utf-8'?>
+<view name='(Lookup Databases by srcid)' alias='DatabaseSrcIdLU' xmlns='http://www.lotus.com/dxl'
+ version='9.0' replicaid='C1257AC00076B554' showinmenu='false' publicaccess='false'
+ designerversion='8.5.3' unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator'
+ headers='beveled' opencollapsed='false' showresponsehierarchy='true' showmargin='true'
+ shrinkrows='false' extendlastcolumn='false' showhierarchies='false' unreadcolor='black'
+ rowlinecount='1' headerlinecount='1' rowspacing='1' bgcolor='white' totalscolor='black'
+ headerbgcolor='white' boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='false' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
+ uniquekeys='false'>
+<noteinfo noteid='2d6' unid='6215C5616B0A6871852578BD006B5BCA' sequence='12'>
+<created><datetime dst='true'>20110628T153238,50-04</datetime></created>
+<modified><datetime dst='true'>20130515T115642,86+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115642,85+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115642,85+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223638,38+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT ( Form = "UserDatabase" &amp; Active!= "0" )</formula></code>
+<actionbar bgcolor='#ece9d8' bordercolor='black'>
+<actionbuttonstyle bgcolor='#ece9d8'/><font color='system'/><border style='solid'
+ width='0px 0px 1px'/>
+<action title='Categori_ze' showinbar='false' systemcommand='categorize'/>
+<action title='_Edit Document' showinbar='false' systemcommand='edit'/>
+<action title='_Send Document' showinbar='false' systemcommand='send'/>
+<action title='_Forward' showinbar='false' systemcommand='forward'/>
+<action title='_Move To Folder...' showinbar='false' systemcommand='movetofolder'/>
+<action title='_Remove From Folder' showinbar='false' systemcommand='removefromfolder'/>
+<action title='_Read' showinbar='false' systemcommand='markread'/>
+<action title='_Unread' showinbar='false' systemcommand='markunread'/>
+<action title='_Open in New Window' showinbar='false' systemcommand='openinnewwindow'/>
+<action title='_Print...' showinbar='false' systemcommand='print'/>
+<action title='_Delete' showinbar='false' systemcommand='delete'/>
+<action title='_Document Properties' showinbar='false' systemcommand='properties'/>
+<action title='C_ut' showinbar='false' systemcommand='cut'/>
+<action title='_Copy' showinbar='false' systemcommand='copy'/>
+<action title='Copy as Document _Link' showinbar='false' systemcommand='copyasdoclink'/>
+<action title='Copy as _Table' showinbar='false' systemcommand='copyastable'/>
+<action title='P_aste' showinbar='false' systemcommand='paste'/>
+<action title='_Open' showinbar='false' systemcommand='open'/>
+<action title='Bookmark' showinbar='false' systemcommand='bookmark'/></actionbar>
+<column sort='ascending' hidedetailrows='false' itemname='$14' width='10'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='false' sortnocase='true'
+ showaslinks='false'><columnheader title='NoteId'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>@Text(@Right(@NoteID; "NT"))</formula></code></column>
+<column hidedetailrows='false' itemname='$13' width='1' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>""; %REM; "This view maps to the userdatabase view in terms of columns"</formula></code></column>
+<column hidedetailrows='false' itemname='$12' width='1' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>""; %REM; "This view maps to the userdatabase view in terms of columns"</formula></code></column>
+<column hidedetailrows='false' itemname='ReplFormula' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='ReplFormula'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='RepType' width='7.7500' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='RepType'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='ShowOnWS' width='7.6250' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='ShowOnWS'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='$AttachmentExts' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='AttachmentExts'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>@If(
+	ReplOmitAttach="1"; "";
+	ReplAttachmentExts="";  "*.*";
+	ReplAttachmentExts
+)</formula></code></column>
+<column hidedetailrows='false' itemname='$8' width='10' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='NoteId'><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>@Text(@Right(@NoteID; "NT"))</formula></code></column>
+<column hidedetailrows='false' itemname='$10' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='ComparableHash'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>@Password( ("x") + @ReplaceSubstring(@Trim( (ReplFormula) + (RepType) + (AutoLaunchApp) + (ShowOnWS) + @Implode($AttachmentExts; ".") ); @NewLine; ""))</formula></code></column>
+<column hidedetailrows='false' itemname='$11' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='PathNormalized'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>pnorm := @Trim(@ReplaceSubstring(path; "\\"; "/"));
+@If( server != "";
+@Name([Abbreviate]; server) + pnorm;
+pnorm)</formula></code></column>
+<column hidedetailrows='false' itemname='$16' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='LimitToDevices'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>@If(
+	ReplLimitByDevice!="1"; "*";
+	ReplDevices
+)</formula></code></column>
+<column hidedetailrows='false' itemname='AutoLaunchApp' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='AutoLaunch'><font size='9pt' style='bold'/></columnheader></column></view>
+

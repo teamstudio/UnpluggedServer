@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<agent name='Login' alias='Login' xmlns='http://www.lotus.com/dxl' version='9.0'
+ replicaid='C1257AC00076B554' hide='v3' runaswebuser='true' publicaccess='false'
+ designerversion='8.5' activatable='false'>
+<noteinfo noteid='19e' unid='4AF52BE7F8CF5861852576EB005338DF' sequence='36'>
+<created><datetime>20100319T100900,47-05</datetime></created>
+<modified><datetime dst='true'>20130515T115640,34+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115640,33+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115640,33+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,51+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedRestricted/O=mvtest</name><name
+>CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=UnpluggedRestricted/O=mvtest</name><name
+>CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name
+>CN=UnpluggedRestricted/O=mvtest</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name
+>CN=UnpluggedRestricted/O=mvtest</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name
+>CN=UnpluggedRestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name
+>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<designchange><datetime dst='true'>20130515T115641,54+02</datetime></designchange>
+<trigger type='scheduled'>
+<schedule type='never' runlocation='specific' runserver='CN=mvlocal/O=mvtest'/></trigger>
+<documentset type='modified'/><code event='options'><lotusscript>%REM
+	Agent Login
+	Created Mar 19, 2010 by Matt Vargish/Teamstudio
+	Description: Comments for Agent
+%END REM
+Option Public
+Option Declare
+Use "libLogin"
+
+</lotusscript></code><code event='initialize'><lotusscript>Sub Initialize()
+	Login
+End Sub</lotusscript></code>
+<rundata processeddocs='0' exitcode='0'>
+<agentmodified><datetime>20100323T102649,05-05</datetime></agentmodified>
+<agentrun><datetime>20100323T114825,60-05</datetime></agentrun>
+<runlog>Started running agent 'Login|Login' on 03/23/2010 12:48:25 PM
+Running on new or modified documents: 5 total
+Found 5 document(s) that match search criteria
+Ran LotusScript code
+Done running agent 'Login|Login' on 03/23/2010 12:48:25 PM
+</runlog></rundata>
+<item name='$POID'><datetime dst='true'>20130501T151424,09-04</datetime></item></agent>
+

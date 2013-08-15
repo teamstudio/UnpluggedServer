@@ -1,0 +1,530 @@
+<?xml version='1.0' encoding='utf-8'?>
+<form name='(LicenseAgreement)' alias='(LicenseAgreement)' xmlns='http://www.lotus.com/dxl'
+ version='9.0' replicaid='C1257AC00076B554' nocompose='true' noquery='true'
+ publicaccess='false' designerversion='8.5.3' renderpassthrough='true'>
+<noteinfo noteid='1d2' unid='0D66AB6DAAB4C157852576EF000B9C72' sequence='44'>
+<created><datetime>20100322T210649,46-05</datetime></created>
+<modified><datetime dst='true'>20130515T115642,73+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115642,72+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115642,72+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,70+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<body><richtext>
+<pardef id='1' leftmargin='1in' rightmargin='80%' hide='notes web mobile'
+ tabs='C4in R7in'><code event='hidewhen'><formula>1</formula></code></pardef>
+<par def='1'><run><font size='1pt' name='Verdana' pitch='variable' truetype='true'
+ familyid='20' color='red'/></run></par>
+<table widthtype='fitwindow' leftmargin='0.7500in' rightmargin='7.5000in'
+ colorstyle='solid' bgcolor='white' columnspacing='0.2000in' refwidth='7in'><tablecolumn
+ width='100%'/>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='3' align='center' keepwithnext='true' keeptogether='true'/>
+<par def='3'><actionhotspot hotspotstyle='none'><run><font size='1pt'/> </run></actionhotspot></par>
+<par def='3'/>
+<par def='3'><picture width='214px' height='66px'><jpeg>
+/9j/4AAQSkZJRgABAgAAZABkAAD/7AARRHVja3kAAQAEAAAAPAAA/+4AJkFkb2JlAGTAAAAAAQMA
+FQQDBgoNAAAFSgAACOMAAA0uAAASSv/bAIQABgQEBAUEBgUFBgkGBQYJCwgGBggLDAoKCwoKDBAM
+DAwMDAwQDA4PEA8ODBMTFBQTExwbGxscHx8fHx8fHx8fHwEHBwcNDA0YEBAYGhURFRofHx8fHx8f
+Hx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8f/8IAEQgAQgDWAwERAAIR
+AQMRAf/EANMAAAIDAQEBAAAAAAAAAAAAAAAFAwQGAgEHAQEAAgMAAAAAAAAAAAAAAAAAAQUDBAYQ
+AAIDAAECBAYDAAAAAAAAAAMEAQIFAEAREBIUFSAwIhM0NVBgIREAAgECAwMIBgoDAQAAAAAAAQIR
+AAMhMRJRcRMQQWGBkSIyBPCxwdFCUiAwofFicoKyIzNQ4ZI0EgABBAMBAAAAAAAAAAAAAAARAEBg
+ARAxUVATAQABAwIFBAEFAQEAAAAAAAERACExQVEQYXGBoUCRscHRIDBg8OHxUP/aAAwDAQACEQMR
+AAAB+qAAGfOzs4OgKgyExOMhoAAAAAAAABBiwz5cyMpkQxOCIjOj05GQ1AAAAAAADJUHNNN2wyVB
+zW+6vs7GbOAAAZonHwAAAAAAABUPn425rk2m9YIKmm1V70XlhZ5s0BTIAPALYxK5RKxeOCoXCQVm
+rEAvM6jd1FLT1tSHHjtZ9jP3vRbswp2asyZIWysPjPkJrDHHRsjGlYZkR4a8+do+g1lVlKHmw0Ft
+dZy76D6SfNzstCwbk5nUX02xQMCIqDErkI3Ghj0NU59H1xK7S0Mqifc31sz9GFZjjWjI9PSE7PTM
+C8vEgvLBrymXSM8OC2BELhkSAUC4dgAAAtOBqLiMaHoAAAAAAAAAAAAAAAAAAAAAf//aAAgBAQAB
+BQL4LaBvWV1hzwmnUd7akRb3UfempW/B6xIXNoCEZh0hSKPUGuu7Jy/OucNPAibHrKZRqcJktXmi
+BYpbPJKtc00te2t+mtmsmJ6B23B5ZxQmpcRPmF0WvMK1j5/F7+cHxbLBg8xzlKD5rlrUV9xd4/Ty
+tZN/8LTyFzL91n9GivPfHO+fpQ1xzWIBg+7Pdfcmb7/Msshz0dQjJ9Buyoc7Qu1LW3FLi3ScR1CM
+nb2oHcO6TzJapGGHdigbxuMxKzI2BNbcVtbZIQPNENLFXMutYjdLXSZNZnTtNnqJLVChMj0Nb9hn
+KAqppgoFtu02RT/U435u7+IjeaK5gaFc1QClJO80tnhoZzSAGUkSSMwS/bK3p2ZEma418wFDN6Kw
+JT5przenhlgnzaX53E/q0db9grrkAK9juM6wYCDMFJc4JSLHceO5TIFBaTDCbDGi00LLHBGLjYTY
+PptNCy6Rdu1DJM+8j7LXq8nWx1GD6jDQ/AuesSXLelL77eBpAI03wWaoIut+wWWXKoIARQQIicoI
+Y4KosWYXBFKBCPl9kf3HNOpQ4a1u5dikGb1KXDhr2+5cYyR7el3rSlIKAJeDXALno1PEghlr7Uh3
+oOg6+BUVC3pStK/ETOSJNMtGk8LnplmmWjWYiIj+B//aAAgBAgABBQLrZvEdTZi3Kz5h8pPeOnPH
+ays8tHaVp+np2K/7S1acsWO4STNunYH38VqdTYFZ5C9f6f8A/9oACAEDAAEFAutklY6m7N+Unzj4
+Oe9enYjtdOeXjtKs/T07NImR3rTljRMgLM26dofePBQfU3XrPIWpH9P/AP/aAAgBAgIGPwKW9WnJ
+yZT/AP/aAAgBAwIGPwL2ac3TrYXUQg4OTKf/2gAIAQEBBj8C+hctLaLLbGXPvoMbbC1Onic013rT
+hC2nXV0Cy7cEw5GWFIeG/DuGBcOU02i0zKs4iObori3LJKz4hlnlQtuM016vTdXlSEe0hfP5hIpF
+Gu7cuMdKnOigTTo/s1Zg/X95wOvke9aZdN0aXDTl0dlFALLrzO47wpjrRiW1BzM7q80CwnzEkdf3
+1Ys6hNppJoXX4aDGeHMmfso+WNxOGMUzmZ561X3XwaO7PVVhbj29NgjTEzA+6rTo68a0TnOkg1cv
+XWBu3c9OQ+tK4LGGA99NJl4OPIjbR9OzwnKzqmOqnNxtRDc+7666ymGCmDX9zU/Tj21cTrp0+UxU
+fKY9tBY1XD8NZJ2H30UYabox6DT2ggOmMd4mosII+Zqi+oAPxLzVY/V7Kv3AJKmY6q4ZQKImaFxV
+1S2nHdThlC6YyorYUNHxnKjxUHQVrhlAoiZopZXWRmxyr+ZBG1fQ0tooADONG3aXW4zPMK79tY6J
+HvriJ1jZRWwoaPjOVXLdxB3wQCvoeRWNxUwxnPsosGa4SIygUXFldR52xpEJ7hnugQMquztiuFwx
+EQcKtj8Wn2Vd/T+0Uh0As4liRtoqmCkTGyvJE7HHYYrzW/3UPyml/OPUa82wz0j7cKVXxXON1M2k
+Ap4TVxhnw2iraP4cyN2NP3RKCVjmouM1RyP+aFwrrjGDXDa2BsbZXmgOdB649tKr4qMSKuHQAUEq
+R0cguLmme7lN45DBau7+RPzz7au/p/aKFpk1x4TMVMTcfmFeVtfKG9leYtjNiY7KDjxpzGvBpt28
+WjsrzNs/EoFfLcTKimkBBi8UbZyZGBoT3XUyp20bYQARLldgoIcmVgesV3hiuU5EV/5Vnf8A6q8N
+C22Pdw7RU+G4nMa4KpGrxRyzGk7Vo2xZH4Xckz6hWkWQG2zh2UC2InVcb028guIsMuWNXf0/tFWT
+cthjoGNRbQLuocRFeMtQmotqEHQIqblsMdtcMW10HNYwr+NFSc9IinS5ZD2we6fvrg2bfDQ+L0FN
+fOUaU9tXLdy0HtqYB3b6Nmxb4at4j91NfI7oELvqHUMNhqeCtQoCjYK/kQNvr+NAs5xX9Kf8jl03
+FDDpqeF9p99aUUKuwcpd7csczjQVRCjAD6ctaE9GHqqeFJ6ZPJLWhO0Yeqp4U75NQMv8F//aAAgB
+AQMBPyH9ArxqYJWZzpGKPQU1iOjMc6IEZDAFxIZShBCwUBJPihYQQwP+FLrX5MJvKQd2phooiNIH
+SkQBJ2F7RvQy1kTAmxV0TmDbz0KayTAWbaDU/fsT+yJ9uA4Jt0AAbOVCWC31J5YfemtoqvusgXwU
+36ySYLs0O2rtCS4tzpIg6LCi482lDypShqGixmj1vxbMyvE3Za62GNBm0TFMJIH2Bq0shJEotib/
+ALsdMtXI7qn+gXmLn1w3DGesX8/r88Gos+aTPEDsh+9KEIGjHBIPo49kvmpmaITrZ+CudCOzUXv/
+AOnehgh5JQButKSCNqEUZbDBufih69hLofaiTAbt+gR80Ytyve4Z+aQjLja1shDLooy8KBdKMwgh
+ZlP1UDkok6z+KxBkyyeQRPWanCHDcF9JFbUZeFAulFGsdW5BmrJL7onZZUNHUhZsTQJLVm9tbNHV
+e0J7rQ+lsNlbNYWyZZdAj5rNnqiFNllwZAWhtk2QS71Y5sHNas6VreSj42KNgYCyHQ5UgaAOgBV/
+G8ol5rmaBDhrvwANMbLK7L6UesMTuyeKv8p2QDwV5j44sm2liGPU/ah3glvWFirMpoAJcI6VZ7Mr
+aSJq8El3EGHinGKQgLNq8xQAooh6fZru971lbhJZXLrSkweQfjUOYS3WNKlQiQCZcBznFNf8cXkw
+XUXL2olv+4OF/wB3byngAPiDF4DSbM0mMpbAGOwUSmYq7t6+9YgA6ox5o44RH2ka2IZXXbFe9qtt
+Exs3h7NDlFkrROW4lG8pPPBuuCazu4bSRNQAdiMNTcqxcJHc1wV4MdlKOQzYp/GaMpdwA9qyZAwP
+IR70AhL/AKbiVFPzlUL9jfjMrXNie1ygQXJFuBUCipB+D+6maGexmY4HXSMiXI168AM7iIvjfNQB
+bmAT1roZAhOYmmiZdCE9q5htl/emYGkpdTWnFUyDL2pSZIENhgUkU0nOVYWLxFhQT4dxreV4pYqR
+dlyQ1yNKBjYLKXBplusx0K5RzRPNAZHpb2xXKPIB4ocI/CJTo0cmrAu9Wv6f9ceXCxNA2M9v2soo
+IaEHES0e5oI0dioDx5AP1vJBrP5iggAb/AsUAABAWApZOcyP4VDgRvD2WKABAsBj/wAL/9oACAEC
+AwE/IfW55PUzYxTNOb8I15eolatJU4bNS9L6gUMhanJF7IpEoTzvQw0/z1DCGTi87fU3nDyouk0E
+fw7/2gAIAQMDAT8h9bmEPUyksRSrOb8Jxy9RKc71bolTZqeOz6giospeRV0gqIDLveiui9saeoeJ
+k+OKTPGnqV5w8q0yetBGP4d//9oADAMBAAIRAxEAABCSSCQCAASSSSSSSSQQQCCSSSSSSSD+SSQC
+SSSSSSAA5gQCQQASQQQAGPCCAASCSQQAAA7/AIkAEhggEgAlhjgEAgAAAkEkkAEgkkkkkkkEEkkk
+kkkkkkkkkkkkkn//2gAIAQEDAT8Q/RDh5LiZPCaycMvIgwmrDVkdtSr+GoKluBnap9rN0A1bTgUs
+Gw0KyBMorKbMTUB6k7SksRLUNDVpvFKXkWl2p1NSIgdcpgdahTBmkYV7aNr1HQwsxAq2A670z8A0
+lABI0N5+p/eV/qsJTwin1PCGUVsS0iY7yXiWtJoUYrbZkGgd0DfWojdw1TyJ7JodMrLYsZJ5qjwJ
+RIbRy5fKp7kTRiF8INEt9avbITEFgOhGxSdM9BJozcACCnm2AUgsKEU2KB9sQAVlgs6mn7pG3dAy
+ofZoQELsruPlDhJTK75AeB/XzsOBu0mkqtLq8pIi3N/eW1meAkSv+4fio4IJzoPkUSa25EGg206E
+QH2qTGWD1hgVsYc2gyM5cGtMJAtMI6sqWkAHUMDLcRbqn4nBalwCrO1RmC1luNl7KZfxYiWq2m6d
+jSrgkDIjYjQnmUEFBhSpT0JGTMQ0mD4yAk7VNGsETMMzQAq1REszUPc81ImWKxNZU2YalPQkZMxD
+TfqXG3ZGCTeTlVyOYJMiywic3KdOwiJxA2yUhAJcBzqM1uRTqneRjkF4pxxNg4JL7k9KIiNRkGZy
+TnSPEwh4FhE8zgUvSQQSBTNFrAY4VMsTko69BvWATeeNqvoM2mJYtdVJZKb0Bh4oQFgkPELTJeZt
+pVy0iNSb+eFUBRBCJwNgxFE8wHLoHKUlMVCL/XR4Iv7zY4eIdWMyCic4oSk+KORDUnJUchX7GBDI
+cUwsGCygA5kzRgCkaffLdyqNvSVSLQMJZK83vM+VP70ltixuQu6nC4SAje7ZZpBeAuF1OclGMweI
+7LlKLyqXB564BAsxCcFcmQUq3k6/l4tUUdIxg5C3egjeIbXus+eBi8XhuyduFUtFwTFxgibYtUAG
+gbGAF5gZXq1GaithfcktWHe+dD2FQGZKxhPs4UpFZKQgcbxrEc2k3g7ORtOg0p8KycZVhSKBqIVS
+skhLCDepOIOXR4yaYLTnJLK2Qz7NEWScVuFU47+1TlWIzJvDU+NCp+tIOQepyaMSM3kDeSfNQdKA
+AQiAL+NEVsiFkRETUNNMUmjfNdwCxi7NY4s1JLCbmjw0TELkHXk3EYaJ9sqghEgEHKp5QiMLqcSr
+B+OEs6kp5rxOlnCoKWAOxBaOHekWpRkNxd71qQO1zBYmCaZKMu0IlCXrBpZDMLAiF71BYhuYIihC
+k1o9tAhgwKSaQ0PyLgJFLyJQoTIRKAAyF73pk81CLwDkQJ60zYuBUUkUhG8lqNvFGHBlChOrOKUg
+04iaS3AR3pS2XuVvAb1BF5MM/c+lEBjA12AVjgMsHuHao1egEDbInX9DhI43jQdycPMqELiYVu5v
+grHUQ028GvG7P4gsBsBYCi6HilAQF5f1ilzK151gq9Sr4KBF7u8aPsIAgAsAFSEqqULlZzetHkNJ
+7qY/ahRlBgAYAP8Awv/aAAgBAgMBPxD1uA3f1MwIgxY/M1KCYjuXPrhzmH++o6hv7/7UvRv0/Vc7
+Qqwbh9/fqH5rU5zaxfen6BI0PLPinRmc3hY8UxUHNgAy29QTGcvT/OKGsLHPf1L0j2H+eKyPcf8A
+hQCAgP4d/9oACAEDAwE/EPW2lzqfHqYlZSWNus1JSYieZc+uHNke+vn1HLPyZ8zUiOT9PwVz7DzX
+X0ff36jXASc5tACutM2Yi3yGfFLNxE+FjxS2QeABk6HqBBzl/rb88XMrCOZ19vUz4La2eLniswlz
+fiDxRgBAfw7/2Q==
+</jpeg></picture></par>
+<pardef id='4' align='center' tabs='L4.2500in R7.5000in' keepwithnext='true'
+ keeptogether='true'/>
+<par def='4'/>
+<par def='3'><run><font size='14pt' name='Verdana' pitch='variable' truetype='true'
+ familyid='20'/>Teamstudio® Software License Agreement and User Agreement</run></par>
+<pardef id='5' align='full' keepwithnext='true' keeptogether='true'/>
+<par def='5'><run><font size='14pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/></run></par>
+<pardef id='6' spacebefore='2' keepwithnext='true' keeptogether='true'/>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>This Software License Agreement (the “Agreement”) is a legal agreement between you (“you” or</run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>“Customer”), and Teamstudio, Inc., a Massachusetts corporation with its principal place of business located at 900 Cummings Center, Suite 326-T, Beverly, MA  01915  (“Teamstudio”).</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>Teamstudio licenses its Unplugged software products on a per-mobile device basis.  Your right to use the Teamstudio Unplugged XPages Engine software product is set forth in this Agreement and any Teamstudio Unplugged Client Software License Supplement presented upon download to you or your authorized users of any Unplugged Client software.  </run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>Carefully read all of the terms and conditions of this Agreement prior to downloading and/or installing or using the Licensed Product (as that term is defined below).  This Agreement between you and Teamstudio sets forth the terms and conditions of Customer’s use of the Licensed Product.  For the purposes of this Agreement, the effective date of this Agreement shall be the date upon which Customer clicks to accept this Agreement.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>BY CLICKING  “OK” YOU ARE ACCEPTING ALL OF THE TERMS OF THIS AGREEMENT AND AGREE TO BE BOUND BY THE TERMS OF THIS AGREEMENT.  IF YOU DO NOT AGREE TO ALL OF THE TERMS OF THIS AGREEMENT, CLICK “CANCEL” INDICATING THAT YOU DO NOT ACCEPT AND DO NOT DOWNLOAD AND/OR INSTALL OR OTHERWISE USE THE LICENSED PRODUCT.</run></par>
+<par def='6'><run><font size='12pt' name='Times New Roman' pitch='variable'
+ truetype='true' familyid='10'/><break/></run></par>
+<par def='5'><run><font size='11pt' style='bold' name='Calibri' pitch='variable'
+ truetype='true' familyid='20'/>1.   </run><run><font size='11pt' name='Calibri'
+ pitch='variable' truetype='true' familyid='20'/>This Agreement contains the entire understanding of Teamstudio and Customer and supersedes all prior written or oral communications between the parties with respect to the subject matter hereof.  This Agreement does not operate as an acceptance of any conflicting terms and conditions and shall prevail over any conflicting provisions of any purchase order of Customer or any other instruments except as set forth herein. </run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' style='bold' name='Calibri' pitch='variable'
+ truetype='true' familyid='20'/>2.    Definitions:</run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>2.1 </run><run><font size='11pt' style='bold' name='Calibri'
+ pitch='variable' truetype='true' familyid='20'/>Computer System </run><run
+><font size='11pt' name='Calibri' pitch='variable' truetype='true' familyid='20'/>means the computer hardware equipment on which Customer has elected to install and/or execute a given copy of the Licensed Program.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>2.2 </run><run><font size='11pt' style='bold' name='Calibri'
+ pitch='variable' truetype='true' familyid='20'/>Documentation </run><run
+><font size='11pt' name='Calibri' pitch='variable' truetype='true' familyid='20'/>means the softcopy documentation provided by Teamstudio with the Licensed Program, such as softcopy user manuals and online help.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>2.3 </run><run><font size='11pt' style='bold' name='Calibri'
+ pitch='variable' truetype='true' familyid='20'/>Licensed Product </run><run
+><font size='11pt' name='Calibri' pitch='variable' truetype='true' familyid='20'/>means, collectively, the Licensed Program and Documentation.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>2.4 </run><run><font size='11pt' style='bold' name='Calibri'
+ pitch='variable' truetype='true' familyid='20'/>Licensed Program </run><run
+><font size='11pt' name='Calibri' pitch='variable' truetype='true' familyid='20'/>means the executable code version of the Teamstudio software, as well as any updates or new versions that may be delivered by Teamstudio to Customer during the term of this license.  Licensed Program does not include Prerequisites, as defined in Section 5 hereof.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>2.5 </run><run><font size='11pt' style='bold' name='Calibri'
+ pitch='variable' truetype='true' familyid='20'/>Maintenance</run><run><font
+ size='11pt' name='Calibri' pitch='variable' truetype='true' familyid='20'/> means services relating to any updates to the Licensed Program that may become available by Teamstudio during the term of this Agreement if such service has been maintained by Customer as set forth in Section 10.1.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>2.6 </run><run><font size='11pt' style='bold' name='Calibri'
+ pitch='variable' truetype='true' familyid='20'/>Major Release</run><run><font
+ size='11pt' name='Calibri' pitch='variable' truetype='true' familyid='20'/> means a major improvement or a new release of the Licensed Program.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>2.7 </run><run><font size='11pt' style='bold' name='Calibri'
+ pitch='variable' truetype='true' familyid='20'/>Minor Release</run><run><font
+ size='11pt' name='Calibri' pitch='variable' truetype='true' familyid='20'/> means a bug fix or other minor update that does not usually impact functionality of the Licensed Program.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>2.8 </run><run><font size='11pt' style='bold' name='Calibri'
+ pitch='variable' truetype='true' familyid='20'/>Platform </run><run><font
+ size='11pt' name='Calibri' pitch='variable' truetype='true' familyid='20'/>means a specific mobile device platform such as iOS, Android or BlackBerry.   Certain additional restrictions may apply to the Licensed Programs that are licensed to Customer based on the Platform.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' style='bold' name='Calibri' pitch='variable'
+ truetype='true' familyid='20'/>2.9 Support or Technical Support</run><run
+><font size='11pt' name='Calibri' pitch='variable' truetype='true' familyid='20'/> means access to email based support personnel for the purpose of providing assistance to Customer’s system administrator with the use of the Licensed Product and second line assistance to Customer’s system administrator in supporting the standard business use of a Licensed Program by Customer’s authorized end users.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' style='bold' name='Calibri' pitch='variable'
+ truetype='true' familyid='20'/>3. License Fee:</run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>3.1 The license fee (“License Fee”) is the aggregate of the fees for the Licensed Program selected by Customer and may include fees associated with Maintenance or Support.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>3.2 The License Fee is due and payable by Customer upon receipt of Teamstudio’s invoice.   All payments under this Agreement shall be made in United States dollars, and if not paid within thirty (30) days of when due (or such longer period set forth in an invoice) will be subject to interest at the rate of eighteen percent (18%) annually, or the maximum amount allowed by applicable law if lower, calculated from the date when payment was due until payment is made.   In addition, Customer agrees to pay Teamstudio’s cost of collecting any past-due amounts under this Agreement, including but not limited to reasonable attorneys’ fees and costs.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' style='bold' name='Calibri' pitch='variable'
+ truetype='true' familyid='20'/>4. License Grant:</run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>4.1 Teamstudio hereby grants to Customer a limited, non-exclusive, non-transferable license to the Licensed Product solely for Customer’s own internal use and with no more than the number of supported mobile devices set forth in the applicable transaction document.  All use of the Licensed Program by Customer shall be made solely in accordance with the Documentation. </run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>4.2 Under the per mobile device model, an entitlement to use a mobile device with the Licensed Program may not be transferred, reassigned or redesignated between or among Customer’s employees and/or independent contractors except in connection with the long-term replacement of personnel. By way of example, if you have 50 employees in your enterprise each using one (1) mobile device to access and/or use the Licensed Program (each an “Authorized User”), you must acquire one (1) entitlement for each of such 50 employees. If an employee uses two (2) mobile devices (e.g., an iPhone and an iPad device) then two (2) entitlements shall be required for such employee.  Furthermore, if any such Authorized User has discontinued accessing and/or using the Licensed Program with a mobile device, neither Customer nor such Authorized User may transfer, reassign or redesignate the per mobile device license; except, however, in the event that any Authorized User's access or use is terminated permanently, such Authorized User's entitlement may be transferred to a new user, subject to the terms and conditions set forth herein. In no event may the actual number of Authorized Users accessing or using the Licensed Program exceed the number of per mobile device entitlements you have acquired. </run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>4.3 Customer’s acquisition of per mobile device licenses for the Licensed Program as set forth above authorizes Authorized Users to install and use the Unplugged Client software on any number of supported mobile devices, as long as the total number of devices does not exceed the number of per mobile device entitlements you have acquired.  In addition, Customer may install as many instances of Licensed Program as are reasonably necessary to provide the foregoing access.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>4.4 All licenses are subject to the following limitations:</run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>(a) The Licensed Product shall be used only by Customer for Customer’s sole and exclusive benefit, and shall not be used to provide time-sharing or other services.</run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>(b) Customer shall be responsible for identifying Authorized Users of supported mobile devices and maintaining compliance with the license requirements set forth in Sections 4.2 and 4.3.  </run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>(c) Customer shall not transfer, distribute or sublicense the Licensed Product to any third parties, and Customer’s license shall automatically terminate in the event of such a transfer or distribution.</run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>(d)   Customer shall not lease or lend the Licensed Program or otherwise allow use of the Licensed Program by or on behalf of any third party, nor describe the results of any benchmarking of the Licensed Program, whether or not obtained with Teamstudio’s assistance, to any third party.</run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>(e) Customer may not use the Licensed Program in such a way that results in Customer’s development of software products that are directly or indirectly competitive with the Licensed Product or other Teamstudio products.  The Licensed Program may not be used to create frameworks/controls/wrappers or other such products that are intended to be programmatically reused by anyone.  Customer acknowledges that any breach of this Section 4.2(d) will constitute a material breach of this Agreement and will result in an immediate termination of the license granted hereunder. </run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>(f) Customer’s right to deploy, evaluate, and use the Licensed Programs may be further limited based on the Platform for which the Licensed Program is licensed.   </run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>(g) Teamstudio reserves all rights to the Licensed Product not specifically granted herein.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>4.5 Customer acknowledges and agrees that the Licensed Program contains certain features that allow Customer to extend Lotus Notes® and Domino® applications to various mobile device platforms.   Customer acknowledges and agrees that such features shall not be used by Customer under any circumstance unless Customer obtains valid licenses to use such Lotus Notes and Domino applications as contemplated by this Agreement and comply with any terms and conditions associated with the use of such applicable mobile device platforms. Customer acknowledges and agrees that Customer remains solely liable for any claims that arise from Customer’s use of Lotus Notes and Domino and related applications or mobile device platforms and products and that Teamstudio shall have no liability whatsoever under any circumstances for such use.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' style='bold' name='Calibri' pitch='variable'
+ truetype='true' familyid='20'/>5. Ownership/Prerequisites</run><run><font
+ size='11pt' name='Calibri' pitch='variable' truetype='true' familyid='20'/>:  The Licensed Product is the proprietary property of Teamstudio or its licensors and is protected by the copyright law of the U.S., international treaties and other applicable laws. Teamstudio and its licensors retain any and all rights, title and interest in and to the Licensed Product, including in all copies, improvements, enhancements, modifications and derivative works of the Licensed Product. Customer’s rights to use the Licensed Product shall be limited to those expressly granted in Section 4. All rights not expressly granted to Customer are retained by Teamstudio and/or its licensors. Teamstudio shall identify a list of prerequisite hardware and software required for installation and use of the Software (“Prerequisites”).  Customer shall be responsible for acquiring, or authorizing Teamstudio to acquire on Customer’s behalf, all Prerequisites prior to installation and use of the Software.  Teamstudio shall not be a party to any software or other license agreement associated with the Prerequisites whether or not downloaded or installed by Teamstudio personnel on Customer’s behalf.  Notwithstanding anything to the contrary in this Agreement, Teamstudio makes no warranty of any kind with regard to the Prerequisites.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' style='bold' name='Calibri' pitch='variable'
+ truetype='true' familyid='20'/>6. Term and Termination:</run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>6.1    Subject to the limitations herein, the term of the license set forth in this Agreement is perpetual.  The license shall be for a period commencing upon the date of download and continuing until such time as Customer discontinues use of the Licensed Product on the Computer System or this Agreement is terminated, but otherwise without limitation as to duration.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>6.2    Teamstudio shall have the right to terminate Customer’s license if Customer fails to pay any required license fee(s) or otherwise fails to comply with the license terms and conditions set forth herein.   In the event that Customer’s failure to comply is not payment-related, Teamstudio shall give written notice to Customer of such default, and if such default has not been remedied within thirty (30) days after such notice, the license granted hereunder shall terminate.  In the event that Customer has failed to pay any required fee(s), whether an initial license fee or fee for additional licenses, maintenance, subscriptions or any other services, Teamstudio shall give written notice to Customer of such default, and if such default has not been remedied in full within five (5) days of such notice, all licenses granted hereunder are hereby automatically revoked without further notice. </run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>6.3    Customer agrees, upon expiration of the license term or upon termination by reason of Customer’s default or material breach, to immediately return or destroy the Licensed Program and copies thereof as directed by Teamstudio and, if requested by Teamstudio, to certify in writing as to the destruction or return of the Licensed Product and all copies thereof.  </run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>6.4    Sections 4.5, 5, 6.3, 6.4, 7.5, 8.2, 9, 11 and 16 of this Agreement shall survive the expiration or termination of Customer’s license and this Agreement.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' style='bold' name='Calibri' pitch='variable'
+ truetype='true' familyid='20'/>7. Warranty:</run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>7.1 Teamstudio warrants that during the term of this Agreement, for a period of ninety (90) days following installation on the Computer System, the Licensed Program will perform in all material respects in accordance with the specifications in the Documentation.  Customer’s exclusive remedy for any breach of the warranty contained in this Section 7.1, it for Teamstudio, at its expense, to use commercially reasonable efforts to replace or repair the Licensed Program.  Customer must notify Teamstudio in writing of any specific defect within the ninety (90) day period.  </run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>7.2 Teamstudio warrants during the term of this Agreement that any services described herein shall be performed in a reasonable and workmanlike manner, consistent with generally accepted industry standards.  Customer’s exclusive remedy for any breach of the warranty contained in this Section 7.2 is for Teamstudio, at its expense, to re-perform the deficient services.  Customer must notify Teamstudio in writing of any specific defect in the services within thirty (30) days of Teamstudio’s completion of the services.  </run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>7.3 In the event Teamstudio is unable, after using commercially reasonable efforts to correct the defects identified by Customer pursuant to Sections 7.1 and 7.2, Customer’s sole and exclusive remedy shall be:  for Section 7.1, to return the Licensed Product, terminate Customer’s rights under this Agreement and receive a refund of payments actually received by Teamstudio from Customer for the Licensed Product which is the subject of the warranty claim; and, for Section 7.2, to receive a refund of payments actually received by Teamstudio from Customer for the deficient services.  </run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>7.4 Any modification or attempted modification of the Licensed Product by Customer, any failure by Customer to implement any improvements or updates to the Licensed Product as supplied by Teamstudio any use of the Licensed Product not in compliance with the specifications set forth in the Documentation, shall void the limited warranties set forth in Sections 7.1 and 7.2.   Teamstudio shall not be responsible for any defect in, or caused by, any additions or modifications to the Licensed Product by Customer.</run></par>
+<par def='6'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/><break/>7.5 EXCEPT AS OTHERWISE PROVIDED IN THIS SECTION 7:</run></par>
+<pardef id='7' keepwithnext='true' keeptogether='true'/>
+<par def='7'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>(a) TEAMSTUDIO EXPRESSLY DISCLAIMS ALL WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT AS WELL AS ALL WARRANTIES ARISING BY USAGE OF TRADE, COURSE OF DEALING OR COURSE OF PEFORMANCE TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW; AND </run></par>
+<par def='7'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>(b) TEAMSTUDIO MAKES NO WARRANTY THAT THE LICENSED PROGRAM AND/OR SERVICES WILL MEET CUSTOMER’S REQUIREMENTS, OR THAT THE LICENSED PROGRAM AND/OR SERVICES WILL BE UNINTERRUPTED, TIMELY, SECURE, OR ERROR FREE; NOR DOES TEAMSTUDIO MAKE ANY WARRANTY AS TO THE RESULTS THAT MAY BE OBTAINED FROM THE USE OF THE LICENSED PROGRAM AND/OR SERVICES TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW</run><run
+><font size='11pt' style='bold' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>. </run></par>
+<par def='5'><run><font size='11pt' style='bold' name='Calibri' pitch='variable'
+ truetype='true' familyid='20'/>8. Mutual Indemnification: </run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>8.1 Teamstudio shall defend Customer against any claim, demand, suit, or proceeding made or brought against Customer by a third party alleging that the use of the Licensed Program as permitted hereunder infringes or misappropriates the copyright or patent rights of a third party in the country in which Customer acquired the Services (a "</run><run
+><font size='11pt' style='bold' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>Claim Against Customer</run><run><font size='11pt' name='Calibri'
+ pitch='variable' truetype='true' familyid='20'/>"), and shall indemnify Customer for any damages, attorney fees and costs finally awarded against Customer as a result of, and for amounts paid by Customer under a court approved settlement of, a Claim Against Customer;  provided that Customer shall (a) promptly give Teamstudio written notice of the Claim Against Customer; (b) give Teamstudio sole control of the defense and settlement of the Claim Against Customer (provided that Teamstudio may not settle any Claim Against Customer unless the settlement unconditionally releases Customer of all liability); and (c) provide to Teamstudio all reasonable assistance, at our expense. In the event of a Claim Against Customer, or if Teamstudio reasonably believes the Licensed Program may infringe, Teamstudio may in its discretion and at no cost to Customer (i) modify the Licensed Program so that it no longer infringes, without breaching its warranties under Section 7.1 above, (ii) obtain a license for Customer’s continued use of the Licensed Program in accordance with this Agreement, or (iii) terminate Customer’s license for such Licensed Programs upon ten (10) days’ written notice and refund payments actually received by Teamstudio from Customer for the Licensed Product which is the subject of the infringement claim.  Teamstudio shall have no indemnification obligation for any claim to the extent based upon the following:  (a) Customer’s use of the Licensed Program in combination with other items when such infringement would not have occurred from the use of the Licensed Program solely for the purpose for which they were designed or sold by Teamstudio; (b) modifications to the Licensed Program not authorized in writing by Teamstudio; or (c) Customer’s continued use of the Licensed Program following notification to suspend use due to a claim or threat of a claim as described in this Section 8.1.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>8.2. Customer shall defend</run><run><font size='11pt' style='bold'
+ name='Calibri' pitch='variable' truetype='true' familyid='20'/> </run><run
+><font size='11pt' name='Calibri' pitch='variable' truetype='true' familyid='20'/>Teamstudio against any claim, demand, suit or proceeding made or brought against Teamstudio by a third party: (i) alleging that Customer’s use of the Licensed Programs, Services or Prerequisites is in breach of this Agreement, infringes or misappropriates the intellectual property rights of a third party or violates applicable law, or (ii) is otherwise related to a breach by Customer of this Agreement (a "</run><run
+><font size='11pt' style='bold' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>Claim Against Teamstudio</run><run><font size='11pt' name='Calibri'
+ pitch='variable' truetype='true' familyid='20'/>"), and shall indemnify Teamstudio for any damages, attorney fees and costs finally awarded against Teamstudio as a result of, or for any amounts paid by Teamstudio under a court-approved settlement of, a Claim Against Teamstudio; provided that Teamstudio (a) promptly gives Customer written notice of the Claim Against Teamstudio; (b) gives Customer sole control of the defense and settlement of the Claim Against Teamstudio (provided that Customer may not settle any Claim Against Teamstudio unless the settlement unconditionally releases Teamstudio of all liability); and (c) provides to Customer all reasonable assistance, at Customer’s expense.  Customer shall have no indemnification obligation for any claim to the extent based upon the gross negligence or willful misconduct of Teamstudio.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>8.3</run><run><font size='11pt' style='bold' name='Calibri'
+ pitch='variable' truetype='true' familyid='20'/> </run><run><font size='11pt'
+ name='Calibri' pitch='variable' truetype='true' familyid='20'/>This Section 8 (Mutual Indemnification) states the indemnifying party’s sole liability to, and the indemnified party’s exclusive remedy against, the other party for any type of claim described in this Section 8.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' style='bold' name='Calibri' pitch='variable'
+ truetype='true' familyid='20'/>9. Use of Licensed Program and Limitation of Liability:</run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>9.1. The Licensed Program is a tool that is not intended to replace the professional skills and judgment of Customer and its employees, agents and consultants.  Customer alone shall be responsible for any use made by Customer of the output of the Licensed Program or any reliance thereon by Customer or Customer’s authorized users.  Customer shall also be responsible for the continued operation and maintenance of the computer equipment, the Prerequisites and the third-party software used with the Licensed Program.   For these reasons, Customer agrees to be solely responsible for the design, repair and configuration of Customer’s equipment, machinery, systems and/or products.  Customer assumes all risks and liability for results obtained by the use of and/or implementation of the designs developed by Customer that are in any way influenced by the use of the Licensed Program or the provision of services, whether such designs are used singly or in combination with other designs or products.   Customer shall protect, indemnify, hold harmless and defend Teamstudio of and from any loss, cost, damage or expense, including attorneys’ fees, arising from any claim asserted against Teamstudio that is in any way associated with the matters set forth in this Section 9.1.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>9.2 Without limitation of Section 9.1 above, the liability of Teamstudio for any claim relating to the subject matter of this Agreement regardless of the form of action, whether in contract or tort, including claims of negligence or claims of intellectual property infringement against Teamstudio, shall be limited to the total of all amounts Customer has paid to Teamstudio for the Licensed Program or services that are finally determined by a court of competent jurisdiction to have caused damages or that are directly related to the cause of action.  The limitation of liability hereunder shall be further limited to the amounts received by Teamstudio from Customer in the twelve (12) month period immediately prior to the date that Customer provides Teamstudio with written notice of such claim.  In no event shall Teamstudio be liable for any incidental, indirect, exemplary, special or consequential damages including, without limitation, loss of use, loss of profits or other consequential damages, even if Teamstudio has been advised of the possibility of such damages.  No action, regardless of form, relating to the transactions under this Agreement may be brought by Customer more than one (1) year after the event giving rise to the cause of action has occurred. </run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' style='bold' name='Calibri' pitch='variable'
+ truetype='true' familyid='20'/>10. Maintenance and Support:</run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>10.1 Unless otherwise specified by Teamstudio, a Maintenance and Support services subscription of one (1) year is provided with the Licensed Program.  Maintenance and Support services include access to recent releases of the Software and access to technical support as set forth herein or in a separate Maintenance Services Agreement.  </run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>10.2 MAINTENANCE AND SUPPORT SERVICES SUBSCRIPTIONS SHALL AUTOMATICALLY RENEW FOR A DURATION EQUAL TO THE THEN-CURRENT MAINTENANCE AND SUPPORT SERVICES SUBSCRIPTION UNLESS AND UNTIL CUSTOMER PROVIDES WRITTEN NOTICE OF ITS INTENT TO TERMINATE PRIOR TO THE EXPIRATION OF SUCH SUBSCRIPTION.  AT LEAST THIRTY (30) DAYS PRIOR TO THE EXPIRATION OF ANY MAINTENANCE AND SUPPORT SERVICES SUBSCRIPTION, TEAMSTUDIO WILL SEND CUSTOMER AN INVOICE FOR SUCH RENEWAL PERIOD.  Maintenance and Support services subscriptions are provided in accordance with the terms of Teamstudio’s then-current Support and Maintenance policies.  In the event that Customer notifies TeamStudio in writing of its intent to cancel its Maintenance and Support services subscription prior to the end of the one (1) year period following installation of the Licensed Program, or in the event that Customer allows Maintenance and Support service coverage to lapse for any period of time, Customer may: (i) acquire Minor Releases free of charge by downloading the updates from the Teamstudio website until the next major Release when a license key change occurs; or (ii) acquire a Major Release upgrade by paying the then-current Licensed Program price and, upon receipt of payment, Teamstudio will issue a new License Key to Customer which will include one (1) year of Maintenance and Support services.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>10.3 If Customer maintains Maintenance and Support services during the term, Teamstudio will send to Customer an email notification with instructions on how to access a new Major Release or Minor Release or other update through the Teamstudio website.  A CD is available on request for an additional fee.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>10.4 Technical Support shall consist of operational assistance and technical support to be rendered in the English language by Teamstudio by email.  Technical Support will only be provided for the then-current Major Release and one (1) prior Major Release of the Licensed Program.  Unless otherwise agreed in writing, Technical Support is available only during normal business hours, Monday through Friday, excluding local and Federal holidays, in the region in which you acquired the Licensed Program.  Teamstudio will use its commercially reasonable efforts to assist Customer with requests for support.  Teamstudio does not guarantee any particular response or resolution time for such requests.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>10.5 Any materials provided to Customer by Teamstudio in connection with Technical Support shall be deemed “Licensed Products” and are licensed, not sold to Customer.  Teamstudio’s obligation to provide Technical Support is subject to Customer providing Teamstudio with all information and documentation reasonably requested by Teamstudio relating to the Technical Support request submitted by Customer.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>10.6 The Technical Support provisions set forth in Sections 10.3 through 10.5 are the current terms pursuant to which Teamstudio may provide Technical Support to Customer.  Teamstudio reserves the right to alter or amend the provisions of these sections, or terminate the provision of Technical Support services for the Licensed Program, upon the end of the then-current term of Maintenance and Support services, if any.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' style='bold' name='Calibri' pitch='variable'
+ truetype='true' familyid='20'/>11. Proprietary Rights:</run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>11.1 Information and data supplied by either party to the other party may include confidential or proprietary information.  Confidential or proprietary information (“Confidential Information”) means any information or data (including without limitation any formula, pattern, compilation, program, device, method, technique, or process) that is disclosed by one party (the “Disclosing Party”) to the other party (the “Receiving Party”) pursuant to this Agreement.  Confidential Information of Teamstudio includes, but is not limited to, the terms of this Agreement, the Licensed Product, the structure, organization, design, algorithms, methods, templates, data models, data structures, flow charts, logic flow, and screen displays associated with the Licensed Program, the Documentation, and pricing information.  Confidential Information of Customer includes, but is not limited to, Customer data and Customer’s financial and business information.   Confidential Information shall not include information that either party can demonstrate: (i) at the time of disclosure is in the public domain or is otherwise available to the Receiving Party other than on a confidential basis; (ii) after disclosure, becomes a part of the public domain by publication or otherwise through no fault of the Receiving Party; (iii) was disclosed to the Receiving Party by a third party not under an obligation of confidentiality to the Disclosing Party; or (iv) is or has been independently developed by the Receiving Party (as evidenced by the Receiving Party’s written records) without access to any Confidential Information of the Disclosing Party.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>11.2 Each party agrees: (i) to hold the Disclosing Party’s Confidential Information in strict confidence; and (ii) except as expressly authorized by this Agreement, not to, directly or indirectly, use, disclose, copy, transfer or allow access to the Confidential Information.  Notwithstanding the foregoing, a Receiving Party may disclose Confidential Information of the Disclosing Party as required by law or court order; in such event, such party shall inform the other party in writing prior to any such required disclosure.  And, notwithstanding any other provision of this Agreement, Teamstudio will not be prevented or restricted by this Agreement from using any technique, idea, concept or know-how relating to Teamstudio’s business activities.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>11.3 Teamstudio shall have a royalty-free, worldwide, irrevocable, perpetual license to use and incorporate into the Licensed Product or services any suggestions, enhancement requests, recommendations or other feedback provided by Customer, including Customer’s authorized users, relating to the operation of the Licensed Product or services.   </run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' style='bold' name='Calibri' pitch='variable'
+ truetype='true' familyid='20'/>12. Export:  </run><run><font size='11pt'
+ name='Calibri' pitch='variable' truetype='true' familyid='20'/>Customer acknowledges that the Licensed Product provided hereunder may be subject to export controls.  Customer agrees that any Licensed Product licensed hereunder will not be exported (or re-exported from the country where it was first installed), directly or indirectly, separately or as part of a system, without Customer, at its own cost, first obtaining all necessary licenses from the United States Department of Commerce and any other appropriate agency of the United States Government as may be required by law.  Customer acknowledges that it shall be solely responsible for determining the extent of any such licenses required, and for any costs associated with complying with the requirements of this Section 12.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' style='bold' name='Calibri' pitch='variable'
+ truetype='true' familyid='20'/>13. U.S. Federal Government End Use Provisions: </run><run
+><font size='11pt' name='Calibri' pitch='variable' truetype='true' familyid='20'/>Teamstudio provides the Licensed Product for ultimate U.S. federal government end use solely in accordance with the following: Government technical data and software rights related to the Services include only those rights customarily provided to the public as defined in this Agreement. This customary commercial license is provided in accordance with FAR 12.211 (Technical Data) and FAR 12.212 (Software) and, for Department of Defense transactions, DFAR 252.227-7015 (Technical Data – Commercial Items) and DFAR 227.7202-3 (Rights in Commercial Computer Software or Computer Software Documentation). If a government agency has a need for rights not conveyed under these terms, it must negotiate with us to determine if there are acceptable terms for transferring such rights, and a mutually acceptable written addendum specifically conveying such rights must be included in any applicable contract or agreement.   </run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' style='bold' name='Calibri' pitch='variable'
+ truetype='true' familyid='20'/>14. Taxes: </run><run><font size='11pt' name='Calibri'
+ pitch='variable' truetype='true' familyid='20'/>The License Fees and any other amounts payable pursuant to the terms and conditions herein are exclusive of all national, state, regional, local municipal or other taxes and fees including, but not limited to, excise, sales, use, property, ad valorem, intangibles, goods and services and value added taxes, customs duties and registration fees, now in force or enacted in the future, and all such taxes and fees, except taxes based on Teamstudio’s net worth, capital or net income, shall be paid directly by the Customer, or if paid by Teamstudio, Customer will reimburse Teamstudio for such taxes and fees.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' style='bold' name='Calibri' pitch='variable'
+ truetype='true' familyid='20'/>15. Notice: </run><run><font size='11pt' name='Calibri'
+ pitch='variable' truetype='true' familyid='20'/>Any notice or other communication given hereunder shall be in writing.  Notice shall be considered delivered and effective upon receipt when sent by U.S. Mail, postage prepaid, or certified mail, return receipt requested, addressed to the parties as set forth above.  Either party, upon written notice to the other, may change any name or address to which future notice shall be sent.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' style='bold' name='Calibri' pitch='variable'
+ truetype='true' familyid='20'/>16. General:</run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>16.1 Customer may not assign any of its obligations, rights or remedies hereunder and any such attempted assignment shall be null and void.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>16.2 The waiver or failure of either party to exercise in any respect any right provided for herein shall not be deemed a waiver of any further right hereunder.  This Agreement constitutes the complete understanding between the parties with respect to the subject matter herein and supersedes all proposals, all previous negotiations and agreements, written or oral, express or implied, between the parties with respect to the subject matter herein. This Agreement may not be waived, altered, amended or modified except in writing, directly referencing the Agreement, and signed by authorized representatives of both parties.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>16.3 It is expressly agreed that the parties are acting hereunder as independent contractors.  Under no circumstances shall any of the employees of one party be deemed the employees of the other for any purpose.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>16.4 If any provision of this Agreement is determined by a court of competent jurisdiction to be invalid or unenforceable, such determination shall not affect the validity or enforceability of any other part or provision of this Agreement.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>16.5 The obligations of Customer under Sections 4 and 11 hereof are of a special and unique character which gives them a peculiar value to Teamstudio and its third party vendors for which neither Teamstudio nor its third party vendors can be reasonably or adequately compensated in damages in the event Customer breaches such obligations.  Therefore, Teamstudio and its third party vendors, in addition to other remedies which may be available, shall each be entitled to injunctive and other equitable relief in the event of the breach or threatened breach of such obligations.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>16.6 This Agreement shall be governed by the substantive laws of the Commonwealth of Massachusetts, U.S.A., without regard to any conflict of law provisions.  This Agreement will not be governed by the United Nations Convention of Contracts for the International Sale of Goods, or by the Uniform Commercial Code, the application of which are expressly excluded.  The parties agree that sole jurisdiction and venue for any dispute relating to the Agreement shall be in the courts of Essex County, Massachusetts or the United States District Court for the District of Massachusetts.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='5'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>16.7 This Agreement shall be binding on Customer by Customer’s clicking “OK” to accept these terms as set forth above.   If the parties hereto execute this Agreement in writing by an exchange of faxed signed copies hereof, it shall be binding by such exchange of signed copies.   In the event of such an exchange, this Agreement shall become binding on both parties and shall constitute admissible evidence of the existence and binding effect of this Agreement.</run></par>
+<par def='6'><run><font size='2pt'/></run></par>
+<par def='7'><run><font size='11pt' name='Calibri' pitch='variable' truetype='true'
+ familyid='20'/>16.8 The terms and conditions of this Agreement apply to any and all third party software included with or imbedded in the Licensed Program other than the Prerequisites.</run></par>
+<par def='7'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='7'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<pardef id='8' align='right' tabs='L4.2500in R7.5000in' keepwithnext='true'
+ keeptogether='true'/>
+<par def='8'><run><font size='7pt' name='Verdana' pitch='variable' truetype='true'
+ familyid='20' color='gray'/>Teamstudio Software License Agreement and User Agreement</run></par>
+<par def='8'><run><font size='7pt' name='Verdana' pitch='variable' truetype='true'
+ familyid='20' color='gray'/>082012</run></par>
+<par def='7'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='7'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='7'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='7'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<pardef id='9' leftmargin='0.0104in' keepwithnext='true' keeptogether='true'/>
+<section onread='collapse' onpreview='collapse'><sectiontitle pardef='9' borderstyle='shadow'
+ color='#0060a0'><font color='#0060a0' style='bold' name='Verdana' pitch='variable'
+ truetype='true' familyid='20'/><text>Teamstudio® Software – Beta License Agreement 
+and User Agreement
+
+</text></sectiontitle>
+<pardef id='10' align='center' tabs='L1.6361in L2.2722in L2.9083in L3.5444in L4.1806in L4.8167in L5.4528in L6.0889in L6.7250in L7.3611in L7.9972in L8.6333in L9.2694in L9.9056in L10.5417in L11.1778in'
+ keepwithnext='true' keeptogether='true'/>
+<par def='10'><run><font size='14pt' name='Verdana' pitch='variable' truetype='true'
+ familyid='20'/></run></par>
+<par def='10'><run><font size='14pt' name='Verdana' pitch='variable' truetype='true'
+ familyid='20'/>Teamstudio® Software – Beta License Agreement </run></par>
+<par def='10'><run><font size='14pt' name='Verdana' pitch='variable' truetype='true'
+ familyid='20'/>and User Agreement</run></par>
+<pardef id='11' tabs='L1.6361in L2.2722in L2.9083in L3.5444in L4.1806in L4.8167in L5.4528in L6.0889in L6.7250in L7.3611in L7.9972in L8.6333in L9.2694in L9.9056in L10.5417in L11.1778in'
+ keepwithnext='true' keeptogether='true'/>
+<par def='11'><run><font size='14pt' name='Verdana' pitch='variable' truetype='true'
+ familyid='20'/></run></par>
+<pardef id='12' align='full' spaceafter='2' keepwithnext='true' keeptogether='true'/>
+<par def='12'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/>This is a legal agreement between you, the end-user, and Teamstudio, Inc., a Massachusetts, U.S.A. corporation. </run><run
+><font style='bold' name='Verdana' pitch='variable' truetype='true' familyid='20'/>By clicking on the "accept" button when downloading or upon installation, you signify that you have read this Agreement and accept these terms, and are authorized (on behalf of any entity for which you are using or installing the Software) to accept and be bound by these terms. If you do not agree to the terms of this Agreement, then we are unwilling to license the Software to you, in which event you must not download, install or use the Software. </run><run
+><font name='Verdana' pitch='variable' truetype='true' familyid='20'/> </run></par>
+<par def='7'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/>The term "you" means the company, entity or individual who is acquiring the license to use the Software under this Agreement.  The term "we" or "us" means Teamstudio, Inc., except that terms such as "both of us" means both you and us.</run></par>
+<par def='7'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='7'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/>In this Agreement, the term “Software" means the Teamstudio Unplugged® beta software that this Agreement accompanies, including computer software and associated media and printed materials, and may include "online" or electronic documentation.  </run></par>
+<par def='11'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='11'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/>The Software is beta test software and is licensed to you for (a) the purpose of testing the software, reporting bugs and recommending changes to us, and (b) evaluating whether you wish to obtain a full license to the Software under a separate agreement.  </run></par>
+<par def='11'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='11'><run><font style='bold' name='Verdana' pitch='variable' truetype='true'
+ familyid='20'/>1.  Grant of License.</run></par>
+<par def='11'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='11'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/>You may install the Software for use on one Android simulator.  If you wish to use the Software on more than a single simulator, additional Beta licenses must be obtained from us for each simulator upon which the Software is to be used.</run></par>
+<par def='11'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='11'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/>We reserve the right to require you or an officer of the licensee to certify that the terms of this agreement have been complied with, including, but not limited to, that the number of users has not at any time exceeded that permitted by the license.</run></par>
+<par def='11'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='7'><run><font style='bold' name='Verdana' pitch='variable' truetype='true'
+ familyid='20'/>2.  Other Restrictions.  </run></par>
+<pardef id='13' tabs='L1.5000in' keepwithnext='true' keeptogether='true'/>
+<par def='13'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='13'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/>You have the right to use the number of copies for which you have acquired licenses or as otherwise expressly permitted under Paragraph 1.  You may make additional copies of the Software, but only for backup, disaster recovery or archival purposes or when copying is an essential step in the authorized use of the Software.  You must reproduce all copyright and other proprietary or restricted rights notices in the original Software on all authorized copies.  You may not copy the User Guide or written materials accompanying the Software. </run></par>
+<par def='13'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='13'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/>You may not sell, assign, hire out or lease out the Software or make available the Software or any copies thereof in any form to any third parties.  You may not: modify, translate, reverse engineer, decompile, disassemble, or create derivative works based on the Software provided to you in object code form.  If you are using the Software in any country in the European Community, the prohibition against modifying, translating, reverse engineering, decompiling, disassembling or creating derivative works based on the Software does not affect your rights under any legislation implementing the E.C. Council Directive on the Legal Protection of Computer Programs; provided, as specified in such directive, if you wish to exercise any rights under such directive to make the Software interoperable with other software, you must first request from us in writing the tools necessary to create interoperable programs.</run></par>
+<par def='13'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='7'><run><font style='bold' name='Verdana' pitch='variable' truetype='true'
+ familyid='20'/>3.  Ownership.  </run></par>
+<par def='13'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='13'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/>The Software is owned by us or our suppliers and is protected by United States copyright laws, international treaty provisions, and all other applicable laws.  Your license confers no title or ownership in the Software and is not a sale of any rights in the Software.  All ownership rights remain in us or our third party suppliers, as the case may be.</run></par>
+<par def='13'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='7'><run><font style='bold' name='Verdana' pitch='variable' truetype='true'
+ familyid='20'/>4.  Other Software.  </run></par>
+<par def='13'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='13'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/>We may provide to you certain software which is specifically labeled as being provided by and/or owned by third parties (“Third Party Materials").  You shall be licensing such Third-Party Materials directly from the third party provider, including the right to use such Third Party Materials in connection with the Software.  </run></par>
+<par def='13'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='13'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/>Certain of the Third Party Materials supplied by us for use with the Software are governed by open-source software license agreements supplied with such Third Party Materials, such as the GNU General Public License.  We make no claim of ownership of such open-source software, and such software is supplied solely in accordance with the license agreements accompanying such software.  Accordingly, the restrictions above under "Grant of License" concerning scope of use, ownership, modification, confidentiality and other provisions relating to the Software do not apply to such open-source software.  However, the disclaimer of warranty and limitations of liability below under "Warranty Disclaimer” and "Limitation of Liability" do apply to Third Party Materials.</run></par>
+<par def='11'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<pardef id='14' tabs='L1.2500in' keepwithnext='true' keeptogether='true'/>
+<par def='14'><run><font style='bold' name='Verdana' pitch='variable' truetype='true'
+ familyid='20'/>5.  Warranty Disclaimer</run><run><font name='Verdana' pitch='variable'
+ truetype='true' familyid='20'/>.  </run></par>
+<par def='14'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='11'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/>THE SOFTWARE IS PROVIDED “AS IS” WITHOUT ANY WARRANTY WHATSOEVER, INCLUDING BUT NOT LIMITED TO ANY FUNCTIONALITY OR ITS BEING VIRUS FREE. YOU RECOGNIZE THAT THE “AS IS” CLAUSE OF THIS AGREEMENT IS AN IMPORTANT PART OF THE BASIS OF THIS AGREEMENT, WITHOUT WHICH WE WOULD NOT HAVE AGREED TO ENTER THIS AGREEMENT.  YOU ARE SPECIFICALLY CAUTIONED THAT IF THE SOFTWARE IS PROVIDED DURING TESTING OR PREMARKET STAGES (ALPHA OR BETA), IT MAY BE PARTICULARLY UNRELIABLE DURING THIS TIME.  WE DISCLAIM ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY, REGARDING THE SOFTWARE, INCLUDING ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NONINFRINGEMENT.  NO REPRESENTATION OR OTHER AFFIRMATION OF FACT REGARDING THE SOFTWARE SHALL BE DEEMED A WARRANTY FOR ANY PURPOSE OR GIVE RISE TO ANY LIABILITY WHATSOEVER.  YOU ACKNOWLEDGE THAT YOU HAVE RELIED ON NO WARRANTIES OR STATEMENTS OTHER THAN AS MAY BE SET FORTH HEREIN.  YOU ASSUME ALL RISK ASSOCIATED WITH THE QUALITY, PERFORMANCE, INSTALLATION AND USE OF THE SOFTWARE INCLUDING, BUT NOT LIMITED TO, THE RISKS OF PROGRAM ERRORS, DAMAGE TO EQUIPMENT, LOSS OF DATA OR SOFTWARE PROGRAMS, OR UNAVAILABILITY OR INTERRUPTION OF OPERATIONS.  YOU ARE SOLELY RESPONSIBLE FOR DETERMINING THE APPROPRIATENESS OF USE THE SOFTWARE AND ASSUME ALL RISKS ASSOCIATED WITH ITS USE.</run></par>
+<par def='14'><run><font style='bold underline' name='Verdana' pitch='variable'
+ truetype='true' familyid='20'/></run></par>
+<par def='14'><run><font style='bold' name='Verdana' pitch='variable' truetype='true'
+ familyid='20'/>6.  Limitation of Liability.</run></par>
+<par def='14'><run><font style='bold' name='Verdana' pitch='variable' truetype='true'
+ familyid='20'/></run></par>
+<par def='14'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/>WE SHALL NOT BE LIABLE TO USER OR ANY THIRD PARTY FOR ANY INCIDENTAL, INDIRECT, EXEMPLARY, SPECIAL OR CONSEQUENTIAL DAMAGES, UNDER ANY CIRCUMSTANCES, INCLUDING, BUT NOT LIMITED TO, LOST PROFITS, REVENUE OR SAVINGS, LOSS OF GOODWILL, OR THE LOSS OF USE OF ANY DATA, EVEN IF WE HAVE BEEN ADVISED OF, KNEW, OR SHOULD HAVE KNOWN, OF THE POSSIBILITY THEREOF.  UNDER NO CIRCUMSTANCES SHALL OUR AGGREGATE CUMULATIVE LIABILITY HEREUNDER, WHETHER IN CONTRACT, TORT, OR OTHERWISE, EXCEED THE TOTAL AMOUNT OF FEES ACTUALLY PAID BY YOU UNDER THIS AGREEMENT.  YOU ACKNOWLEDGE THAT THE FEES PAID BY YOU REFLECT THE ALLOCATION OF RISK SET FORTH IN THIS AGREEMENT AND THAT WE WOULD NOT ENTER INTO THIS AGREEMENT WITHOUT THESE LIMITATIONS ON OUR LIABILITY.</run></par>
+<par def='14'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='14'><run><font style='bold' name='Verdana' pitch='variable' truetype='true'
+ familyid='20'/>7.  Indemnification.</run></par>
+<par def='11'><run><font style='bold' name='Verdana' pitch='variable' truetype='true'
+ familyid='20'/></run></par>
+<par def='11'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/>You agree to indemnify and hold us, our parent company(ies), subsidiaries, affiliates, officers and employees, harmless from any claim or demand, including reasonable attorneys' fees, made by any third party due to or arising out of your use of the Software, or the infringement by you, of any intellectual property or other right of any person or entity.</run></par>
+<par def='7'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='14'><run><font style='bold' name='Verdana' pitch='variable' truetype='true'
+ familyid='20'/>8.  Confidentiality.</run></par>
+<par def='14'><run><font style='bold' name='Verdana' pitch='variable' truetype='true'
+ familyid='20'/></run></par>
+<par def='14'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/>While using the Software, you will be exposed to information about the Software, its functionality and/or to information about us, all of which is confidential and includes our trade secrets ("</run><run
+><font style='bold' name='Verdana' pitch='variable' truetype='true' familyid='20'/>Confidential Information</run><run
+><font name='Verdana' pitch='variable' truetype='true' familyid='20'/>").  You agree that you will not disclose any form -- oral, electronic or paper -- of Confidential Information to any third party, and that you will only use Confidential Information for the purpose of the license above.  You agree to immediately return all Confidential Information materials to us, upon request, at the end of this license.  </run></par>
+<par def='11'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='11'><run><font style='bold' name='Verdana' pitch='variable' truetype='true'
+ familyid='20'/>9.  Installation Services and Technical Support.</run></par>
+<par def='11'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='11'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/>We do not provide installation services for the Software.  We will provide technical support, under terms to be solely determined by us, via email, phone and/or online.</run></par>
+<par def='11'><run><font name='Courier New' pitch='fixed' truetype='true'
+ familyid='30'/></run></par>
+<par def='11'><run><font style='bold' name='Verdana' pitch='variable' truetype='true'
+ familyid='20'/>10.  Term and Termination.</run></par>
+<par def='11'><run><font name='Courier New' pitch='fixed' truetype='true'
+ familyid='30'/></run></par>
+<par def='11'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/>This Agreement will automatically expire on the thirtieth day after we make available the production version of the Software, unless earlier terminated as set forth below in this paragraph.  Either you or we may terminate this Agreement at any time upon written notice. This Agreement shall terminate automatically, without notice, if you fail to comply with the terms of this Agreement.  Upon any termination of this Agreement, you must discontinue use of the Software and uninstall and destroy all copies of the Software you have obtained or made.</run></par>
+<par def='11'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='7'><run><font style='bold' name='Verdana' pitch='variable' truetype='true'
+ familyid='20'/>11.  Assignment/Transfer.</run></par>
+<par def='7'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='7'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/>You may not transfer or assign the Software to a separate legal entity without our prior written consent.</run></par>
+<par def='7'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='7'><run><font style='bold' name='Verdana' pitch='variable' truetype='true'
+ familyid='20'/>12.  General.</run></par>
+<par def='7'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='7'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/>The validity, construction and performance of this Agreement will be governed by and construed in accordance with the laws of the Commonwealth of Massachusetts, USA applicable to contracts executed in and performed entirely within such Commonwealth, without reference to any choice of law principles of such Commonwealth.  The application to this Agreement of the United Nations Convention on Contracts for the International Sale of Goods is hereby expressly excluded. No amendment, modification or change to this Agreement, or any waiver of any right or remedy under this Agreement, will be valid unless in writing and signed by an authorized representative of the party to be bound. If any provision of this Agreement conflicts with the law under which this Agreement is to be construed or if any provision of this Agreement is held invalid or unenforceable by a court of competent jurisdiction, that provision will be deemed to be restated to reflect as nearly as possible the original intentions of the parties in accordance with the applicable law.  The remaining provisions of this Agreement will not be affected thereby, and each of those provisions will be valid and enforceable to the full extent permitted by law.  In the event that either party is unable to perform any of its obligations under this Agreement because of an event wholly beyond its control, including but not limited to, fire, natural disaster and action or decree of a governmental body, the party who has been so affected shall immediately give written notice to the other party and use reasonable efforts to resume performance. In connection with any dispute under this Agreement, if requested by us, you agree to submit to arbitration in a forum selected by us within the Commonwealth of Massachusetts for the resolution of any disputes, hereunder; provided, this does not limit our right to obtain injunctive relief in any court of competent jurisdiction.  This Agreement constitutes the entire agreement of the parties, superseding all prior agreements and understandings as to the subject matter hereof, notwithstanding any oral representations or statements to the contrary heretofore made.</run></par>
+<par def='7'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run><run
+><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par></section>
+<par def='7'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='7'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='7'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='7'><run><font name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='4'><run><font size='8pt' name='Verdana' pitch='variable' truetype='true'
+ familyid='20'/></run><picture width='109px' height='11px'><gif>
+R0lGODlhbQALAOYAAP///wAAaAAAYAAAWAAAAAAIcAgYeBgogPDw8EBIkBgYGFhgoGhwqAAAcFBY
+mJCYwJiYwMjI2NDQ4Ojo8AAIaCAogDhIkICIuKCoyLi4uAAQcBAQEBAgeEBAQGBoqIiQuKiw0MDA
+2ODg6CAwgDA4iEhQmHiAsJiYmKiwyLCwyNjY4AAAUAgQcCAgICAwiCgwiDAwMDg4ODhAkEBImEhI
+SGBooHB4qHB4sHiAuKioqKioyLCw0LC40MDI2MjIyMjI4NjY2Ojo6AgICAgQeBAYeBgggCgoKCg4
+iEhYmFBQUFBYoFhooGBwqGhooGh4qHBwcICAgIiIuJCQkJCQuJCQwJigwLi40LjA2MDAwNDQ0ODg
+4ODo6PDw+AAQeAgYcBggeCAoiCgwgDBAkDhAiEBQkEBQmFhYWFhgqGBgYGhoaHBwsHh4eHh4sICA
+sICAuICIsIiIiIiQwJCYuJigyKCgoKCgwKCgyKCowKio0LCwwLC4yLjA0MjA2NDI4NjY6Ojw8CwA
+AAAAbQALAEAI/wABCBxIsKDBgwgTKkxY40ANABxYIFhIseJACgEYCEwRQMDEgQgEBEgBgEGAFwAC
+BPggMETHj00CHABJJICbKyoHngngRaAJlRNEkgQwI0ACACJFkJA5UGScgQQKJjlBEEHUDQSjDlRQ
+JICGAAMGjLAiQICBsj0AWAgrcsADpDLZCvjgYMWAjhLgnl2RR0CBAgIGaGBgVuCdwADIBh7QoMDR
+AQLSjilrAPLbrFCAZIADAAYMH0DSaCUAA0sWAhla5ADSYo3ABiYsyqYIYsVsogEsAABR5bbvggUC
+XBB4IQAFDw6WnNUhUAITFg1cpAwAQeCPnAJNjlBxVwAZgSA6Dv9cwBQACpU4AwwsejRplwAOBqpc
+ArWgAi0FoyrISnA/AAcGaHDEBABM8UIBDYzwFgYGFIAEChoMEQEJFWDQ3AFFfPRGBSVswcFfB8jR
+0ggFGGADAA986MAeYMwEgAkflrCACx4AcMABeXGxwBABVDAcAE/EIFAOGyigQAcCdWBkC1kkSZAR
+BCEJABfV/WalQCzNZoFRIkCGwpW+1aQEHnNEEQEAHzBBBUEqROFEGyoIVAUEQUxgwg18CBTBDTh8
+hCIDOJwZgkgY2JHCDxAwB4AIEFQJwAVq8JBAbgDUgQGBAKhwAQOXGQQFDWZkIFAGSdAgxUBUoUGD
+qEB2QAcACGDudAMCQYQUQB8CiUeChQAsVUFKJRKohEphCGRAAzI8EMAXAvGwBQRABQGAB+WdJwBc
+RwHwglFw+WEDdjuAlZdARrAqkBRCoiqkVgIRgF+7AAT3oxMBFMDAAgt4sMAPEVAwQAkyBCCdSlO0
+9JJAMc3Ew1kNDPBHuOoJRN6vAOihkg7iCTRpewGIENwCFwWARH0ECWHQVfxtpZZKAUtwhEo4YMDG
+ACCI5AAV9VIQQXBZDuqRQDXI1EMFDNiggQA7INUAC2IYEIFIZZTg17WTBuBB1bqVJUFQ8IHAQQAG
+AIBFDgCcYHJWPkCVNlYkC7RBQAA7
+</gif></picture><run
+><font size='8pt' name='Verdana' pitch='variable' truetype='true' familyid='20'/></run></par>
+<par def='4'><run><font size='8pt' name='Verdana' pitch='variable' truetype='true'
+ familyid='20'/></run></par>
+<pardef id='15' hide='notes web mobile' tabs='C4in R7in' keepwithnext='true'
+ keeptogether='true'><code event='hidewhen'><formula>1</formula></code></pardef>
+<par def='15'><run><font color='red' name='Verdana' pitch='variable' truetype='true'
+ familyid='20'/><field type='text' kind='computed' name='SaveOptions'><code
+ event='defaultvalue'><formula>"0"</formula></code></field></run><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='8' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell></tablerow></table>
+<pardef id='16' align='center' leftmargin='1in' rightmargin='80%' hide='notes web mobile'
+ tabs='L4.2500in R7.5000in'/>
+<par def='16'><run><font size='1pt'/></run></par></richtext></body>
+<item name='$$ScriptName' summary='false' sign='true'><text>(LicenseAgreement)</text></item></form>
+

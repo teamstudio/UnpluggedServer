@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sharedactions xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257AC00076B554'
+ hide='v3 v4strict' designerversion='8.5.2' maxid='10'>
+<noteinfo noteid='236' unid='2D0DF368E027D491852576F6004AD6D5' sequence='45'>
+<created><datetime dst='true'>20100330T093726,61-04</datetime></created>
+<modified><datetime dst='true'>20130515T115642,16+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115642,15+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115642,15+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,96+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name
+>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<action title='New User' id='1'><imageref name='userdevicesnew.gif'/><code
+ event='click'><formula>@Command([Compose]; "User")</formula></code><code
+ event='hidewhen'><formula>(!@IsMember("[Admin]";@UserRoles))</formula></code><code
+ event='label'><formula>"New User"</formula></code></action>
+<action title='New Application' id='2'><imageref name='userdevicesnew.gif'/><code
+ event='click'><formula>@Command([Compose];"UserDatabase")</formula></code><code
+ event='hidewhen'><formula>(!@IsMember("[Admin]";@UserRoles))</formula></code><code
+ event='label'><formula>"New Application"</formula></code></action>
+<action title='Enable Devices' showinrightbuttonmenu='true' align='right'
+ id='3'><imageref name='Enabled.gif'/><code event='options'><lotusscript>Use "LibSettings"
+</lotusscript></code><code event='click'><lotusscript>Sub Click(Source As Button)
+	UIEnableDevices Nothing
+End Sub</lotusscript></code><code event='hidewhen'><formula>(!@IsMember("[Admin]";@UserRoles))</formula></code><code
+ event='label'><formula>"Enable"</formula></code></action>
+<action title='Disable' showinrightbuttonmenu='true' align='right' id='4'><imageref
+ name='Disabled.gif'/><code event='click'><formula>@Command([RunAgent]; "Disable")</formula></code><code
+ event='hidewhen'><formula>(!@IsMember("[Admin]";@UserRoles))</formula></code><code
+ event='label'><formula>"Disable"</formula></code></action>
+<action title='Enable' showinrightbuttonmenu='true' align='right' id='5'><imageref
+ name='Enabled.gif'/><code event='click'><formula>@Command([RunAgent]; "Enable")</formula></code><code
+ event='hidewhen'><formula>(!@IsMember("[Admin]";@UserRoles))</formula></code><code
+ event='label'><formula>"Enable"</formula></code></action>
+<action title='New Profile' id='6'><imageref name='userappnew.gif'/><code
+ event='click'><formula>@Command([Compose];"Profile")</formula></code><code
+ event='hidewhen'><formula>(!@IsMember("[Admin]";@UserRoles))</formula></code><code
+ event='label'><formula>"New Profile"</formula></code></action>
+<action title='New Device' id='7'><imageref name='userdevicesnew.gif'/><code
+ event='click'><formula>@Command([Compose];"Device")</formula></code><code
+ event='hidewhen'><formula>(!@IsMember("[Admin]";@UserRoles))</formula></code><code
+ event='label'><formula>"New Device"</formula></code></action>
+<action title='+  Add profiles to selected' align='right' id='8'><imageref
+ name='profiles.gif'/><code event='click'><formula>@Command([RunAgent];"ProfileAddToSel")</formula></code></action>
+<action title='-  Remove profiles from selected' align='right' id='9'><imageref
+ name='profiles.gif'/><code event='click'><formula>@Command([RunAgent];"(ProfileRemoveFromSel)")</formula></code></action>
+<action title='Disable Embedded Vw' showinrightbuttonmenu='true' align='right'
+ id='10'><imageref name='Disabled.gif'/><code event='click'><lotusscript>Sub Click(Source As Button)
+	Dim s As New notessession
+	Dim db As notesdatabase
+	Dim col As notesdocumentcollection
+	Dim doc As notesdocument
+	Set db=s.CurrentDatabase
+	Set col=db.UnprocessedDocuments
+	Set doc=col.getfirstdocument
+	While Not doc Is Nothing
+		doc.Active = "0"
+		doc.Save True, True
+		Set doc=col.GetNextDocument(doc)
+	Wend
+	Dim ws As New notesuiworkspace
+	ws.ViewRefresh
+End Sub</lotusscript></code><code event='hidewhen'><formula>(!@IsMember("[Admin]";@UserRoles))</formula></code><code
+ event='label'><formula>"Disable"</formula></code></action>
+<item name='$$ScriptName' summary='false' sign='true'><text>$ACTIONS</text></item></sharedactions>
+

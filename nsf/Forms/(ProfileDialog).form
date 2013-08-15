@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='utf-8'?>
+<form name='(ProfileDialog)' alias='ProfileDialog' xmlns='http://www.lotus.com/dxl'
+ version='9.0' replicaid='C1257AC00076B554' publicaccess='false' designerversion='8.5.2'
+ renderpassthrough='true'>
+<noteinfo noteid='2ca' unid='4B48A79A72BE54E6852578BC005938FF' sequence='15'>
+<created><datetime dst='true'>20110627T121432,95-04</datetime></created>
+<modified><datetime dst='true'>20130515T115643,42+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115643,41+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115643,41+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223638,35+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<body><richtext>
+<pardef id='1'/>
+<par def='1'><run><font size='8pt' color='gray'/><field type='text' allowmultivalues='true'
+ kind='computed' name='existing' listinputseparators='comma semicolon' listdisplayseparator='semicolon'><code
+ event='defaultvalue'><formula>@If(!@IsDocBeingLoaded; existing;
+existing!=""; existing;
+@DbColumn("":"NoCache"; @DbName; "Profiles"; 1))</formula></code></field></run><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='7' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='8pt'
+ color='gray'/><field type='text' kind='computedwhencomposed' name='isRemove'><code
+ event='defaultvalue'><formula>isRemove</formula></code></field></run><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='13' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<table widthtype='fixedleft' refwidth='4in'><tablecolumn width='0.1875in'/><tablecolumn
+ width='3.6875in'/><tablecolumn width='0.1250in'/>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='3' keepwithnext='true' keeptogether='true'/>
+<par def='3'/></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='4' keepwithnext='true' keeptogether='true'/>
+<par def='4'/></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='5' keepwithnext='true' keeptogether='true'/>
+<par def='5'/></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='3'/></tablecell>
+<tablecell borderwidth='0px'>
+<par def='4'/></tablecell>
+<tablecell borderwidth='0px'>
+<par def='5'/></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='3'/></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='6' rightmargin='3.6875in' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>"1" = isRemove</formula></code></pardef>
+<par def='6'><run><font style='bold' color='#0060a0'/>Add existing profiles:</run></par>
+<pardef id='7' rightmargin='3.6875in' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>"1" != isRemove</formula></code></pardef>
+<par def='7'><run><font style='bold' color='#0060a0'/>Remove profiles:</run></par>
+<pardef id='8' rightmargin='3.6875in' keepwithnext='true' keeptogether='true'/>
+<par def='8'/></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='9' rightmargin='0.1250in' keepwithnext='true' keeptogether='true'/>
+<par def='9'/></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='3'/></tablecell>
+<tablecell borderwidth='0px'>
+<par def='4'><field usenotesstyle='false' height='2.2500in' width='4in' alignwithparagraph='true'
+ multiline='true' borderstyle='inset' lookupeachchar='false' lookupaddressonrefresh='false'
+ type='keyword' allowmultivalues='true' kind='editable' name='ExistingProfiles'
+ listinputseparators='comma' listdisplayseparator='comma'><keywords helperbutton='false'
+ columns='1' ui='listbox'><formula>existing</formula></keywords><code event='inputtranslation'><formula
+>@Sort(@ThisValue)</formula></code></field></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='5'/></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='3'/></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='10' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>"1" = isRemove</formula></code></pardef>
+<par def='10'/>
+<pardef id='11' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>"1" = isRemove</formula></code></pardef>
+<par def='11'><run><font style='bold' color='#0060a0'/>Add new profiles:</run></par>
+<par def='11'><run><font style='bold' color='#0060a0'/></run></par>
+<par def='11'><field type='keyword' allowmultivalues='true' kind='editable'
+ name='NewProfiles' listinputseparators='comma semicolon newline' listdisplayseparator='semicolon'><keywords
+ ui='dialoglist' allownew='true'><formula>@Sort(NewProfiles)</formula></keywords></field></par>
+<par def='11'/>
+<par def='11'/>
+<pardef id='12' keepwithnext='true' keeptogether='true'/>
+<par def='12'/></tablecell>
+<tablecell borderwidth='0px'>
+<par def='5'/></tablecell></tablerow></table>
+<par def='1'/>
+<par def='1'/>
+<par def='1'/>
+<pardef id='13' hide='notes web mobile'/>
+<par def='13'><run><font color='red'/></run><run><font color='red'/><field
+ type='text' allowmultivalues='true' kind='computed' name='Profiles' listinputseparators='comma semicolon'
+ listdisplayseparator='semicolon'><code event='defaultvalue'><formula>@Sort(@Unique(@Trim(ExistingProfiles:NewProfiles)))</formula></code></field></run><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='10' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font color='red'/></run></par></richtext></body>
+<item name='$$ScriptName' summary='false' sign='true'><text>ProfileDialog</text></item></form>
+

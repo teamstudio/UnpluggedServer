@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<page name='(mainframeHeader)' alias='mainframeHeader' xmlns='http://www.lotus.com/dxl'
+ version='9.0' replicaid='C1257AC00076B554' publicaccess='false' designerversion='8.5.2'
+ renderpassthrough='true'>
+<noteinfo noteid='1ae' unid='FD401E9F2C9451D8852576EB0059F7F7' sequence='18'>
+<created><datetime>20100319T112241,83-05</datetime></created>
+<modified><datetime dst='true'>20130515T115643,19+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115643,18+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115643,18+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,58+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<body><richtext>
+<pardef id='1' leftmargin='1in' rightmargin='96%' hide='preview previewedit'/>
+<par def='1'><run><font size='5pt'/></run></par>
+<table widthtype='fitmargins' rowspacing='0.0597in' columnspacing='0.0597in'
+ refwidth='7.2896in'><tablecolumn width='4.0465in'/><tablecolumn width='3.0042in'
+ sizetofit='true'/>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='white'>
+<cellbackground repeat='once'><imageref name='unplugged_logo.jpg'/></cellbackground>
+<pardef id='3' align='right' leftmargin='1in' rightmargin='100%' spacebefore='1.5'
+ hide='preview previewedit' tabs='L1.3750in R6in' keepwithnext='true' keeptogether='true'/>
+<par def='3'/>
+<pardef id='4' align='right' leftmargin='1in' rightmargin='100%' spacebefore='1.5'
+ hide='preview previewedit' tabs='L1.3750in R5.0625in L6.6875in' keepwithnext='true'
+ keeptogether='true'/>
+<par def='4'/>
+<par def='3'/></tablecell>
+<tablecell borderwidth='0px' bgcolor='white'>
+<cellbackground repeat='once'/>
+<pardef id='5' align='right' leftmargin='0.0243in' rightmargin='100%' keepwithnext='true'
+ keeptogether='true'/>
+<par def='5'><run><font style='bold'/>On: </run><run><font color='#002060'/><computedtext
+><code event='value'><formula>svr := @Subset( @DbName; 1 );
+@If( svr=""; "Local"; @Name( [Abbreviate]; svr ) )</formula></code></computedtext></run><run
+><font size='14pt' style='bold' color='#bf4100'/></run></par></tablecell></tablerow></table>
+<pardef id='6' rightmargin='96%' tabs='L2.1250in'/>
+<par def='6'/></richtext></body>
+<item name='$$ScriptName' summary='false' sign='true'><text>mainframeHeader</text></item></page>
+

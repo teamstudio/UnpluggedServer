@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="filter" replicaid="C1257AC00076B554" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="1be" sequence="257" unid="C40990217F343EEA852576EF0060678E">
+<created><datetime>20100323T123259,66-05</datetime></created>
+<modified><datetime dst="true">20130515T115640,11+02</datetime></modified>
+<revised><datetime dst="true">20130515T115640,10+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130515T115640,10+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,62+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Craig Schumann/O=Teamstudio</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name="$PublicAccess" sign="true"><text>1</text></item>
+<item name="$DesignerVersion" sign="true"><text>8.5</text></item>
+<item name="$Flags"><text>s34Q</text></item>
+<item name="$TITLE" sign="true"><text>libPush</text></item>
+
+
+<item name="$POID"><datetime dst="true">20130501T151423,53-04</datetime></item></note>

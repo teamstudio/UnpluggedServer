@@ -1,0 +1,339 @@
+<?xml version='1.0' encoding='utf-8'?>
+<form name='User Application' alias='UserDatabase' xmlns='http://www.lotus.com/dxl'
+ version='9.0' replicaid='C1257AC00076B554' publicaccess='false' designerversion='8.5.3'
+ default='true' renderpassthrough='true'>
+<noteinfo noteid='146' unid='16DE510871BE1FAD852576D6006CCFD4' sequence='84'>
+<created><datetime>20100226T144830,92-05</datetime></created>
+<modified><datetime dst='true'>20130515T115641,56+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115641,55+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115641,55+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,28+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='windowtitle'><formula
+>Path + @If(Path=""; ""; Server != "" ; " (" + @Name([CN];Server) + ")";  " (" + @Name([CN];@Subset(@DbName; 1))+ ")" )</formula></code><code
+ event='declarations'><lotusscript>Const NULLHANDLE = 0
+Const NO_ERROR = 0
+Const ERR_FORMULA_COMPILATION = &amp;h500 + 1
+Declare Function NSFFormulaCompile Lib "nnotes.dll" ( _
+Byval FormulaName As Long, _
+Byval FormulaNameLength As Integer, _
+Byval FormulaText As Lmbcs String, _
+Byval FormulaTextLength As Integer, _
+rethFormula As Long, _
+retFormulaLength As Integer, _
+retCompileError As Integer, _
+retCompileErrorLine As Integer, _
+retCompileErrorColumn As Integer, _
+retCompileErrorOffset As Integer, _
+retCompileErrorLength As Integer _
+) As Integer
+Declare Sub OSMemFree Lib "nnotes.dll" (Byval hHandle As Long)
+Declare Function OSLoadString Lib "nnotes.dll" ( _
+Byval hmodule As Long, _
+Byval status As Integer, _
+Byval s As String, _
+Byval slen As Integer _
+) As Integer
+
+</lotusscript></code><code event='querysave'><lotusscript>
+
+
+
+' ================================================================================
+' CheckSelectionFormulaValid - This function uses the Lotus C API to check thesyntax of a Notes formula.
+'
+' Return Value: Variant - A 3 elements array containing
+
+' Index 0 - The compilation error code or NO_ERROR (0) if valid
+' Index 1 - The compilation error offset in formula or NO_ERROR if valid 
+' Index 2 - The compilation error length or NO_ERROR if valid
+'
+' Note: The compilation error code at Index 0 can then be passed to GetAPIError() to get more info about the error.
+' ================================================================================
+' ================================================================================
+' GetAPIError - This function uses the Lotus C API to return a Notes error's text message.
+'
+' Return Value: String - The text associated with the Notes API error code.
+' ================================================================================
+Sub Querysave(Source As Notesuidocument, Continue As Variant)
+	Dim sSelFormula As String
+	sSelFormula = Trim(source.FieldGetText("ReplFormula"))
+	If sSelFormula = "" Then
+		Continue = True
+		Exit Sub
+	End If
+	Dim iRC As Variant
+	iRC = CheckSelectionFormulaValid(sSelFormula)
+	If iRC(0) = NO_ERROR Then
+		Continue = True
+		Exit Sub
+	End If
+	Msgbox "Error starts at character: " &amp; Cstr(iRC(1)) &amp; " and ends at character: " &amp; Cstr(iRC(1) + iRC(2) - 1), , _
+	"Formula error: " &amp; GetAPIError(iRC(0))
+	Continue = False
+End Sub
+</lotusscript></code><code event='CheckSelectionFormulaValid'><lotusscript
+>Function CheckSelectionFormulaValid(sFormula) As Variant
+	
+	Dim iError As Integer
+	Dim hFormula As Long
+	Dim wFormulaLen As Integer
+	Dim iCompileError As Integer
+	Dim iCompileErrorLine As Integer
+	Dim iCompileErrorColumn As Integer
+	Dim iCompileErrorOffset As Integer
+	Dim iCompileErrorLength As Integer
+	Dim iArray(2) As Integer
+	
+	iError = NSFFormulaCompile(0, 0, _
+	sFormula, _
+	Len(sFormula), _
+	hFormula, _
+	wFormulaLen, _
+	iCompileError, _
+	iCompileErrorLine, _
+	iCompileErrorColumn, _
+	iCompileErrorOffset, _
+	iCompileErrorLength)
+	
+	If hFormula &lt;&gt; NULLHANDLE Then
+		Call OSMemFree(hFormula)
+	End If
+	
+	If iError = ERR_FORMULA_COMPILATION Then
+		iArray(0) = iCompileError
+		iArray(1) = iCompileErrorOffset
+		iArray(2) = iCompileErrorLength
+		CheckSelectionFormulaValid = iArray
+	Else
+		iArray(0) = NO_ERROR
+		iArray(1) = NO_ERROR
+		iArray(2) = NO_ERROR
+		CheckSelectionFormulaValid = iArray
+	End If
+	
+End Function
+</lotusscript></code><code event='GetAPIError'><lotusscript>Function GetAPIError(iErrorCode As Integer) As String
+	
+	Dim iRetVal As Integer
+	Dim sError As String * 1024
+	
+	sError = String(1024, 0)
+	iRetVal = OSLoadString(0&amp;, iErrorCode, sError, 1023)
+	
+	If iRetval &lt;&gt; 0 Then
+		GetApiError = Left$(sError, iRetVal)
+	End If
+	
+End Function</lotusscript></code>
+<actionbar bgcolor='white' bordercolor='black'>
+<actionbuttonstyle bgcolor='white'/><font color='system'/><border style='solid'
+ width='0px 0px 1px'/></actionbar>
+<body><richtext>
+<pardef id='1' leftmargin='1in' rightmargin='96%' hide='preview previewedit'/>
+<par def='1'><run><font style='bold' color='#bf4100'/></run></par><subformref
+ name='(Header) | sfrmHeader'/>
+<pardef id='2' rightmargin='96%' tabs='L2.1250in'/>
+<par def='2'><run><font style='bold' color='#bf4100'/></run></par>
+<pardef id='3'/>
+<par def='3'><run><font size='14pt' style='bold' color='#0060a0'/>Application: </run><run
+><font size='14pt' style='bold' color='#0060a0'/><computedtext><code event='value'><formula
+>strOn := "  on  ";
+Path + @If(Path=""; ""; Server != "" ; strOn + @Name([Abbreviate];Server);  strOn + @Name([Abbreviate];@Subset(@DbName; 1)) )</formula></code></computedtext></run><run
+><font size='14pt' style='bold' color='#0060a0'/></run></par>
+<par def='3'><run><font size='6pt' style='bold' color='#bf4100'/></run></par>
+<table widthtype='fitmargins' rowspacing='0.0500in' columnspacing='0.1500in'
+ refwidth='8.1750in'><tablecolumn width='2.9125in'/><tablecolumn width='4.6625in'
+ sizetofit='true'/>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<pardef id='5' rightmargin='2.9125in' keepwithnext='true' keeptogether='true'/>
+<par def='5'><run><font size='9pt' style='bold'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<pardef id='6' keepwithnext='true' keeptogether='true'/>
+<par def='6'><run><font size='9pt' style='bold' color='#f7f7f7'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<pardef id='7' keepwithnext='true' keeptogether='true'/>
+<par def='7'><run><font size='9pt' style='bold'/>Profiles</run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='6'><run><font size='9pt' style='bold'/></run><run><font size='9pt'
+ style='bold'/><sharedfieldref name='Profiles'/></run><run><font size='9pt'
+ style='bold'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='7'><run><font size='9pt' style='bold'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='6'><run><font size='9pt' style='bold'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='7'><run><font size='9pt' style='bold'/>Users:</run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<pardef id='8' keepwithnext='true' keeptogether='true'/>
+<par def='8'><field choicesdialog='view' viewdatabase='' view='Users\All'
+ viewcolumn='2' lookupeachchar='false' lookupaddressonrefresh='false' type='names'
+ allowmultivalues='true' kind='editable' name='UserName' listinputseparators='newline'
+ listdisplayseparator='newline'><code event='inputvalidation'><formula>IDS_USER_REQ:="At least one profile or user must be listed";
+
+@If(@IsDocBeingSaved &amp; ( @Trim(UserName)="" &amp; @Trim(Profiles) = "" ) ; @Failure(IDS_USER_REQ); @Success)</formula></code></field></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<pardef id='9' hide='read print preview' tabs='L2.2500in' keepwithnext='true'
+ keeptogether='true'/>
+<par def='9'><run><font size='9pt' color='gray'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<pardef id='10' tabs='L2.2500in' keepwithnext='true' keeptogether='true'/>
+<par def='10'><run><font size='9pt' color='#f7f7f7'/> </run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='7'><run><font size='9pt' style='bold'/>Enabled?</run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<pardef id='11' keepwithnext='true' keeptogether='true'/>
+<par def='11'><field borderstyle='none' lookupeachchar='false' lookupaddressonrefresh='false'
+ type='keyword' kind='editable' name='Active'><keywords helperbutton='false'
+ columns='2' ui='radiobutton'><textlist><text>Yes|1</text><text>No|0</text></textlist></keywords><code
+ event='defaultvalue'><formula>"1"</formula></code></field></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='7'><run><font size='9pt' color='#f7f7f7'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='6'><run><font size='9pt' color='#f7f7f7'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='7'><run><font size='9pt' style='bold'/>Application Server:</run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='6'><field type='text' kind='editable' name='Server'><code event='inputtranslation'><formula
+>@Trim(Server)</formula></code></field><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='7'><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='6'><run><font size='9pt' color='#f7f7f7'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='7'><run><font size='9pt' style='bold'/>Application Path:</run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='6'><field type='text' kind='editable' name='Path'><code event='inputvalidation'><formula
+>IDS_DBPATH_REQ:="Application Path is required";
+
+@If(@IsDocBeingSaved &amp; @Trim(Path)=""; @Failure(IDS_DBPATH_REQ); @Success)</formula></code></field><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='7'><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='6'><run><font size='9pt' color='#f7f7f7'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='7'><run><font size='9pt' style='bold'/>Selection Formula:</run></par>
+<par def='7'><run><font size='9pt'/>(Leave blank to sync all documents)</run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='6'><field type='text' kind='editable' name='ReplFormula'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='7'><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='6'><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='7'><run><font size='9pt' style='bold'/>Device Types</run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='6'><field borderstyle='none' lookupeachchar='false' lookupaddressonrefresh='false'
+ type='keyword' kind='editable' name='ReplLimitByDevice'><keywords helperbutton='false'
+ recalconchange='true' columns='2' ui='radiobutton'><textlist><text>All Device Types|0</text><text
+>Selected Device Types|1</text></textlist></keywords><code event='defaultvalue'><formula
+>"0"</formula></code></field></par>
+<pardef id='12' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>ReplLimitByDevice!="1"</formula></code></pardef>
+<par def='12'/>
+<par def='12'>Choose device types that should receive the application:</par>
+<par def='12'/>
+<par def='12'><field borderstyle='none' lookupeachchar='false' lookupaddressonrefresh='false'
+ type='keyword' allowmultivalues='true' kind='editable' name='ReplDevices'
+ listinputseparators='comma' listdisplayseparator='comma'><keywords helperbutton='false'
+ recalconchange='true' recalcchoices='true' columns='1' ui='checkbox'><textlist
+><text>iOS (iPhones, iPads)|3</text><text>Android|2</text><text>BlackBerry|1</text></textlist></keywords><code
+ event='defaultvalue'><formula>"3":"2":"1"</formula></code></field></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='7'><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='6'><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='7'><run><font size='9pt' style='bold'/>Attachments:</run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='6'><run><font size='9pt'/></run><field borderstyle='none' lookupeachchar='false'
+ lookupaddressonrefresh='false' type='keyword' kind='editable' name='ReplOmitAttach'><keywords
+ helperbutton='false' recalconchange='true' columns='2' ui='radiobutton'><textlist
+><text>Send attachments to device|0</text><text>Do not send attachments to device|1</text></textlist></keywords><code
+ event='defaultvalue'><formula>"0"</formula></code></field><run><font size='9pt'/></run></par>
+<pardef id='13' hide='read print preview' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>ReplOmitAttach="1"</formula></code></pardef>
+<par def='13'/>
+<par def='13'>Enter extensions for file types to send to the device (blank for "all"):</par>
+<par def='13'><field lookupeachchar='false' lookupaddressonrefresh='false'
+ type='keyword' allowmultivalues='true' kind='editable' name='ReplAttachmentExts'
+ listinputseparators='space comma semicolon newline blankline' listdisplayseparator='newline'><keywords
+ recalconchange='true' recalcchoices='true' columns='1' ui='dialoglist' allownew='true'><textlist
+><text>jpg</text><text>gif</text><text>png</text></textlist></keywords><code
+ event='defaultvalue'><formula>"jpg":
+"gif":
+"png"</formula></code><code event='inputtranslation'><formula>lc:=@LowerCase(ReplAttachmentExts);
+@ReplaceSubstring(lc; "*." : "." ; "")</formula></code></field></par>
+<pardef id='14' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>ReplOmitAttach="1"</formula></code></pardef>
+<par def='14'/>
+<par def='14'>Attachments that match the following filters will be sent to the device:</par>
+<par def='14'><field type='text' kind='computedfordisplay' name='dspReplAttachmentExts'><keywords
+ ui='dialoglist' allownew='true'/><code event='defaultvalue'><formula>@If(ReplAttachmentExts=""; "*.*"; @Implode(("*." + ReplAttachmentExts); ",   "))</formula></code></field><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='7' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='7'><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='6'><run><font size='9pt' style='bold'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='7'><run><font size='9pt' style='bold'/>Workspace</run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='6'><run><font size='9pt' style='bold'/></run><field borderstyle='none'
+ lookupeachchar='false' lookupaddressonrefresh='false' type='keyword' allowmultivalues='true'
+ kind='editable' name='ShowOnWS' listinputseparators='comma' listdisplayseparator='comma'><keywords
+ helperbutton='false' columns='1' ui='checkbox'><textlist><text>Do not show on XPages Engine workspace|no</text></textlist></keywords></field><run
+><font size='9pt' style='bold'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='7'><run><font size='9pt' style='bold'/>Auto Launch</run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='6'><field borderstyle='none' lookupeachchar='false' lookupaddressonrefresh='false'
+ type='keyword' allowmultivalues='true' kind='editable' name='AutoLaunchApp'
+ listinputseparators='comma' listdisplayseparator='comma'><keywords helperbutton='false'
+ columns='1' ui='checkbox'><textlist><text>Automatically launch this app when Unplugged starts|yes</text></textlist></keywords></field></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='7'><run><font size='9pt' style='bold'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='6'><run><font size='9pt' style='bold'/></run></par></tablecell></tablerow></table>
+<pardef id='4' firstlineleftmargin='1in' tabs='L2.2500in'/>
+<par def='4'><run><font size='9pt'/></run></par>
+<par def='3'><run><font size='9pt'/>	</run></par></richtext></body>
+<item name='$FormUsers'><text>[Admin]</text></item>
+<item name='$SubForm_RepIDs' sign='true'><text>0000000000000000</text></item>
+<item name='$$ScriptName' summary='false' sign='true'><text>UserDatabase</text></item></form>
+

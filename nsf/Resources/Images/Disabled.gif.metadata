@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><imageresource designerversion="8.5" name="Disabled.gif" noquery="true" publicaccess="false" replicaid="C1257AC00076B554" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="1ca" sequence="14" unid="EA23994310899034852576EF005452EC">
+<created><datetime>20100323T102102,52-05</datetime></created>
+<modified><datetime dst="true">20130515T115639,08+02</datetime></modified>
+<revised><datetime dst="true">20130515T115639,07+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130515T115639,07+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,66+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedRestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name="$$ScriptName" sign="true" summary="false"><text>Disabled.gif</text></item>
+
+<item name="$MimeType" sign="true"><text>image/gif</text></item>
+<item name="$FileModDT" sign="true"><datetime dst="true">20110712T102909,45-04</datetime></item></imageresource>

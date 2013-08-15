@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><imageresource designerversion="8.5" name="Enabled.gif" publicaccess="false" replicaid="C1257AC00076B554" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="1ce" sequence="12" unid="E39889165CC06FF1852576EF005452E9">
+<created><datetime>20100323T102102,49-05</datetime></created>
+<modified><datetime dst="true">20130515T115639,14+02</datetime></modified>
+<revised><datetime dst="true">20130515T115639,13+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130515T115639,13+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,67+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedRestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+
+<item name="$MimeType" sign="true"><text>image/gif</text></item>
+<item name="$FileModDT" sign="true"><datetime>20100323T101447,84-05</datetime></item>
+<item name="$$ScriptName" sign="true" summary="false"><text>Enabled.gif</text></item>
+<item name="$EditFilePath"><text>C:\DOCUME~1\mvargi01\LOCALS~1\Temp\notes4C4485\~Enabled.gif</text></item></imageresource>

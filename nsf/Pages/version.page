@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<page name='version' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257AC00076B554'
+ publicaccess='false' designerversion='8.5' renderpassthrough='true'>
+<noteinfo noteid='1ba' unid='D8A1E6DE2A5F793B852576EB005AAD43' sequence='15'>
+<created><datetime>20100319T113025,95-05</datetime></created>
+<modified><datetime dst='true'>20130515T115641,87+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115641,86+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115641,86+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,61+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<body><richtext>
+<pardef id='1' leftmargin='1in' tabs='L0.5000in L1in L1.5000in L2in L2.5000in L3in L3.5000in L4in'/>
+<par def='1'><run><font size='8pt'/>v.  2.4.22.374</run></par></richtext></body>
+<item name='$$ScriptName' summary='false' sign='true'><text>version</text></item></page>
+

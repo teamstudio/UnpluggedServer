@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<agent name='(Disable)' alias='Disable' xmlns='http://www.lotus.com/dxl' version='9.0'
+ replicaid='C1257AC00076B554' hide='v3' publicaccess='false' designerversion='8.5.2'>
+<noteinfo noteid='252' unid='14E4D8A9189C9596852576FE0049ED90' sequence='16'>
+<created><datetime dst='true'>20100407T092729,44-04</datetime></created>
+<modified><datetime dst='true'>20130515T115642,25+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115642,24+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115642,24+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223638,01+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<designchange><datetime dst='true'>20130515T115643,46+02</datetime></designchange>
+<trigger type='agentlist'/>
+<documentset type='selected'/><code event='action'>
+<simpleaction action='runformula'><formula>FIELD Active:="0";
+SELECT @All</formula></simpleaction></code>
+<rundata processeddocs='1' exitcode='0'>
+<agentmodified><datetime dst='true'>20130515T115642,25+02</datetime></agentmodified>
+<agentrun><datetime dst='true'>20130708T222642,37+02</datetime></agentrun>
+<runlog>Started running agent '(Disable)|Disable' on 08-07-2013 22:26:42
+Running on selected documents: 1 total
+Found 1 document(s) that match search criteria
+1 document(s) were modified by formula
+Done running agent '(Disable)|Disable' on 08-07-2013 22:26:42
+</runlog></rundata>
+<item name='$POID'><datetime dst='true'>20130501T151425,61-04</datetime></item></agent>
+

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><imageresource designerversion="6" name="ui_expand.gif" publicaccess="false" replicaid="C1257AC00076B554" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="206" sequence="11" unid="A30FA7571C392C1B852576F20058830D">
+<created><datetime>20100326T110647,17-05</datetime></created>
+<modified><datetime dst="true">20130515T115641,12+02</datetime></modified>
+<revised><datetime dst="true">20130515T115641,11+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130515T115641,11+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,84+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Michael BOURAK/O=ONIMOD</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Craig Schumann/O=Teamstudio</name><name>CN=tsbuild/O=Teamstudio</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+
+<item name="$MimeType" sign="true"><text>image/gif</text></item>
+<item name="$FileModDT" sign="true"><datetime>20021213T205221,25+01</datetime></item></imageresource>

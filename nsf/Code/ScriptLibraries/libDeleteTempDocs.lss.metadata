@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="filter" replicaid="C1257AC00076B554" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="20e" sequence="24" unid="64A2DC5D974DEC60852576F60008F917">
+<created><datetime dst="true">20100329T213800,55-04</datetime></created>
+<modified><datetime dst="true">20130515T115639,44+02</datetime></modified>
+<revised><datetime dst="true">20130515T115639,43+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130515T115639,43+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,86+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Craig Schumann/O=Teamstudio</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name="$TITLE" sign="true"><text>libDeleteTempDocs</text></item>
+<item name="$PublicAccess" sign="true"><text>1</text></item>
+<item name="$Flags"><text>s34Q</text></item>
+
+
+<item name="$POID"><datetime dst="true">20130501T151423,61-04</datetime></item></note>

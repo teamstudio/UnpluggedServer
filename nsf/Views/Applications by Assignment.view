@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='utf-8'?>
+<view name='Applications by Assignment' alias='Dbs' xmlns='http://www.lotus.com/dxl'
+ version='9.0' replicaid='C1257AC00076B554' showinmenu='false' publicaccess='false'
+ designerversion='8.5.2' unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator'
+ headers='flat' opencollapsed='false' showresponsehierarchy='true' showmargin='true'
+ shrinkrows='false' extendlastcolumn='true' showhierarchies='false' unreadcolor='black'
+ rowlinecount='1' headerlinecount='2' rowspacing='1' bgcolor='white' altrowcolor='#efefef'
+ totalscolor='black' headerbgcolor='white' boldunreadrows='false' evaluateactions='false'
+ allownewdocuments='false' allowcustomizations='false' hidemarginborder='true'
+ marginwidth='10px 0px 0px' marginbgcolor='white' uniquekeys='false'>
+<noteinfo noteid='186' unid='17DB021ACCB1C9BB852576E900124698' sequence='42'>
+<created><datetime>20100316T221937,20-05</datetime></created>
+<modified><datetime dst='true'>20130515T115638,62+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115638,61+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115638,61+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,46+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT Form = "UserDatabase"</formula></code>
+<actionbar bgcolor='white' bordercolor='black'>
+<actionbuttonstyle bgcolor='white'/><font color='system'/><border style='solid'
+ width='0px 0px 1px'/>
+<sharedactionref id='2'>
+<action title='New Application'><imageref name='userdevicesnew.gif'/><code
+ event='click'><formula>@Command([Compose];"UserDatabase")</formula></code><code
+ event='hidewhen'><formula>(!@IsMember("[Admin]";@UserRoles))</formula></code><code
+ event='label'><formula>"New Application"</formula></code></action></sharedactionref>
+<sharedactionref id='8'>
+<action title='Profiles...\+  Add profiles to selected' align='right'><imageref
+ name='profiles.gif'/><code event='click'><formula>@Command([RunAgent];"ProfileAddToSel")</formula></code></action></sharedactionref>
+<sharedactionref id='9'>
+<action title='Profiles...\-  Remove profiles from selected' align='right'><imageref
+ name='profiles.gif'/><code event='click'><formula>@Command([RunAgent];"(ProfileRemoveFromSel)")</formula></code></action></sharedactionref>
+<action title='_Edit Document' showinbar='false' systemcommand='edit'/>
+<action title='_Print...' showinbar='false' systemcommand='print'/>
+<action title='_Delete' showinbar='false' systemcommand='delete'/>
+<action title='C_ut' showinbar='false' systemcommand='cut'/>
+<action title='_Copy' showinbar='false' systemcommand='copy'/>
+<action title='Copy as Document _Link' showinbar='false' systemcommand='copyasdoclink'/>
+<action title='Copy as _Table' showinbar='false' systemcommand='copyastable'/>
+<action title='P_aste' showinbar='false' systemcommand='paste'/>
+<action title='_Open' showinbar='false' systemcommand='open'/>
+<sharedactionref id='4'>
+<action title='Disable' showinrightbuttonmenu='true' align='right'><imageref
+ name='Disabled.gif'/><code event='click'><formula>@Command([RunAgent]; "Disable")</formula></code><code
+ event='hidewhen'><formula>(!@IsMember("[Admin]";@UserRoles))</formula></code><code
+ event='label'><formula>"Disable"</formula></code></action></sharedactionref>
+<sharedactionref id='5'>
+<action title='Enable' showinrightbuttonmenu='true' align='right'><imageref
+ name='Enabled.gif'/><code event='click'><formula>@Command([RunAgent]; "Enable")</formula></code><code
+ event='hidewhen'><formula>(!@IsMember("[Admin]";@UserRoles))</formula></code><code
+ event='label'><formula>"Enable"</formula></code></action></sharedactionref></actionbar>
+<column sort='ascending' hidedetailrows='false' itemname='$3' width='10' resizable='true'
+ separatemultiplevalues='true' sortnoaccent='true' sortnocase='true' showaslinks='false'
+ categorized='true' twisties='true'><font color='#002f80' style='bold'/><columnheader
+ title='Assigned To'><font size='9pt' style='bold'/></columnheader><numberformat
+ legacy='true' format='general' varying='true' punctuated='false' parens='false'
+ percent='false' bytes='false'/><code event='value'><formula>@Trim(Profiles:@Name([Abbreviate];UserName))</formula></code><twistieimage
+><imageref database='0000000000000000' name='ui_expand.gif'/></twistieimage></column>
+<column hidedetailrows='false' itemname='$6' width='2' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='false' sortnocase='true' showaslinks='false' showasicons='true'><columnheader
+><font size='9pt' style='bold'/></columnheader><numberformat legacy='true'
+ format='general' varying='true' punctuated='false' parens='false' percent='false'
+ bytes='false'/><code event='value'><formula>@If( Active= "0"; "vwdisabled.gif";  "vwenabled.gif" )</formula></code></column>
+<column hidedetailrows='false' itemname='Server' width='14.1250' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='Server'><font size='9pt' style='bold'/></columnheader><numberformat
+ legacy='true' format='general' varying='true' punctuated='false' parens='false'
+ percent='false' bytes='false'/></column>
+<column hidedetailrows='false' itemname='Path' width='15.1250' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='Path'><font size='9pt' style='bold'/></columnheader><numberformat
+ legacy='true' format='general' varying='true' punctuated='false' parens='false'
+ percent='false' bytes='false'/></column></view>
+

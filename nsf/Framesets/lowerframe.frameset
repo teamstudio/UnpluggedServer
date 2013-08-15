@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<frameset name='lowerframe' xmlns='http://www.lotus.com/dxl' version='9.0'
+ replicaid='C1257AC00076B554' publicaccess='false' designerversion='8.5' columns='250px 78%'
+ spacing='0px' borderwidth='1px' bordercolor='#e1e1e1'>
+<noteinfo noteid='1ee' unid='1E6B0ACE19C47011852576F10043116A' sequence='30'>
+<created><datetime>20100325T071233,70-05</datetime></created>
+<modified><datetime dst='true'>20130515T115640,39+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115640,38+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115640,38+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,78+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<frame name='Nav' targetframe='NotesView' scrolling='never'><namedelementlink
+ type='frameset' name='navframe'/></frame>
+<frameset rows='100 1' spacing='0px'>
+<frame name='NotesView' targetframe='NotesPreview'><namedelementlink type='view'
+ name='AllUsers'/></frame>
+<frame name='NotesPreview'><bordercaption show='caption arrows' justify='center'><code
+ event='value'><formula>"Preview"</formula></code></bordercaption></frame></frameset></frameset>
+

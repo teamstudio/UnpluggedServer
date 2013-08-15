@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='utf-8'?>
+<view name='(Embed Devices)' alias='DevicesEmbedded' xmlns='http://www.lotus.com/dxl'
+ version='9.0' replicaid='C1257AC00076B554' showinmenu='false' publicaccess='false'
+ designerversion='8.5.2' unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator'
+ headers='flat' opencollapsed='false' showresponsehierarchy='false' showmargin='true'
+ shrinkrows='false' extendlastcolumn='true' showhierarchies='false' unreadcolor='black'
+ rowlinecount='1' headerlinecount='2' rowspacing='1' bgcolor='white' altrowcolor='#efefef'
+ totalscolor='black' headerbgcolor='white' boldunreadrows='false' evaluateactions='false'
+ allownewdocuments='false' allowcustomizations='false' hidemarginborder='true'
+ marginwidth='10px 0px 0px' marginbgcolor='white' uniquekeys='false'>
+<noteinfo noteid='282' unid='D7C2BF0F3CDD14A3852578940050C631' sequence='18'>
+<created><datetime dst='true'>20110518T104216,17-04</datetime></created>
+<modified><datetime dst='true'>20130515T115642,30+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115642,29+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115642,29+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223638,15+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT Form = "Device"</formula></code>
+<actionbar bgcolor='white' bordercolor='black'>
+<actionbuttonstyle bgcolor='white'/><font color='system'/><border style='solid'
+ width='0px 0px 1px'/>
+<action title='_Edit Document' showinbar='false' systemcommand='edit'/>
+<action title='New Device Embedded Vw'><imageref name='userdevicesnew.gif'/><code
+ event='click'><lotusscript>Sub Click(Source As Button)
+	Dim ws As New notesuiworkspace
+	Dim db As NotesDatabase
+	Set db = ws.CurrentDatabase.Database
+	Dim uidoc As NotesUIDocument
+	Set uidoc = ws.CurrentDocument
+	Dim username As String
+	If Not uidoc Is Nothing Then
+		username = uidoc.Document.GetItemValue("UserName")(0)
+	End If
+	
+	Dim uidocNew As NotesUIDocument
+	Set uidocNew = ws.ComposeDocument(db.Server,db.FilePath,"Device",,,True)
+	If username &lt;&gt; "" Then
+		uidocnew.FieldSetText "Username", username
+	End If 
+	
+End Sub</lotusscript></code><code event='hidewhen'><formula>(!@IsMember("[Admin]";@UserRoles))</formula></code><code
+ event='label'><formula>"New Device"</formula></code></action>
+<action title='_Print...' showinbar='false' systemcommand='print'/>
+<action title='_Delete' showinbar='false' systemcommand='delete'/>
+<action title='C_ut' showinbar='false' systemcommand='cut'/>
+<action title='_Copy' showinbar='false' systemcommand='copy'/>
+<action title='Copy as Document _Link' showinbar='false' systemcommand='copyasdoclink'/>
+<action title='Copy as _Table' showinbar='false' systemcommand='copyastable'/>
+<action title='P_aste' showinbar='false' systemcommand='paste'/>
+<action title='_Open' showinbar='false' systemcommand='open'/>
+<sharedactionref id='10'>
+<action title='Disable Embedded Vw' showinrightbuttonmenu='true' align='right'><imageref
+ name='Disabled.gif'/><code event='click'><lotusscript>Sub Click(Source As Button)
+	Dim s As New notessession
+	Dim db As notesdatabase
+	Dim col As notesdocumentcollection
+	Dim doc As notesdocument
+	Set db=s.CurrentDatabase
+	Set col=db.UnprocessedDocuments
+	Set doc=col.getfirstdocument
+	While Not doc Is Nothing
+		doc.Active = "0"
+		doc.Save True, True
+		Set doc=col.GetNextDocument(doc)
+	Wend
+	Dim ws As New notesuiworkspace
+	ws.ViewRefresh
+End Sub</lotusscript></code><code event='hidewhen'><formula>(!@IsMember("[Admin]";@UserRoles))</formula></code><code
+ event='label'><formula>"Disable"</formula></code></action></sharedactionref>
+<sharedactionref id='3'>
+<action title='Enable Devices' showinrightbuttonmenu='true' align='right'><imageref
+ name='Enabled.gif'/><code event='options'><lotusscript>Use "LibSettings"
+</lotusscript></code><code event='click'><lotusscript>Sub Click(Source As Button)
+	UIEnableDevices Nothing
+End Sub</lotusscript></code><code event='hidewhen'><formula>(!@IsMember("[Admin]";@UserRoles))</formula></code><code
+ event='label'><formula>"Enable"</formula></code></action></sharedactionref></actionbar>
+<column sort='ascending' hidedetailrows='false' itemname='$3' width='10' resizable='true'
+ separatemultiplevalues='true' sortnoaccent='true' sortnocase='true' showaslinks='false'
+ categorized='true' twisties='true'><font color='#002f80' style='bold'/><columnheader
+ title='UserName'><font size='9pt' style='bold'/></columnheader><numberformat
+ legacy='true' format='general' varying='true' punctuated='false' parens='false'
+ percent='false' bytes='false'/><code event='value'><formula>@Name([Abbreviate];UserName)</formula></code><twistieimage
+><imageref database='0000000000000000' name='ui_expand.gif'/></twistieimage></column>
+<column hidedetailrows='false' itemname='$7' width='2' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='false' sortnocase='true' showaslinks='false' showasicons='true'><columnheader
+><font size='9pt' style='bold'/></columnheader><numberformat legacy='true'
+ format='general' varying='true' punctuated='false' parens='false' percent='false'
+ bytes='false'/><code event='value'><formula>@If( Active= "0"; "vwdisabled.gif";  "vwenabled.gif" )</formula></code></column>
+<column hidedetailrows='false' itemname='ID&#xA;' width='14.3750' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='Device Id'><font size='9pt' style='bold'/></columnheader><numberformat
+ legacy='true' format='general' varying='true' punctuated='false' parens='false'
+ percent='false' bytes='false'/><code event='value'><formula>ID</formula></code></column>
+<column hidedetailrows='false' itemname='UserAgent' width='26.6250' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='User Agent'><font size='9pt' style='bold'/></columnheader><numberformat
+ legacy='true' format='general' varying='true' punctuated='false' parens='false'
+ percent='false' bytes='false'/></column></view>
+

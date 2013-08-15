@@ -1,0 +1,1708 @@
+<?xml version='1.0' encoding='utf-8'?>
+<form name='(ImportDialog)' alias='(ImportDialog)' xmlns='http://www.lotus.com/dxl'
+ version='9.0' replicaid='C1257AC00076B554' nocompose='true' noquery='true'
+ publicaccess='false' designerversion='8.5.2' bgcolor='system' renderpassthrough='true'>
+<noteinfo noteid='2ee' unid='82B2E144BE762678852578D100558177' sequence='9'>
+<created><datetime dst='true'>20110718T113357,03-04</datetime></created>
+<modified><datetime dst='true'>20130515T115642,62+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115642,61+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115642,61+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223638,46+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<globals><code event='options'><lotusscript>Option Public
+Option Explicit
+Use "libImport"
+Uselsx "*javacon"
+
+</lotusscript></code><code event='declarations'><lotusscript>%REM
+	Import Dailog Code
+	Author: Teamstudio
+	Description: Imports CSV file containing user / device information and creates 
+	appropriate documents in the Unplugged Synchronizer.
+	
+	This code utilizes a modified version OpenCSV which is copyrighted by Bytecode Pty Ltd.
+	and licensed under the Apache License, Version 2.0.
+	Source code, along with copyright and license is available in the libImport
+	Java script library in the au.com.bytecode.opencsv package.
+	
+%END REM
+
+Dim importer As CSVImporter  
+Dim availLicenses As Double
+
+Private Const REQUIRED_IMPORT_HEADER_FIELDS =_
+"UserName,Overwrite,Profiles,Active,CanCreateDevices,DevicePushRepLog"
+
+Private Const ADDED = "New Users Imported"
+Private Const OVERWRITTEN = "Existing Users, replaced"
+Private Const IGNORED = "Existing Users, skipped"
+Private Const DEV_ENABLED = "Enabled Devices added"
+Private Const DEV_DISABLED = "Disabled Devices added"
+Private Const DEV_EXISTED = "Existing Devices, skipped"
+
+Private Const FLD_VALIDATE_STATUS = "ValidationStatus"
+Private Const FLD_IMPORT_STATUS = "ImportStatus"
+Private Const FLD_IMPORT_SUMMARY = "ImportSummary"
+Private Const FLD_STATE = "State"
+
+Const ERR_ADMN_ROLE_REQ = 13001
+Const ERR_BAD_ROW = 13002
+Const ERR_BAD_ROW_LEN = 13003
+Const ERR_OVER_LICENSE = 13004
+Const ERR_MISSING_HEADER_VALS = 13005
+Const ERR_MISSING_HEADERS = 13006
+
+Public Class CSVImporter
+%REM
+	Author: Teamstudio
+	Description: Imports CSV file containing user / device information and creates 
+	appropriate documents in the Unplugged Synchronizer.
+	
+	This code utilizes a modified version OpenCSV which is copyrighted by Bytecode Pty Ltd.
+	and licensed under the Apache License, Version 2.0.
+	Source code, along with copyright and license is available in the libImport
+	Java script library in the au.com.bytecode.opencsv package.
+%END REM
+	Private s As NotesSession
+	Private ws As NotesUIWorkspace
+	Private db As NotesDatabase
+	Private vwDevicesAll As NotesView
+	Private vwDevices As NotesView
+	Private vwUsers As NotesView
+	
+	Private activeLicensesToCreate As Double
+	Private lstImportStats List As Double
+	Private logUsers As CSVWriter
+	Private logDevices As CSVWriter
+	Private map List As Integer
+	Private sourcePath As String
+	Private logDevicePath As String
+	Private logUserPath As String
+	
+	Private docOpts As NotesDocument
+	Private uiDocOpts As NotesUIDocument
+	
+	Sub New
+		Set s = New NotesSession
+		Set ws = New NotesUIWorkspace
+		Set db = s.currentdatabase
+		Set vwUsers = db.Getview("UsersAll")
+		Set vwDevices = db.Getview("DevicesEmbedded")
+		Set vwDevicesAll = db.Getview("DevicesAllLU")
+		
+	End Sub
+	
+	Sub updateUI(Field As String, vVal As Variant)
+		If docOpts Is Nothing Then
+			Print Field,, Cstr(vVal)
+		Else
+			docOpts.ReplaceItemValue Field, vVal
+			If Not uiDocOpts Is Nothing Then uiDocOpts.Refresh
+		End If
+	End Sub
+	
+	Sub uiValidateImport()
+		Dim ws As New NotesUIWorkspace
+		Set uiDocOpts = ws.CurrentDocument
+		Set docOpts = uiDocOpts.Document
+		
+		Dim filenames As Variant
+		filenames = ws.OpenFileDialog( _
+		False, "Select CSV File to Import","CVS Files|*.csv", "\", Environ("HOMEPATH"))
+		If (Not Isempty(filenames)) Then
+			updateUI "SourceFile", filenames(0)
+			sourcePath = filenames(0)
+		Else
+			sourcePath = ""
+			updateUI "SourceFile", ""
+			Exit Sub
+		End If 
+		
+		updateUI FLD_STATE, 2
+		
+		updateUI FLD_VALIDATE_STATUS,  "Validating file..."
+		Sleep 1
+		
+		validateImport
+		
+		updateUI "UserLog", Strleftback(SourcePath, ".") + "_log_user.csv"
+		updateUI "DeviceLog", Strleftback(SourcePath, ".")  + "_log_devices.csv"
+		
+		
+		updateUI FLD_STATE, 3
+		
+	End Sub
+	
+	Sub validateImport()
+		If Not UserHasAuthority Then
+			Error ERR_ADMN_ROLE_REQ, "Only user's with Editor ACL access and the [Admin] ACL role can bulk import users"
+		End If
+		Dim c As New CSVReader
+		c.loadFile(sourcePath)
+		Dim i As Long
+		Dim vArr As Variant
+		If c.hasNext Then
+			vArr = c.readNext()
+			If Not Isarray(vArr) Then Error ERR_BAD_ROW, "Invalid input: row " &amp; i &amp;_
+			" (" &amp; Join(vArr, ":") &amp; ")"
+			If Ubound(vArr) &lt; 5 Then  Error ERR_BAD_ROW_LEN, "Invalid input: row " &amp; i &amp;_
+			" (" &amp; Join(vArr, ":") &amp; ")"
+			
+			createImportMap vArr, map
+			
+			updateUI FLD_VALIDATE_STATUS,  "Processed file header row..."
+			
+		End If
+		
+		Dim mapLen As Integer
+		mapLen = Ubound(vArr) 'save first row length to validate subsequent rows.
+		
+		activeLicensesToCreate = 0 'we need to reset this incase we're called more than once
+		
+		Do While c.hasNext
+			i = i + 1
+			vArr = c.readNext()
+			If Not Isarray(vArr) Then 
+				updateUI FLD_VALIDATE_STATUS,"Validation Failed"
+				Error ERR_BAD_ROW, "Invalid input: row " &amp; i
+			End If
+			If Ubound(vArr) &lt;&gt; mapLen Then
+				updateUI FLD_VALIDATE_STATUS,"Validation Failed"
+				Error ERR_BAD_ROW_LEN, "Invalid input (wrong number of elements), row: " &amp; i &amp;_
+				" (" &amp; Join(vArr, ":") &amp; ")"
+			End If
+			
+			If Iselement(map("Device_ID")) Then
+				Dim devices As Variant
+				devices = Split(vArr(map("Device_ID")), ";")
+				Forall pin In devices
+					If "" &lt;&gt; Fulltrim(pin) Then
+						If "1" = vArr(map("Device_Active")) Then 
+							If (getDeviceEntry(Cstr(pin))Is Nothing) Then
+								activeLicensesToCreate = activeLicensesToCreate + 1	
+							End If
+						End If
+					End If
+					If i Mod 20 = 0 Then updateUI FLD_VALIDATE_STATUS, "Validating row " &amp; i &amp; "..."
+				End Forall
+			End If
+			
+		Loop
+		
+		c.close
+		Delete c
+		
+		If activeLicensesToCreate &gt; availLicenses Then
+			updateUI FLD_VALIDATE_STATUS, "Validated " &amp; i &amp; " rows. " &amp; activeLicensesToCreate &amp; " new devices; Exceeds " &amp; availLicenses &amp; " licenses available. "
+		Else
+			updateUI FLD_VALIDATE_STATUS, "Validated " &amp; i &amp; " rows. " &amp; activeLicensesToCreate &amp; " new devices will be activated.  Ready to import."
+		End If
+		
+	End Sub
+	
+	Sub uiImport()
+		Dim ws As New NotesUIWorkspace
+		Set uiDocOpts = ws.CurrentDocument
+		Set docOpts = uiDocOpts.Document
+		
+		logUserPath = docOpts.getItemValue("UserLog")(0)
+		logDevicePath = docOpts.getItemValue("DeviceLog")(0)
+		
+		updateUI FLD_STATE, 4
+		
+		Dim msgSummary As String, nl As String
+		nl = Chr(10)
+		msgSummary =  nl &amp; _
+		"Source File: " &amp; sourcePath &amp; nl &amp; _
+		"User Log: " &amp; logUserPath &amp; nl &amp; _
+		"Device Log: " &amp; logDevicePath &amp; nl
+		
+		updateUI FLD_IMPORT_SUMMARY,  msgSummary
+		
+		updateUI  FLD_IMPORT_STATUS,  "Preparing import of file: " &amp; sourcePath
+		Sleep 1
+		
+		logSetup
+		
+		import
+		
+		Forall stat In lstImportStats
+			If stat &gt; 0 Then
+				msgSummary  =  msgSummary &amp; nl &amp;   Listtag(stat) &amp; ":  "  &amp; stat
+			End If
+		End Forall
+		
+		updateUI FLD_IMPORT_SUMMARY,  msgSummary
+		
+		updateUI FLD_STATE, 5
+		
+	End Sub
+	
+	Sub import()
+		If Not UserHasAuthority Then
+			Messagebox "Only user's with Editor ACL access and the [Admin] ACL role can bulk import users"
+			Exit Sub
+		End If
+		
+		If activeLicensesToCreate &gt; getLicenseCount() Then
+			Error ERR_OVER_LICENSE, "Import would create " &amp;  activeLicensesToCreate &amp; " new devices; Exceeds " &amp; availLicenses &amp; " licenses available. "
+		End If
+		
+		Dim vArr As Variant, i As Long
+		'Import loop
+		Dim c As New CSVReader
+		i = 0
+		Set c = New CSVReader
+		c.loadFile(sourcePath)
+		If c.hasNext Then
+			vArr = c.readNext() 'skip headers 
+		End If
+		Do While c.hasNext
+			i = i + 1
+			If i Mod 20 = 0 Then updateUI FLD_IMPORT_STATUS, "Processing row " &amp; i &amp; "..."
+			
+			vArr = c.readNext()
+			processRow vArr, map
+		Loop
+		
+		updateUI  FLD_IMPORT_STATUS, "Processed " &amp; i &amp; " rows."
+		
+		c.close
+		Delete c
+		
+		logCleanup
+		
+	End Sub
+	
+	Function processRow(vArr As Variant, map List As Integer) As Boolean
+		
+		Dim userName As NotesName
+		Set userName = New NotesName(vArr(map("UserName")))
+		
+		Dim overwrite As Boolean
+		overwrite = ("1" = vArr(map("Overwrite")))
+		
+		Dim create As Boolean, isOverwrite As Boolean
+		create = True
+		isOverwrite = False
+		
+		Dim dcUser As NotesDocumentCollection
+		vwUsers.Refresh
+		Set dcUser = vwUsers.getAllDocumentsByKey(userName.Abbreviated, True)
+		
+		Dim logAction As String
+		Dim devicesAdded As String
+		Dim devicesExisted As String
+		
+		If dcUser.count &gt; 0 Then
+			'user exists
+			If overwrite Then
+				isOverwrite = True
+				dcUser.removeAll True
+				
+				'		Uncommenting the following will also remove devices when overwrite is set;
+				'		Note that if the device is used by another user it may affect that user too.
+				'			Dim dcDevices As NotesDocumentCollection
+				'			Set dcDevices = vwDevices.Getalldocumentsbykey(userName.Abbreviated, True)
+				'			If dcDevices.count &gt; 0 Then
+				'				dcDevices.removeall true
+				'			End If
+				
+			Else
+				IncrementStat(IGNORED)
+				logAction = "Existed/Ignored"
+				create = False
+			End If
+		End If
+		
+		If create Then
+			Dim docUser As New NotesDocument(db)
+			docUser.Form = "User"
+			docUser.Replaceitemvalue "UserName", userName.Canonical
+			Dim docDevices List As NotesDocument
+			Dim fld As String, sVal As String
+			
+			' [, ",], generated by a space after a comma treated as content, can only be 
+			' a mistake in our context, just strip it.
+			Dim i As Integer
+			For i = 0 To Ubound(vArr)
+				If { "} = vArr(i) Then  
+					vArr(i) = ""
+				End If
+			Next
+			
+			Forall el In map
+				fld = Listtag(el)
+				sVal = vArr(el)
+				If Strcomp("Profiles", fld, 1) =  0 Then
+					docUser.replaceItemValue fld, Split(sVal, ";") 
+				Elseif Strcomp("UserName", fld, 1) =  0 Then
+					'nothing to do
+				Elseif Strcomp("Device_", Left(fld, 7), 1) &lt;&gt; 0 Then 'Ignore device doc field prefix
+					docUser.Replaceitemvalue fld, sVal
+				End If
+			End Forall
+			docUser.Save True, True
+			
+			
+			If isOverwrite Then
+				IncrementStat(OVERWRITTEN)
+				logAction = "Overwritten"
+			Else
+				IncrementStat(ADDED)
+				logAction = "Added"
+			End If		
+			
+		End If 'create
+		
+		If Iselement(map("Device_ID")) Then
+			
+			Dim devices As Variant, existingDeviceCreatedFor As String, enabled As String
+			devices = Split(vArr(map("Device_ID")), ";")
+			Forall pin In devices
+				If "" &lt;&gt; Fulltrim(pin) Then
+					Dim veDevice As NotesViewEntry
+					Set veDevice = getDeviceEntry(Cstr(pin))
+					If (veDevice Is Nothing) Then
+						Set docDevices(pin) = New NotesDocument(db)
+						docDevices(pin).replaceItemValue "ID", pin 
+						docDevices(pin).Replaceitemvalue "Form", "Device" 
+						docDevices(pin).Replaceitemvalue "UserName", userName.Canonical
+						If devicesAdded = "" Then devicesAdded = pin Else devicesAdded = devicesAdded &amp; ";" &amp; pin
+					Else
+						IncrementStat(DEV_EXISTED)
+						If devicesExisted = "" Then devicesExisted = pin Else devicesExisted = devicesExisted &amp; ";" &amp; pin
+						Dim colvals As Variant
+						colvals = veDevice.columnValues
+						enabled = Cstr(colvals(2))
+						existingDeviceCreatedFor = Cstr(colvals(1))
+						If existingDeviceCreatedFor = userName.Canonical Then existingDeviceCreatedFor = ""
+						writeDeviceLogLine  Cstr(Pin), userName.Abbreviated, "Existed/Ignored", enabled, existingDeviceCreatedFor
+					End If
+				End If
+			End Forall	
+			
+			
+			Forall el In map
+				fld = Listtag(el)
+				sVal = vArr(el)
+				If Strcomp("Device_ID", fld, 1) =  0 Then
+					'nothing to do
+				Elseif Strcomp("Device_", Left(fld, 7), 1) = 0 Then 'device doc field prefix
+					Forall docDevice In docDevices
+						docDevice.Replaceitemvalue Mid(fld, 8), sVal 
+						If Strcomp("Device_Active", fld, 1) =  0 Then
+							If sVal = "1" Then
+								IncrementStat(DEV_ENABLED)
+								enabled = "1"
+							Else
+								IncrementStat(DEV_DISABLED)
+								enabled = "0"
+							End If
+							writeDeviceLogLine docDevice.getItemValue("ID")(0), userName.Abbreviated, "Added", enabled, "" 
+						End If
+					End Forall				
+				End If
+			End Forall
+			
+			Forall docDevice In docDevices
+				docDevice.save True, True
+			End Forall
+			
+			Erase docDevices
+			
+		End If 'device
+		
+		writeUserLogLine userName.Abbreviated, logAction, devicesAdded, devicesExisted
+	End Function
+	
+	Function createImportMap(vArr As Variant, out_map List As Integer) As Boolean
+		Dim required As Variant, hasSome As Boolean, hasAll As Boolean
+		required = Split(REQUIRED_IMPORT_HEADER_FIELDS, ",")
+		Erase out_map
+		Dim i As Integer
+		For i = 0 To Ubound(vArr)
+			out_map(vArr(i)) = i
+		Next
+		hasAll = True
+		Forall req In required
+			If ( Iselement( out_map(req) ) ) Then
+				hasSome = True
+			Else
+				hasAll = False
+			End If	
+		End Forall
+		If hasSome And (Not hasAll) Then
+			Error ERR_MISSING_HEADER_VALS, "CSV file header row does not contain all required fields: " &amp;_
+			Chr(10) &amp; Chr(13) &amp; Chr(10) &amp; Chr(13) &amp; REQUIRED_IMPORT_HEADER_FIELDS
+		Elseif hasAll Then
+			createImportMap = True
+		Else
+			Error ERR_MISSING_HEADERS, "CVS File does not define header row. Header row must contain: " &amp;_
+			Chr(10) &amp; Chr(13) &amp; Chr(10) &amp; Chr(13) &amp; REQUIRED_IMPORT_HEADER_FIELDS
+		End If
+	End Function
+	
+	Function getLicenseCount() As Long
+		Execute({Use "libLogin" :	availLicenses = getAvailableLicenses()})
+		getLicenseCount = availLicenses
+	End Function
+	
+	Function getDeviceEntry(deviceID As String) As NotesViewEntry
+		vwDevicesAll.Refresh
+		Set getDeviceEntry = vwDevicesAll.getEntryBykey(deviceID, True)
+	End Function
+	
+	Sub IncrementStat(Stat As String)
+		If(Iselement(lstImportStats(Stat))) Then
+			lstImportStats(Stat) = lstImportStats(Stat) + 1
+		Else
+			'init stats in order to display
+			If(Not Iselement(lstImportStats(ADDED))) Then lstImportStats(ADDED) = 0
+			If(Not Iselement(lstImportStats(OVERWRITTEN))) Then lstImportStats(OVERWRITTEN) = 0
+			If(Not Iselement(lstImportStats(IGNORED))) Then lstImportStats(IGNORED) = 0
+			If(Not Iselement(lstImportStats(DEV_ENABLED))) Then lstImportStats(DEV_ENABLED) = 0
+			If(Not Iselement(lstImportStats(DEV_DISABLED))) Then lstImportStats(DEV_DISABLED) = 0
+			If(Not Iselement(lstImportStats(DEV_EXISTED))) Then lstImportStats(DEV_EXISTED) = 0
+			
+			lstImportStats(Stat) = 1
+		End If
+	End Sub
+	
+	Function UserHasAuthority() As Integer
+		Dim sRole As String
+		sRole = "[Admin]"
+		UserHasAuthority = False
+		Dim vHasRole As Variant, hasRole As Boolean
+		If  "[" &lt;&gt; Left(sRole, 1) Then sRole = "[" &amp; sRole
+		If  "]" &lt;&gt; Right(sRole, 1) Then sRole = sRole &amp; "]"
+		vHasRole = Evaluate( {@IsMember("} &amp; sRole &amp; {"; @UserRoles)} )
+		hasRole = -vHasRole(0)
+		
+		Dim s As New NotesSession
+		UserHasAuthority = ( hasRole And (4 &lt;= s.Currentdatabase.Currentaccesslevel)  )
+		
+	End Function
+	
+	Sub logSetup() 
+		
+		Redim logHeaders(3) As String
+		logHeaders(0) = "UserName"
+		logHeaders(1) = "ActionTaken"
+		logHeaders(2) = "DevicesAdded"
+		logHeaders(3) = "DevicesExisted"
+		
+		Set logUsers = New CSVWriter()
+		logUsers.setOutputFile(logUserPath)
+		logUsers.writeNext logHeaders
+		
+		Redim logHeaders(4) As String
+		logHeaders(0) = "DeviceId"
+		logHeaders(1) = "ImportFileUserName"
+		logHeaders(2) = "ActionTaken"
+		logHeaders(3) = "Enabled"
+		logHeaders(4) = "ExistingDeviceUser"
+		
+		Set logDevices = New CSVWriter()
+		logDevices.setOutputFile(logDevicePath)
+		logDevices.writeNext logHeaders
+		
+	End Sub
+	
+	Sub logCleanup()
+		If Not logUsers Is Nothing Then
+			logUsers.close
+			Delete logUsers	
+			Set logUsers = Nothing
+		End If
+		If Not logDevices Is Nothing Then
+			logDevices.close
+			Delete logDevices
+			Set logDevices = Nothing
+		End If
+	End Sub
+	
+	Sub writeUserLogLine(userName As String, action As String, devicesAdded As String, devicesExisted As String)
+		If Not logUsers Is Nothing Then
+			Redim logline(3) As String
+			logline(0) = userName
+			logline(1) = action
+			logline(2) = devicesAdded
+			logline(3) = devicesExisted
+			logUsers.writeNext logline
+		End If
+	End Sub
+	
+	Sub writeDeviceLogLine(deviceID As String, ImportUserName As String, Action As String, Enabled As String,  ExistingDeviceUserName As String)
+		If Not logDevices Is Nothing Then
+			Redim logline(4) As String
+			logline(0) = deviceID
+			logline(1) = ImportUserName
+			logline(2) = Action
+			logline(3) = Enabled
+			logline(4) = ExistingDeviceUserName
+			logDevices.writeNext logline
+		End If
+	End Sub
+	
+End Class
+
+Public Class CSVWriter
+%REM
+	Author: Teamstudio
+	Description: LS2J wrapper on CSV processing class.
+	
+	This code utilizes a modified version OpenCSV which is copyrighted by Bytecode Pty Ltd.
+	and licensed under the Apache License, Version 2.0.
+	Source code, along with copyright and license is available in the libImport
+	Java script library in the au.com.bytecode.opencsv package.
+%END REM
+	Private jSession As JavaSession
+	Private jClass As JavaClass
+	Private jObject As JavaObject
+	Private jError As JavaError
+	Private methods List As JavaMethod
+	Sub New
+		Set jSession = New JavaSession()
+		On Error Goto errhandler
+		Set jClass = jSession.GetClass("com/teamstudio/unplugged/libs/CsvWriterWrapper")  ' lib.Zip;
+		Set jObject = jClass.CreateObject
+		Set methods("setOutputFile") = jClass.GetMethod("setOutputFile", "(Ljava/lang/String;)V")
+		Set methods("writeNext") = jClass.GetMethod("writeNext", "([Ljava/lang/String;)V")
+		Set methods("close") = jClass.GetMethod("close", "()V")
+		Exit Sub
+errhandler:
+		handleJError jSession.GetLastJavaError()
+	End Sub
+	
+	Sub setOutputFile(filePath As String)
+		methods("setOutputFile").Invoke jObject, filePath
+		Exit Sub
+errhandler:
+		handleJError jSession.GetLastJavaError()
+	End Sub
+	
+	Sub writeNext(strLine() As String)
+		Dim vArr As Variant
+		vArr = strLine
+		methods("writeNext").Invoke  jObject, vArr
+		Exit Sub
+errhandler:
+		handleJError jSession.GetLastJavaError()
+	End Sub
+	
+	Sub Close()
+		methods("close").Invoke jObject
+		Exit Sub
+errhandler:
+		handleJError jSession.GetLastJavaError()
+	End Sub
+	
+	Sub Delete
+		Forall m In methods
+			If Not m Is Nothing Then 
+				Delete m
+				Set m = Nothing
+			End If
+		End Forall
+		If Not jObject Is Nothing Then
+			Delete jObject
+		End If
+		'um, we don't do this because it apparently invalidates other instances!
+		'		If Not jClass Is Nothing Then
+		'			Delete jClass
+		'		End If
+	End Sub
+	
+	
+	
+	Private Function handleJError(je As JAVAERROR)
+		Set jError = jSession.GetLastJavaError()
+		If jError.errorMsg&lt;&gt;"" Then
+			'Print "Stack Trace: " &amp;  jError.stackTrace
+			Error Err, Err &amp; ": " &amp; Error() &amp; " [ " &amp; Lsi_info(2)  &amp; " - line " &amp; Cstr(Erl) &amp; |]| 
+		Else
+			Error Err, Error() &amp; " [ " &amp; Lsi_info(12)  &amp; " - line " &amp; Cstr(Erl) &amp; "]" 
+		End If
+		' Clear the Error
+		jSession.ClearJavaError
+		Exit Function
+	End Function
+End Class
+
+Public Class CSVReader
+%REM
+	Author: Teamstudio
+	Description: LS2J wrapper on CSV processing class.
+	
+	This code utilizes a modified version OpenCSV which is copyrighted by Bytecode Pty Ltd.
+	and licensed under the Apache License, Version 2.0.
+	Source code, along with copyright and license is available in the libImport
+	Java script library in the au.com.bytecode.opencsv package.
+%END REM
+	Private jSession As JavaSession
+	Private jClass As JavaClass
+	Private jObject As JavaObject
+	Private jError As JavaError
+	Private methods List As JavaMethod
+	Sub New
+		Set jSession = New JavaSession()
+		On Error Goto errhandler
+		Set jClass = jSession.GetClass("com/teamstudio/unplugged/libs/CsvReaderWrapper")  ' lib.Zip;
+		Set jObject = jClass.CreateObject
+		Set methods("loadFile") = jClass.GetMethod("loadFile", "(Ljava/lang/String;)V")
+		Set methods("hasNext") = jClass.GetMethod("hasNext", "()Z")
+		Set methods("readNext") = jClass.GetMethod("readNext", "()[Ljava/lang/String;")
+		Set methods("close") = jClass.GetMethod("close", "()V")
+		Exit Sub
+errhandler:
+		handleJError jSession.GetLastJavaError()
+	End Sub
+	
+	Sub loadFile(filePath As String)
+		methods("loadFile").Invoke jObject, filePath
+		Exit Sub
+errhandler:
+		handleJError jSession.GetLastJavaError()
+	End Sub
+	
+	Function readNext() As Variant
+		readNext = methods("readNext").Invoke( jObject )
+		Exit Function
+errhandler:
+		handleJError jSession.GetLastJavaError()
+	End Function
+	
+	Function hasNext() As Boolean
+		hasNext = methods("hasNext").Invoke( jObject )
+		Exit Function
+errhandler:
+		handleJError jSession.GetLastJavaError()
+	End Function
+	
+	Sub Close()
+		methods("close").Invoke jObject
+		Exit Sub
+errhandler:
+		handleJError jSession.GetLastJavaError()
+	End Sub
+	
+	Sub Delete
+		Forall m In methods
+			If Not m Is Nothing Then 
+				Delete m
+				Set m = Nothing
+			End If
+		End Forall
+		If Not jObject Is Nothing Then
+			Delete jObject
+		End If
+		'um, we don't do this because it apparently invalidates other instances!
+		'		If Not jClass Is Nothing Then
+		'			Delete jClass
+		'		End If
+	End Sub
+	
+	
+	
+	Private Function handleJError(je As JAVAERROR)
+		Set jError = jSession.GetLastJavaError()
+		If jError.errorMsg&lt;&gt;"" Then
+			'Print "Stack Trace: " &amp;  jError.stackTrace
+			Error Err, Err &amp; ": " &amp; Error() &amp; " [ " &amp; Lsi_info(2)  &amp; " - line " &amp; Cstr(Erl) &amp; |]| 
+		Else
+			Error Err, Error() &amp; " [ " &amp; Lsi_info(12)  &amp; " - line " &amp; Cstr(Erl) &amp; "]" 
+		End If
+		' Clear the Error
+		jSession.ClearJavaError
+		Exit Function
+	End Function
+End Class
+
+Class TestCSVImporter As CSVImporter
+%REM
+	Author: Teamstudio
+	Description: Tests Import of CSV file containing user / device information.
+	
+	This code utilizes a modified version OpenCSV which is copyrighted by Bytecode Pty Ltd.
+	and licensed under the Apache License, Version 2.0.
+	Source code, along with copyright and license is available in the libImport
+	Java script library in the au.com.bytecode.opencsv package.
+%END REM
+	Private headersFull As String
+	Private headersUsers As String
+	Private importFile As CSVWriter
+	Private keepLog As Boolean
+	Private logListDevices List As Variant
+	Private logListUsers List As Variant
+	Sub New
+		headersFull = "UserName,Overwrite,Profiles,Active,CanCreateDevices,DevicePushRepLog,Device_ID,Device_Active"
+		headersUsers = "UserName,Overwrite,Profiles,Active,CanCreateDevices,DevicePushRepLog"
+		Dim ws As New NotesUIWorkspace
+		Set db = ws.currentdatabase.database
+	End Sub
+	
+	Private Sub createCsv(sPath As String, sHeaders As String)
+		Dim vArr As Variant, i As Integer
+		vArr = Split(sHeaders, ",")
+		Redim sArr(Ubound(vArr)) As String
+		For i = 0 To Ubound( vArr )
+			sArr(i) = vArr(i)
+		Next
+		Set importFile = New CSVWriter()
+		importFile.setOutputFile sPath
+		importFile.writeNext sArr
+	End Sub
+	
+	Private Sub writeInputLine(sArr() As String)
+		importFile.writeNext sArr
+	End Sub
+	
+	Private Sub closeCsv()
+		If Not importFile Is Nothing Then
+			importFile.close
+			Delete importFile
+			Set importFile = Nothing
+		End If
+	End Sub
+	
+	Private Sub clearDb()
+		db.Alldocuments.Removeall True
+	End Sub
+	
+	Private Function getDevice(device As String) As NotesDocument
+		Set getDevice = _
+		db.Search({Form = "Device" &amp; ID = "} &amp; device &amp; {"}, Nothing, 0).Getfirstdocument()
+	End Function
+	
+	Private Function getUser(userName As String) As NotesDocument
+		Set getUser = _
+		db.Search({Form = "User" &amp; UserName = "} &amp; userName &amp; {"}, Nothing, 0).Getfirstdocument()
+	End Function
+	
+	Private Sub Assert(msg As String)
+		Error 9999, Getthreadinfo(10) &amp; ": "  &amp; msg
+	End Sub
+	
+	Private Sub AssertFieldEquals(doc As NotesDocument, sField As String, sVal As String)
+		Dim sValActual As String
+		sValActual = doc.Getitemvalue(sField)(0)
+		If sVal &lt;&gt; sValActual Then
+			Error 9999, Getthreadinfo(10) &amp; ": Expected: "  &amp; sVal &amp; "; Actual: " &amp; sValActual &amp; " (" &amp; sField &amp; "/" &amp; doc.Getitemvalue("Username")(0) &amp; ")"
+		End If
+	End Sub
+	
+	
+	Private Sub writeUserLogLine(userName As String, action As String, devicesAdded As String, devicesExisted As String)
+		If keepLog Then
+			Dim logEntry List As String
+			logEntry("userName") = userName
+			logEntry("action") = action
+			logEntry("devicesAdded") = devicesAdded
+			logEntry("devicesExisted") = devicesExisted
+			logListUsers(userName) = logEntry
+		End If
+	End Sub
+	
+	Private Sub writeDeviceLogLine(deviceID As String, ImportUserName As String, Action As String, Enabled As String,  ExistingDeviceUserName As String)
+		If keepLog Then
+			Dim logEntry List As String
+			logEntry("deviceID") = deviceID
+			logEntry("ImportUserName")  = ImportUserName
+			logEntry("Action")  = Action
+			logEntry("Enabled")  = Enabled
+			logEntry("ExistingDeviceUserName")  = ExistingDeviceUserName
+			logListDevices(deviceID) = logEntry
+		End If
+	End Sub
+	
+	Private Sub setup()
+		Print "Setup test: " &amp; Getthreadinfo(10)
+		
+		If db.Alldocuments.Count &gt; 0 Then
+			'Make sure someone doesn't run this in a db where they care about the data (e.g. production!)
+			Error 9999, "Tests cannot be run on databases containing documents.  Tests require deletion of all data.  Use an empty test database to run tests."
+		End If
+		
+		clearDb
+		
+		keepLog = False
+		sourcePath = "testImportCsv.csv"
+	End Sub
+	
+	Private Sub teardown()
+		clearDb
+		keepLog = False
+		Erase logListDevices
+		Erase logListUsers
+		Print "Teardown test: " &amp; Getthreadinfo(10)
+	End Sub
+	
+	Sub runTests()	
+		
+		testOverLicense
+		testImport
+		testNoDeviceColumnImport
+		testNoDeviceRowsImport
+		testOverwriteImport
+		testImportWontOverWriteDevices
+		testBadRow
+		testLogging
+		
+		Msgbox "Tests passed"
+		Exit Sub
+	End Sub
+	
+	Private Sub testImport()
+		setup
+		
+		createCsv sourcePath, headersFull &amp; ",spareUserFld,Device_spareFld"
+		Dim i As Integer
+		For i = 0 To 9
+			Redim sLine(9) As String
+			sLine(0) = "User_" &amp; i		'UserName,
+			sLine(1) = "1"				'Overwrite,
+			sLine(2) = "profile_" &amp; i	'Profiles,
+			sLine(3) = Cstr(i)			'Active,'
+			sLine(4) = Cstr(i)			'CanCreateDevices,
+			sLine(5) = Cstr(i)			'DevicePushRepLog,
+			sLine(6) = "210000_" &amp; i	'Device_ID,
+			sLine(7) = Cstr(i)			'Device_Active
+			sLine(8) = "userSpare_" &amp; i	'spareUserFld  -- test adding addl data to user
+			sLine(9) = "deviceSpare_" &amp; i	'Device_spareFld  -- test adding addl data to device
+			writeInputLine sLine
+		Next
+		closeCsv
+		
+		validateImport
+		import
+		
+		For i = 0 To 9
+			Dim docUser As NotesDocument
+			Set docUser = getUser("User_" &amp; i)
+			If docUser Is Nothing Then
+				Assert "User not created: User_" &amp; i
+			Else
+				AssertFieldEquals docUser, "Profiles",  "profile_"  &amp; i 
+				AssertFieldEquals docUser, "Active", Cstr(i)
+				AssertFieldEquals docUser, "CanCreateDevices", Cstr(i) 
+				AssertFieldEquals docUser, "DevicePushRepLog", Cstr(i)
+				AssertFieldEquals docUser, "spareUserFld", "userSpare_" &amp; i 
+			End If
+			
+			Dim docDevice As NotesDocument
+			Set docDevice = getDevice("210000_" &amp; i)
+			If docDevice Is Nothing Then
+				Assert "Device not created: 210000_" &amp; i
+			Else
+				AssertFieldEquals docDevice, "Username", "User_" &amp; i
+				AssertFieldEquals docDevice, "Active", Cstr(i)
+				AssertFieldEquals docDevice, "spareFld", "deviceSpare_" &amp; i 
+			End If
+		Next
+		teardown
+	End Sub
+	
+	Private Sub testNoDeviceColumnImport()
+		setup
+		
+		createCsv sourcePath, headersUsers
+		Dim i As Integer
+		For i = 0 To 9
+			Redim sLine(5) As String
+			sLine(0) = "User_" &amp; i		'UserName,
+			sLine(1) = "1"				'Overwrite,
+			sLine(2) = "profile_" &amp; i	'Profiles,
+			sLine(3) = Cstr(i)			'Active,'
+			sLine(4) = Cstr(i)			'CanCreateDevices,
+			sLine(5) = Cstr(i)			'DevicePushRepLog,
+			writeInputLine sLine
+		Next
+		closeCsv
+		
+		validateImport
+		import
+		
+		Dim dc As NotesDocumentCollection
+		Set dc = db.Search({Form = "Device"}, Nothing, 0)
+		If dc.Count &gt; 0 Then
+			Error 9999, Getthreadinfo(1) &amp; ":" &amp;  " Devices documents were created and should not have been!"
+		End If
+		
+		For i = 0 To 9
+			Dim docUser As NotesDocument
+			Set docUser = getUser("User_" &amp; i)
+			If docUser Is Nothing Then
+				Assert "User not created: User_" &amp; i
+			Else
+				AssertFieldEquals docUser, "Profiles",  "profile_"  &amp; i 
+				AssertFieldEquals docUser, "Active",Cstr(i)
+				AssertFieldEquals docUser, "CanCreateDevices", Cstr(i) 
+				AssertFieldEquals docUser, "DevicePushRepLog", Cstr(i)
+			End If
+		Next
+		teardown
+	End Sub
+	
+	Private Sub testNoDeviceRowsImport()
+		setup
+		
+		createCsv sourcePath, headersFull
+		Dim i As Integer
+		For i = 0 To 9
+			Redim sLine(7) As String
+			sLine(0) = "User_" &amp; i		'UserName,
+			sLine(1) = "1"				'Overwrite,
+			sLine(2) = "profile_" &amp; i	'Profiles,
+			sLine(3) = Cstr(i)			'Active,'
+			sLine(4) = Cstr(i)			'CanCreateDevices,
+			sLine(5) = Cstr(i)			'DevicePushRepLog,
+			If( i Mod 2 = 0) Then
+				sLine(6) = "210000_" &amp; i	'Device_ID,
+				sLine(7) = Cstr(i)			'Device_Active
+			End If
+			writeInputLine sLine
+		Next
+		closeCsv
+		
+		validateImport
+		import
+		
+		For i = 0 To 9
+			Dim docUser As NotesDocument
+			Set docUser = getUser("User_" &amp; i)
+			If docUser Is Nothing Then
+				Assert "User not created: User_" &amp; i
+			Else
+				AssertFieldEquals docUser, "Profiles",  "profile_"  &amp; i 
+				AssertFieldEquals docUser, "Active",Cstr(i)
+				AssertFieldEquals docUser, "CanCreateDevices", Cstr(i) 
+				AssertFieldEquals docUser, "DevicePushRepLog", Cstr(i)
+			End If
+			
+			Dim docDevice As NotesDocument
+			Set docDevice = getDevice("210000_" &amp; i)
+			If docDevice Is Nothing Then
+				If( i Mod 2 = 0) Then
+					Assert "Device not created: 210000_" &amp; i					
+				End If
+			Else
+				If( i Mod 2 &lt;&gt; 0) Then
+					Assert "Device SHOULD NOT have been created: 210000_" &amp; i					
+				End If
+				AssertFieldEquals docDevice, "Username", "User_" &amp; i
+				AssertFieldEquals docDevice, "Active", Cstr(i)
+			End If
+			
+		Next
+		teardown
+	End Sub
+	
+	Private Sub testOverwriteImport()
+		setup
+		
+		createCsv sourcePath, headersUsers
+		Dim i As Integer
+		For i = 0 To 9
+			Redim sLine(5) As String
+			sLine(0) = "User_" &amp; i		'UserName,
+			sLine(1) = "1"				'Overwrite,
+			sLine(2) = "profile_" &amp; i	'Profiles,
+			sLine(3) = Cstr(i)			'Active,'
+			sLine(4) = Cstr(i)			'CanCreateDevices,
+			sLine(5) = Cstr(i)			'DevicePushRepLog,
+			writeInputLine sLine
+		Next
+		closeCsv
+		
+		validateImport
+		import
+		
+		For i = 0 To 9
+			Dim docUser As NotesDocument
+			Set docUser = getUser("User_" &amp; i)
+			If docUser Is Nothing Then
+				Assert "User not created: User_" &amp; i
+			Else
+				AssertFieldEquals docUser, "Profiles",  "profile_"  &amp; i 
+				AssertFieldEquals docUser, "Active",Cstr(i)
+				AssertFieldEquals docUser, "CanCreateDevices", Cstr(i) 
+				AssertFieldEquals docUser, "DevicePushRepLog", Cstr(i)
+			End If
+		Next
+		
+		
+		createCsv sourcePath, headersUsers
+		For i = 0 To 9
+			Redim sLine(5) As String
+			sLine(0) = "User_" &amp; i		'UserName,
+			sLine(1) = Cstr(i Mod 2)	'Overwrite, -- MOD 2!
+			sLine(2) = "profile_" &amp; i + 99	'Profiles,
+			sLine(3) = Cstr(i)			'Active,'
+			sLine(4) = Cstr(i)			'CanCreateDevices,
+			sLine(5) = Cstr(i)			'DevicePushRepLog,
+			writeInputLine sLine
+		Next
+		closeCsv
+		
+		validateImport
+		import
+		
+		For i = 0 To 9
+			Set docUser = getUser("User_" &amp; i)
+			If docUser Is Nothing Then
+				Assert "User not created: User_" &amp; i
+			Else
+				If ( i Mod 2 = 1 ) Then 'overwrite = false in last loop
+					AssertFieldEquals docUser, "Profiles",  "profile_"  &amp; i + 99
+				Else
+					AssertFieldEquals docUser, "Profiles",  "profile_"  &amp; i 
+				End If
+				
+				AssertFieldEquals docUser, "Active",Cstr(i)
+				AssertFieldEquals docUser, "CanCreateDevices", Cstr(i) 
+				AssertFieldEquals docUser, "DevicePushRepLog", Cstr(i)
+			End If
+		Next
+		
+		teardown
+	End Sub
+	
+	Private Sub testImportWontOverWriteDevices()
+		setup
+		
+		createCsv sourcePath, headersFull
+		Dim i As Integer
+		For i = 0 To 3
+			Redim sLine(7) As String
+			sLine(0) = "User_" &amp; i		'UserName,
+			sLine(1) = "1"				'Overwrite,
+			sLine(2) = "profile_" &amp; i	'Profiles,
+			sLine(3) = Cstr(i)			'Active,'
+			sLine(4) = Cstr(i)			'CanCreateDevices,
+			sLine(5) = Cstr(i)			'DevicePushRepLog,
+			sLine(6) = "210000_" &amp; (3-i)	'Device_ID,
+			sLine(7) = "0"			'Device_Active
+			writeInputLine sLine
+		Next
+		closeCsv
+		
+		validateImport
+		import
+		
+		For i = 0 To 3
+			Dim docUser As NotesDocument
+			Set docUser = getUser("User_" &amp; i)
+			If docUser Is Nothing Then
+				Assert "User not created: User_" &amp; i
+			Else
+				AssertFieldEquals docUser, "Profiles",  "profile_"  &amp; i 
+				AssertFieldEquals docUser, "Active", Cstr(i)
+				AssertFieldEquals docUser, "CanCreateDevices", Cstr(i) 
+				AssertFieldEquals docUser, "DevicePushRepLog", Cstr(i) 
+			End If
+			
+			Dim docDevice As NotesDocument
+			Set docDevice = getDevice("210000_"  &amp; (3-i))
+			If docDevice Is Nothing Then
+				Assert "Device not created: 210000_"  &amp; (3-i)
+			Else
+				AssertFieldEquals docDevice, "Username", "User_" &amp; i
+				AssertFieldEquals docDevice, "Active", "0"
+			End If
+		Next
+		
+		createCsv sourcePath, headersFull
+		For i = 0 To 3
+			Redim sLine(7) As String
+			sLine(0) = "User_" &amp; i		'UserName,
+			sLine(1) = "1"				'Overwrite,
+			sLine(2) = "profile_" &amp; i + 99	'Profiles,
+			sLine(3) = Cstr(i)			'Active,'
+			sLine(4) = Cstr(i)			'CanCreateDevices,
+			sLine(5) = Cstr(i)			'DevicePushRepLog,
+			sLine(6) = "210000_" &amp; (i)	'Device_ID,
+			sLine(7) = "0"		'Device_Active
+			writeInputLine sLine
+		Next
+		closeCsv
+		
+		validateImport
+		import
+		
+		For i = 0 To 3
+			
+			Set docUser = getUser("User_" &amp; i)
+			If docUser Is Nothing Then
+				Assert "User not created: User_" &amp; i
+			Else
+				'make sure we overwrote the users
+				AssertFieldEquals docUser, "Profiles",  "profile_"  &amp; i + 99
+			End If
+			
+			Set docDevice = getDevice("210000_"  &amp; (i))
+			If docDevice Is Nothing Then
+				Assert "Device not created: 210000_"  &amp; (i)
+			Else
+				' if we didn't overwrite device, it should still be orig users
+				AssertFieldEquals docDevice, "Username", "User_" &amp; (3-i)
+			End If
+		Next
+		
+		teardown
+	End Sub
+	
+	Private Sub testOverLicense()
+		setup
+		
+		createCsv sourcePath, headersFull
+		Dim i As Integer
+		For i = 0 To 3
+			Redim sLine(7) As String
+			sLine(0) = "User_" &amp; i		'UserName,
+			sLine(1) = "1"				'Overwrite,
+			sLine(2) = "profile_" &amp; i	'Profiles,
+			sLine(3) = Cstr(i)			'Active,'
+			sLine(4) = Cstr(i)			'CanCreateDevices,
+			sLine(5) = Cstr(i)			'DevicePushRepLog,
+			sLine(6) = "210000_" &amp; (i)	'Device_ID,
+			sLine(7) = "1"			'Device_Active
+			writeInputLine sLine
+		Next
+		closeCsv
+		validateImport
+		
+		On Error Resume Next
+		
+		import
+		
+		On Error Goto 0
+		
+		If Err &lt;&gt; ERR_OVER_LICENSE Then
+			Error 9999, "Import didn't catch over-licensing condition!"
+		End If
+		Err = 0 
+		
+		
+		teardown
+	End Sub
+	
+	Private Sub testBadRow()
+		setup
+		
+		createCsv sourcePath, headersFull
+		Dim i As Integer
+		For i = 0 To 2
+			Redim sLine(6) As String
+			sLine(0) = "User_" &amp; i		'UserName,
+			sLine(1) = "1"				'Overwrite,
+			'sLine(2) = "profile_" &amp; i	'Profiles,
+			sLine(2) = Cstr(i)			'Active,'
+			sLine(3) = Cstr(i)			'CanCreateDevices,
+			sLine(4) = Cstr(i)			'DevicePushRepLog,
+			sLine(5) = "210000_" &amp; (i)	'Device_ID,
+			sLine(6) = "1"			'Device_Active
+			writeInputLine sLine
+		Next
+		closeCsv
+		
+		On Error Resume Next
+		validateImport
+		
+		On Error Goto 0
+		
+		If Err &lt;&gt; ERR_BAD_ROW_LEN Then
+			Error 9999, "Import didn't catch invalid row!"
+		End If
+		Err = 0 
+		
+		
+		teardown
+	End Sub
+	
+	Private Sub testLogging()
+		setup
+		
+		createCsv sourcePath, headersFull
+		Dim i As Integer
+		For i = 0 To 3
+			Redim sLine(7) As String
+			sLine(0) = "User_" &amp; i		'UserName,
+			sLine(1) = "1"				'Overwrite,
+			sLine(2) = "profile_" &amp; i	'Profiles,
+			sLine(3) = Cstr(i)			'Active,'
+			sLine(4) = Cstr(i)			'CanCreateDevices,
+			sLine(5) = Cstr(i)			'DevicePushRepLog,
+			sLine(6) = "210000_" &amp; (i)	'Device_ID,
+			sLine(7) = "0"			'Device_Active
+			writeInputLine sLine
+		Next
+		closeCsv
+		
+		keepLog = True
+		
+		validateImport
+		import
+		
+		Dim user As String, device As String, userLog As Variant, deviceLog As Variant
+		
+		'Verify straight import
+		For i = 1 To 3
+			user = "User_" &amp; i
+			device = "210000_" &amp; (i)
+			If Not Iselement(logListUsers(user)) Then Error 9999, "Failed to log user: " &amp; user
+			If Not Iselement(logListDevices(device)) Then Error 9999, "Failed to log device: " &amp; device
+			
+			userLog = logListUsers(user)
+			deviceLog =logListDevices(device)
+			
+			If ( userLog("action") &lt;&gt; "Added" ) Then Error 9999, "Action should be 'Added': " &amp; user
+			If ( userLog("devicesAdded") &lt;&gt; device ) Then Error 9999, "devicesAdded should be '" &amp; device &amp; "': " &amp; user
+			If ( userLog("devicesExisted") &lt;&gt; "" ) Then Error 9999, "devicesExisted should be '': " &amp; user
+			
+			If ( deviceLog("ImportUserName") &lt;&gt; user ) Then Error 9999, "ImportUserName should be '" &amp; user &amp; "': " &amp; user
+			If ( deviceLog("Action") &lt;&gt; "Added" ) Then Error 9999, "Action should be 'Added': " &amp; user
+			If ( deviceLog("Enabled") &lt;&gt; "0" ) Then Error 9999, "Enabled should be '0': " &amp; user
+			If ( deviceLog("ExistingDeviceUserName") &lt;&gt; "" ) Then Error 9999, "ExistingDeviceUserName should be '': " &amp; user
+			
+		Next
+		
+		Erase logListUsers
+		Erase logListDevices
+		
+		'Verify overwrite import, existing devices
+		createCsv sourcePath, headersFull
+		For i = 0 To 3
+			Redim sLine(7) As String
+			sLine(0) = "User_" &amp; i		'UserName,
+			sLine(1) = "1"				'Overwrite,
+			sLine(2) = "profile_" &amp; i	'Profiles,
+			sLine(3) = Cstr(i)			'Active,'
+			sLine(4) = Cstr(i)			'CanCreateDevices,
+			sLine(5) = Cstr(i)			'DevicePushRepLog,
+			sLine(6) = "210000_" &amp; (3-i)	'Device_ID,
+			sLine(7) = "0"			'Device_Active
+			writeInputLine sLine
+		Next
+		closeCsv
+		
+		validateImport
+		import
+		
+		For i = 1 To 3
+			user = "User_" &amp; i
+			device = "210000_" &amp; (3-i)
+			If Not Iselement(logListUsers(user)) Then Error 9999, "Failed to log user: " &amp; user
+			If Not Iselement(logListDevices(device)) Then Error 9999, "Failed to log device: " &amp; device
+			
+			userLog = logListUsers(user)
+			deviceLog =logListDevices(device)
+			
+			If ( userLog("action") &lt;&gt; "Overwritten" ) Then Error 9999, "Action should be 'Overwritten': " &amp; user
+			If ( userLog("devicesAdded") &lt;&gt; "" ) Then Error 9999, "devicesAdded should be '': " &amp; user
+			If ( userLog("devicesExisted") &lt;&gt; device ) Then Error 9999, "devicesExisted should be '" &amp; device &amp; "': " &amp; user
+			
+			If ( deviceLog("ImportUserName") &lt;&gt; user ) Then Error 9999, "ImportUserName should be '" &amp; user &amp; "': " &amp; user
+			If ( deviceLog("Action") &lt;&gt; "Existed/Ignored" ) Then Error 9999, "Action should be 'Existed/Ignored': " &amp; user
+			If ( deviceLog("Enabled") &lt;&gt; "0" ) Then Error 9999, "Enabled should be '0': " &amp; user
+			If ( deviceLog("ExistingDeviceUserName") = "" ) Then Error 9999, "ExistingDeviceUserName should have value: " &amp; user
+		Next
+		
+		'Verify ignore existing import, add devices
+		createCsv sourcePath, headersFull
+		For i = 0 To 3
+			Redim sLine(7) As String
+			sLine(0) = "User_" &amp; i		'UserName,
+			sLine(1) = "1"				'Overwrite,
+			sLine(2) = "profile_" &amp; i	'Profiles,
+			sLine(3) = Cstr(i)			'Active,'
+			sLine(4) = Cstr(i)			'CanCreateDevices,
+			sLine(5) = Cstr(i)			'DevicePushRepLog,
+			sLine(6) = "210000_" &amp; (3-i) &amp; ";210000_" &amp; (39-i)	'Device_ID,
+			sLine(7) = "0"			'Device_Active
+			writeInputLine sLine
+		Next
+		closeCsv
+		
+		validateImport
+		import
+		
+		For i = 1 To 3
+			Dim device2 As String, deviceLog2 As Variant
+			user = "User_" &amp; i
+			device = "210000_" &amp; (3-i)
+			device2 = "210000_" &amp; (39-i)
+			If Not Iselement(logListUsers(user)) Then Error 9999, "Failed to log user: " &amp; user
+			If Not Iselement(logListDevices(device)) Then Error 9999, "Failed to log device: " &amp; device
+			If Not Iselement(logListDevices(device2)) Then Error 9999, "Failed to log device: " &amp; device2
+			
+			userLog = logListUsers(user)
+			deviceLog =logListDevices(device)
+			deviceLog2 =logListDevices(device2)
+			
+			If ( userLog("action") &lt;&gt; "Overwritten" ) Then Error 9999, "Action should be 'Overwritten': " &amp; user
+			If ( userLog("devicesAdded") &lt;&gt; device2 ) Then Error 9999, "devicesAdded should be '" &amp; device2 &amp; "': " &amp; user
+			If ( userLog("devicesExisted") &lt;&gt; device ) Then Error 9999, "devicesExisted should be '" &amp; device &amp; "': " &amp; user
+			
+			If ( deviceLog("ImportUserName") &lt;&gt; user ) Then Error 9999, "ImportUserName should be '" &amp; user &amp; "': " &amp; user
+			If ( deviceLog("Action") &lt;&gt; "Existed/Ignored" ) Then Error 9999, "Action should be 'Existed/Ignored': " &amp; user
+			If ( deviceLog("Enabled") &lt;&gt; "0" ) Then Error 9999, "Enabled should be '0': " &amp; user
+			If ( deviceLog("ExistingDeviceUserName") = "" ) Then Error 9999, "ExistingDeviceUserName should have value: " &amp; user
+			
+			If ( deviceLog2("ImportUserName") &lt;&gt; user ) Then Error 9999, "ImportUserName should be '" &amp; user &amp; "': " &amp; user
+			If ( deviceLog2("Action") &lt;&gt; "Added" ) Then Error 9999, "Action should be 'Added': " &amp; user
+			If ( deviceLog2("Enabled") &lt;&gt; "0" ) Then Error 9999, "Enabled should be '0': " &amp; user
+			If ( deviceLog2("ExistingDeviceUserName") &lt;&gt; "" ) Then Error 9999, "ExistingDeviceUserName should be '': " &amp; user
+			
+		Next
+		
+		teardown
+	End Sub
+	
+End Class
+</lotusscript></code><code event='getImporter'><lotusscript>Function getImporter() As CSVImporter
+	If importer Is Nothing Then
+		Set importer = New CSVImporter 
+	End If
+	Set getImporter = importer 
+End Function</lotusscript></code></globals><code event='postopen'><lotusscript
+>Sub Postopen(Source As Notesuidocument)
+	Source.Document.ReplaceItemValue "AvailLicenses", 	getImporter().getLicenseCount   
+End Sub
+</lotusscript></code><code event='queryrecalc'><lotusscript>Sub Queryrecalc(Source As Notesuidocument, Continue As Variant)
+	Dim file As String	
+	
+	file = Source.FieldGetText("UserLog")
+	If file &lt;&gt; ""  Then
+		If Dir$( file ) &lt;&gt; "" Then
+			Source.Document.ReplaceItemValue "UserLogExists", 1
+		Else
+			Source.Document.ReplaceItemValue "UserLogExists", 0
+		End If
+	End If
+	
+	file = Source.FieldGetText("DeviceLog")
+	If file &lt;&gt; ""  Then
+		If Dir$( file ) &lt;&gt; "" Then
+			Source.Document.ReplaceItemValue "DeviceLogExists", 1
+		Else
+			Source.Document.ReplaceItemValue "DeviceLogExists", 0
+		End If
+	End If
+	
+End Sub</lotusscript></code>
+<body><richtext>
+<pardef id='1'><code event='hidewhen'><formula>1</formula></code></pardef>
+<par def='1'><run><font size='9pt' color='blue'/></run><run><font size='9pt'/><field
+ type='number' kind='editable' name='State'><numberformat format='general'
+ digits='2' punctuated='false' parens='false' percent='false' bytes='false'/><code
+ event='defaultvalue'><formula>0</formula></code></field></run><run><font
+ size='9pt'/></run></par>
+<par def='1'><run><font size='9pt' color='blue'/>&lt;hidden&gt;</run></par>
+<table widthtype='fixedleft' rowspacing='0.1000in' columnspacing='0.1000in'
+ refwidth='5.9854in'><tablecolumn width='0.8125in'/><tablecolumn width='3.7000in'/><tablecolumn
+ width='0.8729in'/>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='3' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>1</formula></code></pardef>
+<par def='3'><run><font size='9pt' color='blue'/>&lt;hidden&gt;</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='4' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>1</formula></code></pardef>
+<par def='4'><run><font size='9pt' color='blue'/>&lt;hidden&gt;</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='5' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>1</formula></code></pardef>
+<par def='5'><run><font size='9pt' color='blue'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='6' keepwithnext='true' keeptogether='true'/>
+<par def='6'><run><font size='9pt'/></run><picture width='72px' height='72px'><gif
+>
+R0lGODlhSABIAOf/AAMKDQkeKRAoNRMxQxk8VCFDWytGWiVNay1UcjdXcDNZdy1bfi9dgDJgfSZk
+mEFhezdhpDNnijVkoi9nojhohS5pnTVpkitskzloni9smjlqmS1ulTBvlzdukDltljRuozBzlEBv
+jTNymjVxoD5vnkFupT1xmj1zljN3kjd1njtzqDp3jTB9jDt5oUB5ljR9kkF4rj57pDGCij5+jkJ6
+qkt3rjuAiUV8n0F9pjSGh0SAqTaJfjeHj0qAsDuJhUyBpEeDrEuBt0mFnFSCoDWReVCFqTmRgDOU
+dkyHsFmHpj+Sh1CJuTSZbk+KtFSIvy2cbUWQnlWKrj+WhTqYgFGMtjmadVGOq0OWmFSPuVGSsViP
+wFqOxVeRu0Obljijal2RtUScl2ORsDamZ1mTvTykdkCigzSrV1uVv02cpEagkR6yVl+Vul+VxjGt
+YGGUzDirZT2pcFabshm5P12YwgDHCjKxVg3CIl+axGuYuCm4Ry+0Xi22Uz+ubiy4ThXBPhrCNGSe
+yADQACu/PQDQFWmgvnaeuWmhxXKgwEqzezPBRwDZACjIOzfCTxDVByXLLXKlygDcAHelxE26dgDb
+ExvRJ2+o03OqyYCownmrxDXOQgDkDTXSKQDmAEvGaTHTNVHEbiPbFz3QPUHNVirYL3yv1DHZJIev
+yhLjITvWLiLeKRzjDBDqAATrGzPcNADwDFTNcDndKj7aPEPbNEHaRX+45ADzFIG53iroGQz0AJK4
+0DXlJSbqKoW82wf2Gj3jO5y4z1DZbErgOk/eSoy+1yDyJSjyFEPnNkXlRz7qLUPnPx75ApHC3JzA
+1jPwMhj6IDjwJZPF3x77Iyz2LELvPUvtRZ3F4ZrH25bI4Tb5IK3E1qPH3T/2M1/oYzT6MVPuT6nJ
+2Ub1TEr1Q17tXKbL4D/+KVX1TaLP40/4R6rO5FP5PWfzXlP7Sk/8U1f5Wl37VLPT42D5YmX6W1v9
+XbzT5b/T37fX52L/V8DY6sba5sre69Dh59jh6dvk7Nfo7uHp8P///yH5BAEKAP8ALAAAAABIAEgA
+QAj+AP8JHEiwoMGDCBMqXMiw4IMhSSJKnEixosWLGJMMedDQYAgqWEKG5KJlyxYtVtLAyWMHjJaQ
+W+AECtSokSJIOCc1KrNFpM+fQLFQudFRYAMcOpImpbEIFy5lUJXVWqXJ0Q+lMPrUquUsmtdez25R
+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
+ucpXznIGLOAAIDekzGdO85rb/F4BAQA7
+</gif></picture><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='4'><run><font size='9pt' color='blue'/>&lt;hidden&gt; </run></par>
+<pardef id='7' align='right' keepwithnext='true' keeptogether='true'/>
+<par def='7'><run><font size='9pt' color='#0060a0'/>Licenses available: </run><run
+><font size='9pt' color='#0060a0'/><field type='text' kind='computedfordisplay'
+ name='AvailLicenses'><code event='defaultvalue'><formula>AvailLicenses</formula></code></field></run><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='10' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='5'><run><font size='9pt' color='blue'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='8' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+> State &gt; 3</formula></code></pardef>
+<par def='8'><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='9' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+> State &gt; 3</formula></code></pardef>
+<par def='9'><run><font size='9pt' style='bold'/>CSV File to import:</run></par>
+<pardef id='10' tabs='L3.1875in' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula> State &gt; 3</formula></code></pardef>
+<par def='10'><run><font size='9pt'/></run><run><font size='9pt'/><field usenotesstyle='false'
+ height='0.2000in' width='3.5000in' alignwithparagraph='true' borderstyle='inset'
+ type='text' kind='editable' name='SourceFile'><code event='inputenabled'><formula
+>@False</formula></code></field></run><run><font size='9pt'/>     </run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='11' tabs='L3.1875in' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>State&gt;3</formula></code></pardef>
+<par def='11'><run><font size='9pt'/></run></par>
+<par def='11'><run><font size='9pt'/></run><button width='0.7500in' widthtype='fixed'
+ wraptext='true' edge='rounded' bgcolor='#0060a0'><font size='8pt' color='white'/>Select<code
+ event='click'><lotusscript>Sub Click(Source As Button)
+	getImporter().uiValidateImport
+End Sub</lotusscript></code></button><run><font size='9pt' color='blue'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='8'><run><font size='9pt'/></run></par>
+<par def='8'><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='9'><run><font size='9pt'/></run><run><font size='9pt' color='#0060a0'
+ style='bold'/><field type='text' kind='computedfordisplay' name='ValidationStatus'><code
+ event='defaultvalue'><formula>ValidationStatus</formula></code></field></run><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='12' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+> State &gt; 3</formula></code></pardef>
+<par def='12'><run><font size='9pt' color='blue'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='8'><run><font size='9pt'/></run></par>
+<par def='8'><run><font size='9pt'/></run></par>
+<par def='8'><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='13' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>State!=3</formula></code></pardef>
+<par def='13'><run><font size='9pt' style='bold'/>Log User info to file:</run></par>
+<par def='13'><run><font size='9pt'/></run><run><font size='9pt'/><field usenotesstyle='false'
+ height='0.2000in' width='3.5000in' alignwithparagraph='true' type='text'
+ allowmultivalues='true' kind='editable' name='UserLog' listinputseparators='comma'
+ listdisplayseparator='comma'><keywords helperbutton='false' recalconchange='true'
+ recalcchoices='true' columns='1' ui='dialoglist' allownew='true'/><code event='inputenabled'><formula
+>@False</formula></code></field></run><run><font size='9pt'/>     </run></par>
+<par def='4'><run><font size='9pt'/></run><run><font size='9pt'/><field type='number'
+ kind='computedwhencomposed' name='UserLogExists'><numberformat format='general'
+ varying='true' digits='2' punctuated='false' parens='false' percent='false'
+ bytes='false'/><code event='defaultvalue'><formula>0</formula></code></field></run><run
+><font size='9pt'/></run></par>
+<pardef id='14' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+> State != 3 | UserLogExists=0</formula></code></pardef>
+<par def='14'><run><font size='8pt' color='red'/></run><picture width='16px'
+ height='16px'><gif>
+R0lGODlhEAAQAOYAAP7bc/7bdP7bdv/egf7egf/hiv7giv/ij/7ijv/jl/7kl//lnv/mnv7lnv7m
+nv/np//rtf7rtf701v7SZP7glf/ps//twf/uwf/xzf/01//13P/FYf7FYf/GYv7FYv7Uiv/Xkf7c
+n//hq/60PP61PP60Pe6rPf67Sf66Sv67Sv6/VP/BWP7BWP/BWf7BWf/FYv7Ld/7LePPEeP7Rh/7S
+iOPBi//bn+rIkv/gq3tRE35TFIVYFoNWFn5UFYRYF4tdGYpcGYpdGY9gG5FhHJdlHpRkHZpoH8uf
+Y8mcYsaaYMWZYMWaYNKkZ9CjZsyfZMqeY8icYsabYcSaYNOlaNKkaNKlaNGjZ8+iZs6iZs2gZcue
+ZMmdY8ebYsecYsWbYciib86gZc+hZsWZYc6uhdW8nt3Muf///wAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5
+BAEAAGYALAAAAAAQABAAAAesgGaCg4SFhmZlU1Nlh4VVGhpTjYNlTBIZVIyTVhY1NxhNk2RNFTk5
+F1dkjVgQODo9IhFhh19gFCE+OzYPWV+GTgUqM0A/NCoGToVfRxMmMkJDMiYCWr6DTwAjJDFFRDAl
+JQFbg19QAykn6ekpKARI1lwILS4sHz9GHystKwddglEKPGzoAIJHEBAeOLxIwEWQlzENHCxgQJHi
+ggVjkgxSImWJGCUgO4qRIkZQIAA7
+</gif></picture><run><font size='8pt' color='#ff8100'/>  Warning!  File exists and will be over-written!</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='15' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>State!=3</formula></code></pardef>
+<par def='15'><run><font size='9pt'/></run></par>
+<par def='15'><run><font size='9pt'/></run><button width='0.7500in' widthtype='fixed'
+ wraptext='true' edge='rounded' bgcolor='#0060a0'><font size='8pt' color='white'/>Change<code
+ event='click'><lotusscript>Sub Click(Source As Button)
+	Dim fld As String
+	fld = "UserLog"
+	Dim ws As New notesuiworkspace
+	Dim filenames As Variant
+	filenames = ws.OpenFileDialog( _
+	False, "Select Log File","CVS Files|*.csv", Strleftback(ws.CurrentDocument.FieldGetText(fld), "\"), Strrightback(ws.CurrentDocument.FieldGetText(fld), "\"))
+	If (Not Isempty(filenames)) Then
+		ws.CurrentDocument.FieldSetText fld, filenames(0)
+		ws.CurrentDocument.Refresh
+	End If
+End Sub</lotusscript></code></button><run><font size='9pt' color='blue'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='8'><run><font size='9pt'/></run></par>
+<par def='8'><run><font size='9pt'/></run></par>
+<par def='8'><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='13'><run><font size='9pt' style='bold'/>Log Device info to file:</run></par>
+<par def='13'><run><font size='9pt'/></run><run><font size='9pt'/><field usenotesstyle='false'
+ height='0.2000in' width='3.5000in' alignwithparagraph='true' borderstyle='inset'
+ type='text' kind='editable' name='DeviceLog'><code event='inputenabled'><formula
+>@False</formula></code></field></run><run><font size='9pt'/>     </run></par>
+<par def='4'><run><font size='9pt'/><field type='number' kind='computedwhencomposed'
+ name='DeviceLogExists'><numberformat format='general' varying='true' digits='2'
+ punctuated='false' parens='false' percent='false' bytes='false'/><code event='defaultvalue'><formula
+>0</formula></code></field></run></par>
+<pardef id='16' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>State!=3 |  DeviceLogExists=0</formula></code></pardef>
+<par def='16'><picture width='16px' height='16px'><gif>
+R0lGODlhEAAQAOYAAP7bc/7bdP7bdv/egf7egf/hiv7giv/ij/7ijv/jl/7kl//lnv/mnv7lnv7m
+nv/np//rtf7rtf701v7SZP7glf/ps//twf/uwf/xzf/01//13P/FYf7FYf/GYv7FYv7Uiv/Xkf7c
+n//hq/60PP61PP60Pe6rPf67Sf66Sv67Sv6/VP/BWP7BWP/BWf7BWf/FYv7Ld/7LePPEeP7Rh/7S
+iOPBi//bn+rIkv/gq3tRE35TFIVYFoNWFn5UFYRYF4tdGYpcGYpdGY9gG5FhHJdlHpRkHZpoH8uf
+Y8mcYsaaYMWZYMWaYNKkZ9CjZsyfZMqeY8icYsabYcSaYNOlaNKkaNKlaNGjZ8+iZs6iZs2gZcue
+ZMmdY8ebYsecYsWbYciib86gZc+hZsWZYc6uhdW8nt3Muf///wAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5
+BAEAAGYALAAAAAAQABAAAAesgGaCg4SFhmZlU1Nlh4VVGhpTjYNlTBIZVIyTVhY1NxhNk2RNFTk5
+F1dkjVgQODo9IhFhh19gFCE+OzYPWV+GTgUqM0A/NCoGToVfRxMmMkJDMiYCWr6DTwAjJDFFRDAl
+JQFbg19QAykn6ekpKARI1lwILS4sHz9GHystKwddglEKPGzoAIJHEBAeOLxIwEWQlzENHCxgQJHi
+ggVjkgxSImWJGCUgO4qRIkZQIAA7
+</gif></picture><run
+><font size='8pt' color='#ff8100'/>  </run><run><font size='8pt' color='#ff8100'/>Warning!  File exists and will be over-written!</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='15'><run><font size='9pt'/></run></par>
+<par def='15'><run><font size='9pt'/></run><button width='0.7500in' widthtype='fixed'
+ wraptext='true' edge='rounded' bgcolor='#0060a0'><font size='8pt' color='white'/>Change<code
+ event='click'><lotusscript>Sub Click(Source As Button)
+	Dim fld As String
+	fld = "DeviceLog"
+	Dim ws As New notesuiworkspace
+	Dim filenames As Variant
+	filenames = ws.OpenFileDialog( _
+	False, "Select Log File","CVS Files|*.csv", "\", ws.CurrentDocument.FieldGetText(fld))
+	If (Not Isempty(filenames)) Then
+		ws.CurrentDocument.FieldSetText fld, filenames(0)
+		ws.CurrentDocument.Refresh
+	End If
+End Sub</lotusscript></code></button><run><font size='9pt' color='blue'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='6'><run><font size='9pt'/></run></par>
+<par def='6'><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='17' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>State &lt; 4</formula></code></pardef>
+<par def='17'><run><font size='9pt' color='#0060a0' style='bold'/><field type='text'
+ kind='computedfordisplay' name='ImportStatus'><code event='defaultvalue'><formula
+>ImportStatus</formula></code></field></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='8' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='18' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>State &lt; 4</formula></code></pardef>
+<par def='18'><run><font size='9pt' color='blue'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='19' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+> State &lt; 4</formula></code></pardef>
+<par def='19'><run><font size='9pt'/></run></par></tablecell>
+<tablecell columnspan='2' borderwidth='0px'>
+<pardef id='21' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+> State &lt; 4</formula></code></pardef>
+<par def='21'><run><font size='9pt' style='bold'/>Import Summary:</run></par>
+<par def='21'><run><font size='9pt' style='bold'/></run></par>
+<par def='21'><run><font size='9pt'/></run><run><font size='9pt'/><field usenotesstyle='false'
+ height='2in' width='4.6000in' multiline='true' borderstyle='inset' type='text'
+ kind='editable' name='ImportSummary'/></run><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='6'><run><font size='9pt'/></run></par>
+<par def='6'><run><font size='9pt'/></run></par>
+<par def='6'><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='22' align='right' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>State != 3</formula></code></pardef>
+<par def='22'><run><font size='9pt'/></run><button width='0.7500in' widthtype='fixed'
+ wraptext='true' edge='rounded' bgcolor='#0060a0'><font size='9pt' style='bold'
+ color='white'/>Import<code event='click'><lotusscript>Sub Click(Source As Button)
+	getImporter().uiImport
+End Sub</lotusscript></code></button><run><font size='9pt' color='blue'/></run></par>
+<par def='4'><run><font size='9pt' color='blue'/>&lt;hidden&gt;</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='23' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>State &gt; 3</formula></code></pardef>
+<par def='23'><run><font size='9pt'/></run><button width='0.7500in' widthtype='fixed'
+ wraptext='true' edge='rounded' bgcolor='#0060a0'><code event='click'><formula
+>@Command([FileCloseWindow])</formula></code><font size='9pt' color='white'/>Cancel</button><run
+><font size='9pt'/></run></par>
+<pardef id='24' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>State &lt; 5</formula></code></pardef>
+<par def='24'><run><font size='9pt'/></run><button width='0.7500in' widthtype='fixed'
+ wraptext='true' edge='rounded' bgcolor='#0060a0'><code event='click'><formula
+>@Command([FileCloseWindow])</formula></code><font size='9pt' color='white'/>Close</button><run
+><font size='9pt' color='blue'/></run></par></tablecell></tablerow></table>
+<par def='1'><run><font size='9pt' color='blue'/>&lt;hidden&gt;</run></par>
+<par def='1'><run><font size='9pt' color='blue'/></run></par>
+<par def='1'><run><font size='9pt' color='blue'/></run></par>
+<par def='1'><run><font size='9pt' color='blue'/></run></par>
+<pardef id='25'><code event='hidewhen' enabled='false'><formula>1</formula></code></pardef>
+<par def='25'><run><font size='9pt' color='blue'/></run><button width='2.6875in'
+ widthtype='maximum' maxlines='1' wraptext='true' edge='rounded' bgcolor='system'><font
+ color='red'/>Run test suite (Warning: deletes all data)<code event='click'><lotusscript
+>Sub Click(Source As Button)
+	Dim testImporter As New TestCSVImporter 
+	testImporter.runTests
+End Sub</lotusscript></code></button><run><font size='9pt' color='blue'/></run></par></richtext></body>
+<item name='UISaved' summary='false' sign='true'>
+<rawitemdata type='400'>
+AAAAAAAAAAA=
+</rawitemdata></item>
+<item name='State' summary='false'><number>0</number></item>
+<item name='UserLogExists' summary='false'><number>0</number></item>
+<item name='DeviceLogExists' summary='false'><number>0</number></item>
+<item name='$$ScriptName' summary='false' sign='true'><text>(ImportDialog)</text></item></form>
+

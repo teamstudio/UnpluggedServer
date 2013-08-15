@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='utf-8'?>
+<subform name='(Header)' alias='sfrmHeader' xmlns='http://www.lotus.com/dxl'
+ version='9.0' replicaid='C1257AC00076B554' designerversion='8.5.2' renderpassthrough='true'>
+<noteinfo noteid='18e' unid='8FCB9F7DB5E5A75B852576E9000C5863' sequence='53'>
+<created><datetime>20100316T211450,59-05</datetime></created>
+<modified><datetime dst='true'>20130515T115642,47+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115642,46+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115642,46+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,48+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<actionbar bgcolor='#ece9d8' bordercolor='black'>
+<actionbuttonstyle bgcolor='#ece9d8'/><font color='system'/><border style='solid'
+ width='0px 0px 1px'/>
+<action title='Edit' icon='89' hide='edit previewedit'><code event='click'><formula
+>@Command([EditDocument]; 1)</formula></code></action>
+<action title='Save' icon='117' hide='preview read'><code event='click'><formula
+>@Command([FileSave])</formula></code></action>
+<action title='Close' icon='21' hide='preview read'><code event='click'><formula
+>REM {@Command([FileSave]);};
+@Command([FileCloseWindow])</formula></code></action></actionbar>
+<body><richtext>
+<pardef id='1' leftmargin='1in' rightmargin='96%' hide='preview previewedit'/>
+<par def='1'><run><font size='5pt'/></run></par>
+<table widthtype='fitmargins' rowspacing='0.0597in' columnspacing='0.0597in'
+ refwidth='7.2896in'><tablecolumn width='4.0465in'/><tablecolumn width='3.0042in'
+ sizetofit='true'/>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='white'>
+<cellbackground repeat='once'><imageref name='unplugged_logo.jpg'/></cellbackground>
+<pardef id='3' align='right' leftmargin='1in' rightmargin='100%' spacebefore='1.5'
+ hide='preview previewedit' tabs='L1.3750in R6in' keepwithnext='true' keeptogether='true'/>
+<par def='3'/>
+<par def='3'/>
+<par def='3'/>
+<par def='3'/></tablecell>
+<tablecell borderwidth='0px' bgcolor='white'>
+<cellbackground repeat='once'/>
+<pardef id='4' leftmargin='1in' rightmargin='100%' hide='preview previewedit'
+ keepwithnext='true' keeptogether='true'/>
+<par def='4'><run><font size='21pt' color='#bf4100'/></run></par>
+<pardef id='5' align='right' leftmargin='1in' rightmargin='100%' hide='preview previewedit'
+ keepwithnext='true' keeptogether='true'/>
+<par def='5'><run><font size='14pt' style='bold'/></run><run><font size='14pt'
+ color='#5f5f5f'/><field type='text' kind='computedfordisplay' name='dspFormType'><code
+ event='defaultvalue'><formula>@If(
+Form="User"; "USER";
+Form="UserDatabase"; "APPLICATION";
+Form ="MessageLog"; "LOG";
+Form="Device"; "DEVICE";
+Form="Profile"; "PROFILE";
+"")</formula></code></field></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='7' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='14pt' style='bold'/></run></par></tablecell></tablerow></table>
+<pardef id='6' rightmargin='96%' hide='preview previewedit' tabs='L2.1250in'/>
+<par def='6'/></richtext></body>
+<item name='$$ScriptName' summary='false' sign='true'><text>sfrmHeader</text></item></subform>
+

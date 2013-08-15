@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<agent name='(EnableDevices)' alias='EnableDevices' xmlns='http://www.lotus.com/dxl'
+ version='9.0' replicaid='C1257AC00076B554' hide='v3' publicaccess='false'
+ designerversion='8.5.2'>
+<noteinfo noteid='246' unid='148A94DDF5DC4B9D852576FE004933F3' sequence='20'>
+<created><datetime dst='true'>20100407T091934,27-04</datetime></created>
+<modified><datetime dst='true'>20130515T115642,34+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115642,33+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115642,33+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,99+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<designchange><datetime dst='true'>20130515T115643,56+02</datetime></designchange>
+<trigger type='agentlist'/>
+<documentset type='selected'/><code event='options'><lotusscript>Option Public
+Option Declare
+Use "libSettings"
+
+</lotusscript></code><code event='initialize'><lotusscript>Sub Initialize()
+	UIEnableDevices Nothing 'view
+End Sub</lotusscript></code>
+<rundata processeddocs='0' exitcode='0' agentdata='B81D95190B205B39852578CD004855AD'>
+<agentmodified><datetime dst='true'>20110714T090731,21-04</datetime></agentmodified>
+<agentrun><datetime dst='true'>20110714T091257,03-04</datetime></agentrun>
+<runlog>Started running agent '(EnableDevices)|EnableDevices' on 07/14/2011 09:12:55 AM
+Running on selected documents: 1 total
+Found 1 document(s) that match search criteria
+Ran LotusScript code
+Done running agent '(EnableDevices)|EnableDevices' on 07/14/2011 09:12:57 AM
+</runlog></rundata>
+<item name='$POID'><datetime dst='true'>20130501T151425,57-04</datetime></item></agent>
+

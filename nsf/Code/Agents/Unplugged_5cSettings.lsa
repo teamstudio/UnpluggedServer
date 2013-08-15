@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<agent name='Unplugged\Settings' alias='Settings' xmlns='http://www.lotus.com/dxl'
+ version='9.0' replicaid='C1257AC00076B554' hide='v3' publicaccess='false'
+ designerversion='8.5'>
+<noteinfo noteid='1e2' unid='5CB1E5316C32E75C852576EF006D6C4C' sequence='87'>
+<created><datetime>20100323T145511,48-05</datetime></created>
+<modified><datetime dst='true'>20130515T115641,30+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115641,29+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115641,29+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,74+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<designchange><datetime dst='true'>20130515T115642,48+02</datetime></designchange>
+<trigger type='actionsmenu'/>
+<documentset type='runonce'/><code event='options'><lotusscript>%REM
+	Agent Unplugged\Settings
+	Created Mar 23, 2010 by Matt Vargish/Teamstudio
+	Description: Comments for Agent
+%END REM
+Option Public
+Option Declare
+Use "libSettings"
+
+
+
+
+</lotusscript></code><code event='initialize'><lotusscript>Sub Initialize()
+  Settings
+End Sub</lotusscript></code>
+<rundata processeddocs='0' exitcode='0' agentdata='82C6749DA3C43F26852576F6004B901F'>
+<agentmodified><datetime dst='true'>20130515T115641,30+02</datetime></agentmodified>
+<agentrun><datetime dst='true'>20130724T080548,04+01</datetime></agentrun>
+<runlog>Started running agent 'Unplugged\Settings|Settings' on 24-07-2013 08:05:45
+Ran LotusScript code
+Done running agent 'Unplugged\Settings|Settings' on 24-07-2013 08:05:48
+</runlog></rundata>
+<item name='$POID'><datetime dst='true'>20130501T151424,89-04</datetime></item></agent>
+

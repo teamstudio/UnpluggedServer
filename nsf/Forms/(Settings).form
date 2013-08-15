@@ -1,0 +1,535 @@
+<?xml version='1.0' encoding='utf-8'?>
+<form name='(Settings)' alias='(Settings)' xmlns='http://www.lotus.com/dxl'
+ version='9.0' replicaid='C1257AC00076B554' nocompose='true' noquery='true'
+ publicaccess='false' designerversion='8.5.3' bgcolor='system' renderpassthrough='true'>
+<noteinfo noteid='1d6' unid='286AA954619EE8D2852576EF004A6778' sequence='149'>
+<created><datetime>20100323T083241,52-05</datetime></created>
+<modified><datetime dst='true'>20130515T115643,66+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115643,65+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115643,65+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,71+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<body><richtext>
+<pardef id='1'><code event='hidewhen'><formula>1</formula></code></pardef>
+<par def='1'><run><font color='blue'/>&lt;hidden&gt;</run></par>
+<table widthtype='fixedleft' columnspacing='0.1000in' refwidth='5.2063in'><tablecolumn
+ width='5.0063in'/>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='3' rightmargin='4.0250in' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>1</formula></code></pardef>
+<par def='3'><run><font color='blue'/>&lt;hidden&gt;</run></par>
+<pardef id='4' rightmargin='3.3896in' keepwithnext='true' keeptogether='true'/>
+<par def='4'><run><font size='6pt' color='blue'/></run></par>
+<table leftmargin='0' widthtype='fixedleft' colorstyle='solid' bgcolor='white'
+ rowspacing='0.0500in' columnspacing='0.1500in' refwidth='4.9875in'><border
+ style='inset' width='2px' color='#efefef'/><tablecolumn width='1.3646in'/><tablecolumn
+ width='3.0229in'/>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='6' keepwithnext='true' keeptogether='true'/>
+<par def='6'><run><font size='2pt'/></run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='7' keepwithnext='true' keeptogether='true'/>
+<par def='7'><run><font size='2pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='6'><picture width='72px' height='72px'><gif>
+R0lGODlhSABIAOf/AAMKDQkeKRAoNRMxQxk8VCFDWytGWiVNay1UcjdXcDNZdy1bfi9dgDJgfSZk
+mEFhezdhpDNnijVkoi9nojhohS5pnTVpkitskzloni9smjlqmS1ulTBvlzdukDltljRuozBzlEBv
+jTNymjVxoD5vnkFupT1xmj1zljN3kjd1njtzqDp3jTB9jDt5oUB5ljR9kkF4rj57pDGCij5+jkJ6
+qkt3rjuAiUV8n0F9pjSGh0SAqTaJfjeHj0qAsDuJhUyBpEeDrEuBt0mFnFSCoDWReVCFqTmRgDOU
+dkyHsFmHpj+Sh1CJuTSZbk+KtFSIvy2cbUWQnlWKrj+WhTqYgFGMtjmadVGOq0OWmFSPuVGSsViP
+wFqOxVeRu0Obljijal2RtUScl2ORsDamZ1mTvTykdkCigzSrV1uVv02cpEagkR6yVl+Vul+VxjGt
+YGGUzDirZT2pcFabshm5P12YwgDHCjKxVg3CIl+axGuYuCm4Ry+0Xi22Uz+ubiy4ThXBPhrCNGSe
+yADQACu/PQDQFWmgvnaeuWmhxXKgwEqzezPBRwDZACjIOzfCTxDVByXLLXKlygDcAHelxE26dgDb
+ExvRJ2+o03OqyYCownmrxDXOQgDkDTXSKQDmAEvGaTHTNVHEbiPbFz3QPUHNVirYL3yv1DHZJIev
+yhLjITvWLiLeKRzjDBDqAATrGzPcNADwDFTNcDndKj7aPEPbNEHaRX+45ADzFIG53iroGQz0AJK4
+0DXlJSbqKoW82wf2Gj3jO5y4z1DZbErgOk/eSoy+1yDyJSjyFEPnNkXlRz7qLUPnPx75ApHC3JzA
+1jPwMhj6IDjwJZPF3x77Iyz2LELvPUvtRZ3F4ZrH25bI4Tb5IK3E1qPH3T/2M1/oYzT6MVPuT6nJ
+2Ub1TEr1Q17tXKbL4D/+KVX1TaLP40/4R6rO5FP5PWfzXlP7Sk/8U1f5Wl37VLPT42D5YmX6W1v9
+XbzT5b/T37fX52L/V8DY6sba5sre69Dh59jh6dvk7Nfo7uHp8P///yH5BAEKAP8ALAAAAABIAEgA
+QAj+AP8JHEiwoMGDCBMqXMiw4IMhSSJKnEixosWLGJMMedDQYAgqWEKG5KJlyxYtVtLAyWMHjJaQ
+W+AECtSokSJIOCc1KrNFpM+fQLFQudFRYAMcOpImpbEIFy5lUJXVWqXJ0Q+lMPrUquUsmtdez25R
+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
+ucpXznIGLOAAIDekzGdO85rb/F4BAQA7
+</gif></picture><run
+><font size='8pt'/></run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='7'><run><font size='28pt' style='bold' color='#0060a0'/>Settings</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='6'><run><font size='2pt' style='bold'/></run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='7'><run><font size='2pt' style='bold'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell columnspan='2' borderwidth='0px'>
+<pardef id='8' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>1</formula></code></pardef>
+<par def='8'><run><font color='blue'/></run></par>
+<table widthtype='fitmargins' minrowheight='6in' rowdisplay='compute' htmlid='SettingsTable'
+ leftmargin='0' refwidth='4.6861in'><tablecolumn width='100%'/>
+<tablerow tablabel='Basic' name='Basic'>
+<tablecell borderwidth='0px'>
+<pardef id='10' leftmargin='0' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>1</formula></code></pardef>
+<par def='10'><run><font color='blue'/>&lt;hidden&gt;</run></par>
+<table widthtype='fitmargins' leftmargin='0' colorstyle='solid' bgcolor='white'
+ rowspacing='0.0500in' columnspacing='0.1500in' refwidth='4.6861in'><tablecolumn
+ width='35.3299%'/><tablecolumn width='64.6701%'/>
+<tablerow>
+<tablecell columnspan='2' borderwidth='0px'>
+<pardef id='13' keepwithnext='true' keeptogether='true'/>
+<par def='13'><run><font size='14pt' style='bold' color='#0060a0'/>License</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#efefef'>
+<pardef id='14' rightmargin='1.3667in' keepwithnext='true' keeptogether='true'/>
+<par def='14'><run><font size='9pt' style='bold'/>License Number: </run><run
+><font size='9pt'/> </run></par>
+<pardef id='15' leftmargin='0.0167in' keepwithnext='true' keeptogether='true'/>
+<par def='15'><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#efefef'>
+<pardef id='16' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>1</formula></code></pardef>
+<par def='16'><run><font size='9pt'/> </run><run><font size='9pt' color='blue'/>&lt;hidden&gt;</run></par>
+<table leftmargin='0' widthtype='fixedleft' refwidth='2.7146in'><tablecolumn
+ width='1.7771in'/><tablecolumn width='0.9375in'/>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='18' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>SKILN=""</formula></code></pardef>
+<par def='18'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
+ kind='computed' name='SKILN'><code event='defaultvalue'><formula>SKILN</formula></code></field></run><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='8' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='19' align='right' rightmargin='0.9396in' keepwithnext='true' keeptogether='true'><code
+ event='hidewhen'><formula>(!@IsMember("[Admin]";@UserRoles)) | SKILN=""</formula></code></pardef>
+<par def='19'><run><font size='9pt'/></run><button width='2in' widthtype='maximum'
+ maxlines='1' wraptext='true' edge='rounded' bgcolor='#0060a0'><code event='click'><formula
+>FIELD CloseAction:= "UpdateKey";
+@Command([RefreshParentNote]);
+@Command([FileCloseWindow])</formula></code><font size='8pt' style='bold'
+ color='white'/>Update</button><run><font size='9pt'/></run></par></tablecell></tablerow></table>
+<par def='16'><run><font size='9pt' color='blue'/>&lt;hidden&gt;</run></par>
+<pardef id='20' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>(!@IsMember("[Admin]";@UserRoles)) | SKILN!=""</formula></code></pardef>
+<par def='20'><run><font size='9pt'/>Unlicensed/Evaluation      </run><button
+ width='2in' widthtype='maximum' maxlines='1' wraptext='true' edge='rounded'
+ bgcolor='#0060a0'><code event='click'><formula>FIELD CloseAction:= "EnterKey";
+@Command([RefreshParentNote]);
+@Command([FileCloseWindow])</formula></code><font size='8pt' style='bold'
+ color='white'/>Enter Serial Key</button><run><font size='9pt' color='blue'/></run></par>
+<par def='16'><run><font size='9pt' color='blue'/>&lt;hidden&gt;</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='white'>
+<pardef id='12' keepwithnext='true' keeptogether='true'/>
+<par def='12'><run><font size='9pt' style='bold'/>Enabled Users:</run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='white'>
+<pardef id='21' keepwithnext='true' keeptogether='true'/>
+<par def='21'><run><font size='9pt' style='bold'/></run><run><font size='9pt'/><field
+ type='number' kind='computed' name='LicensedUsers'><numberformat format='fixed'
+ punctuated='true' parens='false' percent='false' bytes='false'/><code event='defaultvalue'><formula
+>LicensedUsers</formula></code></field></run><run><font size='9pt' style='bold'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#efefef'>
+<par def='12'><run><font size='9pt' style='bold'/>Expires:</run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#efefef'>
+<par def='21'><run><font size='9pt'/></run><run><font size='9pt'/><field type='datetime'
+ kind='computed' name='Expires'><datetimeformat show='date' date='yearmonthday'
+ fourdigityearfor21stcentury='true' zone='never' dateformat='weekdaymonthdayyear'
+ dayformat='twodigitday' monthformat='twodigitmonth' yearformat='fourdigityear'
+ weekdayformat='shortname' dateseparator1=' ' dateseparator2='/' dateseparator3='/'
+ timeseparator=':' preference='usersetting'/><code event='defaultvalue'><formula
+>Expires</formula></code></field></run><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#efefef'>
+<par def='12'><run><font size='4pt'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#efefef'>
+<par def='21'><run><font size='4pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='12'><run><font size='14pt' style='bold' color='#0060a0'/>Servers</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='22' align='right' keepwithnext='true' keeptogether='true'/>
+<par def='22'><run><font size='9pt' color='#0060a0'/></run><actionhotspot
+ hotspotstyle='none'><code event='click'><formula>FIELD $SettingsTable:="Advanced";
+@Command([ViewRefreshFields])</formula></code><run><font size='9pt' color='#0060a0'/>Advanced &gt;&gt;</run></actionhotspot><run
+><font size='9pt' color='#0060a0'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#efefef'>
+<par def='12'><run><font size='9pt' style='bold'/>Licensed Servers:</run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#efefef'>
+<par def='21'><run><font size='9pt' style='bold'/></run><run><font size='9pt'/><field
+ choicesdialog='addressbook' lookupeachchar='false' lookupaddressonrefresh='false'
+ type='names' allowmultivalues='true' kind='editable' name='LicensedServers'
+ listinputseparators='comma semicolon' listdisplayseparator='semicolon'><keywords
+ columns='1' ui='dialoglist' allownew='true'/></field></run><run><font size='9pt'
+ style='bold'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#efefef'>
+<par def='12'><run><font size='4pt' style='bold'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#efefef'>
+<par def='21'><run><font size='4pt' style='bold'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell columnspan='2' borderwidth='0px'>
+<par def='13'><run><font size='14pt' style='bold' color='#0060a0'/>Synchronization Logging</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#efefef'>
+<par def='12'><run><font size='9pt' style='bold'/>Login:</run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#efefef'>
+<par def='21'><run><font size='9pt'/></run><run><font size='9pt'/><field borderstyle='none'
+ lookupeachchar='false' lookupaddressonrefresh='false' type='keyword' kind='editable'
+ name='LogOpts_Login'><keywords helperbutton='false' recalconchange='true'
+ columns='3' ui='radiobutton'><textlist><text>Off|0</text><text>All|1</text><text
+>Errors Only|2</text></textlist></keywords><code event='defaultvalue'><formula
+>"0"</formula></code></field></run><run><font size='9pt'/></run></par>
+<par def='16'><run><font size='9pt'/></run><run><font size='8pt' color='blue'/><field
+ type='text' kind='computedfordisplay' name='cfdLogOptsLogic_Login'><code
+ event='defaultvalue'><formula>srcV:=LogOpts_Login;
+
+@If(@ThisValue=srcV ; @Return(srcV); "");
+
+@If(
+
+ srcV *=  "":"0" ;
+	FIELD LogTypes_Login := "";
+
+LogTypes_Login = "" ;
+	FIELD LogTypes_Login := "2":"4":"8";
+
+"");
+
+srcV</formula></code></field></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='7' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par>
+<par def='21'><run><font size='4pt'/> </run></par>
+<par def='21'><run><font size='9pt'/></run><run><font size='9pt'/><field borderstyle='none'
+ lookupeachchar='false' lookupaddressonrefresh='false' type='keyword' allowmultivalues='true'
+ kind='editable' name='LogTypes_Login' listinputseparators='comma' listdisplayseparator='comma'><keywords
+ helperbutton='false' recalconchange='true' recalcchoices='true' columns='3'
+ ui='checkbox'><formula>"Requests|2":
+"Responses|4":
+"Debug Info|8"</formula></keywords><code event='inputenabled'><formula>opts:=LogOpts_Login;
+(opts="1" | opts="2")</formula></code><code event='inputvalidation'><formula
+>@If(
+LogOpts_Login *= "1":"2"
+&amp; @ThisValue="";
+@Failure("Login Logging: To enable logging you must select at least one item to log."); @Success)</formula></code></field></run><run
+><font size='9pt'/></run></par>
+<par def='16'><run><font size='9pt'/></run><run><font size='8pt' color='blue'/><field
+ type='number' kind='computed' name='LogFlags_Login'><numberformat format='general'
+ varying='true' digits='2' punctuated='false' parens='false' percent='false'
+ bytes='false'/><code event='defaultvalue'><formula>opts:=LogOpts_Login;
+types:=LogTypes_Login;
+
+@If(
+	opts="";  @Return(0);
+	opts="0"; @Return(0);
+	""
+);
+
+@If(  types=""; 0 ; @Sum(@TextToNumber(types))  )
++  @If(opts="2"; 1; 0)</formula></code></field></run><run><font size='9pt'/> </run></par>
+<par def='21'><run><font size='4pt'/>   </run><run><font size='9pt'/> </run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='white'>
+<par def='12'><run><font size='9pt' style='bold'/>Push:</run></par>
+<par def='12'><run><font size='8pt' color='#4f4f4f'/>(device sends updates)<break
+/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='white'>
+<par def='21'><run><font size='9pt'/><field borderstyle='none' lookupeachchar='false'
+ lookupaddressonrefresh='false' type='keyword' allowmultivalues='true' kind='editable'
+ name='RepConfOpts_Push' listinputseparators='comma' listdisplayseparator='comma'><keywords
+ helperbutton='false' recalconchange='true' columns='1' ui='checkbox'><textlist
+><text>Email user on update conflict|1</text></textlist></keywords><code event='defaultvalue'><formula
+>"0"</formula></code></field></run></par>
+<par def='21'/>
+<par def='21'><run><font size='9pt'/><field borderstyle='none' lookupeachchar='false'
+ lookupaddressonrefresh='false' type='keyword' kind='editable' name='LogOpts_Push'><keywords
+ helperbutton='false' recalconchange='true' columns='3' ui='radiobutton'><textlist
+><text>Off|0</text><text>All|1</text><text>Errors Only|2</text></textlist></keywords><code
+ event='defaultvalue'><formula>"0"</formula></code></field></run><run><font
+ size='9pt'/></run></par>
+<par def='16'><run><font size='8pt' color='blue'/><field type='text' kind='computedfordisplay'
+ name='cfdLogOptsLogic_Push'><code event='defaultvalue'><formula>srcV:=LogOpts_Push;
+
+@If(@ThisValue=srcV ; @Return(srcV); "");
+
+@If(
+
+ srcV *=  "":"0" ;
+	FIELD LogTypes_Push := "";
+
+LogTypes_Push = "" ;
+	FIELD LogTypes_Push := "4":"8";
+
+"");
+
+srcV</formula></code></field></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='7' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='21'><run><font size='4pt'/> </run></par>
+<par def='21'><run><font size='9pt'/></run><run><font size='9pt'/><field borderstyle='none'
+ lookupeachchar='false' lookupaddressonrefresh='false' type='keyword' allowmultivalues='true'
+ kind='editable' name='LogTypes_Push' listinputseparators='comma' listdisplayseparator='comma'><keywords
+ helperbutton='false' recalconchange='true' recalcchoices='true' columns='3'
+ ui='checkbox'><formula>"Requests|2":
+"Responses|4":
+"Debug Info|8"</formula></keywords><code event='inputenabled'><formula>opts:=LogOpts_Push;
+(opts="1" | opts="2")</formula></code><code event='inputvalidation'><formula
+>@If(
+LogOpts_Push *= "1":"2"
+&amp; @ThisValue="";
+@Failure("Push Logging: To enable logging you must select at least one item to log."); @Success)</formula></code></field></run><run
+><font size='9pt'/></run></par>
+<par def='16'><run><font size='9pt'/></run><run><font size='8pt' color='blue'/><field
+ type='number' kind='computed' name='LogFlags_Push'><numberformat format='general'
+ varying='true' digits='2' punctuated='false' parens='false' percent='false'
+ bytes='false'/><code event='defaultvalue'><formula>RepConfEmail:=@If(RepConfOpts_Push="1";4096;0);
+
+opts:=LogOpts_Push;
+types:=LogTypes_Push;
+
+@If(
+	opts="";  @Return(RepConfEmail);
+	opts="0"; @Return(RepConfEmail);
+	""
+);
+
+RepConfEmail + @If(  types=""; 0 ; @Sum(@TextToNumber(types))  )
++  @If(opts="2"; 1; 0)</formula></code></field></run><run><font size='4pt'/>  </run></par>
+<pardef id='23' tabs='L0.5000in L1in L1.5000in L2in L2.5000in L3in L3.5000in L4in'
+ keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula>@IsMember("2"; LogTypes_Push)</formula></code></pardef>
+<par def='23'><run><font size='8pt'/> </run></par>
+<par def='23'><run><font size='8pt'/></run></par>
+<pardef id='24' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>@IsNotMember("2"; LogTypes_Push)</formula></code></pardef>
+<par def='24'><run><font size='8pt' color='#0060a0'/>Warning: Logged "Requests" will include data accessed with the users credentials.</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#efefef'>
+<par def='12'><run><font size='9pt' style='bold'/>Pull:</run></par>
+<par def='12'><run><font size='8pt' color='#4f4f4f'/>(device retrieves updates)<break
+/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#efefef'>
+<par def='21'><run><font size='9pt'/><field borderstyle='none' lookupeachchar='false'
+ lookupaddressonrefresh='false' type='keyword' kind='editable' name='LogOpts_Pull'><keywords
+ helperbutton='false' recalconchange='true' columns='3' ui='radiobutton'><textlist
+><text>Off|0</text><text>All|1</text><text>Errors Only|2</text></textlist></keywords><code
+ event='defaultvalue'><formula>"0"</formula></code></field></run></par>
+<par def='16'><run><font size='8pt' color='blue'/><field type='text' kind='computedfordisplay'
+ name='cfdLogOptsLogic_Pull'><code event='defaultvalue'><formula>srcV:=LogOpts_Pull;
+
+@If(@ThisValue=srcV ; @Return(srcV); "");
+
+@If(
+
+ srcV *=  "":"0" ;
+	FIELD LogTypes_Pull := "";
+
+LogTypes_Pull = "" ;
+	FIELD LogTypes_Pull := "2":"8";
+
+"");
+
+srcV</formula></code></field></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='7' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='21'><run><font size='6pt'/></run></par>
+<par def='21'><run><font size='9pt'/></run><run><font size='9pt'/><field borderstyle='none'
+ lookupeachchar='false' lookupaddressonrefresh='false' type='keyword' allowmultivalues='true'
+ kind='editable' name='LogTypes_Pull' listinputseparators='comma' listdisplayseparator='comma'><keywords
+ helperbutton='false' recalconchange='true' recalcchoices='true' columns='3'
+ ui='checkbox'><formula>"Requests|2":
+"Responses|4":
+"Debug Info|8"</formula></keywords><code event='inputenabled'><formula>opts:=LogOpts_Pull;
+(opts="1" | opts="2")</formula></code><code event='inputvalidation'><formula
+>@If(
+LogOpts_Pull *= "1":"2"
+&amp; @ThisValue="";
+@Failure("Pull Logging: To enable logging you must select at least one item to log."); @Success)</formula></code></field></run><run
+><font size='9pt'/></run></par>
+<par def='16'><run><font size='8pt' color='blue'/><field type='text' kind='computedfordisplay'
+ name='cfdLogErrorNote'><code event='defaultvalue'><formula>@If(( (LogOpts_Pull *= "1":"2") &amp; @IsMember("8";LogTypes_Pull) ); @Return("");"");
+FIELD LogErrorNote := "";
+""</formula></code></field></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='7' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='21'><run><font size='9pt'/><field borderstyle='none' lookupeachchar='false'
+ lookupaddressonrefresh='false' type='keyword' allowmultivalues='true' kind='editable'
+ name='LogErrorNote' listinputseparators='comma' listdisplayseparator='comma'><keywords
+ helperbutton='false' recalconchange='true' columns='1' ui='checkbox'><textlist
+><text>Copy active note to log on failure|1</text></textlist></keywords><code
+ event='inputenabled'><formula>( (LogOpts_Pull *= "1":"2") &amp; @IsMember("8";LogTypes_Pull) )</formula></code><code
+ event='defaultvalue'><formula>"0"</formula></code></field></run><run><font
+ size='9pt'/></run></par>
+<par def='16'><run><font size='9pt'/></run><run><font size='8pt' color='blue'/><field
+ type='number' kind='computed' name='LogFlags_Pull'><numberformat format='general'
+ varying='true' digits='2' punctuated='false' parens='false' percent='false'
+ bytes='false'/><code event='defaultvalue'><formula>logerrnote:=@If(@IsMember("8";LogTypes_Pull)  &amp; LogErrorNote="1";4096;0);
+opts:=LogOpts_Pull;
+types:=LogTypes_Pull;
+
+@If(
+	opts="";  @Return(0);
+	opts="0"; @Return(0);
+	""
+);
+
+logerrnote + @If(  types=""; 0 ; @Sum(@TextToNumber(types))  )
++  @If(opts="2"; 1; 0)</formula></code></field></run><run><font size='4pt'/>  </run></par>
+<pardef id='25' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>@IsMember("4"; LogTypes_Pull) | LogErrorNote = "1"</formula></code></pardef>
+<par def='25'><run><font size='8pt'/> </run></par>
+<par def='25'><run><font size='8pt'/></run></par>
+<pardef id='26' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>@IsNotMember("4"; LogTypes_Pull) &amp; LogErrorNote != "1"</formula></code></pardef>
+<par def='26'><run><font size='8pt' color='#0060a0'/>Warning: Logged </run><run
+><font size='8pt' color='#0060a0'/><computedtext><code event='value'><formula
+>msgLst:= @If(@IsMember("4"; LogTypes_Pull);"\"Responses\"" ;""):
+					@If(LogErrorNote = "1"; "\"active note\""; "");
+@Implode(@Trim(msgLst);" &amp; ")</formula></code></computedtext></run><run
+><font size='8pt' color='#0060a0'/> will include data accessed with the users credentials.</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='12'><run><font size='9pt' style='bold'/>Mail:</run></par>
+<par def='12'><run><font size='8pt' color='#4f4f4f'/>(device sends pending mail)<break
+/></run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='21'><run><font size='9pt'/><field borderstyle='none' lookupeachchar='false'
+ lookupaddressonrefresh='false' type='keyword' kind='editable' name='LogOpts_Mail'><keywords
+ helperbutton='false' recalconchange='true' columns='3' ui='radiobutton'><textlist
+><text>Off|0</text><text>All|1</text><text>Errors Only|2</text></textlist></keywords><code
+ event='defaultvalue'><formula>"0"</formula></code></field></run><run><font
+ size='9pt'/></run></par>
+<par def='21'><run><font size='9pt'/></run></par>
+<par def='16'><run><font size='9pt'/></run><run><font size='8pt' color='blue'/><field
+ type='number' kind='computed' name='LogFlags_Mail'><numberformat format='general'
+ varying='true' digits='2' punctuated='false' parens='false' percent='false'
+ bytes='false'/><code event='defaultvalue'><formula>opts:=LogOpts_Mail;
+
+%REM; " in bit flag, 0 = OFF,  2 = ON,  2 or 1 = ON with flag for Errors Only, in format of more complex fields above";
+@If(
+	opts="1"; 2;
+	opts="2"; (2 +1);
+	0
+)</formula></code></field></run><run><font size='4pt'/>  </run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='12'><run><font size='3pt' color='#4f4f4f'/></run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='21'><run><font size='3pt' color='#4f4f4f'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='12'><run><font color='#4f4f4f'/></run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='22'><run><font size='8pt' color='#4f4f4f'/>Last updated:  </run><run
+><font size='8pt' color='#4f4f4f'/><field type='datetime' kind='computedwhencomposed'
+ name='UISaved'><datetimeformat show='datetime' date='yearmonthday' fourdigityearfor21stcentury='true'
+ time='hourminutesecond' zone='never' dateformat='weekdaymonthdayyear' dayformat='twodigitday'
+ monthformat='twodigitmonth' yearformat='fourdigityear' weekdayformat='shortname'
+ dateseparator1=' ' dateseparator2='/' dateseparator3='/' timeseparator=':'
+ preference='usersetting'/><code event='defaultvalue'><formula>@Now</formula></code></field></run><run
+><font size='8pt' color='#4f4f4f'/></run></par>
+<par def='22'><run><font size='3pt' color='#4f4f4f'/></run></par></tablecell></tablerow></table>
+<pardef id='27' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>1</formula></code></pardef>
+<par def='27'><run><font color='blue'/>&lt;hidden&gt;</run></par></tablecell></tablerow>
+<tablerow tablabel='Advanced' name='Advanced'>
+<tablecell borderwidth='0px'>
+<par def='27'><run><font color='blue'/>&lt;hidden&gt;</run></par>
+<table leftmargin='0' widthtype='fixedleft' colorstyle='solid' bgcolor='white'
+ rowspacing='0.0500in' columnspacing='0.1500in' refwidth='4.6750in'><tablecolumn
+ width='1.3646in'/><tablecolumn width='2.7104in'/>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='29' keepwithnext='true' keeptogether='true'/>
+<par def='29'><run><font size='14pt' style='bold' color='#0060a0'/>Advanced</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='30' align='right' keepwithnext='true' keeptogether='true'/>
+<par def='30'><run><font size='9pt' color='#0060a0'/></run><actionhotspot
+ hotspotstyle='none'><code event='click'><formula>FIELD $SettingsTable:="Basic";
+@Command([ViewRefreshFields])</formula></code><run><font size='9pt' color='#0060a0'/>&lt;&lt; Back to basic settings</run></actionhotspot><run
+><font size='14pt' style='bold' color='#0060a0'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#efefef'>
+<par def='29'><run><font size='9pt' style='bold'/>Max Response Size:</run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#efefef'>
+<pardef id='31' keepwithnext='true' keeptogether='true'/>
+<par def='31'><run><font size='9pt'/>In KiloBytes, or blank for default (256K)</run></par>
+<par def='31'><run><font size='9pt' style='bold'/></run><run><font size='9pt'/><field
+ type='number' allowmultivalues='true' kind='editable' name='MaxRespSize'
+ listinputseparators='comma semicolon' listdisplayseparator='semicolon'><keywords
+ ui='dialoglist' allownew='true'/><numberformat format='general' digits='2'
+ punctuated='false' parens='false' percent='false' bytes='false'/></field></run><run
+><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#efefef'>
+<par def='29'><run><font size='4pt' style='bold'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#efefef'>
+<pardef id='32' keepwithnext='true' keeptogether='true'/>
+<par def='32'><run><font size='4pt' style='bold'/></run></par></tablecell></tablerow></table>
+<pardef id='33' keepwithnext='true' keeptogether='true'/>
+<par def='33'><run><font color='blue'/></run></par></tablecell></tablerow></table>
+<par def='8'><run><font size='2pt' style='bold'/></run></par></tablecell></tablerow></table>
+<pardef id='34' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>1</formula></code></pardef>
+<par def='34'><run><font color='blue'/>&lt;hidden&gt;&lt;hidden&gt;</run></par></tablecell></tablerow></table>
+<par def='1'><run><font color='blue'/>&lt;hidden&gt;</run></par></richtext></body>
+<item name='LogFlags_Login_1' summary='false'><number>0</number></item>
+<item name='LogFlags_Login_2' summary='false'><number>0</number></item>
+<item name='LogFlags_Pull_1' summary='false'><number>0</number></item>
+<item name='$FormUsers'><text>[Admin]</text></item>
+<item name='LicensedUsers' summary='false'><number>0</number></item>
+<item name='LogFlags_Login' summary='false'><number>0</number></item>
+<item name='LogFlags_Push' summary='false'><number>0</number></item>
+<item name='LogFlags_Pull' summary='false'><number>0</number></item>
+<item name='LogFlags_Mail' summary='false'><number>0</number></item>
+<item name='MaxRespSize' summary='false'><number>0</number></item>
+<item name='$$ScriptName' summary='false' sign='true'><text>(Settings)</text></item></form>
+

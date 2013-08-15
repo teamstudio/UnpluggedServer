@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><imageresource designerversion="8.5" name="Unplugged-Icon.gif" publicaccess="false" replicaid="C1257AC00076B554" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="176" sequence="12" unid="00A06904F7C31CE6852576E9000C846B">
+<created><datetime>20100316T211643,31-05</datetime></created>
+<modified><datetime dst="true">20130515T115641,17+02</datetime></modified>
+<revised><datetime dst="true">20130515T115641,16+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130515T115641,16+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,42+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+
+<item name="$MimeType" sign="true"><text>image/gif</text></item>
+<item name="$FileModDT" sign="true"><datetime>20100304T134617,00-05</datetime></item></imageresource>

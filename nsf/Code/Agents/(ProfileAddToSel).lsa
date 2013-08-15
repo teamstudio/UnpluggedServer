@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<agent name='(ProfileAddToSel)' alias='ProfileAddToSel' xmlns='http://www.lotus.com/dxl'
+ version='9.0' replicaid='C1257AC00076B554' hide='v3' publicaccess='false'
+ designerversion='8.5.2'>
+<noteinfo noteid='29a' unid='B050C9349F0DE412852578B6003A4E36' sequence='9'>
+<created><datetime dst='true'>20110621T063651,10-04</datetime></created>
+<modified><datetime dst='true'>20130515T115643,30+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115643,29+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115643,29+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223638,21+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<designchange><datetime dst='true'>20130515T115644,49+02</datetime></designchange>
+<trigger type='agentlist'/>
+<documentset type='selected'/><code event='options'><lotusscript>Option Public
+Option Declare
+Use "libSettings"
+
+</lotusscript></code><code event='initialize'><lotusscript>Sub Initialize()
+	UIAddProfilesToViewSelected
+End Sub</lotusscript></code>
+<rundata processeddocs='0' exitcode='0' agentdata='56D288B8F5A84E8A852578B6003AC95C'>
+<agentmodified><datetime dst='true'>20110621T063845,61-04</datetime></agentmodified>
+<agentrun><datetime dst='true'>20110621T092125,21-04</datetime></agentrun>
+<runlog>Started running agent '(ProfileAddToSel)|ProfileAddToSel' on 06/21/2011 09:21:22 AM
+Running on selected documents: 1 total
+Found 1 document(s) that match search criteria
+Ran LotusScript code
+Done running agent '(ProfileAddToSel)|ProfileAddToSel' on 06/21/2011 09:21:25 AM
+</runlog></rundata>
+<item name='$POID'><datetime dst='true'>20130501T151426,13-04</datetime></item></agent>
+

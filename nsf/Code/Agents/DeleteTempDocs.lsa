@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<agent name='DeleteTempDocs' alias='DeleteTempDocs' xmlns='http://www.lotus.com/dxl'
+ version='9.0' replicaid='C1257AC00076B554' hide='v3' publicaccess='false'
+ designerversion='8.5' restrictions='unrestricted' activatable='false'>
+<noteinfo noteid='1c6' unid='0BACEE82DB61ACB4852576EE0057BC31' sequence='22'>
+<created><datetime>20100322T105818,09-05</datetime></created>
+<modified><datetime dst='true'>20130515T115638,91+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115638,90+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115638,90+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,65+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Craig Schumann/O=Teamstudio</name><name
+>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<designchange><datetime dst='true'>20130515T115640,11+02</datetime></designchange>
+<trigger type='scheduled'>
+<schedule type='byminutes' hours='0' minutes='30' runlocation='any'/></trigger><code
+ event='options'><lotusscript>%REM
+	Agent DeleteTempDocs
+	Created Mar 22, 2010 by Matt Vargish/Teamstudio
+	Description: Deletes parameter docs used for interagent comm
+%END REM
+Option Public
+Option Declare
+Use "libDeleteTempDocs"
+
+
+ 
+
+</lotusscript></code><code event='initialize'><lotusscript>Sub Initialize()
+DeleteTempDocs
+End Sub</lotusscript></code>
+<rundata processeddocs='0' exitcode='0' agentdata='FC73D82DB8F9C0368525776C004954E4'>
+<agentmodified><datetime dst='true'>20130515T115638,91+02</datetime></agentmodified>
+<agentrun><datetime dst='true'>20130815T100828,54+02</datetime></agentrun>
+<runlog>Started running agent 'DeleteTempDocs|DeleteTempDocs' on 08/15/2013 10:08:28 AM
+Found 0 document(s) that match search criteria
+Ran LotusScript code
+Done running agent 'DeleteTempDocs|DeleteTempDocs' on 08/15/2013 10:08:28 AM
+</runlog></rundata>
+<item name='$POID'><datetime dst='true'>20130501T151424,69-04</datetime></item></agent>
+

@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" createForm="false"
+	rendered="false">
+  
+	<xp:this.beforeRenderResponse><![CDATA[#{javascript:
+	
+//var Logger = function(strType, session) {
+
+//	var that=this;
+	 
+    var  logger_fLogOpen;
+    var  logger_fLogOpenAttempted;
+    var  logger_docLog;
+    var logger_dbLog;
+    var logger_rti;
+    var logger_sType;
+    var logger_stB;
+    var  logger_stP;
+    var logger_fHasErrors;
+    var logger_fHasWarnings;
+    var logger_sUser;
+    var logger_sPin;
+    var logger_targetDatabase;
+    var logger_sFirstNoteId;
+    var logger_runTimeMS = 0;
+    var logger_testid;
+    var logger_LOG_ON_ERROR_ONLY = 1;
+    var logger_LOG_REQUEST = 2;
+    var logger_LOG_RESPONSE = 4;
+    var logger_LOG_DEBUG = 8;
+    var sbDebug;
+    var unpConfigSubdir;
+    var logger_sLastNoteId;
+    var logger_sNextNoteId;
+    var logger_clientProtocolVersion = 0;
+	var logger_clientDbFileFormat = 0;
+	
+	//CTOR
+	//logger_sType = strType;
+ 
+
+;
+    var logger_getRunTimeMS = function(){
+        return logger_runTimeMS;
+    }
+;
+    var logger_setRunTimeMS = function(runTimeMS) {
+        logger_runTimeMS = runTimeMS;
+    }
+;
+    var logger_getFirstNoteId = function() {
+        return logger_sFirstNoteId;
+    }
+;
+    var logger_setFirstNoteId = function(firstNoteId) {
+        logger_sFirstNoteId = firstNoteId;
+    }
+;
+    var logger_getLastNoteId = function() {
+        return logger_sLastNoteId;
+    }
+;
+    var logger_setLastNoteId = function(lastNoteId) {
+        logger_sLastNoteId = lastNoteId;
+    }
+;
+    var logger_getNextNoteId = function() {
+        return logger_sNextNoteId;
+    }
+;
+    var logger_setNextNoteId = function(nextNoteId) {
+        logger_sNextNoteId = nextNoteId;
+    }
+;
+   var logger_LoadLogDb = function() {
+        try {
+            var sServer = "";
+            if (!session.isOnServer()) {
+                // when debugging we want the server where the config is which should be
+                // that gotten through the debug versions of AgentContext
+                //J: sServer = session.getAgentContext().getCurrentDatabase().getServer();
+                sServer = database.getServer(); //ssjs global
+            }
+            //J: var replpath = session.getAgentContext().getCurrentDatabase().getFilePath().replace('\\', '/');
+            var replpath = database.getFilePath().replace('\\', '/'); //ssjs global
+            if (-1 != replpath.indexOf('/')) {
+                unpConfigSubdir = replpath.substring(0, replpath.lastIndexOf('/') + 1);
+                logger_dbLog = session.getDatabase(sServer, unpConfigSubdir + "UnpluggedLog.nsf", true);
+            }
+            else {
+                logger_dbLog = session.getDatabase(sServer, "UnpluggedLog.nsf", true);
+            }
+
+            if (logger_dbLog.isOpen()) {
+                logger_docLog = logger_dbLog.createDocument();
+                if (null != logger_docLog) {
+                    logger_docLog.replaceItemValue("Form", "MessageLog");
+                    logger_docLog.replaceItemValue("Type", logger_sType);
+                    logger_rti = logger_docLog.createRichTextItem("Message");
+                    logger_CreateStyles();
+                    logger_rti.appendStyle(logger_stP);
+                    logger_fLogOpen = true;
+                }
+            }
+        }
+        catch (e) {
+            print("Unplugged: SSJS Logger:  Error loading log: " + e);
+        }
+        finally {
+            logger_fLogOpenAttempted = true;
+        }
+    }
+
+;	
+    var logger_dispose = function() {
+        if (logger_fLogOpen) {
+            try {
+            	if(logger_rti){
+                	logger_rti.compact();
+				}
+                // status
+                var nStatus = 0;
+                if (logger_fHasWarnings) {
+                    nStatus = 1;
+                }
+                if (logger_fHasErrors) {
+                    nStatus = nStatus + 2;
+                }
+                logger_docLog.replaceItemValue("Status", nStatus);
+                // user & pin
+                if(logger_sUser){logger_docLog.replaceItemValue("UserName", logger_sUser)};
+                if(logger_sPin){logger_docLog.replaceItemValue("Pin", logger_sPin)};
+                if(logger_targetDatabase){logger_docLog.replaceItemValue("Database", logger_targetDatabase)};
+                if(logger_sFirstNoteId){logger_docLog.replaceItemValue("FirstNoteID", logger_sFirstNoteId)};
+                if(logger_sLastNoteId){logger_docLog.replaceItemValue("LastNoteID", logger_sLastNoteId)};
+                if(logger_sNextNoteId){logger_docLog.replaceItemValue("NextNoteID", logger_sNextNoteId)};
+                if(logger_runTimeMS){logger_docLog.replaceItemValue("RunTimeMS", logger_runTimeMS)};
+                if(logger_clientProtocolVersion){logger_docLog.replaceItemValue("ClientProtocolVersion", logger_clientProtocolVersion)};
+                if(true){logger_docLog.replaceItemValue("ServerProtocolVersion", 3)};  //TODO ?
+                if(logger_clientDbFileFormat){logger_docLog.replaceItemValue("ClientDbFileFormat", logger_clientDbFileFormat)};
+                
+                if (logger_testid) {
+                    logger_docLog.replaceItemValue("TestId", logger_testid);
+                }
+                
+                logger_docLog.save(true, true);
+                logger_docLog.recycle();
+                logger_dbLog.recycle();
+            }
+            catch (e) {
+				print("Unplugged: SSJS Logger:  Error finalizing log: " + e);
+            }
+
+        }
+    }
+ ;   
+    //J:  was dispose, here we're going with save...
+    var logger_save = logger_dispose;
+;
+    var logger_getTargetDatabase = function() {
+        return logger_targetDatabase;
+    }
+;
+    var logger_setTargetDatabase = function(database) {
+        logger_targetDatabase = database;
+    }
+;
+    var logger_DebugWrite = function(sMsg) {
+        if (logger_fLogOpen) {
+            logger_write(sMsg);
+        }
+        else {
+            if (null == sbDebug) {
+                sbDebug = new java.lang.StringBuilder();
+            }
+            sbDebug.append("\n\r" + sMsg);
+        }
+    }
+   
+;
+    var logger_DebugCommit = function() {
+        logger_AddHeader("Debugging Messages");
+        if (null != unpConfigSubdir) {
+            logger_write("Unplugged Data Synchronizer Directory: " + unpConfigSubdir);
+        }
+        if (null != sbDebug) {
+            logger_write(sbDebug.toString());
+        }
+    }
+;
+    var logger_write = function(sMsg) {
+        if ((!logger_fLogOpenAttempted)) {
+            logger_LoadLogDb();
+        } // only if first call
+        if (logger_fLogOpen) {
+            try {
+                logger_rti.addNewLine(1);
+                logger_rti.appendText(sMsg);
+            }
+            catch (e) {
+ 				print("Unplugged: SSJS Logger:  Error writing log: " + e);
+            }
+        }
+    }
+;    
+
+    var logger_AddHeader = function(sHeaderName) {
+        if ((!logger_fLogOpenAttempted)) {
+            logger_LoadLogDb();
+        } // only if first call
+        if (logger_fLogOpen) {
+            try {
+                logger_rti.addNewLine(2);
+                logger_rti.appendStyle(logger_stB);
+                logger_rti.appendText(sHeaderName);
+                logger_rti.appendStyle(logger_stP);
+                logger_rti.addNewLine(1);
+            }
+            catch (e) {
+				print("Unplugged: SSJS Logger:  Error in AddHeader: " + e);
+            }
+
+        }
+    }
+;
+    var logger_LogRequestHeaders = function(docRequest) {
+        if ((!logger_fLogOpenAttempted)) {
+            logger_LoadLogDb();
+        } // only if first call
+        if (logger_fLogOpen) {
+        	//TODO: //J: should this rely on access to globals e.g. facesContext?
+			var request = facesContext.getExternalContext().getRequest(); 
+    		if(!request){
+    			throw "Failed to access request to read HTTP headers";
+    		}
+    	    logger_write("AUTH_TYPE = " + request.getAuthType()); 
+      		logger_write("CONTENT_LENGTH = " + request.getContentLength()); 
+      		logger_write("CONTENT_TYPE = " + request.getContentType()); 
+      		logger_write("CONTEXT_PATH = " + request.getContextPath()); 
+      		logger_write("HTTPS = " + (request.isSecure() ? "ON" : "OFF")); 
+      		logger_write("PATH_INFO = " + request.getPathInfo()); 
+      		logger_write("PATH_TRANSLATED = " + request.getPathTranslated()); 
+      		logger_write("QUERY_STRING = " + request.getQueryString()); 
+      		logger_write("REMOTE_ADDR  = " + request.getRemoteAddr()); 
+      		logger_write("REMOTE_HOST = " + request.getRemoteHost()); 
+      		logger_write("REMOTE_USER = " + request.getRemoteUser()); 
+      		logger_write("REQUEST_METHOD = " + request.getMethod()); 
+      		logger_write("REQUEST_SCHEME = " + request.getScheme()); 
+      		logger_write("REQUEST_URI = " + request.getRequestURI()); 
+      		logger_write("SCRIPT_NAME = " + request.getServletPath()); 
+      		logger_write("SERVER_NAME = " + request.getServerName()); 
+      		logger_write("SERVER_PORT = " + request.getServerPort()); 
+      		logger_write("SERVER_PROTOCOL = " + request.getProtocol()); 
+      		logger_write("HTTP_ACCEPT = " + request.getHeader("Accept")); 
+      		logger_write("HTTP_ACCEPT_ENCODING = " + request.getHeader("Accept-Encoding")); 
+      		logger_write("HTTP_ACCEPT_LANGUAGE = " + request.getHeader("Accept-Language")); 
+      		logger_write("HTTP_CONNECTION = " + request.getHeader("Connection")); 
+      		logger_write("HTTP_HOST = " + request.getHeader("Host"));         
+      		logger_write("HTTP_REFERER = " + request.getHeader("Referer")); 
+      		logger_write("HTTP_USER_AGENT = " + request.getHeader("User-Agent")); 
+        }
+    }
+;
+    logger_CreateStyles = function(){
+        logger_stB = session.createRichTextStyle();
+        logger_stP = session.createRichTextStyle();
+
+        logger_stP.setFontSize(9);
+        logger_stP.setBold(lotus.domino.RichTextStyle.NO);
+        logger_stP.setColor(lotus.domino.RichTextStyle.COLOR_BLACK);
+
+        color = session.createColorObject();
+        logger_stB.setBold(lotus.domino.RichTextStyle.YES);
+        logger_stB.setColor(color.setRGB(0, 90, 160));
+        logger_stB.setFontSize(10);
+    }
+;
+    var logger_getHasErrors = function() {
+        return logger_fHasErrors;
+    }
+;
+    var logger_setHasErrors = function(hasErrors) {
+        logger_fHasErrors = hasErrors;
+    }
+;
+    var logger_getHasWarnings = function() {
+        return logger_fHasWarnings;
+    }
+;
+    var logger_setHasWarnings = function(hasWarnings) {
+        logger_fHasWarnings = hasWarnings;
+    }
+ ;
+    var logger_getUser = function() {
+        return logger_sUser;
+    }
+;
+    var logger_setUser = function(user) {
+        logger_sUser = user;
+    }
+;
+    var logger_getPin = function() {
+        return logger_sPin;
+    }
+;
+    var logger_setPin = function(pin) {
+        logger_sPin = pin;
+    }
+;
+    var logger_getTestId = function() { 
+        return logger_testid;
+    }
+;
+    var logger_setTestId = function(testId) {
+        logger_testid = testId;
+    }
+ ;   
+    var logger_getClientProtocolVersion = function() {
+        return logger_clientProtocolVersion;
+    }
+;
+    var logger_setClientProtocolVersion = function(clientProtocolVers) {
+    	logger_clientProtocolVersion = clientProtocolVers;
+    }
+;
+	var logger_setClientDbFormat = function(clientCurrentFileFormat) {
+		logger_clientDbFileFormat = clientCurrentFileFormat;
+	}
+;	
+	var logger_getClientDbFormat = function() {
+		return logger_clientDbFileFormat;
+	}
+;
+
+	
+//*** retriever ****	
+	
+
+	var retriever_nLogLevel = 0;
+	var retriever_fLogDebug = false;
+	var retriever_fLogErrOnly = true;
+//	var retriever_log;  //logger_...
+	var retriever_resultMsg = "unknown error";
+	
+	var retriever_streamAttachment = function(){ 	
+		try {
+			
+			var startTime = new Date();	
+			var is404Error = false;
+			retriever_logSetup(session, "GetAttachment");	
+			var path = param.get("db");
+			var server = "";
+			var documentId = param.get("documentId");
+			var file = param.get("file");
+			var device = param.get("device");
+			
+			var exCon = facesContext.getExternalContext();
+			var response = exCon.getResponse();
+			var writer = null;	
+			writer = response.getOutputStream();
+			var db;
+
+			
+ 			logger_setPin(device);
+ 			logger_setUser(session.getEffectiveUserName());
+ 			logger_setTargetDatabase(path);
+ 			
+ 			if(!device){
+ 			is404Error = true;
+ 				throw "Device ID not specified"
+ 			}
+ 			if(!path){
+ 				is404Error = true;
+ 				throw "Database path not specified"
+ 			}
+ 			if(!documentId){
+ 				is404Error = true;
+ 				throw "Document ID not specified"
+ 			}
+ 			if(!file){
+ 				is404Error = true;
+ 				throw "File name not specified"
+ 			}
+ 			
+			var contenttype = java.net.URLConnection.guessContentTypeFromName(file);
+			if(!contenttype){
+				if(file.endsWith(".docx")){
+					contenttype="application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+				}else{
+					contenttype="application/octet-stream";
+				}
+			}
+			response.setContentType(contenttype);
+			response.setHeader("Cache-Control", "no-cache");
+ 			
+ 			logger_DebugWrite("Setting response content type: " + contenttype);
+ 			logger_DebugWrite("Locating " + file + "... "); 
+ 			
+
+ 			
+ 			if (path.contains("!!")) {
+                var temp = path.split("!!");
+                server = temp[0];
+                path = temp[1];
+            }
+ 			
+			
+			try{
+				db = session.getDatabase(server, path);
+			}catch(e){
+				is404Error = true;
+				throw "Error opening database: " + e;
+			}
+			if((!db) || (!db.isOpen())){
+				is404Error = true;
+				throw "Error opening database."
+			}
+			
+			var doc;
+			try{
+				var doc = db.getDocumentByUNID(documentId);
+			}catch(e){
+				is404Error = true;
+				throw "Error locating document: " + e;
+			}
+
+			var eo = doc.getAttachment(file);
+			if(!eo){
+				is404Error = true;
+				throw "Error retrieving attachment from document: " + file;
+			}else{
+				logger_DebugWrite("Preparing attachment stream for " + eo.getName());
+				var stream = eo.getInputStream();
+				//logger_DebugWrite("writer: " +  writer.getClass().getName());
+				
+				var tot = 0;
+				var cnt = 0;
+				var zero = 0;
+				var buffsize = (256*1024);
+				var bArr = new java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, buffsize);
+
+				cnt = stream.read(bArr);
+
+				while (cnt > -1) {
+					tot+=cnt;
+					if(cnt<(buffsize)){
+						var endArr = java.util.Arrays.copyOf(bArr, cnt);
+						//logger_DebugWrite("tot: " + tot + "  cnt: " +  cnt + "  last byte array length: " + endArr.length);
+						writer.write(endArr)
+					}else{
+						writer.write(bArr);  //,zero.intValue(),cnt.intValue());
+					}
+					
+					cnt = stream.read(bArr);
+				}
+				
+				retriever_resultMsg = "Sent '" + file + "' as binary stream, " + tot + " bytes.";
+				
+				
+				stream.close();
+				eo.recycle();
+			}
+			
+		} catch (e) {
+			logger_setHasErrors(true);
+			var errmsg = ( (e.message)? e.message : e );
+			var code = ( (is404Error) ? 404 : 500 );
+			retriever_resultMsg = "Returned HTTP error " + code + ": " + errmsg;
+
+							// we currently return a 404 or server 500 http response, but could send xml in future.
+							//"<?xml version='1.0' encoding='utf-8' ?>" + "<tms:unplugged xmlns:tms='http://www.teamstudio.com/unplugged'>"
+                            //+ "<tms:error number='" + "8999" + "'  message='" + retriever_xmlEscape(errmsg) + "' />" + "</tms:unplugged>";
+							//response.setContentType("text/xml");
+							//writer.write((retriever_resultMsg).getBytes());
+							
+			response.sendError(code, "getAttachment error on file " + file + ": " + errmsg);
+			facesContext.responseComplete();
+			
+		}finally{
+		
+			var endTime = new Date();
+			logger_setRunTimeMS(endTime - startTime)
+		
+			logger_DebugWrite(retriever_resultMsg);
+			retriever_logCommit(retriever_resultMsg);
+			try {
+				writer.close();
+				facesContext.responseComplete();
+			} catch (e) {
+				print("getAttachment error: " + e);
+			}
+
+		}
+	}
+;
+	var retriever_logSetup = function(s, strType){
+        var dbCur;
+        var docProf;
+        dbCur = database;
+        
+        //TODO: for now always set up logger: 
+        //retriever_log = new Logger(strType, session);
+        logger_sType=strType;
+        
+        if (dbCur) {
+            docIcon = dbCur.getDocumentByID("FFFF0010");
+            if (docIcon.hasItem("unpReplTestId")) {
+            	docProf = dbCur.getDocumentByID(docIcon.getItemValueString("unpReplTestId"));
+          		if (!docProf) {
+             		throw "Invalid test setting!";
+          		}
+         	} else {
+             	docProf = dbCur.getProfileDocument("(Settings)", "(unpluggedconfig)");
+           	
+            }
+          	docIcon.recycle();
+           	retriever_nLogLevel = docProf.getItemValueInteger("LogFlags_Pull");
+           	if (0 < retriever_nLogLevel) {
+           		//TODO: retriever_log = new Logger(strType, session);
+             	retriever_fLogErrOnly = ((logger_LOG_ON_ERROR_ONLY & retriever_nLogLevel) == logger_LOG_ON_ERROR_ONLY);
+             	retriever_fLogDebug = ((logger_LOG_DEBUG & retriever_nLogLevel) == logger_LOG_DEBUG);
+          	}
+
+           	if (retriever_fLogDebug) {
+           		
+             	if (!docProf.isProfile()) {
+             		logger_write("WARNING! Using ALT Settings document >>  " + docProf.getNoteID());
+          		}
+       		}
+
+      		docProf.recycle();
+ 		}
+	}
+;	
+	var retriever_logCommit = function(strResponse) {
+            try {
+            	if (0 < retriever_nLogLevel) {
+					if ((!retriever_fLogErrOnly) || (retriever_fLogErrOnly && (logger_getHasErrors() || logger_getHasWarnings()))) {
+                    	
+                    	if (retriever_fLogDebug) {
+                    		logger_DebugCommit();
+                        }
+                       
+                        if ((logger_LOG_REQUEST & retriever_nLogLevel) == logger_LOG_REQUEST) {
+                            logger_AddHeader("Request");
+                            logger_LogRequestHeaders();
+                        }
+                        
+                       	if ((logger_LOG_RESPONSE & retriever_nLogLevel) == logger_LOG_RESPONSE) {
+                            	logger_AddHeader("Response");
+                            	logger_write(strResponse);
+                      	}
+                      	
+                     	//save it
+                     	logger_save();
+                 	}
+               	}
+           	} catch (e) {
+                print("getAttachmett error: " + e);
+	      	} finally {
+            }
+        
+    	}
+    	
+;
+    var retriever_xmlEscape = function(input) { 
+    print(input);
+	    try{
+    	    var out =  input; //new java.util.StringBuffer(input.length);
+    	    print(out);
+			return out.replace(/&/g, '&amp;')
+            		.replace(/</g, '&lt;')
+               		.replace(/>/g, '&gt;')
+               		.replace(/"/g, '&quot;')
+               		.replace(/'/g, '&apos;')
+             	;
+         
+    	}catch(e){
+    		print("xmlEscape error: " + e);
+    		return input;
+   	 	}
+    }    	
+;		
+
+
+//rem in the form: /Unplugged.nsf/getAttachment.xsp?db=mimeattach.nsf&documentId=A3C1C4140ECFE13C85257A400059904F&item=rti&file=unplugged.gif
+
+retriever_streamAttachment();
+
+	
+
+
+}]]></xp:this.beforeRenderResponse>&#160;</xp:view>  

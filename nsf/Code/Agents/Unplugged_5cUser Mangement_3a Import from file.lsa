@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<agent name='Unplugged\User Mangement: Import from file' alias='ImportUsersCsv'
+ xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257AC00076B554'
+ hide='v3' publicaccess='false' designerversion='8.5.2'>
+<noteinfo noteid='2aa' unid='E9A443E532D19331852578AF006FC5BC' sequence='23'>
+<created><datetime dst='true'>20110614T162051,16-04</datetime></created>
+<modified><datetime dst='true'>20130515T115641,36+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115641,35+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115641,35+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223638,26+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<designchange><datetime dst='true'>20130515T115642,54+02</datetime></designchange>
+<trigger type='actionsmenu'/>
+<documentset type='runonce'/><code event='initialize'><lotusscript>Sub Initialize
+	Dim ws As New NotesUIWorkspace
+	If Not UserHasAuthority Then
+		MessageBox "Only user's with Editor ACL access and the [Admin] ACL role can bulk import users"
+		Exit Sub
+	End If
+	Dim docTmp As New NotesDocument(ws.Currentdatabase.Database)
+	ws.Dialogbox "(ImportDialog)", True, True, True, False, False, False,_
+	"User Import", docTmp, True, True, False 
+End Sub
+
+</lotusscript></code><code event='UserHasAuthority'><lotusscript>	Function UserHasAuthority() As Integer
+		Dim sRole As String
+		sRole = "[Admin]"
+		UserHasAuthority = False
+		Dim vHasRole As Variant, hasRole As Boolean
+		If  "[" &lt;&gt; Left(sRole, 1) Then sRole = "[" &amp; sRole
+		If  "]" &lt;&gt; Right(sRole, 1) Then sRole = sRole &amp; "]"
+		vHasRole = Evaluate( {@IsMember("} &amp; sRole &amp; {"; @UserRoles)} )
+		hasRole = -vHasRole(0)
+		
+		Dim s As New NotesSession
+		UserHasAuthority = ( hasRole And (4 &lt;= s.Currentdatabase.Currentaccesslevel)  )
+		
+	End Function</lotusscript></code>
+<rundata processeddocs='0' exitcode='0' agentdata='10EE7FE6E34906AC852578D900528C02'>
+<agentmodified><datetime dst='true'>20130515T115641,36+02</datetime></agentmodified>
+<agentrun><datetime dst='true'>20130723T125748,33+02</datetime></agentrun>
+<runlog>Started running agent 'Unplugged\User Mangement: Import from file|ImportUsersCsv' on 23-07-2013 12:57:27
+Ran LotusScript code
+Done running agent 'Unplugged\User Mangement: Import from file|ImportUsersCsv' on 23-07-2013 12:57:48
+</runlog></rundata>
+<item name='$POID'><datetime dst='true'>20130501T151426,21-04</datetime></item></agent>
+

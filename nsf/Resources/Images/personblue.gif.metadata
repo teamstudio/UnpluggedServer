@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><imageresource designerversion="8.5.2" imagename="vwicn003.gif" name="personblue.gif" noquery="true" noreplace="true" publicaccess="false" replicaid="C1257AC00076B554" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="2c2" sequence="6" unid="E3F0B62D59B3433F852578B6004EC16B">
+<created><datetime dst="true">20110621T102013,23-04</datetime></created>
+<modified><datetime dst="true">20130515T115640,74+02</datetime></modified>
+<revised><datetime dst="true">20130515T115640,72+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130515T115640,72+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223638,33+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+
+<item name="$MimeType" sign="true"><text>image/gif</text></item>
+<item name="$FileModDT" sign="true"><datetime dst="true">20070625T174002,00-04</datetime></item></imageresource>

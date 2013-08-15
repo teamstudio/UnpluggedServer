@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<form name='Nav' alias='Nav' xmlns='http://www.lotus.com/dxl' version='9.0'
+ replicaid='C1257AC00076B554' nocompose='true' noquery='true' publicaccess='false'
+ designerversion='8.5.2' renderpassthrough='true'>
+<noteinfo noteid='1ea' unid='6F250FBA87669D65852576F1004286F9' sequence='27'>
+<created><datetime>20100325T070639,29-05</datetime></created>
+<modified><datetime dst='true'>20130515T115640,48+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115640,47+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115640,47+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,77+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<body><richtext>
+<pardef id='1'/>
+<par def='1'/>
+<par def='1'/>
+<par def='1'><embeddedoutline outline='OutlineNav' showtwistie='true' scrollbars='false'
+ widthtype='fitwindow' heighttype='fitcontent' height='1.5625in'><title><layout
+ labelalign='topleft' labelhoffset='0' labelvoffset='0'/></title><toplevel
+ selectedcolor='#0060a0' mouseovercolor='#0082bf'><font style='bold'/><layout
+ labelalign='topleft' entryvoffset='0.2000in' imagealign='topleft' labelhoffset='0.2000in'
+ labelvoffset='0'/></toplevel><sublevel selectedcolor='#0060a0' mouseovercolor='#0082bf'><layout
+ labelalign='topleft' entryhoffset='0.2000in' entryvoffset='0.1000in' imagealign='topleft'
+ labelhoffset='0.2000in' labelvoffset='0'/></sublevel><twistieimage><imageref
+ name='ui_expand.gif'/></twistieimage></embeddedoutline></par></richtext></body>
+<item name='$$ScriptName' summary='false' sign='true'><text>Nav</text></item></form>
+

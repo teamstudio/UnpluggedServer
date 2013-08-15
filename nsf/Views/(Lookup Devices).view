@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<view name='(Lookup Devices)' alias='DevicesLU' xmlns='http://www.lotus.com/dxl'
+ version='9.0' replicaid='C1257AC00076B554' showinmenu='false' publicaccess='false'
+ designerversion='8.5' unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator'
+ headers='beveled' opencollapsed='false' showresponsehierarchy='false' showmargin='true'
+ shrinkrows='false' extendlastcolumn='false' showhierarchies='false' unreadcolor='black'
+ rowlinecount='1' headerlinecount='1' rowspacing='1' bgcolor='white' totalscolor='black'
+ headerbgcolor='white' boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='false' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
+ uniquekeys='false' formatnoteid='47DDA81BEB83D151852576D6006AFB37'>
+<noteinfo noteid='286' unid='7F00FBEADF75FE1E85257892007A8A42' sequence='24'>
+<created><datetime dst='true'>20110516T181827,86-04</datetime></created>
+<modified><datetime dst='true'>20130515T115642,98+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115642,97+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115642,97+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223638,17+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=mvlocal/O=mvtest</name><name>CN=admin/O=dev</name><name
+>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT Form = "Device" &amp; Active!= "0"; %REM; "DO NOT MODIFY - USED IN LICENSING"</formula></code>
+<actionbar bgcolor='#ece9d8' bordercolor='black'>
+<actionbuttonstyle bgcolor='#ece9d8'/><font color='system'/><border style='solid'
+ width='0px 0px 1px'/>
+<action title='Categori_ze' showinbar='false' systemcommand='categorize'/>
+<action title='_Edit Document' showinbar='false' systemcommand='edit'/>
+<action title='_Send Document' showinbar='false' systemcommand='send'/>
+<action title='_Forward' showinbar='false' systemcommand='forward'/>
+<action title='_Move To Folder...' showinbar='false' systemcommand='movetofolder'/>
+<action title='_Remove From Folder' showinbar='false' systemcommand='removefromfolder'/>
+<action title='_Read' showinbar='false' systemcommand='markread'/>
+<action title='_Unread' showinbar='false' systemcommand='markunread'/>
+<action title='_Open in New Window' showinbar='false' systemcommand='openinnewwindow'/>
+<action title='_Print...' showinbar='false' systemcommand='print'/>
+<action title='_Delete' showinbar='false' systemcommand='delete'/>
+<action title='_Document Properties' showinbar='false' systemcommand='properties'/>
+<action title='C_ut' showinbar='false' systemcommand='cut'/>
+<action title='_Copy' showinbar='false' systemcommand='copy'/>
+<action title='Copy as Document _Link' showinbar='false' systemcommand='copyasdoclink'/>
+<action title='Copy as _Table' showinbar='false' systemcommand='copyastable'/>
+<action title='P_aste' showinbar='false' systemcommand='paste'/>
+<action title='_Open' showinbar='false' systemcommand='open'/>
+<action title='Bookmark' showinbar='false' systemcommand='bookmark'/></actionbar>
+<column sort='ascending' hidedetailrows='true' itemname='ID' width='10' resizable='true'
+ separatemultiplevalues='true' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='ID&#xA;'><font size='9pt' style='bold'/></columnheader></column></view>
+

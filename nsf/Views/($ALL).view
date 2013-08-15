@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<view name='($ALL)' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257AC00076B554'
+ showinmenu='false' noreplace='true' publicaccess='false' designerversion='8.5.2'
+ unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator' headers='flat'
+ opencollapsed='false' showresponsehierarchy='true' showmargin='true' shrinkrows='false'
+ extendlastcolumn='true' showhierarchies='false' unreadcolor='black' rowlinecount='1'
+ headerlinecount='2' rowspacing='1' bgcolor='white' altrowcolor='#f7f7f7'
+ totalscolor='black' headerbgcolor='white' boldunreadrows='false' evaluateactions='false'
+ allownewdocuments='false' allowcustomizations='false' hidemarginborder='true'
+ marginwidth='10px 0px 0px' marginbgcolor='white' uniquekeys='false' formatnoteid='149D0E1319FA3C2D852576E9000AFDB3'>
+<noteinfo noteid='2da' unid='D13F03DF36983A37852578BE004B4F09' sequence='10'>
+<created><datetime dst='true'>20110629T094234,33-04</datetime></created>
+<modified><datetime dst='true'>20130515T115643,81+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115643,79+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130811T020045,19+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223638,39+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT @All</formula></code>
+<actionbar bgcolor='white' bordercolor='black'>
+<actionbuttonstyle bgcolor='white'/><font color='system'/><border width='5px'/>
+<action title='_Edit Document' showinbar='false' systemcommand='edit'/>
+<action title='_Print...' showinbar='false' systemcommand='print'/>
+<action title='_Delete' showinbar='false' systemcommand='delete'/>
+<action title='C_ut' showinbar='false' systemcommand='cut'/>
+<action title='_Copy' showinbar='false' systemcommand='copy'/>
+<action title='Copy as Document _Link' showinbar='false' systemcommand='copyasdoclink'/>
+<action title='Copy as _Table' showinbar='false' systemcommand='copyastable'/>
+<action title='_Open' showinbar='false' systemcommand='open'/></actionbar>
+<column hidedetailrows='false' itemname='$7' width='2' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='false' sortnocase='true' showaslinks='false' showasicons='true'><columnheader
+><font size='9pt' style='bold'/></columnheader><numberformat legacy='true'
+ format='general' varying='true' punctuated='false' parens='false' percent='false'
+ bytes='false'/><code event='value'><formula>@If( Active= "0"; "vwdisabled.gif";  "vwenabled.gif" )</formula></code></column>
+<column hidedetailrows='false' itemname='Form' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+><font size='9pt' style='bold'/></columnheader><numberformat legacy='true'
+ format='general' varying='true' punctuated='false' parens='false' percent='false'
+ bytes='false'/></column>
+<column sort='ascending' hidedetailrows='false' itemname='$2' width='23' resizable='true'
+ separatemultiplevalues='true' sortnoaccent='true' sortnocase='true' showaslinks='false'><font
+ color='#002f80' style='bold'/><columnheader title='User'><font size='9pt'
+ style='bold'/></columnheader><numberformat legacy='true' format='general'
+ varying='true' punctuated='false' parens='false' percent='false' bytes='false'/><code
+ event='value'><formula>@Name([Abbreviate];UserName)</formula></code></column>
+<column hidedetailrows='false' itemname='Pin' width='12.3750' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='Pin'><font size='9pt' style='bold'/></columnheader><numberformat legacy='true'
+ format='general' varying='true' punctuated='false' parens='false' percent='false'
+ bytes='false'/></column></view>
+

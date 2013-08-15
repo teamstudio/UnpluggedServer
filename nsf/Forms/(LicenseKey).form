@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='utf-8'?>
+<form name='(LicenseKey)' alias='(LicenseKey)' xmlns='http://www.lotus.com/dxl'
+ version='9.0' replicaid='C1257AC00076B554' nocompose='true' noquery='true'
+ publicaccess='false' designerversion='8.5.2' bgcolor='system' renderpassthrough='true'>
+<noteinfo noteid='202' unid='35B71CA22D1CE62F852576F100664584' sequence='35'>
+<created><datetime>20100325T133704,68-05</datetime></created>
+<modified><datetime dst='true'>20130515T115642,80+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115642,79+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115642,79+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,83+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<body><richtext>
+<pardef id='1' rightmargin='0.8375in' keepwithnext='true' keeptogether='true'/>
+<par def='1'/>
+<pardef id='2'><code event='hidewhen'><formula>1</formula></code></pardef>
+<par def='2'><run><font color='blue'/>&lt;hidden&gt;</run></par>
+<table widthtype='fixedleft' rowspacing='0.1000in' columnspacing='0.1000in'
+ refwidth='4.3708in'><tablecolumn width='0.8125in'/><tablecolumn width='3.1583in'/>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='4' keepwithnext='true' keeptogether='true'/>
+<par def='4'><picture width='72px' height='72px'><gif>
+R0lGODlhSABIAOf/AAMKDQkeKRAoNRMxQxk8VCFDWytGWiVNay1UcjdXcDNZdy1bfi9dgDJgfSZk
+mEFhezdhpDNnijVkoi9nojhohS5pnTVpkitskzloni9smjlqmS1ulTBvlzdukDltljRuozBzlEBv
+jTNymjVxoD5vnkFupT1xmj1zljN3kjd1njtzqDp3jTB9jDt5oUB5ljR9kkF4rj57pDGCij5+jkJ6
+qkt3rjuAiUV8n0F9pjSGh0SAqTaJfjeHj0qAsDuJhUyBpEeDrEuBt0mFnFSCoDWReVCFqTmRgDOU
+dkyHsFmHpj+Sh1CJuTSZbk+KtFSIvy2cbUWQnlWKrj+WhTqYgFGMtjmadVGOq0OWmFSPuVGSsViP
+wFqOxVeRu0Obljijal2RtUScl2ORsDamZ1mTvTykdkCigzSrV1uVv02cpEagkR6yVl+Vul+VxjGt
+YGGUzDirZT2pcFabshm5P12YwgDHCjKxVg3CIl+axGuYuCm4Ry+0Xi22Uz+ubiy4ThXBPhrCNGSe
+yADQACu/PQDQFWmgvnaeuWmhxXKgwEqzezPBRwDZACjIOzfCTxDVByXLLXKlygDcAHelxE26dgDb
+ExvRJ2+o03OqyYCownmrxDXOQgDkDTXSKQDmAEvGaTHTNVHEbiPbFz3QPUHNVirYL3yv1DHZJIev
+yhLjITvWLiLeKRzjDBDqAATrGzPcNADwDFTNcDndKj7aPEPbNEHaRX+45ADzFIG53iroGQz0AJK4
+0DXlJSbqKoW82wf2Gj3jO5y4z1DZbErgOk/eSoy+1yDyJSjyFEPnNkXlRz7qLUPnPx75ApHC3JzA
+1jPwMhj6IDjwJZPF3x77Iyz2LELvPUvtRZ3F4ZrH25bI4Tb5IK3E1qPH3T/2M1/oYzT6MVPuT6nJ
+2Ub1TEr1Q17tXKbL4D/+KVX1TaLP40/4R6rO5FP5PWfzXlP7Sk/8U1f5Wl37VLPT42D5YmX6W1v9
+XbzT5b/T37fX52L/V8DY6sba5sre69Dh59jh6dvk7Nfo7uHp8P///yH5BAEKAP8ALAAAAABIAEgA
+QAj+AP8JHEiwoMGDCBMqXMiw4IMhSSJKnEixosWLGJMMedDQYAgqWEKG5KJlyxYtVtLAyWMHjJaQ
+W+AECtSokSJIOCc1KrNFpM+fQLFQudFRYAMcOpImpbEIFy5lUJXVWqXJ0Q+lMPrUquUsmtdez25R
+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
+ucpXznIGLOAAIDekzGdO85rb/F4BAQA7
+</gif></picture></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='5' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>1</formula></code></pardef>
+<par def='5'><run><font color='blue'/>&lt;hidden&gt;</run></par>
+<table leftmargin='0' widthtype='fixedleft' rowspacing='0.0500in' columnspacing='0.0500in'
+ refwidth='3.1875in'><tablecolumn width='1.3750in'/><tablecolumn width='1.6125in'/>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='7' keepwithnext='true' keeptogether='true'/>
+<par def='7'><run><font size='9pt' style='bold'/>License Number:  </run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='8' keepwithnext='true' keeptogether='true'/>
+<par def='8'><run><font size='9pt'/></run><run><font size='9pt'/><field usenotesstyle='false'
+ height='0.2000in' width='1.6000in' alignwithparagraph='true' borderstyle='inset'
+ type='text' kind='editable' name='SKILN'/></run><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='7'><run><font size='9pt' style='bold'/>Key: </run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='8'><run><font size='9pt'/></run><run><font size='9pt'/><field usenotesstyle='false'
+ height='0.2000in' width='1.6000in' alignwithparagraph='true' borderstyle='inset'
+ type='text' kind='editable' name='SKIKEY'/></run><run><font size='9pt'/></run></par></tablecell></tablerow></table>
+<par def='5'><run><font color='blue'/>&lt;hidden&gt;</run></par></tablecell></tablerow></table>
+<par def='2'><run><font color='blue'/>&lt;hidden&gt;</run></par></richtext></body>
+<item name='UISaved' summary='false' sign='true'>
+<rawitemdata type='400'>
+AAAAAAAAAAA=
+</rawitemdata></item>
+<item name='$$ScriptName' summary='false' sign='true'><text>(LicenseKey)</text></item></form>
+

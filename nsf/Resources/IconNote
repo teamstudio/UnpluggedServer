@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note default='true' class='icon' xmlns='http://www.lotus.com/dxl' version='9.0'
+ replicaid='C1257AC00076B554'>
+<noteinfo noteid='126' unid='98D70C5519CED964852576D6006AFB3A' sequence='149'>
+<created><datetime>20100226T142831,30-05</datetime></created>
+<modified><datetime dst='true'>20130515T115619,26+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115619,25+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115619,25+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,18+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name></wassignedby>
+<item name='$DefaultFrameset'><text>mainframe</text></item>
+<item name='$FlagsNoRefresh'><text/></item>
+<item name='$TemplateServerName'><text>CN=Mark Leusink/O=LinQed</text></item>
+<item name='$TITLE'><text>Teamstudio Unplugged 2.4
+#2Teamstudio Unplugged 2.4</text></item>
+<item name='$PIRCRefreshModTime'><datetime dst='true'>20130515T115616,85+02</datetime></item>
+<item name='$TemplateModTime'><datetime dst='true'>20130515T115454,52+02</datetime></item>
+<item name='$TemplateFileName'><text>c:\Program Files (x86)\IBM\Notes\Data\unplugged\Unplugged server iOS 2013-05-15\Unplugged.ntf</text></item>
+<item name='IconBitmap' summary='true'>
+<rawitemdata type='6'>
+AiAgAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAURERERERERERERERERETh5ERERERERERERERERERERERERERE
+RERERETk5ERERERERERERERERE8REREUREREREREREREREQREREREfRERERERERERERBEREREREe
+RERERERERERETu8fTu8REURERERERERN0z3URERE8RHkRERERERNMzMzMz1EROER9ERERERE0zMz
+MzMz1ERBEfRERERETTMzMzMzMzREQRH0RERERNMzMzMzMzMzREERFEREREQzMzMzMzMzM0RBEfRE
+REREMzMzMzMzMzPUQRH0RERERN3TMzMzMzMz1OER9EREREStRE3TMzMzM9RBEfREREREMzPdRE3d
+MzPUQREURERERDMzM0RN3UTdRE8RH0RERE0zMz1EQzM91EROEREfRERNMzM9RNMzM9RERPEREURE
+QzMzPUTTMzPURERPERFEREMzMzREMzMz1ERERE7vRETTMzM0RDMzM0RERERERERE0zMz1E0zMzNE
+RERERERERNMzM9RNMzM9REREREREREQzMzNETTMzPURERERERERE3dMzREMzMzRERERERERERERE
+TUTTMzM0RERERERERERERERERN0zNERERERERERERERERERERERERERERETkRERERERERERERERE
+REREHkRERERERERERERERERE4Q==
+</rawitemdata></item>
+<item name='$Daos'><text>0</text></item>
+<item name='$Flags'><text>JFKfR7</text></item></note>
+

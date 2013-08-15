@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><imageresource designerversion="8.5.2" name="peoplePicker_16.gif" noquery="true" noreplace="true" publicaccess="false" replicaid="C1257AC00076B554" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="2be" sequence="6" unid="8BEA87A7C6C42573852578B6004EC167">
+<created><datetime dst="true">20110621T102013,19-04</datetime></created>
+<modified><datetime dst="true">20130515T115640,68+02</datetime></modified>
+<revised><datetime dst="true">20130515T115640,66+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130515T115640,66+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223638,32+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+
+<item name="$MimeType" sign="true"><text>image/gif</text></item>
+<item name="$FileModDT" sign="true"><datetime>20091026T150340,39-05</datetime></item></imageresource>

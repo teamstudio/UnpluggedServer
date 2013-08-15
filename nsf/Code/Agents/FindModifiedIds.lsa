@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<agent name='FindModifiedIds' alias='FindModifiedIds' xmlns='http://www.lotus.com/dxl'
+ version='9.0' replicaid='C1257AC00076B554' hide='v3' publicaccess='false'
+ designerversion='8.5' restrictions='unrestricted' activatable='false'>
+<noteinfo noteid='26a' unid='215A1A404AFF3156852577BD0048EFF9' sequence='15'>
+<created><datetime dst='true'>20101015T091640,25-04</datetime></created>
+<modified><datetime dst='true'>20130515T115639,20+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115639,19+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115639,19+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223638,07+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Craig Schumann/O=Teamstudio</name><name
+>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<designchange><datetime dst='true'>20130515T115640,39+02</datetime></designchange>
+<trigger type='scheduled'>
+<schedule type='never' runlocation='any'/></trigger>
+<documentset type='modified'/><code event='options'><lotusscript>Option Public
+Option Declare
+
+Use "libFindModifiedIds"
+
+</lotusscript></code><code event='initialize'><lotusscript>Sub Initialize()
+	FindModifiedIds
+End Sub</lotusscript></code>
+<rundata processeddocs='0' exitcode='0' agentdata='4855A4EAB76A6847C1257B6C0036DB63'>
+<agentmodified><datetime dst='true'>20130515T115639,20+02</datetime></agentmodified>
+<agentrun><datetime dst='true'>20130813T160343,67+02</datetime></agentrun>
+<runlog>Started running agent 'FindModifiedIds|FindModifiedIds' on 08/13/2013 04:03:43 PM
+Running on new or modified documents: 610 total
+Found 610 document(s) that match search criteria
+Ran LotusScript code
+Done running agent 'FindModifiedIds|FindModifiedIds' on 08/13/2013 04:03:43 PM
+</runlog></rundata>
+<item name='$POID'><datetime dst='true'>20130501T151425,73-04</datetime></item></agent>
+

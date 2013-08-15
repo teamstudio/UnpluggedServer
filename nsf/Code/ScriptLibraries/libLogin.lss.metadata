@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="filter" replicaid="C1257AC00076B554" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="1da" sequence="353" unid="58C05512E62ADD53852576EF006755FA">
+<created><datetime>20100323T134842,18-05</datetime></created>
+<modified><datetime dst="true">20130515T115639,70+02</datetime></modified>
+<revised><datetime dst="true">20130515T115639,69+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130515T115639,69+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,73+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedRestricted/O=mvtest</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=UnpluggedRestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedRestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Mark Dixon/O=dev</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name="$Flags"><text>s34Q</text></item>
+<item name="$PublicAccess" sign="true"><text>1</text></item>
+<item name="$TITLE" sign="true"><text>libLogin</text></item>
+
+
+<item name="$POID"><datetime dst="true">20130501T151423,77-04</datetime></item></note>

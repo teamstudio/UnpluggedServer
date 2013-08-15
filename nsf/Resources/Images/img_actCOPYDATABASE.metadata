@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><imageresource designerversion="6.5" imagename="Database.gif" name="img_actCOPYDATABASE" noquery="true" publicaccess="false" replicaid="C1257AC00076B554" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="216" sequence="11" unid="1D8232E742DC24AB852576F6000D27D8">
+<created><datetime dst="true">20100329T222341,68-04</datetime></created>
+<modified><datetime dst="true">20130515T115639,37+02</datetime></modified>
+<revised><datetime dst="true">20130515T115639,36+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130515T115639,36+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,88+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Craig Schumann/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name>CN=Craig Schumann/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name>CN=Craig Schumann/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name>CN=Craig Schumann/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name>CN=Craig Schumann/O=Teamstudio</name><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+
+<item name="$MimeType" sign="true"><text>image/gif</text></item>
+<item name="$FileModDT" sign="true"><datetime dst="true">20040922T103845,90-04</datetime></item></imageresource>

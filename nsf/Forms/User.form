@@ -1,0 +1,216 @@
+<?xml version='1.0' encoding='utf-8'?>
+<form name='User' alias='User' xmlns='http://www.lotus.com/dxl' version='9.0'
+ replicaid='C1257AC00076B554' publicaccess='false' designerversion='8.5.2'
+ renderpassthrough='true'>
+<noteinfo noteid='142' unid='2CAC84D940B9F8B1852576D6006B42D3' sequence='72'>
+<created><datetime>20100226T143134,59-05</datetime></created>
+<modified><datetime dst='true'>20130515T115641,50+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115641,49+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115641,49+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,27+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<globals><code event='options'><lotusscript>Option Declare
+
+</lotusscript></code></globals><code event='windowtitle'><formula>"User: " + @Name([Abbreviate]; UserName)</formula></code><code
+ event='declarations'><lotusscript>Dim g_origKey As String
+
+</lotusscript></code><code event='querysave'><lotusscript>Sub Querysave(Source As Notesuidocument, Continue As Variant)
+	Dim doc As NotesDocument, vw As NotesView,  vec As NotesViewEntryCollection, ve As NotesViewEntry, isDupe As Boolean
+	source.Refresh
+	Set doc = source.document
+	Set vw = doc.ParentDatabase.GetView("UsersAll")
+	vw.Refresh
+	
+	Dim nn As New NotesName(doc.UserName(0))
+	Set vec = vw.GetAllEntriesByKey(nn.Abbreviated, True)
+	If vec.Count &gt; 0 Then
+		Set ve = vec.GetFirstEntry
+		Do While Not ve Is Nothing
+			Dim veId As String, docId As String
+			If Strcomp(ve.NoteID, doc.NoteID, 1) &lt;&gt; 0 Then
+				isDupe = True
+				Exit Do
+			End If
+			Set ve = vec.GetNextEntry(ve)
+		Loop
+	End If
+	
+	If isDupe Then
+		If source.IsNewDoc Then 
+			If ( 6 &lt;&gt; Messagebox("User already defined.  Create?", 4+32+256 , "Warning: Duplicate") ) Then
+				continue = False
+			End If
+		Elseif doc.GetItemValue("UserName")(0)   &lt;&gt;  g_origKey  Then
+			If ( 6 &lt;&gt; Messagebox("User already defined.  Save changes?", 4+32+256 , "Warning: Duplicate") ) Then
+				continue = False
+			End If
+		Else
+			Messagebox "Warning: User is defined more than once.", 64 , "Warning: Duplicate" 
+		End If
+	End If
+	
+	Delete doc  'get rid of doc b/c notes caches it so 2 saves on new doc doesn't pick up note id on second save...
+End Sub
+</lotusscript></code><code event='queryopen'><lotusscript>Sub Queryopen(Source As Notesuidocument, Mode As Integer, Isnewdoc As Variant, Continue As Variant)
+	If Not Isnewdoc Then
+		g_origKey = Source.Document.GetItemValue("UserName")(0) 
+	End If
+End Sub</lotusscript></code>
+<actionbar bgcolor='white' bordercolor='black'>
+<actionbuttonstyle bgcolor='white'/><font color='system'/><border style='solid'
+ width='0px 0px 1px'/></actionbar>
+<body><richtext>
+<pardef id='1'/>
+<par def='1'><run><font size='9pt'/>	</run></par>
+<pardef id='2' leftmargin='1in' rightmargin='96%' hide='preview previewedit'/><subformref
+ name='(Header) | sfrmHeader'/>
+<par def='1'><run><font size='14pt' style='bold' color='#0060a0'/>User:  </run><run
+><font size='14pt' style='bold' color='#0060a0'/><computedtext><code event='value'><formula
+>@If(@IsAvailable("UserName");@Name([CN];UserName);"&lt;Not Available&gt;")</formula></code></computedtext></run><run
+><font size='14pt' style='bold' color='#0060a0'/></run></par>
+<par def='1'><run><font size='6pt' style='bold' color='#bf4100'/></run></par>
+<table widthtype='fitmargins' rowspacing='0.0500in' columnspacing='0.1500in'
+ refwidth='7.9667in'><tablecolumn width='1.8451in'/><tablecolumn width='5.5215in'
+ sizetofit='true'/>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<pardef id='4' keepwithnext='true' keeptogether='true'/>
+<par def='4'><run><font size='9pt' style='bold'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<pardef id='5' keepwithnext='true' keeptogether='true'/>
+<par def='5'><run><font size='9pt' style='bold' color='#f7f7f7'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='4'><run><font size='9pt' style='bold'/>Username:</run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<pardef id='6' keepwithnext='true' keeptogether='true'/>
+<par def='6'><run><font size='9pt' color='#f7f7f7'/></run><run><font size='9pt'/><field
+ choicesdialog='addressbook' lookupeachchar='false' lookupaddressonrefresh='false'
+ type='names' kind='editable' name='UserName'><code event='inputvalidation'><formula
+>IDS_USER_REQ:="Username is required";
+
+@If(@IsDocBeingSaved &amp; @Trim(UserName)=""; @Failure(IDS_USER_REQ); @Success)</formula></code></field></run><run
+><font size='9pt' color='#f7f7f7'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<pardef id='7' hide='read print preview' tabs='L2.2500in' keepwithnext='true'
+ keeptogether='true'/>
+<par def='7'><run><font size='9pt' color='gray'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<pardef id='8' tabs='L2.2500in' keepwithnext='true' keeptogether='true'/>
+<par def='8'><run><font size='9pt' color='#f7f7f7'/> </run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='4'><run><font size='9pt' style='bold'/>Enabled?</run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<pardef id='9' keepwithnext='true' keeptogether='true'/>
+<par def='9'><run><font size='9pt' color='#f7f7f7'/></run><run><font size='9pt'/><field
+ borderstyle='none' lookupeachchar='false' lookupaddressonrefresh='false'
+ type='keyword' kind='editable' name='Active'><keywords helperbutton='false'
+ columns='2' ui='radiobutton'><textlist><text>Yes|1</text><text>No|0</text></textlist></keywords><code
+ event='defaultvalue'><formula>"1"</formula></code></field></run><run><font
+ size='9pt' color='#f7f7f7'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='4'><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='5'><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='4'><run><font size='9pt' style='bold'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='5'/></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<pardef id='10' hide='notes web mobile' keepwithnext='true' keeptogether='true'/>
+<par def='10'><run><font size='9pt' style='bold' color='red'/>Device ID  (Pin):</run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<pardef id='11' hide='notes web mobile' keepwithnext='true' keeptogether='true'/>
+<par def='11'><run><font size='9pt' color='red'/></run><run><font size='9pt'
+ color='red'/><field type='text' kind='editable' name='Pin'><code event='inputenabled'><formula
+>@If(CreatePinOnFirstUse="1"; @False; @True)</formula></code><code event='inputtranslation'><formula
+>@If(CreatePinOnFirstUse="1"; ""; Pin)</formula></code></field></run><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='10' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'
+ style='bold' color='red'/>   *depricated, now on device document</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='4'><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='5'><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='4'><run><font size='9pt' style='bold'/>Profiles</run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='5'><run><font size='9pt'/></run><run><font size='9pt'/><sharedfieldref
+ name='Profiles'/></run><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='4'><run><font size='9pt'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='5'><run><font size='9pt' color='#f7f7f7'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<pardef id='12' tabs='L0.5000in L1in L1.5000in L2in L2.5000in L3in L3.5000in L4in'
+ keepwithnext='true' keeptogether='true'/>
+<par def='12'><run><font size='9pt' style='bold'/>Sync Device Log</run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='5'><run><font size='9pt' color='#f7f7f7'/></run><run><font size='9pt'/><field
+ borderstyle='none' lookupeachchar='false' lookupaddressonrefresh='false'
+ type='keyword' allowmultivalues='true' kind='editable' name='DevicePushRepLog'
+ listinputseparators='comma' listdisplayseparator='comma'><keywords helperbutton='false'
+ columns='1' ui='checkbox'><textlist><text>Sync XPages Engine log|1</text></textlist></keywords></field></run><run
+><font size='9pt' color='#f7f7f7'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='4'><run><font size='9pt' color='#f7f7f7'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='5'><run><font size='9pt' color='#f7f7f7'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='4'><run><font size='9pt' style='bold'/>Devices</run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='5'><run><font size='9pt'/><field borderstyle='none' lookupeachchar='false'
+ lookupaddressonrefresh='false' type='keyword' kind='editable' name='CanCreateDevices'><keywords
+ helperbutton='false' recalconchange='true' columns='2' ui='radiobutton'><textlist
+><text>User can create devices|1</text><text>User cannot create devices|0</text></textlist></keywords><code
+ event='defaultvalue'><formula>"1"</formula></code></field></run> </par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='12'><run><font size='9pt' style='bold'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='5'><run><font size='9pt' color='#f7f7f7'/></run><embeddedview name='DevicesEmbedded'
+ showactionbar='true' showheader='false' widthtype='fitwindow' height='2in'
+ scrollbars='true'><code event='showsinglecategory'><formula>lu:=@DbLookup("":"NoCache";@DbName;"DevicesEmbedded"; @Name([Abbreviate];UserName); 1);
+lu2:=@If(@IsError(lu); ""; lu);
+@If(
+@Implode(lu2; "") = "";
+ "";
+@Name([Abbreviate]; UserName))</formula></code><border style='solid' width='1px'
+ color='white'/></embeddedview><run><font size='9pt' color='#f7f7f7'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#d5d5d5'>
+<par def='4'><run><font size='9pt' color='#f7f7f7'/></run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#f7f7f7'>
+<par def='5'><run><font size='9pt' color='#f7f7f7'/></run></par></tablecell></tablerow></table>
+<pardef id='3' firstlineleftmargin='1in' tabs='L2.2500in'/>
+<par def='3'><run><font size='9pt'/></run></par>
+<pardef id='13'><code event='hidewhen'><formula>CreatePinOnFirstUse!="1"</formula></code></pardef>
+<par def='13'><run><font size='9pt'/>User will be granted temporary edit rights to update pin:  </run><run
+><font size='9pt'/><field type='text' allowmultivalues='true' kind='computed'
+ name='AuthorsComputed' listinputseparators='comma' listdisplayseparator='comma'><code
+ event='defaultvalue'><formula>""</formula></code></field></run><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='8' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'><run><font size='9pt'/></run></par>
+<par def='1'><run><font size='9pt'/>  </run></par></richtext></body>
+<item name='$FormUsers'><text>[Admin]</text></item>
+<item name='$SubForm_RepIDs' sign='true'><text>0000000000000000</text></item>
+<item name='$$ScriptName' summary='false' sign='true'><text>User</text></item></form>
+

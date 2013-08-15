@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<agent name='Pull' alias='Pull' xmlns='http://www.lotus.com/dxl' version='9.0'
+ replicaid='C1257AC00076B554' hide='v3' runaswebuser='true' publicaccess='false'
+ designerversion='8.5' activatable='false'>
+<noteinfo noteid='15a' unid='99BFA4CB76350152852576DC0062BC5B' sequence='126'>
+<created><datetime>20100304T125827,47-05</datetime></created>
+<modified><datetime dst='true'>20130515T115640,98+02</datetime></modified>
+<revised><datetime dst='true'>20130515T115640,97+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130515T115640,97+02</datetime></lastaccessed>
+<addedtofile><datetime>20121124T223637,35+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<designchange><datetime dst='true'>20130515T115642,15+02</datetime></designchange>
+<trigger type='scheduled'>
+<schedule type='never' runlocation='any'/></trigger>
+<documentset type='modified'/><code event='action'><javaproject class='JavaAgent.class'
+ codepath='C:\lotus\notes851\Data'><java name='JavaAgent.java'>import com.teamstudio.unplugged.libs.Pull;
+
+import lotus.domino.*;
+
+public class JavaAgent extends AgentBase {
+
+    public void NotesMain() {
+          // (Your code goes here)
+			Pull pull = new Pull();
+			pull.DoPull(this); 
+   }
+}</java>
+<sharedlibraryref name='libPull'/></javaproject></code>
+<rundata processeddocs='0' exitcode='0'>
+<agentmodified><datetime dst='true'>20101015T091856,81-04</datetime></agentmodified></rundata>
+<item name='$JavaCompilerSource'><text>1.3</text></item>
+<item name='$JavaCompilerTarget'><text>1.2</text></item>
+<item name='$POID'><datetime dst='true'>20130501T151424,17-04</datetime></item></agent>
+
