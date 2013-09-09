@@ -1,28 +1,28 @@
 <?xml version='1.0' encoding='utf-8'?>
 <agent name='(Enable)' alias='Enable' xmlns='http://www.lotus.com/dxl' version='9.0'
- replicaid='C1257AC00076B554' hide='v3' publicaccess='false' designerversion='8.5'>
-<noteinfo noteid='25a' unid='E048A319198B48F5852576FE0049FE51' sequence='12'>
+ replicaid='C1257BE1003E4E81' hide='v3' publicaccess='false' designerversion='8.5'>
+<noteinfo noteid='25a' unid='E048A319198B48F5852576FE0049FE51' sequence='13'>
 <created><datetime dst='true'>20100407T092812,33-04</datetime></created>
-<modified><datetime dst='true'>20130515T115642,41+02</datetime></modified>
-<revised><datetime dst='true'>20130515T115642,40+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130515T115642,40+02</datetime></lastaccessed>
-<addedtofile><datetime>20121124T223638,02+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130909T132034,94+02</datetime></modified>
+<revised><datetime dst='true'>20130822T105423,59+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130909T132034,93+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130909T132034,93+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
 >CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<designchange><datetime dst='true'>20130515T115643,60+02</datetime></designchange>
+<designchange><datetime dst='true'>20130822T105436,41+02</datetime></designchange>
 <trigger type='agentlist'/>
 <documentset type='selected'/><code event='action'>
 <simpleaction action='runformula'><formula>FIELD Active:="1";
 SELECT @All</formula></simpleaction></code>
 <rundata processeddocs='1' exitcode='0'>
 <agentmodified><datetime dst='true'>20130515T115642,41+02</datetime></agentmodified>
-<agentrun><datetime dst='true'>20130723T145703,37+01</datetime></agentrun>
-<runlog>Started running agent '(Enable)|Enable' on 23-07-2013 14:57:03
+<agentrun><datetime dst='true'>20130815T122542,26+02</datetime></agentrun>
+<runlog>Started running agent '(Enable)|Enable' on 15-08-2013 12:25:42
 Running on selected documents: 1 total
 Found 1 document(s) that match search criteria
 1 document(s) were modified by formula
-Done running agent '(Enable)|Enable' on 23-07-2013 14:57:03
+Done running agent '(Enable)|Enable' on 15-08-2013 12:25:42
 </runlog></rundata>
 <item name='$POID'><datetime dst='true'>20130501T151425,65-04</datetime></item></agent>
 

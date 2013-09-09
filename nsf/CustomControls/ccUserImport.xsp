@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	<xp:this.acl>
+		<xp:acl>
+			<xp:this.entries>
+				<xp:aclEntry type="DEFAULT" right="NOACCESS"></xp:aclEntry>
+				<xp:aclEntry type="ROLE" right="EDITOR">
+					<xp:this.name><![CDATA[[Admin]]]></xp:this.name>
+				</xp:aclEntry>
+			</xp:this.entries>
+		</xp:acl>
+	</xp:this.acl>
+	
+	<div class="lotusHeader">
+		<h1>User import</h1>
+	</div>
+
+	//TODO: Only user's with Editor ACL access
+
+	<table class="lotusFormTable lotusForm">
+		<tbody>
+
+			<tr class="lotusFormFieldRow">
+				<td class="lotusFormLabel">
+					<label>CSV batch file *:</label>
+				</td>
+				<td>
+
+					<xp:fileUpload id="fileUpload1"></xp:fileUpload>
+
+				</td>
+			</tr>
+
+			<tr>
+				<td class="lotusFormFooter" colspan="3">
+
+					<xp:button value="Process batch file" id="button1">
+						<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
+							<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("users");}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+
+					<xp:link escape="true" text="Cancel" id="link1">
+						<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1" immediate="true">
+							<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("users");}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+
+				</td>
+
+			</tr>
+		</tbody>
+	</table>
+
+</xp:view>

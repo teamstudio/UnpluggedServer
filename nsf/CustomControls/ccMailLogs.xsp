@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<div class="lotusHeader">
+		<h1>Mail logs</h1>
+	</div>
+
+	<xp:tabbedPanel id="tabbedPanel1" selectedTab="#{currentUserBean.activeMailLogTab}" partialRefresh="true" refreshId="tabbedPanel1" partialExecute="true">
+	
+		<xp:tabPanel label="By user" id="tabPanel1">
+			<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="tabbedPanel1">
+				<xp:this.action><![CDATA[#{javascript:currentUserBean.setActiveMailLogTab('tabPanel1');}]]></xp:this.action>
+			</xp:eventHandler>
+			
+			<xe:dynamicViewPanel id="dynamicViewPanel1" var="rowData">
+				<xe:this.data>
+					<xp:dominoView var="view1" 
+						databaseName="#{configBean.unpluggedLogPath}" 
+						viewName="Mail by User"></xp:dominoView>
+				</xe:this.data>
+				
+				<xp:eventHandler event="onColumnClick" submit="true" refreshMode="complete">	
+					<xp:this.action><![CDATA[#{javascript:
+						var url="index.xsp#content=messageLog&action=openDocument&documentId=" + rowData.getNoteID();
+context.redirectToPage(url);}]]></xp:this.action>
+				</xp:eventHandler>
+			</xe:dynamicViewPanel>
+			
+		</xp:tabPanel>
+		
+		<xp:tabPanel label="By send to" id="tabPanel2">
+			<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="tabbedPanel1">
+				<xp:this.action><![CDATA[#{javascript:currentUserBean.setActiveMailLogTab('tabPanel2');}]]></xp:this.action>
+			</xp:eventHandler>
+		
+			<xe:dynamicViewPanel id="dynamicViewPanel2" var="rowData">
+				<xe:this.data>
+					<xp:dominoView var="view1" 
+						databaseName="#{configBean.unpluggedLogPath}" 
+						viewName="Mail by SendTo"></xp:dominoView>
+				</xe:this.data>
+				
+				<xp:eventHandler event="onColumnClick" submit="true" refreshMode="complete">	
+					<xp:this.action><![CDATA[#{javascript:
+						var url="index.xsp#content=messageLog&action=openDocument&documentId=" + rowData.getNoteID();
+context.redirectToPage(url);}]]></xp:this.action>
+				</xp:eventHandler>
+			</xe:dynamicViewPanel>
+		</xp:tabPanel>
+		
+		<xp:tabPanel label="Errors" id="tabPanel3">
+			<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="tabbedPanel1">
+				<xp:this.action><![CDATA[#{javascript:currentUserBean.setActiveMailLogTab('tabPanel3');}]]></xp:this.action>
+			</xp:eventHandler>
+		
+			<xe:dynamicViewPanel id="dynamicViewPanel3" var="rowData">
+				<xe:this.data>
+					<xp:dominoView var="view1" 
+						databaseName="#{configBean.unpluggedLogPath}" 
+						viewName="Mail - Errors Only"></xp:dominoView>
+				</xe:this.data>
+				
+				<xp:eventHandler event="onColumnClick" submit="true" refreshMode="complete">	
+					<xp:this.action><![CDATA[#{javascript:
+						var url="index.xsp#content=messageLog&action=openDocument&documentId=" + rowData.getNoteID();
+context.redirectToPage(url);}]]></xp:this.action>
+				</xp:eventHandler>
+			</xe:dynamicViewPanel>
+		</xp:tabPanel>
+				
+	</xp:tabbedPanel>
+	
+</xp:view>

@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
 <form name='(Settings)' alias='(Settings)' xmlns='http://www.lotus.com/dxl'
- version='9.0' replicaid='C1257AC00076B554' nocompose='true' noquery='true'
+ version='9.0' replicaid='C1257BE1003E4E81' nocompose='true' noquery='true'
  publicaccess='false' designerversion='8.5.3' bgcolor='system' renderpassthrough='true'>
-<noteinfo noteid='1d6' unid='286AA954619EE8D2852576EF004A6778' sequence='149'>
+<noteinfo noteid='1d6' unid='286AA954619EE8D2852576EF004A6778' sequence='150'>
 <created><datetime>20100323T083241,52-05</datetime></created>
-<modified><datetime dst='true'>20130515T115643,66+02</datetime></modified>
-<revised><datetime dst='true'>20130515T115643,65+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130515T115643,65+02</datetime></lastaccessed>
-<addedtofile><datetime>20121124T223637,71+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130909T132034,37+02</datetime></modified>
+<revised><datetime dst='true'>20130822T105424,27+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130909T132034,36+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130909T132034,36+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
 >CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>

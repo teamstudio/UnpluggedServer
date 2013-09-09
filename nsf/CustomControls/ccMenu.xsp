@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	<ul id="menu">
+	
+		<xp:repeat id="repeat1" rows="30" var="menuOption" disableOutputTag="true">
+
+			<xp:this.value><![CDATA[#{javascript:var options = [];
+			
+			options.push( { label : "Dashboard", id : "dashboard", count : null, icon : "charts" } );
+options.push( { label : "Applications", id : "applications", count : null, icon : "list" } );
+options.push( { label : "Users", id : "users", count : null, icon : "group"  } );
+options.push( { label : "Devices", id : "devices", count : null, icon : "ipad" } );
+options.push( { label : "Settings", id : "settings", count : null, icon : "cogwheel" } );
+return options;}]]></xp:this.value>
+
+
+			<xp:panel tagName="li" readonly="true" styleClass="#{javascript:(currentUserBean.getSelectedMenuOption().indexOf( menuOption.id)==0 ? 'lotusSelected' : '')}">
+				<xp:link escape="true" 
+				text="#{javascript:menuOption.label + (menuOption.count != null ? ' (' + menuOption.count + ')': '')}"
+				id="link4">
+					<xp:text id="k" tagName="i" disableTheme="false" styleClass="#{javascript:'glyphicons ' + menuOption.icon}" />
+
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusContent" immediate="true">
+						<xp:this.action><![CDATA[#{javascript:currentUserBean.setSelectedMenuOption(menuOption.id);
+						getComponent("dynamicContent1").show(menuOption.id);}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+			</xp:panel>
+
+		</xp:repeat>
+		
+		<li>
+			<div class="lotusMenuSection" />
+		</li>
+		
+		<li>
+			<xp:link escape="true" text="Data synchronizer logs" id="link1">
+				<i class="glyphicons notes" />
+				
+				<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusContent" immediate="true">
+					<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("dataSyncLogs")}]]></xp:this.action>
+				</xp:eventHandler></xp:link>
+		</li>
+		
+		<li>
+			<div class="lotusMenuSection" />
+		</li>
+		
+		<li>
+			<xp:link escape="true" text="XPages engine logs" id="link5">
+				<i class="glyphicons notes" />
+				<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusContent" immediate="true">
+					<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("errorLogs")}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:link>
+		</li>
+		
+		<li>
+			<div class="lotusMenuSection" />
+		</li>
+		
+		<li>
+			<xp:link escape="true" text="Mail logs" id="link2">
+				<i class="glyphicons notes" />
+			<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusContent" immediate="true">
+				<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("mailLogs")}]]></xp:this.action>
+			</xp:eventHandler></xp:link>
+		</li>
+		
+	</ul>
+
+	<xp:scriptBlock id="scriptBlock1">
+		<xp:this.value><![CDATA[//add a clientside onclick event to all navigator options that sets the active option
+//replace 'navigator1' with the id of your navigator
+dojo.addOnLoad( function() {
+  dojo.query("li", dojo.byId("menu") ).forEach( function(navNode) {
+    dojo.query("a", navNode).connect("onclick", function() {
+     
+      //clear lotusSelected class from all navigation options
+      dojo.query("li", dojo.byId("#{id:navigator1}") ).removeClass("lotusSelected");
+       
+      //mark current node as selected
+      dojo.addClass(navNode, "lotusSelected"); 
+    });
+  });
+});]]></xp:this.value>
+	</xp:scriptBlock></xp:view>

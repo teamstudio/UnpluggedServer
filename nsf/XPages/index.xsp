@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom" xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xc:ccLayout>
+
+		<xe:dynamicContent id="dynamicContent1">
+			<xe:this.defaultFacet><![CDATA[#{javascript:context.getUrlParameter("to") || currentUserBean.getSelectedMenuOption();}]]></xe:this.defaultFacet>
+			<xp:this.facets>
+
+				<xc:ccDashboard xp:key="dashboard" />
+				<xc:ccApplications xp:key="applications" />
+				<xc:ccApplication xp:key="application" />
+
+				<xc:ccUsers xp:key="users" />
+				<xc:ccUser xp:key="user" />
+				<xc:ccUserImport xp:key="userImport" />
+
+				<xc:ccDevices xp:key="devices" />
+				<xc:ccDevices xp:key="device" />
+				
+				<xc:ccSettings xp:key="settings" />
+
+				<xc:ccDataSyncLogs xp:key="dataSyncLogs" />
+				<xc:ccMessageLog xp:key="messageLog" />
+
+				<xc:ccErrorLogs xp:key="errorLogs" />
+				<xc:ccMailLogs xp:key="mailLogs" />
+
+			</xp:this.facets>
+		</xe:dynamicContent>
+
+	</xc:ccLayout>
+
+</xp:view>

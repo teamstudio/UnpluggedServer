@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	<xp:this.data>
+		<xp:dominoView var="vwDevices" viewName="DevicesEmbedded">
+			<xp:this.categoryFilter><![CDATA[#{javascript:var userName = compositeData.userName;
+return @Name("[Abbreviate]", userName);
+}]]></xp:this.categoryFilter>
+		</xp:dominoView>
+	</xp:this.data>
+
+<xp:div id="devices" rendered="#{javascript:!docUser.isNewNote()}" styleClass="lotusSection" style="margin-top: 20px;">
+		<h2><span class="lotusLeft">Devices</span></h2>
+		
+		<div class="lotusSectionBody">
+
+			<xp:text escape="true" id="computedField2" value="No devices created yet for this user">
+				<xp:this.rendered><![CDATA[#{javascript:getComponent("dataTable1").getRowCount()==0}]]></xp:this.rendered>
+			</xp:text>
+	
+			<xp:dataTable id="dataTable1" rows="30" var="rowData" value="#{vwDevices}" styleClass="lotusTable" headerClass="lotusSort"
+				rowClasses="even,odd">
+				<xp:this.rendered><![CDATA[#{javascript:getComponent("dataTable1").getRowCount()>0}]]></xp:this.rendered>
+				
+				<xp:column id="column3" styleClass="lotusFirstCell" style="width: 25px;">
+				
+					<xp:link escape="true" text="" id="link1" title="Click to enable/ disable">
+					
+						<xp:text tagName="i" id="icon" escape="false" disableTheme="false">
+							<xp:this.styleClass>
+							<![CDATA[#{javascript:var enabled = rowData.getColumnValue('$7').indexOf("enabled")>-1;
+								"glyphicons unp-glyph-icon " + (enabled ? "unp-glyph-green ok_2" : "unp-glyph-red remove_2")}
+							]]>
+							</xp:this.styleClass>
+						</xp:text>
+				
+						<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="devices">
+							<xp:this.action><![CDATA[#{javascript:configBean.toggleActive( rowData.getDocument());}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+					
+				</xp:column>
+				
+				<xp:column id="column4">
+					<xp:this.facets>
+						<xp:text xp:key="header" value="Device type" />
+					</xp:this.facets>
+					
+					<xp:text value="#{javascript:configBean.getDeviceType( rowData.getColumnValue('UserAgent'))}" />
+					
+				</xp:column>
+				
+				<xp:column id="column2">
+					<xp:this.facets>
+						<xp:text xp:key="header" value="User Agent" />
+					</xp:this.facets>
+	
+					<xp:text value="#{rowData.UserAgent}" />
+				</xp:column>
+					
+				<xp:column id="column1">
+					<xp:this.facets>
+					<xp:text xp:key="header" value="Device Id" />
+					</xp:this.facets>
+					
+					<xp:text value="#{javascript:rowData.getColumnValues().get(2)}" />
+				</xp:column>
+	
+			</xp:dataTable>
+
+		</div>
+	</xp:div>
+
+</xp:view>

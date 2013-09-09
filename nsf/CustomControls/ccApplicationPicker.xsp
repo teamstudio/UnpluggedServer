@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:button value="Select" id="button1">
+		<i class="glyphicons search unp-glyph-icon" />
+	
+		<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dialog1" immediate="true">
+			<xp:this.action><![CDATA[#{javascript:getComponent("dialog1").show();}]]></xp:this.action>
+		</xp:eventHandler></xp:button>
+		
+	<xp:br></xp:br>
+	
+	<xe:dialog id="dialog1" title="Select application">
+
+		<xp:div id="entries" styleClass="unpDialogPicker">
+			<ul>
+
+				<!-- link to parent folder -->
+				<xp:panel readonly="true" tagName="li" styleClass="xspPickerItem">
+
+					<xp:link escape="true" text="" id="link3" rendered="#{entry.folder}">
+
+						<i class="glyphicons folder_open unp-glyph-icon unp-glyph-gold" />
+
+						<xp:text value=".." />
+
+						<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="entries" disableValidators="true">
+							<xp:this.action><![CDATA[#{javascript:var currentFolder = viewScope.get("appPickerFolder");
+							viewScope.put("appPickerFolder", @Left(currentFolder, "\\") );}]]></xp:this.action>
+						</xp:eventHandler>
+
+					</xp:link>
+
+				</xp:panel>
+
+				<xp:repeat id="repeat1" rows="100" var="entry" disableOutputTag="true" indexVar="entryIdx"
+					value="#{javascript:appPicker.getEntries( (viewScope.get('appPickerFolder') || '') )}">
+					
+					<xp:panel readonly="true" tagName="li" styleClass="#{javascript:'xspPickerItem ' + (entryIdx%2 ? 'even' : 'odd')}">
+
+						<!-- folder -->
+						<xp:link escape="true" text="" id="link1" rendered="#{entry.folder}">
+
+							<i class="glyphicons folder_open unp-glyph-icon unp-glyph-gold" />
+
+							<xp:text value="#{entry.title}" />
+
+							<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="entries" disableValidators="true">
+								<xp:this.action><![CDATA[#{javascript:viewScope.put("appPickerFolder", entry.getPath() )}]]></xp:this.action>
+							</xp:eventHandler>
+
+						</xp:link>
+
+						<!-- file -->
+						<xp:link escape="true" text="" id="link2" rendered="#{!entry.folder}">
+
+							<i class="glyphicons hdd unp-glyph-icon" />
+
+							<xp:text value="#{entry.title}" />
+
+							<xp:eventHandler event="onclick" submit="true" refreshMode="complete" disableValidators="true">
+								<xp:this.action><![CDATA[#{javascript:var selected = entry.getPath();
+							dBar.debug("selected file=" + selected);
+							
+							app.setPath(selected);
+							app.setServer( database.getServer() );
+							
+							getComponent("dialog1").hide("appInfo")}]]></xp:this.action>
+							</xp:eventHandler>
+
+						</xp:link>
+
+					</xp:panel>
+
+				</xp:repeat>
+
+			</ul>
+		</xp:div>
+
+	</xe:dialog>
+	
+	
+
+</xp:view>

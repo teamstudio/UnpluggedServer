@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
 <agent name='Login' alias='Login' xmlns='http://www.lotus.com/dxl' version='9.0'
- replicaid='C1257AC00076B554' hide='v3' runaswebuser='true' publicaccess='false'
+ replicaid='C1257BE1003E4E81' hide='v3' runaswebuser='true' publicaccess='false'
  designerversion='8.5' activatable='false'>
-<noteinfo noteid='19e' unid='4AF52BE7F8CF5861852576EB005338DF' sequence='36'>
+<noteinfo noteid='19e' unid='4AF52BE7F8CF5861852576EB005338DF' sequence='37'>
 <created><datetime>20100319T100900,47-05</datetime></created>
-<modified><datetime dst='true'>20130515T115640,34+02</datetime></modified>
-<revised><datetime dst='true'>20130515T115640,33+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130515T115640,33+02</datetime></lastaccessed>
-<addedtofile><datetime>20121124T223637,51+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130909T132034,06+02</datetime></modified>
+<revised><datetime dst='true'>20130822T105422,10+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130909T132034,05+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130909T132034,05+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedRestricted/O=mvtest</name><name
 >CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=UnpluggedRestricted/O=mvtest</name><name
 >CN=UnpluggedUnrestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name
@@ -16,7 +16,7 @@
 >CN=UnpluggedRestricted/O=mvtest</name><name>CN=Matt Vargish/O=Teamstudio</name><name
 >CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<designchange><datetime dst='true'>20130515T115641,54+02</datetime></designchange>
+<designchange><datetime dst='true'>20130822T105434,95+02</datetime></designchange>
 <trigger type='scheduled'>
 <schedule type='never' runlocation='specific' runserver='CN=mvlocal/O=mvtest'/></trigger>
 <documentset type='modified'/><code event='options'><lotusscript>%REM

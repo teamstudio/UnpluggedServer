@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<helpusingdocument xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257AC00076B554'
+<helpusingdocument xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257BE1003E4E81'
  publicaccess='false' designerversion='8.5' default='true' renderpassthrough='true'>
 <noteinfo noteid='23e' unid='D26C022A7718DDC4852576F600561C68' sequence='4'>
 <created><datetime dst='true'>20100330T114033,68-04</datetime></created>
-<modified><datetime>20121124T223637,99+01</datetime></modified>
+<modified><datetime dst='true'>20130909T132034,86+02</datetime></modified>
 <revised><datetime>20121102T170919,20-05</datetime></revised>
-<lastaccessed><datetime>20121124T223637,98+01</datetime></lastaccessed>
-<addedtofile><datetime>20121124T223637,98+01</datetime></addedtofile></noteinfo>
+<lastaccessed><datetime dst='true'>20130909T132034,85+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130909T132034,85+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name></updatedby>
 <wassignedby><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name></wassignedby>
 <body><richtext>

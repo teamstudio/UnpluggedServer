@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
 <form name='(ImportDialog)' alias='(ImportDialog)' xmlns='http://www.lotus.com/dxl'
- version='9.0' replicaid='C1257AC00076B554' nocompose='true' noquery='true'
+ version='9.0' replicaid='C1257BE1003E4E81' nocompose='true' noquery='true'
  publicaccess='false' designerversion='8.5.2' bgcolor='system' renderpassthrough='true'>
-<noteinfo noteid='2ee' unid='82B2E144BE762678852578D100558177' sequence='9'>
+<noteinfo noteid='2ee' unid='82B2E144BE762678852578D100558177' sequence='10'>
 <created><datetime dst='true'>20110718T113357,03-04</datetime></created>
-<modified><datetime dst='true'>20130515T115642,62+02</datetime></modified>
-<revised><datetime dst='true'>20130515T115642,61+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130515T115642,61+02</datetime></lastaccessed>
-<addedtofile><datetime>20121124T223638,46+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130909T132035,62+02</datetime></modified>
+<revised><datetime dst='true'>20130822T105423,76+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130909T132035,61+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130909T132035,61+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
 >CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>

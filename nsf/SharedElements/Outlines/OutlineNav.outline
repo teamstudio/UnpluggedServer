@@ -1,30 +1,30 @@
 <?xml version='1.0' encoding='utf-8'?>
 <outline name='OutlineNav' alias='OutlineNav' xmlns='http://www.lotus.com/dxl'
- version='9.0' replicaid='C1257AC00076B554' publicaccess='false' designerversion='8.5.2'>
-<noteinfo noteid='1b6' unid='C5EAA5FDD6542910852576EB005A2BD7' sequence='31'>
+ version='9.0' replicaid='C1257BE1003E4E81' publicaccess='false' designerversion='8.5.2'>
+<noteinfo noteid='1b6' unid='C5EAA5FDD6542910852576EB005A2BD7' sequence='32'>
 <created><datetime>20100319T112454,63-05</datetime></created>
-<modified><datetime dst='true'>20130515T115640,61+02</datetime></modified>
-<revised><datetime dst='true'>20130515T115640,60+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130515T115640,60+02</datetime></lastaccessed>
-<addedtofile><datetime>20121124T223637,60+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130909T132034,17+02</datetime></modified>
+<revised><datetime dst='true'>20130822T105422,26+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130909T132034,16+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130909T132034,16+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name
 >CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
 >CN=Mark Leusink/O=LinQed</name></updatedby>
-<outlineentry label='Configuration' type='none'><imageref database='C1257AC00076B554'
+<outlineentry label='Configuration' type='none'><imageref database='C1257BE1003E4E81'
  name='replicationsettings.gif'/></outlineentry>
 <outlineentry label='Applications' level='1' type='namedelementlink'><imageref
- database='C1257AC00076B554' name='application.gif'/><namedelementlink type='view'
+ database='C1257BE1003E4E81' name='application.gif'/><namedelementlink type='view'
  name='DbUsers'/></outlineentry>
 <outlineentry label='By Assignment' level='2' type='namedelementlink'><imageref
- database='C1257AC00076B554' name='userapp.gif'/><namedelementlink type='view'
+ database='C1257BE1003E4E81' name='userapp.gif'/><namedelementlink type='view'
  name='Dbs'/></outlineentry>
-<outlineentry label='Users' level='1' type='namedelementlink'><imageref database='C1257AC00076B554'
+<outlineentry label='Users' level='1' type='namedelementlink'><imageref database='C1257BE1003E4E81'
  name='peoplePicker_16.gif'/><namedelementlink type='view' name='AllUsers'/></outlineentry>
 <outlineentry label='Devices' level='1' type='namedelementlink'><imageref
- database='C1257AC00076B554' name='userdevices.gif'/><namedelementlink type='view'
+ database='C1257BE1003E4E81' name='userdevices.gif'/><namedelementlink type='view'
  name='Devices'/></outlineentry>
 <outlineentry label='Synchronization Logs' type='action' keepfocus='true'><imageref
- database='C1257AC00076B554' name='gotologs.gif'/><code event='value'><formula
+ database='C1257BE1003E4E81' name='gotologs.gif'/><code event='value'><formula
 >logdb:="unpluggedlog.nsf";
 pathFwd := @ReplaceSubstring(@Subset(@DbName;-1); "\\"; "/");
 dirFwd := @LeftBack(pathFwd;"/") ;

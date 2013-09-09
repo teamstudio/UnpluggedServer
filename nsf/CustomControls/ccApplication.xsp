@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom" xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:this.data>
+		<xe:objectData createObject="#{javascript:new com.teamstudio.unplugged.Application()}" var="app"></xe:objectData>
+	</xp:this.data>
+	
+	<div class="lotusHeader">
+		<h1>Application</h1>
+	</div>
+
+	<xp:messages id="messages1"></xp:messages>
+
+	<table class="lotusFormTable lotusForm">
+		<tbody>
+
+			<tr class="lotusFormFieldRow">
+				<td class="lotusFormLabel">
+					<label>Application *:</label>
+				</td>
+				<td>
+				
+					<div>
+						<div style="display: inline-block; width: 100px; vertical-align: top;">
+							<xc:ccApplicationPicker rendered="#{javascript:app.isEditable()}"></xc:ccApplicationPicker>
+						</div>
+				
+						<xp:div style="display: inline-block;" id="appInfo">
+							<xp:div>
+	
+								<xp:this.rendered><![CDATA[#{javascript:app.getPath() != null && app.getPath().length>0}]]></xp:this.rendered>
+								<div>
+									<div style="display: inline-block; width: 60px;">Server:</div>
+									<div style="display: inline-block;">
+										<xp:text escape="true" id="computedField2" value="#{app.server}"
+											rendered="#{javascript:app.getServer() == null || app.getServer().length == 0}"></xp:text>
+										<xp:text escape="true" id="computedField3">
+											<xp:this.value><![CDATA[#{javascript:var n = session.createName(database.getServer());
+											return n.getAbbreviated() + " (current server)"}]]></xp:this.value>
+										</xp:text>
+									</div>
+								</div>
+								<div>
+									<div style="display: inline-block; width: 60px;">Path:</div>
+									<div style="display: inline-block;">
+										<!--							<xp:inputText id="inputText4" value="#{app.path}" />-->
+										<xp:text escape="true" id="computedField1" value="#{app.path}"></xp:text>
+									</div>
+								</div>
+							</xp:div>
+						</xp:div>
+					</div>
+					
+				</td>
+			</tr>
+
+			<tr class="lotusFormFieldRow">
+				<td class="lotusFormLabel">
+					<label>Profiles:</label>
+				</td>
+				<td>
+					<xp:checkBoxGroup id="checkBoxGroup1" value="#{app.profiles}">
+						<xp:selectItems>
+							<xp:this.value><![CDATA[#{javascript:var lu = @DbColumn( @DbName(), "Profiles", 1);
+return lu;}]]></xp:this.value>
+						</xp:selectItems>
+					</xp:checkBoxGroup>
+				</td>
+			</tr>
+
+			<tr class="lotusFormFieldRow">
+				<td class="lotusFormLabel">
+					<label>Users:</label>
+				</td>
+				<td>
+
+					<xe:djextListTextBox id="djextListTextBox1" multipleSeparator="," multipleTrim="true" defaultValue="" value="#{app.users}"
+						displayLabel="true" title="Users">
+					</xe:djextListTextBox>
+					<xe:valuePicker id="valuePicker8" for="djextListTextBox1" pickerText="Add">
+						<xe:this.dataProvider>
+							<xe:dominoViewValuePicker viewName="UsersAll" labelColumn="UserName"></xe:dominoViewValuePicker>
+						</xe:this.dataProvider>
+					</xe:valuePicker>
+				</td>
+			</tr>
+			
+			
+			
+
+			<tr class="lotusFormFieldRow">
+				<td class="lotusFormLabel">
+					<label>Status:</label>
+				</td>
+				<td>
+					<xp:radioGroup id="radioGroup1" value="{app.enabled}">
+						<xp:selectItem itemLabel="Enabled" itemValue="true"></xp:selectItem>
+						<xp:selectItem itemLabel="Disabled" itemValue="false"></xp:selectItem>
+					</xp:radioGroup>
+				</td>
+			</tr>
+
+			<tr class="lotusFormFieldRow">
+				<td class="lotusFormLabel">
+					<label>Selection formula:</label>
+				</td>
+				<td>
+					<xp:inputText id="inputText2" value="#{app.selectionFormula}"></xp:inputText>
+				</td>
+			</tr>
+
+			<tr class="lotusFormFieldRow">
+				<td class="lotusFormLabel">
+					<label>Device types:</label>
+				</td>
+				<xp:td id="tdDeviceTypes">
+					<xp:radioGroup id="radioGroup2" value="#{app.sendToAllDevices}">
+						<xp:selectItem itemLabel="All device types" itemValue="true"></xp:selectItem>
+						<xp:selectItem itemLabel="Selected types only" itemValue="false"></xp:selectItem>
+						<xp:eventHandler event="onchange" submit="true" refreshMode="partial" refreshId="tdDeviceTypes" disableValidators="true"></xp:eventHandler>
+					</xp:radioGroup>
+					
+					<xp:div rendered="#{javascript:!app.getSendToAllDevices().equals('true')}">
+						Choose device types that should receive the application:<br />
+						<xp:checkBoxGroup id="checkBoxGroup2" value="#{app.deviceTypesEnabled}">
+							<xp:selectItem itemLabel="iOS (iPhone, iPad)" itemValue="3"></xp:selectItem>
+							<xp:selectItem itemLabel="Android" itemValue="2"></xp:selectItem>
+							<xp:selectItem itemLabel="BlackBerry" itemValue="1"></xp:selectItem>
+						</xp:checkBoxGroup>
+					</xp:div>
+
+				</xp:td>
+			</tr>
+
+			<tr class="lotusFormFieldRow">
+				<td class="lotusFormLabel">
+					<label>Attachments:</label>
+				</td>
+				<xp:td id="tdSendAttachments">
+					<xp:radioGroup id="radioGroup3" value="#{app.sendAttachments}">
+						<xp:selectItem itemLabel="Send to device" itemValue="true"></xp:selectItem>
+						<xp:selectItem itemLabel="Do not send to device" itemValue="false"></xp:selectItem>
+						<xp:eventHandler event="onchange" submit="true" refreshMode="partial" refreshId="tdSendAttachments" disableValidators="true"></xp:eventHandler>
+					</xp:radioGroup>
+
+					<xp:div rendered="#{javascript:app.getSendAttachments().equals('true')}">
+						Attachment types to send:
+						&#160;
+						<xp:inputText id="inputText3" value="#{app.attachmentExtensions}" multipleSeparator=","></xp:inputText>
+					</xp:div>
+
+				</xp:td>
+			</tr>
+
+
+			<tr class="lotusFormFieldRow">
+				<td class="lotusFormLabel">
+					<label>Show on workspace:</label>
+				</td>
+				<td>
+					<xp:radioGroup id="radioGroup4" value="#{app.showOnWorkspace}">
+						<xp:selectItem itemLabel="Yes" itemValue="true"></xp:selectItem>
+						<xp:selectItem itemLabel="No" itemValue="false"></xp:selectItem>
+					</xp:radioGroup>
+				</td>
+			</tr>
+
+			<tr class="lotusFormFieldRow">
+				<td class="lotusFormLabel">
+					<label>Auto launch when Unplugged starts:</label>
+				</td>
+				<td>
+					<xp:radioGroup id="radioGroup5" value="#{app.autoLaunch}">
+						<xp:selectItem itemLabel="Yes" itemValue="true"></xp:selectItem>
+						<xp:selectItem itemLabel="No" itemValue="false"></xp:selectItem>
+					</xp:radioGroup>
+				</td>
+			</tr>
+
+			<tr>
+				<td class="lotusFormFooter" colspan="3">
+
+					<xc:ccButtons dataSource="#{app}" dataSourceName="app" listContentKey="applications" isNew="#{javascript:app.isNew()}"
+						isEditable="#{javascript:app.isEditable()}" typeName="Application">
+					</xc:ccButtons>
+
+				</td>
+			</tr>
+
+
+
+		</tbody>
+	</table>
+
+</xp:view>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:ccDebugToolbar defaultCollapsed="false" collapseTo="right"></xc:ccDebugToolbar>
+
+	<div class="lotusFrame">
+		<div class="lotusBanner" role="banner">
+			<div class="lotusRightCorner">
+				<div class="lotusInner">
+				
+					<!-- app logo -->
+					<div class="lotusLogo">
+						
+						<xp:link escape="true" text="" id="link3" value="#{javascript:'/.ibmxspres/domino' + configBean.getDbUrl()}" title="Teamstudio Unplugged">
+							<xp:image url="/unplugged_inverted@2x.png" alt="Teamstudio" id="image1" style="height:36px; width: 190px;"></xp:image>
+						</xp:link>
+					</div>
+
+					<ul class="lotusInlinelist lotusUtility">
+						<li class="lotusFirst">
+							<xp:text styleClass="lotusUser" value="#{javascript:@Name('[CN]', @UserName())}" escape="false" />
+						</li>
+						<li>
+							<xp:link escape="true" text="Logout" id="link1">
+								<xp:this.value><![CDATA[#{javascript:"/names.nsf?logout"}]]></xp:this.value>
+							</xp:link>
+						</li>
+					</ul>
+
+				</div>
+			</div>
+		</div>
+
+		<!--<div class="lotusTitleBar">
+			<div class="lotusRightCorner">
+				<div class="lotusInner">
+					<h2 class="lotusEllipsis" title="Unplugged">Unplugged</h2>
+				</div>
+			</div>
+		</div>
+
+		--><!--<div class="lotusPlaceBar">
+			<div class="lotusRightCorner">
+			<div class="lotusInner"> 
+			<h2>Applications</h2>
+			
+			<div class="lotusBtnContainer">
+			<span class="lotusBtn">
+			<a href="javascript:;">Customize</a>
+			</span>
+			<span class="lotusBtn">
+			<a href="javascript:;">More Actions
+			<img class="lotusArrow lotusDropDownSprite" src="../../css/images/blank.gif" alt="" aria-label="show menu" /><span class="lotusAltText">&#x25bc;</span></a>
+			</span>
+			</div>
+			</div>
+			</div>
+			</div>
+			
+		-->
+
+		<xp:div styleClass="lotusMain" id="lotusMain">
+
+			<div class="lotusColLeft">
+				<div class="lotusMenu" role="menu">
+
+					<xc:ccMenu />
+					
+					<!-- version -->
+					<div class="lotusTiny" style="margin: 35px 0 5px 20px; color: #aaaaaa;">
+						<xp:text escape="false" disableTheme="true" value="#{configBean.appVersion}"></xp:text>
+					</div>
+
+				</div>
+			</div>
+
+			<xp:div styleClass="lotusContent" role="main" id="lotusContent">
+
+				<xp:callback></xp:callback>
+
+			</xp:div>
+		</xp:div>
+
+	</div>
+
+</xp:view>

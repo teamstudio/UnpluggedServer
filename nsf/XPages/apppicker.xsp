@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:ccDebugToolbar defaultCollapsed="false" collapseTo="left"></xc:ccDebugToolbar>
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+	<xp:text escape="true" id="computedField1" value="#{viewScope.appPickerSelectedFile}"></xp:text>
+	<xp:br></xp:br>
+
+	<xp:button value="Label" id="button1">
+		<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="computedField1"></xp:eventHandler></xp:button>
+
+
+	<xc:ccApplicationPicker></xc:ccApplicationPicker>
+	
+	</xp:view>

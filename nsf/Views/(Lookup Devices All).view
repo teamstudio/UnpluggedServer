@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <view name='(Lookup Devices All)' alias='DevicesAllLU' xmlns='http://www.lotus.com/dxl'
- version='9.0' replicaid='C1257AC00076B554' showinmenu='false' publicaccess='false'
+ version='9.0' replicaid='C1257BE1003E4E81' showinmenu='false' publicaccess='false'
  designerversion='8.5' unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator'
  headers='beveled' opencollapsed='false' showresponsehierarchy='false' showmargin='true'
  shrinkrows='false' extendlastcolumn='false' showhierarchies='false' unreadcolor='black'
@@ -8,12 +8,12 @@
  headerbgcolor='white' boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
  allowcustomizations='false' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
  uniquekeys='false' formatnoteid='47DDA81BEB83D151852576D6006AFB37'>
-<noteinfo noteid='2d2' unid='C2765A375A5C1105852578BD004565B0' sequence='18'>
+<noteinfo noteid='2d2' unid='C2765A375A5C1105852578BD004565B0' sequence='19'>
 <created><datetime dst='true'>20110628T083800,16-04</datetime></created>
-<modified><datetime dst='true'>20130515T115642,94+02</datetime></modified>
-<revised><datetime dst='true'>20130515T115642,93+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130515T115642,93+02</datetime></lastaccessed>
-<addedtofile><datetime>20121124T223638,37+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130909T132035,44+02</datetime></modified>
+<revised><datetime dst='true'>20130822T105423,95+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130909T132035,43+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130909T132035,43+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=mvlocal/O=mvtest</name><name>CN=admin/O=dev</name><name
 >CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
 >CN=Mark Leusink/O=LinQed</name></updatedby>

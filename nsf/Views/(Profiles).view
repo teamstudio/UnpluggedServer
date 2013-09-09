@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <view name='(Profiles)' alias='Profiles' xmlns='http://www.lotus.com/dxl'
- version='9.0' replicaid='C1257AC00076B554' showinmenu='false' publicaccess='false'
+ version='9.0' replicaid='C1257BE1003E4E81' showinmenu='false' publicaccess='false'
  designerversion='8.5.2' unreadmarks='none' onopengoto='lastopened' onrefresh='refresh'
  headers='flat' opencollapsed='false' showresponsehierarchy='false' showmargin='true'
  shrinkrows='false' extendlastcolumn='true' showhierarchies='false' unreadcolor='black'
@@ -9,12 +9,12 @@
  allownewdocuments='false' allowcustomizations='false' hidemarginborder='true'
  marginwidth='10px 0px 0px' marginbgcolor='white' uniquekeys='false' initialbuildrestricted='false'
  noemptycategories='true'>
-<noteinfo noteid='292' unid='3EB4AD51A9C158AF8525789300460465' sequence='15'>
+<noteinfo noteid='292' unid='3EB4AD51A9C158AF8525789300460465' sequence='16'>
 <created><datetime dst='true'>20110517T084446,45-04</datetime></created>
-<modified><datetime dst='true'>20130515T115643,58+02</datetime></modified>
-<revised><datetime dst='true'>20130515T115643,57+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130515T115643,57+02</datetime></lastaccessed>
-<addedtofile><datetime>20121124T223638,20+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130909T132035,22+02</datetime></modified>
+<revised><datetime dst='true'>20130822T105424,24+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130909T132035,21+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130909T132035,21+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name
 >CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
 >CN=Mark Leusink/O=LinQed</name></updatedby>

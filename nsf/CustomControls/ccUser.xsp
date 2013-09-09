@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.data>
+		<xp:dominoDocument var="docUser" formName="User"></xp:dominoDocument>
+	</xp:this.data>
+
+	<div class="lotusHeader">
+		<xp:text escape="true" tagName="h1" id="computedField1">
+			<xp:this.value><![CDATA[#{javascript:if (docUser.isNewNote() ) {
+	return "New user";
+} else {
+
+	var user = docUser.getItemValueString("userName");
+	var nm = session.createName(user);
+	return nm.getAbbreviated();
+	
+}}]]></xp:this.value>
+		</xp:text>
+	</div>
+
+	<xp:messages id="messages1"></xp:messages>
+
+	<table class="lotusFormTable lotusForm">
+		<tbody>
+
+			<tr class="lotusFormFieldRow">
+				<td class="lotusFormLabel" style="width: 20%">
+					<label>Username *:</label>
+				</td>
+				<td>
+
+					<xp:inputText id="inputUserName" required="true" value="#{docUser.UserName}">
+
+						<xp:typeAhead mode="full" minChars="1" preventFiltering="true">
+							<xp:this.valueList><![CDATA[#{javascript:getComponent("namePicker1").getTypeAheadValue(this)}]]></xp:this.valueList>
+						</xp:typeAhead>
+					</xp:inputText>
+					<xe:namePicker id="namePicker1" for="inputUserName">
+						<xe:accordion id="accordion1"></xe:accordion>
+						<xe:this.dataProvider>
+							<xe:dominoNABNamePicker></xe:dominoNABNamePicker>
+						</xe:this.dataProvider>
+					</xe:namePicker>
+				</td>
+			</tr>
+
+			<tr class="lotusFormFieldRow">
+				<td class="lotusFormLabel">
+					<label>Status:</label>
+				</td>
+				<td>
+					<xp:radioGroup id="radioGroup3" value="#{docUser.Active}" defaultValue="1">
+						<xp:selectItem itemLabel="Enabled" itemValue="1"></xp:selectItem>
+						<xp:selectItem itemLabel="Disabled" itemValue="0"></xp:selectItem>
+					</xp:radioGroup>
+				</td>
+			</tr>
+
+			<tr class="lotusFormFieldRow">
+				<td class="lotusFormLabel">
+					<label>Profiles:</label>
+				</td>
+				<td>
+					<xp:checkBoxGroup id="checkBoxGroup1" value="#{docUser.Profiles}">
+						<xp:selectItems>
+							<xp:this.value><![CDATA[#{javascript:var lu = @DbColumn( @DbName(), "Profiles", 1);
+					
+					return lu;}]]></xp:this.value>
+						</xp:selectItems>
+					</xp:checkBoxGroup>
+				</td>
+			</tr>
+
+			<tr class="lotusFormFieldRow">
+				<td class="lotusFormLabel">
+					<label>Sync device log:</label>
+				</td>
+				<td>
+					<xp:radioGroup id="radioGroup1" value="#{docUser.DevicePushRepLog}" defaultValue="0">
+						<xp:selectItem itemLabel="Yes" itemValue="1"></xp:selectItem>
+						<xp:selectItem itemLabel="No" itemValue="0"></xp:selectItem>
+					</xp:radioGroup>
+
+				</td>
+			</tr>
+
+			<tr class="lotusFormFieldRow">
+				<td class="lotusFormLabel">
+					<label>User can create devices:</label>
+				</td>
+				<td>
+					<xp:radioGroup id="radioGroup2" value="#{docUser.CanCreateDevices}" defaultValue="1">
+						<xp:selectItem itemLabel="Yes" itemValue="1"></xp:selectItem>
+						<xp:selectItem itemLabel="No" itemValue="0"></xp:selectItem>
+					</xp:radioGroup>
+
+				</td>
+			</tr>
+
+			<tr>
+				<td class="lotusFormFooter" colspan="3">
+
+					<xc:ccButtons dataSource="#{docUser}" dataSourceName="docUser" listContentKey="users" isNew="#{javascript:docUser.isNewNote()}"
+						isEditable="#{javascript:docUser.isEditable()}" typeName="User">
+					</xc:ccButtons>
+
+				</td>
+			</tr>
+
+		</tbody>
+	</table>
+	
+	<xc:ccUserDevices userName="#{docUser.UserName}" />
+	
+	<xc:ccUserApplications userName="#{docUser.UserName}" profiles="#{docUser.Profiles}" />
+
+</xp:view>

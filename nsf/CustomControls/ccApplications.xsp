@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	<xp:this.data>
+		<xp:dominoView var="vwApps" viewName="DbUsers"></xp:dominoView>
+	</xp:this.data>
+	
+	<div class="lotusHeader">
+		<h1>Applications</h1>
+	</div>
+	
+	<div class="lotusActionBar lotusBtnContainer">		
+		<span class="lotusBtn lotusBtnAction lotusLeft" role="button">
+			<xp:link escape="true" text="Add application" id="link1" title="Add application">
+				<i class="glyphicons list unp-glyph-icon" />
+			
+				<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusContent">
+					<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("application")}]]></xp:this.action>
+				</xp:eventHandler></xp:link>
+		</span>
+  	</div>
+	
+	<!-- list of servers -->
+	<xp:repeat id="repeat1" rows="30" value="#{javascript:vwApps.getColumnValues(0);}" var="server" 
+		indexVar="serverIndex"
+		style="clear:both;padding-top:10px;">
+	
+		<xp:text tagName="h2" escape="true" id="computedField1" value="#{server}" styleClass="#{javascript:(serverIndex==0 ? 'lotusFirst' : '')}"></xp:text>
+		
+		<!-- list of applications -->
+		<xp:repeat id="repeat2" rows="30" var="appPath" indexVar="appIndex">
+			<xp:this.value><![CDATA[#{javascript:var nav = vwApps.createViewNavFromCategory(server);
+			nav.setMaxLevel(1);
+			
+			var apps = [];
+			
+			var entry = nav.getFirst();
+			while (null != entry ) {
+			
+				apps.push( entry.getColumnValues().get(1) );
+			
+				var next = nav.getNext();
+				entry.recycle();
+				entry = next;
+			}
+			
+			return apps;}]]></xp:this.value>
+			
+			<div class="box">
+			
+				<!-- path & name -->
+				<div class="header">
+					<div style="display: inline-block; width: 350px;">
+						<xp:text escape="true" style="font-weight: bold" id="computedField2" value="#{appPath}"></xp:text>
+					</div>
+					<div style="display: inline-block;">
+						<xp:text escape="true" id="computedField3" value="#{javascript:configBean.getAppName(server, appPath)}"></xp:text>
+					</div>
+				</div>
+				
+				<div class="users">
+				
+					<!-- repeat over all application documents -->
+					<xp:repeat id="repeat3" rows="30" var="appUsers" indexVar="appIdx">
+						<xp:this.value><![CDATA[#{javascript:var keys = new java.util.Vector();
+		keys.add( server );
+		keys.add( appPath);
+
+		return vwApps.getAllEntriesByKey(keys, true);
+		}]]></xp:this.value>
+						<xp:this.facets>
+							<xp:text xp:key="header" disableTheme="true" escape="false"><xp:this.value><![CDATA[<table class="lotusTable"><tbody>]]></xp:this.value></xp:text>
+							<xp:text xp:key="footer" disableTheme="true" escape="false"><xp:this.value><![CDATA[</tbody></table>]]></xp:this.value></xp:text>
+						</xp:this.facets>
+		
+						<xp:tr styleClass="#{javascript:(appIdx==0 ? 'lotusFirst' : '')}">
+							<td style="width: 25px;">
+								<xp:link escape="true" text="" id="link2" title="Click to enable/disable">
+									<xp:text tagName="i" id="icon" escape="false" disableTheme="false">
+										<xp:this.styleClass>
+										<![CDATA[#{javascript:var status = appUsers.getColumnValues().get(2);
+											"glyphicons unp-glyph-icon " + (status.indexOf("enabled")>-1 ? "unp-glyph-green ok_2" : "unp-glyph-red remove_2")}
+										]]>
+										</xp:this.styleClass>
+									</xp:text>
+									<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="repeat3">
+										<xp:this.action><![CDATA[#{javascript:configBean.toggleActive(appUsers.getDocument())}]]></xp:this.action>
+									</xp:eventHandler>
+								</xp:link>
+							</td>
+							
+							<!-- auto launch icon -->
+							<td style="width: 25px;">
+								<xp:text tagName="i" id="computedField5" escape="false" disableTheme="false" title="Auto launch enabled"
+									styleClass="glyphicons unp-glyph-icon send">
+									<xp:this.rendered><![CDATA[#{javascript:appUsers.getDocument().getItemValueString("AutoLaunchApp").equals("yes")}]]></xp:this.rendered>
+								</xp:text>
+							</td>
+							
+							<td style="width: 25px;">
+								<xp:link escape="true" text="" id="link3" title="Open">
+									<xp:text tagName="i" id="open" escape="false" disableTheme="false" styleClass="glyphicons unp-glyph-icon expand">
+									</xp:text>
+									<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
+					<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("application", {action:'openDocument', documentId : appUsers.getNoteID() });
+}]]></xp:this.action>
+				</xp:eventHandler>
+								</xp:link>
+							</td>	
+								
+							<td>
+								<xp:text escape="false" id="computedField4" value="#{javascript:appUsers.getColumnValues().get(3)}">
+									<xp:this.converter>
+										<xp:customConverter getAsObject="#{javascript:value}">
+											<xp:this.getAsString><![CDATA[#{javascript:return @Implode(@Explode(value, ","), "<br />")}]]></xp:this.getAsString>
+										</xp:customConverter>
+									</xp:this.converter>
+								</xp:text>
+							</td>
+							
+						</xp:tr>
+					</xp:repeat>
+				
+				
+				</div>
+			
+			</div>
+
+		</xp:repeat>
+
+	</xp:repeat>
+
+</xp:view>

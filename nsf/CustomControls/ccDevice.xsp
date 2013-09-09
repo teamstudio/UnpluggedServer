@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.data>
+		<xp:dominoDocument var="docDevice" formName="Device" action="openDocument"></xp:dominoDocument>
+	</xp:this.data>
+
+	<div class="lotusHeader">
+		<h1>Device</h1>
+	</div>
+
+	<xp:table>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="User name:" id="userName_Label1" for="userName1"></xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText value="#{docDevice.UserName}" id="userName1"></xp:inputText>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Active:" id="active_Label1" for="active1"></xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText value="#{docDevice.Active}" id="active1"></xp:inputText>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="I d:" id="iD_Label1" for="iD1"></xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText value="#{docDevice.ID}" id="iD1"></xp:inputText>
+			</xp:td>
+		</xp:tr>
+	</xp:table>
+
+	<xc:ccButtons dataSource="#{docDevice}" isNew="#{javascript:docDevice.isNewNote()}" 
+		isEditable="#{javascript:docDevice.isEditable()}"
+		dataSourceName="docDevice"
+		typeName="Device" listContentKey="devices">
+
+	</xc:ccButtons>
+</xp:view>

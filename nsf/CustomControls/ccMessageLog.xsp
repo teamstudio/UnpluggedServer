@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	<div style="float: right">
+
+				<xp:button value="Close" id="button1">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
+						<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("dataSyncLogs")}]]></xp:this.action>
+					</xp:eventHandler></xp:button>
+	</div>
+
+	<div class="lotusHeader">
+		<xp:text tagName="h1" id="title" escape="false">
+			<xp:this.value><![CDATA[#{javascript:var f = docLog.getItemValueString("form");
+
+if (f.equals("MessageLog") ) {
+	return "Data synchronizer log";
+} else if (f.equals("ClientLog") ) {
+	return "XPages Engine Log";
+} else {
+	return "?";
+}}]]></xp:this.value>
+		</xp:text>
+
+	</div>
+
+	<xp:this.data>
+		<xp:dominoDocument var="docLog" formName="MessageLog"
+			databaseName="#{configBean.unpluggedLogPath}"></xp:dominoDocument>
+	</xp:this.data>
+	
+	<table class="lotusFormTable lotusForm"><tbody>
+		<tr class="lotusFormFieldRow">
+			<td class="lotusFormLabel"><label>Created by:</label></td>
+			<td>
+				<xp:text escape="true" id="computedField1">
+					<xp:this.value><![CDATA[#{javascript:var n = docLog.getItemValueString("$UpdatedBy");
+					var nm:NotesName = session.createName(n);
+					nm.getAbbreviated()}]]></xp:this.value>
+				</xp:text>
+			</td>
+		</tr>
+		<tr class="lotusFormFieldRow">
+			<td class="lotusFormLabel"><label>Date:</label></td>
+			<td>
+				<xp:text escape="true" id="computedField6">
+					<xp:this.value><![CDATA[#{javascript:docLog.getDocument().getCreated().toJavaDate()}]]></xp:this.value>
+					<xp:this.converter>
+						<xp:convertDateTime dateStyle="default" type="both" timeStyle="medium"></xp:convertDateTime>
+					</xp:this.converter>
+				</xp:text>
+			</td>
+		</tr>
+		<tr class="lotusFormFieldRow">
+			<td class="lotusFormLabel"><label>Device ID:</label></td>
+			<td>
+				<xp:text escape="true" id="computedField2" value="#{docLog.Pin}"></xp:text>
+			</td>
+		</tr>
+		<tr class="lotusFormFieldRow">
+			<td class="lotusFormLabel"><label>Type:</label></td>
+			<td>
+				<xp:text escape="true" id="computedField3" value="#{docLog.Type}"></xp:text>
+			</td>
+		</tr>
+		<tr class="lotusFormFieldRow">
+			<td class="lotusFormLabel"><label>Application:</label></td>
+			<td>
+				<xp:text escape="true" id="computedField4" value="#{docLog.Database}"></xp:text>
+			</td>
+		</tr>
+		<tr class="lotusFormFieldRow">
+			<td class="lotusFormLabel"><label>Status:</label></td>
+			<td>
+				<xp:text escape="true" id="computedField5">
+					<xp:this.value><![CDATA[#{javascript:var status = docLog.getItemValueString("Status");
+
+if (status=="0") {
+	return "OK";
+} else if (status == "1") {
+	return "Warnings Issues";
+} else if (status == "2") {
+ return "Errors Occured";
+} else if (status == "3") {
+ return "Warnings and Errors";
+} else {
+	return "";
+}
+}]]></xp:this.value>
+				</xp:text>
+			</td>
+			
+		</tr>
+		
+	</tbody></table>	
+	
+	<div style="margin-top: 10px;">
+	
+		<h2>Messages</h2>
+		<div style="margin-top: 10px;">
+			<xp:inputRichText id="inputRichText1" value="#{docLog.Message}" />
+		</div>
+		
+	</div>
+
+
+</xp:view>

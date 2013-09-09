@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
 <scriptlibrary name='libImport' xmlns='http://www.lotus.com/dxl' version='9.0'
- replicaid='C1257AC00076B554' hide='v3 v4strict'>
-<noteinfo noteid='2b6' unid='7B0CE5D153A00EF9852578AF006DEF31' sequence='14'>
+ replicaid='C1257BE1003E4E81' hide='v3 v4strict'>
+<noteinfo noteid='2b6' unid='7B0CE5D153A00EF9852578AF006DEF31' sequence='15'>
 <created><datetime dst='true'>20110614T160046,57-04</datetime></created>
-<modified><datetime dst='true'>20130515T115639,61+02</datetime></modified>
-<revised><datetime dst='true'>20130515T115639,60+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130515T115639,60+02</datetime></lastaccessed>
-<addedtofile><datetime>20121124T223638,29+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130909T132035,31+02</datetime></modified>
+<revised><datetime dst='true'>20130822T105421,57+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130909T132035,30+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130909T132035,30+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=UnpluggedUnrestricted/O=mvtest</name><name
 >CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
 >CN=Mark Leusink/O=LinQed</name></updatedby>

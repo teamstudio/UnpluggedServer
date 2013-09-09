@@ -1,17 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
 <agent name='(ProfileRemoveFromSel)' alias='(ProfileRemoveFromSel)' xmlns='http://www.lotus.com/dxl'
- version='9.0' replicaid='C1257AC00076B554' hide='v3' publicaccess='false'
+ version='9.0' replicaid='C1257BE1003E4E81' hide='v3' publicaccess='false'
  designerversion='8.5.2'>
-<noteinfo noteid='2a2' unid='1789AC8DCC8F29F3852578B600421942' sequence='9'>
+<noteinfo noteid='2a2' unid='1789AC8DCC8F29F3852578B600421942' sequence='10'>
 <created><datetime dst='true'>20110621T080158,42-04</datetime></created>
-<modified><datetime dst='true'>20130515T115643,53+02</datetime></modified>
-<revised><datetime dst='true'>20130515T115643,52+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130515T115643,52+02</datetime></lastaccessed>
-<addedtofile><datetime>20121124T223638,24+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130909T132035,26+02</datetime></modified>
+<revised><datetime dst='true'>20130822T105424,21+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130909T132035,25+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130909T132035,25+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
 >CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<designchange><datetime dst='true'>20130515T115644,73+02</datetime></designchange>
+<designchange><datetime dst='true'>20130822T105437,04+02</datetime></designchange>
 <trigger type='agentlist'/>
 <documentset type='selected'/><code event='options'><lotusscript>Option Public
 Option Declare
