@@ -1,6 +1,8 @@
 package com.teamstudio.unplugged;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
@@ -156,25 +158,46 @@ public class Utils {
 	@SuppressWarnings("unchecked")
 	public static Vector objectToVector(Object in, String t) {
 		
-		DebugToolbar.get().debug("converting a " + t);
+		Vector result = null;
 		
 		if (in instanceof String) {
-			DebugToolbar.get().debug("string");
 			
-			Vector list = new Vector();
-			list.add(in);
-			return list;
-		} 
+			result = new Vector();
+			result.add(in);
 
-		if (in instanceof List) {
+		} else if (in instanceof List) {
 			
-			DebugToolbar.get().debug("list");
-			return (Vector) in;
+			result = new Vector( (List) in);
+		
+		} else {
+
+			DebugToolbar.get().warn("unsupported type: " + in.getClass().getCanonicalName(), "objectToVector" );
+		
 		}
 
-		DebugToolbar.get().debug("its a..." + in.getClass().getCanonicalName() );
+		return result; 
+	
+	}
+	
+	/*
+	 * Join the elements of a collection into a string
+	 */
+	@SuppressWarnings("unchecked")
+	public static String join( Collection in, String delimiter ) {
 		
-		return null;
+		StringBuffer sb = new StringBuffer();
+		
+		Iterator it = in.iterator();
+		while( it.hasNext() ) {
+			sb.append( it.next() );
+			if (it.hasNext()) {
+				sb.append(delimiter);
+			}
+			
+		}
+		
+		return sb.toString();
+		
 	}
 	
 }

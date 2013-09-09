@@ -35,7 +35,7 @@
 
 				<xp:repeat id="repeat1" rows="100" var="entry" disableOutputTag="true" indexVar="entryIdx"
 					value="#{javascript:appPicker.getEntries( (viewScope.get('appPickerFolder') || '') )}">
-					
+
 					<xp:panel readonly="true" tagName="li" styleClass="#{javascript:'xspPickerItem ' + (entryIdx%2 ? 'even' : 'odd')}">
 
 						<!-- folder -->
@@ -43,7 +43,7 @@
 
 							<i class="glyphicons folder_open unp-glyph-icon unp-glyph-gold" />
 
-							<xp:text value="#{entry.title}" />
+							<xp:text value="#{entry.name}" />
 
 							<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="entries" disableValidators="true">
 								<xp:this.action><![CDATA[#{javascript:viewScope.put("appPickerFolder", entry.getPath() )}]]></xp:this.action>
@@ -56,17 +56,14 @@
 
 							<i class="glyphicons hdd unp-glyph-icon" />
 
-							<xp:text value="#{entry.title}" />
+							<xp:text value="#{entry.name}" />
 
-							<xp:eventHandler event="onclick" submit="true" refreshMode="complete" disableValidators="true">
-								<xp:this.action><![CDATA[#{javascript:var selected = entry.getPath();
-							dBar.debug("selected file=" + selected);
-							
-							app.setPath(selected);
-							app.setServer( database.getServer() );
-							
-							getComponent("dialog1").hide("appInfo")}]]></xp:this.action>
-							</xp:eventHandler>
+							<xp:eventHandler event="onclick" submit="false">
+									<xp:this.script><![CDATA[
+									var fullPath = "#{javascript:entry.escapedPath}";
+									dojo.byId("#{id:inputAppPath}").value = fullPath;
+									XSP.closeDialog('#{id:dialog1}')]]></xp:this.script>
+								</xp:eventHandler>
 
 						</xp:link>
 
@@ -78,7 +75,7 @@
 		</xp:div>
 
 	</xe:dialog>
-	
-	
+
+
 
 </xp:view>

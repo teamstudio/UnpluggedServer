@@ -232,7 +232,7 @@
 					<td class="lotusFormFooter" colspan="3">
 	
 						<xp:button value="Edit" id="button1" rendered="#{!settingsObj.editable}">
-							<xp:image url="/glyphicons_halflings_060_pencil.png" id="image2"></xp:image>
+							<i class="glyphicons unp-glyph-icon pencil" />
 						
 							<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
 								<xp:this.action><![CDATA[#{javascript:settingsObj.setEditable(true);
@@ -241,7 +241,7 @@
 						</xp:button>
 	
 						<xp:button value="Save" id="button2" rendered="#{settingsObj.editable}">
-							<xp:image url="/glyphicons_halflings_171_floppy_disk.png" id="image1"></xp:image>
+							<i class="glyphicons unp-glyph-icon floppy_disk" />
 						
 							<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
 								<xp:this.action><![CDATA[#{javascript:if (settingsObj.save() ){

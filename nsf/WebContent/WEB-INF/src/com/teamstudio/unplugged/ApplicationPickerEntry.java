@@ -1,27 +1,20 @@
 package com.teamstudio.unplugged;
 
+import eu.linqed.debugtoolbar.DebugToolbar;
+
 public class ApplicationPickerEntry implements Comparable<ApplicationPickerEntry> {
 
-	private String title;
 	private boolean isFolder;
 	private String path;
-	private String fileName;
-	
-	public ApplicationPickerEntry(String title, String path, String fileName, boolean isFolder) {
-		
-		//DebugToolbar.get().debug("adding:" + title + ", " + path + ", " + fileName + ", " + isFolder);
-		
-		this.title = title;
+	private String name;
+
+	public ApplicationPickerEntry(String title, String path, String name, boolean isFolder) {
 		this.path = path;
-		this.fileName = fileName;
+		this.name = name;
 		this.isFolder = isFolder;
-		
+	
 	}
-
-	public String getTitle() {
-		return title;
-	}
-
+	
 	public boolean isFolder() {
 		return isFolder;
 	}
@@ -29,12 +22,13 @@ public class ApplicationPickerEntry implements Comparable<ApplicationPickerEntry
 	public String getPath() {
 		return path;
 	}
-
-	public String getFileName() {
-		return fileName;
+	public String getEscapedPath() {
+		return path.replace("\\", "\\\\");
 	}
-	
-	
+	public String getName() {
+		return name;
+	}
+
 	public int compareTo(ApplicationPickerEntry compareEntry ) {
 		return new Boolean( compareEntry.isFolder() ).compareTo( new Boolean( this.isFolder ) );
 	}

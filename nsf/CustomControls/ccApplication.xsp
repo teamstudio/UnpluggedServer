@@ -11,46 +11,51 @@
 
 	<xp:messages id="messages1"></xp:messages>
 
-	<table class="lotusFormTable lotusForm">
-		<tbody>
+	<xp:panel readonly="#{javascript:!app.isEditable()}">
+	
+		<xp:table styleClass="lotusFormTable lotusForm">
 
 			<tr class="lotusFormFieldRow">
 				<td class="lotusFormLabel">
 					<label>Application *:</label>
 				</td>
 				<td>
-				
+
 					<div>
 						<div style="display: inline-block; width: 100px; vertical-align: top;">
 							<xc:ccApplicationPicker rendered="#{javascript:app.isEditable()}"></xc:ccApplicationPicker>
 						</div>
-				
+
 						<xp:div style="display: inline-block;" id="appInfo">
 							<xp:div>
-	
-								<xp:this.rendered><![CDATA[#{javascript:app.getPath() != null && app.getPath().length>0}]]></xp:this.rendered>
 								<div>
 									<div style="display: inline-block; width: 60px;">Server:</div>
 									<div style="display: inline-block;">
-										<xp:text escape="true" id="computedField2" value="#{app.server}"
-											rendered="#{javascript:app.getServer() == null || app.getServer().length == 0}"></xp:text>
-										<xp:text escape="true" id="computedField3">
-											<xp:this.value><![CDATA[#{javascript:var n = session.createName(database.getServer());
-											return n.getAbbreviated() + " (current server)"}]]></xp:this.value>
+									
+										<xp:inputText id="inputText1" value="#{app.server}" rendered="#{javascript:app.isEditable()}">
+										</xp:inputText>
+
+										<xp:text escape="true" id="computedField3" rendered="#{javascript:!app.isEditable()}">
+											<xp:this.value><![CDATA[#{javascript:if (app.path.length==0) {
+	return "(current server)";
+} else {
+
+	var n = session.createName(app.getServer() );
+	return n.getAbbreviated()
+}}]]></xp:this.value>
 										</xp:text>
 									</div>
 								</div>
 								<div>
 									<div style="display: inline-block; width: 60px;">Path:</div>
 									<div style="display: inline-block;">
-										<!--							<xp:inputText id="inputText4" value="#{app.path}" />-->
-										<xp:text escape="true" id="computedField1" value="#{app.path}"></xp:text>
+										<xp:inputText id="inputAppPath" value="#{app.path}" />
 									</div>
 								</div>
 							</xp:div>
 						</xp:div>
 					</div>
-					
+
 				</td>
 			</tr>
 
@@ -62,9 +67,10 @@
 					<xp:checkBoxGroup id="checkBoxGroup1" value="#{app.profiles}">
 						<xp:selectItems>
 							<xp:this.value><![CDATA[#{javascript:var lu = @DbColumn( @DbName(), "Profiles", 1);
-return lu;}]]></xp:this.value>
+	return lu;}]]></xp:this.value>
 						</xp:selectItems>
 					</xp:checkBoxGroup>
+					new profile: <xp:inputText id="inputText4" value="#{app.newProfile}"></xp:inputText>
 				</td>
 			</tr>
 
@@ -84,9 +90,9 @@ return lu;}]]></xp:this.value>
 					</xe:valuePicker>
 				</td>
 			</tr>
-			
-			
-			
+
+
+
 
 			<tr class="lotusFormFieldRow">
 				<td class="lotusFormLabel">
@@ -119,9 +125,10 @@ return lu;}]]></xp:this.value>
 						<xp:selectItem itemLabel="Selected types only" itemValue="false"></xp:selectItem>
 						<xp:eventHandler event="onchange" submit="true" refreshMode="partial" refreshId="tdDeviceTypes" disableValidators="true"></xp:eventHandler>
 					</xp:radioGroup>
-					
+
 					<xp:div rendered="#{javascript:!app.getSendToAllDevices().equals('true')}">
-						Choose device types that should receive the application:<br />
+						Choose device types that should receive the application:
+						<br />
 						<xp:checkBoxGroup id="checkBoxGroup2" value="#{app.deviceTypesEnabled}">
 							<xp:selectItem itemLabel="iOS (iPhone, iPad)" itemValue="3"></xp:selectItem>
 							<xp:selectItem itemLabel="Android" itemValue="2"></xp:selectItem>
@@ -140,12 +147,13 @@ return lu;}]]></xp:this.value>
 					<xp:radioGroup id="radioGroup3" value="#{app.sendAttachments}">
 						<xp:selectItem itemLabel="Send to device" itemValue="true"></xp:selectItem>
 						<xp:selectItem itemLabel="Do not send to device" itemValue="false"></xp:selectItem>
-						<xp:eventHandler event="onchange" submit="true" refreshMode="partial" refreshId="tdSendAttachments" disableValidators="true"></xp:eventHandler>
+						<xp:eventHandler event="onchange" submit="true" refreshMode="partial" refreshId="tdSendAttachments"
+							disableValidators="true">
+						</xp:eventHandler>
 					</xp:radioGroup>
 
 					<xp:div rendered="#{javascript:app.getSendAttachments().equals('true')}">
-						Attachment types to send:
-						&#160;
+						Attachment types to send: &#160;
 						<xp:inputText id="inputText3" value="#{app.attachmentExtensions}" multipleSeparator=","></xp:inputText>
 					</xp:div>
 
@@ -187,9 +195,7 @@ return lu;}]]></xp:this.value>
 				</td>
 			</tr>
 
-
-
-		</tbody>
-	</table>
+		</xp:table>
+	</xp:panel>
 
 </xp:view>

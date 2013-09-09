@@ -14,7 +14,8 @@
 	<div class="lotusActionBar lotusBtnContainer">		
 		<span class="lotusBtn lotusBtnAction lotusLeft" role="button">
 			<xp:link escape="true" text="Add user" id="link1">
-				<xp:image url="/glyphicons_003_user.png" id="image2"></xp:image>
+				<i class="glyphicons unp-glyph-icon user" />
+				
 				<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusContent">
 					<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("user")}]]></xp:this.action>
 				</xp:eventHandler></xp:link>
@@ -22,7 +23,7 @@
 		
 		<span class="lotusBtn lotusBtnAction lotusLeft" role="button">
 			<xp:link escape="true" text="Import users" id="link2">
-				<xp:image url="/glyphicons_043_group.png" id="image3"></xp:image>
+				<i class="glyphicons unp-glyph-icon group" />
 				<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusContent">
 					<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("userImport")}]]></xp:this.action>
 				</xp:eventHandler></xp:link>

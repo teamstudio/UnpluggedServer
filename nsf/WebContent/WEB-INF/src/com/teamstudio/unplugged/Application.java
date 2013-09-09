@@ -9,7 +9,6 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import com.ibm.commons.util.StringUtil;
-import com.ibm.xsp.designer.context.XSPContext;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 
 import eu.linqed.debugtoolbar.DebugToolbar;
@@ -30,6 +29,8 @@ public class Application implements Serializable {
 	private boolean exists;
 	
 	private Vector<String> profiles;
+	private String newProfile;
+	
 	private Vector<String> users;
 	private boolean enabled;
 	private String selectionFormula;
@@ -119,8 +120,6 @@ public class Application implements Serializable {
 				}
 				
 				//retrieve document from database
-				DebugToolbar.get().debug("read from document");
-				
 				doc = Utils.getDocument(documentId);
 				
 				if (null != doc) {
@@ -263,6 +262,7 @@ public class Application implements Serializable {
 	}
 
 	public String getPath() {
+		DebugToolbar.get().debug("get it: " + path);
 		return path;
 	}
 
@@ -282,14 +282,24 @@ public class Application implements Serializable {
 		return profiles;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void setProfiles( Object to ) {
 		profiles = Utils.objectToVector( to, "profiles" );
+	}
+
+	public String getNewProfile() {
+		return newProfile;
+	}
+
+	public void setNewProfile(String newProfile) {
+		this.newProfile = newProfile;
 	}
 
 	public Object getUsers() {
 		return users;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void setUsers( Object to) {
 		users = Utils.objectToVector( to, "users" );
 	}
@@ -349,6 +359,8 @@ public class Application implements Serializable {
 	}
 
 	public void setPath(String path) {
+		DebugToolbar.get().debug("path set to " + path);
+		
 		this.path = path;
 	}
 

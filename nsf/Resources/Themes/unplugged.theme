@@ -1,8 +1,7 @@
 <theme extends="oneuiv2.1_green" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="platform:/plugin/com.ibm.designer.domino.stylekits/schema/stylekit.xsd" >
 	
 	<resources>
-		<script src="/glyphicons_halflings/scripts/modernizr.js" clientSide="true"></script>
-		<styleSheet href="/glyphicons_halflings/css/halflings.css"></styleSheet>
+		<script src="/glyphicons/scripts/modernizr.js" clientSide="true"></script>
 		<styleSheet href="/glyphicons/css/glyphicons.css"></styleSheet>
 	</resources>
 	
