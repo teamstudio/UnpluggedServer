@@ -1,7 +1,5 @@
 package com.teamstudio.unplugged;
 
-import eu.linqed.debugtoolbar.DebugToolbar;
-
 public class ApplicationPickerEntry implements Comparable<ApplicationPickerEntry> {
 
 	private boolean isFolder;
@@ -12,7 +10,6 @@ public class ApplicationPickerEntry implements Comparable<ApplicationPickerEntry
 		this.path = path;
 		this.name = name;
 		this.isFolder = isFolder;
-	
 	}
 	
 	public boolean isFolder() {

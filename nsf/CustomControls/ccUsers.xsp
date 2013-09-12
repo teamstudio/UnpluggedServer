@@ -1,204 +1,132 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
 
 
 	<xp:this.data>
 		<xp:dominoView var="vwUsers" viewName="AllUsers"></xp:dominoView>
 		<xp:dominoView var="vwAppsByAssignment" viewName="Dbs"></xp:dominoView>
 	</xp:this.data>
-	
+
 	<div class="lotusHeader">
 		<h1>Users</h1>
 	</div>
-	
-	<div class="lotusActionBar lotusBtnContainer">		
+
+	<div class="lotusActionBar lotusBtnContainer">
 		<span class="lotusBtn lotusBtnAction lotusLeft" role="button">
 			<xp:link escape="true" text="Add user" id="link1">
 				<i class="glyphicons unp-glyph-icon user" />
-				
+
 				<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusContent">
 					<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("user")}]]></xp:this.action>
-				</xp:eventHandler></xp:link>
+				</xp:eventHandler>
+			</xp:link>
 		</span>
-		
-		<span class="lotusBtn lotusBtnAction lotusLeft" role="button">
+
+		<xp:span styleClass="lotusBtn lotusBtnAction lotusLeft">
+			<xp:this.rendered><![CDATA[#{javascript:currentUserBean.isAdmin() && currentUserBean.getAccessLevel() >= lotus.domino.ACL.LEVEL_EDITOR;}]]></xp:this.rendered>
 			<xp:link escape="true" text="Import users" id="link2">
 				<i class="glyphicons unp-glyph-icon group" />
 				<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusContent">
 					<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("userImport")}]]></xp:this.action>
-				</xp:eventHandler></xp:link>
-		</span>
-		
+				</xp:eventHandler>
+			</xp:link>
+		</xp:span>
+
 		<span>
 			<xp:checkBox text="Show applications" id="checkBox2" checkedValue="true" uncheckedValue="false"
 				value="#{sessionScope.showUserApplications}">
-			<xp:eventHandler event="onchange" submit="true" refreshMode="partial" refreshId="dynamicContent1"></xp:eventHandler></xp:checkBox>
+				<xp:eventHandler event="onchange" submit="true" refreshMode="partial" refreshId="dynamicContent1"></xp:eventHandler>
+			</xp:checkBox>
 		</span>
-  	</div>
-  	<!-- 
-  	voor elke user in het systeem...
-	- vind alle apps assigned via vwAppsByAssignment (= vec)
-	- voor elk profiel van die gebruiker
-		- vind all apps toegewezen aan dat profiel (=vec per profiel)
-	 -->
+	</div>
 
-  	<xp:repeat id="repeatUsers" rows="20" value="#{vwUsers}" var="rowData" indexVar="rowIndex">
-  		<xp:this.facets>
-  			<xp:text disableTheme="true" escape="false" xp:key="header"><xp:this.value><![CDATA[<table class="lotusTable"><thead><tr><th class="lotusSort"></th><th class="lotusSort"></th><th class="lotusSort">Name</th><th class="lotusSort">Applications</th><th class="lotusSort">Profiles</th></tr></thead><tbody>]]></xp:this.value></xp:text>
-  			<xp:text disableTheme="true" escape="false" xp:key="footer"><xp:this.value><![CDATA[</tbody></table>]]></xp:this.value></xp:text>
-  		</xp:this.facets>
-  		
-  		<xp:tr>
-  			<xp:this.styleClass><![CDATA[#{javascript:(rowIndex == 0 ? "lotusFirst " : "")  + (rowIndex % 2 ? "lotusAltRow " : "")}]]></xp:this.styleClass>
+	<!-- repeat over all users -->
+	<xp:repeat id="repeatUsers" rows="20" value="#{vwUsers}" var="rowData" indexVar="rowIndex">
+		<xp:this.facets>
+			<xp:text disableTheme="true" escape="false" xp:key="header">
+				<xp:this.value><![CDATA[<table class="lotusTable"><thead><tr><th class="lotusSort"></th><th class="lotusSort">Name</th><th class="lotusSort">Applications</th><th class="lotusSort">Profiles</th></tr></thead><tbody>]]></xp:this.value>
+			</xp:text>
+			<xp:text disableTheme="true" escape="false" xp:key="footer">
+				<xp:this.value><![CDATA[</tbody></table>]]></xp:this.value>
+			</xp:text>
+		</xp:this.facets>
 
-  			<td style="width:25px">
+		<xp:tr>
+			<xp:this.styleClass><![CDATA[#{javascript:(rowIndex == 0 ? "lotusFirst " : "")  + (rowIndex % 2 ? "lotusAltRow " : "")}]]></xp:this.styleClass>
 
-  				<xp:link escape="true" text="" id="link4" title="Click to enable/disable">
+			<td style="width:20px">
 
-  					<xp:text tagName="i" id="icon" escape="false" disableTheme="false">
-  						<xp:this.styleClass>
-  							<![CDATA[#{javascript:var isEnabled = (rowData.getColumnValue('$10').indexOf("enabled")>-1);
-						"glyphicons unp-glyph-icon " + (isEnabled ? "unp-glyph-green ok_2" : "unp-glyph-red remove_2")}
-					]]>
-  						</xp:this.styleClass>
-  					</xp:text>
+				<xc:ccToggleActive itemLabel="user" targetId="#{javascript:rowData.getNoteID()}" refreshId="repeatUsers"
+					isEnabled="#{javascript:rowData.getColumnValue('$10').indexOf('enabled')>-1}">
+				</xc:ccToggleActive>
+				
+			</td>
 
-  					<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="repeatUsers">
-  						<xp:this.action><![CDATA[#{javascript:configBean.toggleActive(rowData.getDocument());}]]></xp:this.action>
-  					</xp:eventHandler>
-  				</xp:link>
+			<td>
 
-  			</td>
-
-  			<td>
-
-  				<xp:link escape="true" text="#{rowData.$2}" id="link3">
-  					<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusContent">
-  						<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("user",
+				<!-- name of user & link to user document -->
+				<xp:link escape="true" id="link3">
+					<xp:this.text><![CDATA[#{javascript:com.teamstudio.unplugged.Utils.getAbbreviatedName(rowData.getColumnValue("$2"));}]]></xp:this.text>
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusContent">
+						<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("user",
 					{
 						documentId : rowData.getNoteID(),
 						action : 'openDocument'
 					}
 					);}]]></xp:this.action>
-  					</xp:eventHandler>
-  				</xp:link>
+					</xp:eventHandler>
 
-  			</td>
 
-  			<!-- applications -->
-  			<td>
+				</xp:link>
 
-  				<xp:repeat id="repeat1" rows="30" var="app" rendered="#{javascript:'true'.equals(sessionScope.showUserApplications)}">
+			</td>
 
-  					<xp:this.value><![CDATA[#{javascript:
-		var userApps = [];
-		
-try {
+			<!-- applications -->
+			<td>
 
-var userName = rowData.getColumnValue("$2");
-var profiles = @Explode( rowData.getColumnValue("$6"), ", ");
+				<xp:repeat id="repeat1" rows="50" var="app" rendered="#{javascript:'true'.equals(sessionScope.showUserApplications)}">
 
-var vec = vwAppsByAssignment.getAllEntriesByKey( userName, true);
-var ve:NotesViewEntry = vec.getFirstEntry();
-while (null != ve) {
+					<xp:this.value><![CDATA[#{javascript:
+					
+					var userName = rowData.getColumnValue("$2");
+					var profiles = @Explode( rowData.getColumnValue("$6"), ", ");
+					
+					return com.teamstudio.unplugged.User.getApplications( userName, vwAppsByAssignment, profiles);}]]></xp:this.value>
 
-	var colValues = ve.getColumnValues();
-	var server = colValues.get(2);
-	var path = colValues.get(3);
-	var active = (colValues.get(1).indexOf('enabled')>-1);
-	
-	userApps.push( {
-		"server" : server,
-		"path" : path,
-		"active" : active,
-		"name" : configBean.getAppName(server, path)
-	});
-
-	var tmp = vec.getNextEntry(ve);
-	ve.recycle();
-	ve = tmp;
-}
-
-vec.recycle();
-
-for (var i=0; i<profiles.length; i++) {
-	if (profiles[i].length>0) {
-		var vec = vwAppsByAssignment.getAllEntriesByKey( profiles[i], true);
-		var ve:NotesViewEntry = vec.getFirstEntry();
-		while (null != ve) {
-		
-			var colValues = ve.getColumnValues();
-			var server = colValues.get(2);
-			var path = colValues.get(3);
-			var active = (colValues.get(1).indexOf('enabled')>-1);
+					<div>
+						<div style="display:inline-block; width:20px">
+							
+							<xc:ccToggleActive itemLabel="application" targetId="#{javascript:app.getUnid()}" refreshId="repeat1"
+								isEnabled="#{javascript:app.getEnabled()=='true'}">
+							</xc:ccToggleActive>
 						
-			userApps.push( {
-				"server" : server,
-				"path" : path,
-				"active" : active,
-				"name" : configBean.getAppName(server, path)
-			});
-		
-			var tmp = vec.getNextEntry(ve);
-			ve.recycle();
-			ve = tmp;
-		}
-		
-		vec.recycle();
-	}
-}
-/*
-userApps.sort(function (a, b) {
-if (a.naam < b.naam)
-     return -1;
-  if (a.naam > b.naam)
-    return 1;
-  return 0;
-	
-});*/
+						</div>
+						<div style="display:inline-block; width:200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+							<xp:text value="#{app.name}" />
+						</div>
+						<div style="display:inline-block; width:150px; overflow: hidden; text-overflow: ellipsis;">
+							<xp:text value="#{javascript:(app.getServer().length>0 ? app.getServer() + ', ' : '')}" />
+							<xp:text value="#{app.path}" />
+						</div>
+					</div>
+
+				</xp:repeat>
+
+			</td>
 
 
-} catch (e) {
-	dBar.error(e);
-}
+			<td>
+				<xp:text escape="true" id="computedField2" value="#{rowData.$6}"></xp:text>
+			</td>
 
 
+		</xp:tr>
 
-return userApps;
-}]]></xp:this.value>
+	</xp:repeat>
 
-  					<div>
-  						<div style="display:inline-block; width:20px">
-  							<xp:text tagName="i" id="computedField1" escape="false" disableTheme="false">
-								<xp:this.styleClass>
-								<![CDATA[#{javascript:"glyphicons unp-glyph-icon " + (app.active>-1 ? "unp-glyph-green ok_2" : "unp-glyph-red remove_2")}
-								]]>
-								</xp:this.styleClass>
-							</xp:text>
-  						</div>
-  						<div style="display:inline-block; width:200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-  							<xp:text value="#{app.name}" />
-  						</div>
-  						<div style="display:inline-block; width:150px; overflow: hidden; text-overflow: ellipsis;">
-  							<xp:text value="#{javascript:(app.server.length>0 ? app.server + ', ' : '')}" />
-  							<xp:text value="#{app.path}" />
-  						</div>
-  					</div>
-
-  				</xp:repeat>
-
-  			</td>
-
-
-  			<td>
-  				<xp:text escape="true" id="computedField2" value="#{rowData.$6}"></xp:text>
-  			</td>
-
-
-  		</xp:tr>
-
-  	</xp:repeat>
-	
-	<xp:pager layout="Previous Group Next" partialRefresh="true" id="pager1" for="repeatUsers"></xp:pager>
+	<xp:pager 
+		layout="Previous Group Next" partialRefresh="true" id="pager1" 
+		for="repeatUsers"
+		rendered="#{javascript:com.teamstudio.unplugged.Utils.isPagerVisible(this)}" />
 
 </xp:view>

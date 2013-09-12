@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.data>
+		<xp:dominoView var="vwProfileItems" viewName="ProfileItemsLU"></xp:dominoView>
+	</xp:this.data>
+
+	<div class="lotusHeader">
+		<h1>Profiles</h1>
+	</div>
+
+	<xp:text escape="true" id="computedField2" value="No profiles have been created">
+		<xp:this.rendered><![CDATA[#{javascript:getComponent("repeatProfiles").getRowCount() == 0}]]></xp:this.rendered>
+	</xp:text>
+
+	<xp:repeat id="repeatProfiles" rows="100" var="profile">
+		<xp:this.rendered><![CDATA[#{javascript:getComponent("repeatProfiles").getRowCount() > 0}]]></xp:this.rendered>
+		<xp:this.value><![CDATA[#{javascript:database.getView("Profiles").getColumnValues(0);}]]></xp:this.value>
+
+		<div class="box">
+			<div class="header" style="font-weight: bold">
+				<xp:text escape="false" disableTheme="true" value="#{profile}"></xp:text>
+			</div>
+
+			<div class="body">
+
+				<div style="display: inline-block; width: 260px; vertical-align:top;">
+					<div style="font-size:.9em">Applications</div>
+					
+					<xp:text escape="true" id="computedField1" value="No applications assigned"
+						rendered="#{javascript:getComponent('repeat2').getRowCount()==0}"></xp:text>
+
+					<!-- applications -->
+					<xp:repeat id="repeat2" rows="100" var="profileItem">
+
+						<xp:this.value><![CDATA[#{javascript:var keys = new java.util.Vector();
+						keys.add(profile);
+						keys.add("UserDatabase");
+						vwProfileItems.getAllEntriesByKey(keys, true)}]]></xp:this.value>
+						
+						<xc:ccToggleActive itemLabel="application" targetId="#{profileItem.noteID}" 
+								refreshId="repeat2"
+								isEnabled="#{javascript:profileItem.getColumnValues().get(2) == '1'}">
+						</xc:ccToggleActive>
+
+						<xp:text escape="false" disableTheme="true" value="#{javascript:profileItem.getColumnValues().get(3)}" />
+						<br />
+
+					</xp:repeat>
+				</div>
+
+				<!-- users -->
+				<div style="display: inline-block; width: 260px; vertical-align:top; padding-left: 10px;">
+					<div style="font-size:.9em">Assigned to</div>
+					
+					<xp:text escape="true" id="computedField3" value="No users assigned"
+						rendered="#{javascript:getComponent('repeat3').getRowCount()==0}"></xp:text>
+					
+					<xp:repeat id="repeat3" rows="100" var="profileItem">
+						<xp:this.value><![CDATA[#{javascript:var keys = new java.util.Vector();
+						keys.add(profile);
+						keys.add("User");
+						vwProfileItems.getAllEntriesByKey(keys, true)}]]></xp:this.value>
+
+						<xc:ccToggleActive itemLabel="user" targetId="#{profileItem.noteID}" 
+								refreshId="repeat3"
+								isEnabled="#{javascript:profileItem.getColumnValues().get(2) == '1'}">
+						</xc:ccToggleActive>
+
+						<xp:text escape="false" disableTheme="true">
+							<xp:this.value><![CDATA[#{javascript:var userName = profileItem.getColumnValues().get(3);
+	
+	@Name("[abbreviate]", userName)}]]></xp:this.value>
+						</xp:text>
+						<br />
+
+					</xp:repeat>
+				</div>
+
+			</div>
+		</div>
+
+	</xp:repeat>
+
+</xp:view>

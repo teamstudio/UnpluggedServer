@@ -3,24 +3,24 @@ package com.teamstudio.unplugged;
 import java.io.Serializable;
 import java.util.HashMap;
 
-import org.openntf.domino.impl.DocumentCollection;
-
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 
 import eu.linqed.debugtoolbar.DebugToolbar;
 
 import lotus.domino.Database;
 import lotus.domino.Document;
-import lotus.domino.NotesException;
+import lotus.domino.Session;
 import lotus.domino.View;
-import lotus.domino.ViewEntryCollection;
 import lotus.domino.ViewNavigator;
 
 public class Configuration implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private HashMap<String, Application> applications;
+	public static final String ROLE_ADMIN = "[Admin]";
+	public static final String ROLE_DEBUG = "[Debug]";
+	
+	private HashMap<String, String> appNames;
 	
 	private String server;
 	private String dbPath;
@@ -35,11 +35,13 @@ public class Configuration implements Serializable {
 	
 	private int numDevices;
 	private int numDevicesActive;
-	
 	private int licensedUsers;
-	
+	private int licensesRemaining;
 	private int numApps;
 	private int numAppsActive;
+	private int numProfiles;
+	
+	public static final String TITLE_NOT_FOUND = "(title not found)";
 	
 	public Configuration() {
 		this.reload();
@@ -56,10 +58,9 @@ public class Configuration implements Serializable {
 	public void reload() {
 		
 		Database dbCurrent = null;
-		View vwStats = null;
-		
+	
 		try {
-			applications = new HashMap<String,Application>();
+			appNames = new HashMap<String,String>();
 			
 			dbCurrent = (Database) Utils.resolveVariable("database");
 			
@@ -118,6 +119,12 @@ public class Configuration implements Serializable {
 			numAppsActive = nav.getCount();
 			nav.recycle();
 			
+			//number of profiles
+			numProfiles = dbCurrent.getView("Profiles").getColumnValues(0).size();
+			
+			//remaining licenses
+			licensesRemaining = licensedUsers - numDevices;
+			
 		} catch (Exception e) {
 			DebugToolbar.get().error(e);
 		} finally {
@@ -125,6 +132,25 @@ public class Configuration implements Serializable {
 			Utils.recycle(vwStats);
 			
 		}
+		
+	}
+	
+	public boolean toggleActive( String id) {
+		
+		try {
+			Document doc = Utils.getDocument(id);
+			
+			if (doc==null) {
+				throw(new Exception("cannot find document with id " + id ));
+			}
+			
+			return this.toggleActive(doc);
+			
+		} catch (Exception e) {
+			DebugToolbar.get().error(e);
+		}
+		
+		return false;
 		
 	}
 		
@@ -138,8 +164,9 @@ public class Configuration implements Serializable {
 		try {
 			
 			String to = (doc.getItemValueString("Active").equals("0") ? "1" : "0");
+			
 			doc.replaceItemValue("Active", to);
-			success = doc.save(); 
+			success = doc.save();
 			
 			this.reloadStatistics();
 			
@@ -150,43 +177,39 @@ public class Configuration implements Serializable {
 		return success;
 	}
 	
-	/*
-	 * Figure out the device type based on a user agent string
-	 */
-	public String getDeviceType(String userAgent) {
-		
-		final String TYPE_IOS = "iOS";
-		final String TYPE_BLACKBERRY = "Blackberry";
-		final String TYPE_ANDROID = "Android";
-		final String TYPE_JAVA = "Java";
-
-		String u = userAgent.toLowerCase();
-		if ( u.indexOf("dalvik") > -1 ) {
-			return TYPE_ANDROID;
-		} else if ( u.indexOf("darwin") > -1 ) {
-			return TYPE_IOS;
-		} else if ( u.indexOf("blackberry") > -1 ) {
-			return TYPE_BLACKBERRY;
-		} else if ( u.indexOf("java") > -1 ) {
-			return TYPE_JAVA;
-		} else {
-			return "Unknown";
-		}
-		
-	}
-	
 	//retrieve the name of an application based on it's path
-	public String getAppName(String server, String path) {
+	public String getAppName(String appServer, String appPath) {
 		
-		String key = server + "!!" + path;
+		String key = appServer + "!!" + appPath;
 		
-		if ( !applications.containsKey(key) ) {
-			Application app = new Application(server, path);
-			applications.put( app.getKey(), app);
+		if ( !appNames.containsKey(key) ) {
+			
+			if (appServer.toLowerCase().indexOf("current") >-1) {
+				appServer = server;
+			}
+			
+			Database db = null;
+			String name = TITLE_NOT_FOUND;
+			
+			try {
+
+				Session session = (Session) Utils.resolveVariable("session");
+				db = session.getDatabase( appServer, appPath);
+				
+				if ( db != null ) {
+					name = db.getTitle();
+				}
+				
+			} catch (Exception e) {
+				DebugToolbar.get().error(e);
+			} finally {
+				Utils.recycle(db);
+			}
+			
+			appNames.put( key, name );
 		}
 		
-		return applications.get(key).getName();
-		
+		return appNames.get(key);
 	}
 	
 	public int getNumUsers() {
@@ -209,6 +232,12 @@ public class Configuration implements Serializable {
 	public int getNumAppsActive() {
 		return numAppsActive;
 	}
+	public int getNumProfiles() {
+		return numProfiles;
+	}
+	public int getNumLicensesRemaining() {
+		return licensesRemaining;
+	}
 	
 	public String getDbUrl() {
 		return dbUrl;
@@ -221,4 +250,13 @@ public class Configuration implements Serializable {
 	public int getLicensedUsers() {
 		return licensedUsers;
 	}
+	public int getLicensesRemaining() {
+		return licensesRemaining;
+	}
+	
+	public String getServer() {
+		return server;
+	}
+	
+
 }

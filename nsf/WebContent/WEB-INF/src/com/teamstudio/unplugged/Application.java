@@ -1,6 +1,7 @@
 package com.teamstudio.unplugged;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Vector;
@@ -14,6 +15,8 @@ import com.ibm.xsp.extlib.util.ExtLibUtil;
 import eu.linqed.debugtoolbar.DebugToolbar;
 import lotus.domino.Database;
 import lotus.domino.Document;
+import lotus.domino.Item;
+import lotus.domino.Name;
 import lotus.domino.Session;
 
 public class Application implements Serializable {
@@ -23,10 +26,10 @@ public class Application implements Serializable {
 	private String unid;
 	private boolean isNew;
 	
-	private String name;
 	private String path;
 	private String server;
 	private boolean exists;
+	private String name;
 	
 	private Vector<String> profiles;
 	private String newProfile;
@@ -42,41 +45,6 @@ public class Application implements Serializable {
 	private boolean autoLaunch;
 	
 	private boolean editable;
-	
-	private static final String NOT_FOUND = "(title not found)";
-	
-	public Application(String server, String path) {
-		
-		this.server = server;
-		this.path = path;
-		
-		Database db = null;
-		
-		try {
-			
-			name = NOT_FOUND;
-			
-			Session session = (Session) Utils.resolveVariable("session");
-			db = session.getDatabase( (server.indexOf("Current Server") > -1 ? "" : server), path);
-			
-			if (db != null && db.isOpen() ) {
-
-				name = db.getTitle();
-				exists = true;
-
-			}
-			
-		} catch (Exception e) {
-			
-			DebugToolbar.get().error(e);
-			
-		} finally {
-			
-			Utils.recycle(db);
-			
-		}
-		
-	}
 	
 	/*
 	 * Constructor called when opening a new or existing application
@@ -129,16 +97,16 @@ public class Application implements Serializable {
 					
 					profiles			= doc.getItemValue("Profiles");
 					users				= doc.getItemValue("UserName");
-					enabled				= doc.getItemValue("Active").equals("1");
+					enabled				= doc.getItemValueString("Active").equals("1");
 					server				= doc.getItemValueString("Server");
 					path				= doc.getItemValueString("Path");
 					selectionFormula 	= doc.getItemValueString("ReplFormula");
 					sendToAllDevices 	= doc.getItemValueString("ReplLimitByDevice").equals("0");		//all=0, selected=1
 					deviceTypesEnabled 	= doc.getItemValue("ReplDevices");			
-					sendAttachments 	= doc.getItemValueString("ReplOmitAttach").equals("0");				//0=send, 1=do not send
+					sendAttachments 	= doc.getItemValueString("ReplOmitAttach").equals("0");			//0=send, 1=do not send
 					attachmentExtensions = doc.getItemValue("ReplAttachmentExts");
-					showOnWorkspace 	= !doc.getItemValue("ShowOnWS").equals("no");						//no/ blank
-					autoLaunch			= doc.getItemValueString("AutoLaunchApp").equals("yes");			//yes/ blank
+					showOnWorkspace 	= !doc.getItemValueString("ShowOnWS").equals("no");				//no/ blank
+					autoLaunch			= doc.getItemValueString("AutoLaunchApp").equals("yes");		//yes/ blank
 					
 				}
 				
@@ -175,6 +143,32 @@ public class Application implements Serializable {
 		
 	}
 	
+	public Application(String server, String path, boolean enabled, String unid) {
+		this.server = server;
+		this.path = path;
+		this.enabled = enabled;
+		this.unid = unid;
+	}
+
+	private boolean validate() {
+		
+		ArrayList<String> errors = new ArrayList<String>();
+		
+		if (StringUtil.isEmpty(path) ) {
+			errors.add("- enter the path to the application");
+		}
+
+		if (users.size()==0 && profiles.size()==0) {
+			errors.add("- assign this application to at least one user or profile");
+		}
+		
+		if (errors.size()>0) {
+			Utils.addErrorMessage("Please correct the following errors:<br />" + Utils.join(errors, "<br />"));
+		}
+		
+		return errors.size()==0;
+	}
+	
 	public boolean save() {
 		
 		Document doc = null;
@@ -182,20 +176,34 @@ public class Application implements Serializable {
 		
 		try {
 			
+			//perform validations
+			if ( !validate() ) {
+				return false;
+			}
+			
 			if (isNew) {
 				
 				doc = ExtLibUtil.getCurrentDatabase().createDocument();
 				doc.replaceItemValue("Form", "UserDatabase");
 				
-				isNew = false;
 			} else {
 				
 				doc = Utils.getDocument(unid);
 				
 			}
 
+			//combine selected profiles and new profile
+			if ( StringUtil.isNotEmpty(newProfile) && !Utils.containsIgnoreCase( profiles, newProfile ) ) {
+				profiles.add( StringUtil.trim(newProfile) );
+			}
+			
 			doc.replaceItemValue("Profiles", profiles);
-			doc.replaceItemValue("UserName", users);
+			
+			//set username and make it a names field
+			Item itUserName = doc.replaceItemValue("UserName", users);
+			itUserName.setNames(true);
+			itUserName.recycle();
+			
 			doc.replaceItemValue("Active", (enabled ? "1" : "0"));
 			doc.replaceItemValue("Server", server);
 			doc.replaceItemValue("Path", path);
@@ -212,6 +220,26 @@ public class Application implements Serializable {
 			
 			success = doc.save();
 			
+			if (success) {
+				
+				String appName = "";
+				if ( !this.getName().equals( Configuration.TITLE_NOT_FOUND ) ) {
+					appName = "for \"" + this.getName() + "\" ";
+				}
+				
+				if (!isExistingApplication()) {
+					
+					Utils.addWarningMessage("Application document saved. The application you specified (" + path + ") could not be found on the current server");
+				
+				} else {
+					
+					Utils.addInfoMessage( "Application document " + appName + (isNew ? "has been created" : "has been updated") );
+					
+				}
+				
+				isNew = false;
+			}
+			
 		} catch (Exception e) {
 			
 			DebugToolbar.get().error(e);
@@ -227,6 +255,45 @@ public class Application implements Serializable {
 	}
 	
 	/*
+	 * Checks if this application exists (on the current server only)
+	 */
+	private boolean isExistingApplication() {
+		
+		Database dbTarget = null;
+		boolean exists = true;
+		
+		try {
+			Session session = ExtLibUtil.getCurrentSession();
+			String canonicalServerName = "";
+			
+			if ( !StringUtil.isEmpty(server) ) {
+				Name nmServer = session.createName(server);
+				canonicalServerName = nmServer.getCanonical();
+				Utils.recycle(nmServer);
+			}
+			
+			if ( StringUtil.isNotEmpty(server) && !canonicalServerName.equalsIgnoreCase(Configuration.get().getServer() ) ) {
+				//different server: can't check if it exists: abort
+				return exists;
+			}
+			
+			//try to open the database
+			dbTarget = session.getDatabase(null, path, false);
+				
+			if (dbTarget == null) {
+				exists = false;
+			}
+			
+		} catch (Exception e) {
+			DebugToolbar.get().error(e);
+		} finally {
+			Utils.recycle(dbTarget);
+		}
+			
+		return exists;
+	}
+	
+	/*
 	 * Removes an application document
 	 */
 	public boolean remove() {
@@ -237,12 +304,22 @@ public class Application implements Serializable {
 		try {
 			
 			doc = Utils.getDocument(unid);
-			doc.remove(true);
+			success = doc.remove(true);
+			
+			if (success) {
+				
+				String appName = "";
+				if ( !this.getName().equals( Configuration.TITLE_NOT_FOUND ) ) {
+					appName = "for \"" + this.getName() + "\" ";
+				}
+				
+				Configuration.get().reloadStatistics();
+				
+				Utils.addInfoMessage( "Application document" + appName + "has been removed" );
+			}
 			
 		} catch (Exception e) {
-				
 			DebugToolbar.get().error(e);
-				
 		} finally {
 				
 			Utils.recycle(doc);
@@ -253,16 +330,14 @@ public class Application implements Serializable {
 	}
 	
 	
-	public String getKey() {
-		return this.server + "!!" + this.path;
-	}
-
 	public String getName() {
+		if (name == null) {
+			name = Configuration.get().getAppName(server, path);
+		}
 		return name;
 	}
 
 	public String getPath() {
-		DebugToolbar.get().debug("get it: " + path);
 		return path;
 	}
 
@@ -284,7 +359,7 @@ public class Application implements Serializable {
 
 	@SuppressWarnings("unchecked")
 	public void setProfiles( Object to ) {
-		profiles = Utils.objectToVector( to, "profiles" );
+		profiles = Utils.objectToVector( to );
 	}
 
 	public String getNewProfile() {
@@ -301,7 +376,7 @@ public class Application implements Serializable {
 
 	@SuppressWarnings("unchecked")
 	public void setUsers( Object to) {
-		users = Utils.objectToVector( to, "users" );
+		users = Utils.objectToVector( to );
 	}
 
 	public String getSelectionFormula() {
@@ -320,12 +395,13 @@ public class Application implements Serializable {
 		this.sendToAllDevices = new Boolean(to);
 	}
 
-	public Vector<String> getDeviceTypesEnabled() {
+	public Object getDeviceTypesEnabled() {
 		return deviceTypesEnabled;
 	}
 
-	public void setDeviceTypesEnabled(Vector<String> deviceTypesEnabled) {
-		this.deviceTypesEnabled = deviceTypesEnabled;
+	@SuppressWarnings("unchecked")
+	public void setDeviceTypesEnabled( Object to) {
+		deviceTypesEnabled = Utils.objectToVector( to );
 	}
 
 	public String getSendAttachments() {
@@ -335,12 +411,12 @@ public class Application implements Serializable {
 		this.sendAttachments = new Boolean(to);
 	}
 
-	public Vector<String> getAttachmentExtensions() {
+	public Object getAttachmentExtensions() {
 		return attachmentExtensions;
 	}
-
-	public void setAttachmentExtensions(Vector<String> attachmentExtensions) {
-		this.attachmentExtensions = attachmentExtensions;
+	@SuppressWarnings("unchecked")
+	public void setAttachmentExtensions( Object to) {
+		this.attachmentExtensions = Utils.objectToVector( to );
 	}
 
 	public String getShowOnWorkspace() {
@@ -359,8 +435,6 @@ public class Application implements Serializable {
 	}
 
 	public void setPath(String path) {
-		DebugToolbar.get().debug("path set to " + path);
-		
 		this.path = path;
 	}
 
@@ -383,5 +457,8 @@ public class Application implements Serializable {
 		return isNew;
 	}
 	
+	public String getUnid() {
+		return unid;
+	}
 	
 }

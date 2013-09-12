@@ -1,12 +1,18 @@
 package com.teamstudio.unplugged;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 
+import lotus.domino.Name;
+import lotus.domino.Item;
+import lotus.domino.Agent;
 import lotus.domino.Database;
 import lotus.domino.Document;
+import lotus.domino.Session;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 
 import eu.linqed.debugtoolbar.DebugToolbar;
@@ -17,13 +23,19 @@ public class Settings implements Serializable {
 	
 	private boolean isEditable;
 	
+	private String licenseNumber;
 	private String licenseKey;
+	
+	private String licenseNumber_in;
+	private String licenseKey_in;
+	
 	private int licenseEnabledUsers;
 	private Date licenseExpirationDate;
+	boolean editLicense;
 	
 	private Vector<String> licensedServer;
 	
-	private int maxResponseSize;
+	private Double maxResponseSize;
 	
 	private String logLogin;
 	private Vector<String> logLoginTypes;
@@ -54,18 +66,12 @@ public class Settings implements Serializable {
 			dbCurrent = ExtLibUtil.getCurrentDatabase();
 			docSettings = dbCurrent.getProfileDocument("(settings)", "(unpluggedconfig)");
 			
-			licenseKey = docSettings.getItemValueString("SKILN");
-			licenseEnabledUsers = docSettings.getItemValueInteger("LicensedUsers");
-			
-			licenseExpirationDate = Utils.readDate(docSettings, "Expires");
-			
 			licensedServer = docSettings.getItemValue("LicensedServers");
 			
-			maxResponseSize = docSettings.getItemValueInteger("MaxRespSize");
+			maxResponseSize = docSettings.getItemValueDouble("MaxRespSize");
 			
 			logLogin = docSettings.getItemValueString("LogOpts_Login");
 			logLoginTypes = docSettings.getItemValue("LogTypes_Login");
-			
 			
 			logPush = docSettings.getItemValueString("LogOpts_Push");
 			logPushTypes = docSettings.getItemValue("LogTypes_Push");
@@ -76,6 +82,14 @@ public class Settings implements Serializable {
 			logPullCopyNoteOnFailure = docSettings.getItemValueString("LogErrorNote").equals("1");
 			
 			logMail = docSettings.getItemValueString("LogOpts_Mail");
+			
+			//retrieve license settings
+			Document docPM = dbCurrent.createDocument();
+			Agent settingsAgent = dbCurrent.getAgent("websettings");
+			
+			settingsAgent.runWithDocumentContext(docPM);
+			
+			readLicenseSettings(docPM);
 			
 			
 		} catch (Exception e) {
@@ -88,6 +102,55 @@ public class Settings implements Serializable {
 		
 	}
 	
+	private void readLicenseSettings(Document docPM) {
+		
+		try {
+			
+			licenseNumber = docPM.getItemValueString("LicenseNumber");
+			licenseKey = docPM.getItemValueString("Key");
+			licenseExpirationDate = Utils.readDate(docPM, "Expires");
+			
+			//fields use to check if the license settings have changed... 
+			licenseNumber_in = docPM.getItemValueString("LicenseNumber");
+			licenseKey_in = docPM.getItemValueString("Key");
+			
+			licenseEnabledUsers = docPM.getItemValueInteger("LicensedUsers");
+			
+		} catch (Exception e) {
+			
+			DebugToolbar.get().error(e);
+		
+		}
+		
+	}
+	
+	private boolean validate() {
+		
+		ArrayList<String> errors = new ArrayList<String>();
+		
+		if (editLicense) {
+			
+			if (StringUtil.isEmpty(licenseKey)) {
+				errors.add("- enter a license key");
+			}
+			
+			if (StringUtil.isEmpty(licenseNumber)) {
+				errors.add("- enter a license number");
+			}
+
+		}
+		
+		if ( licensedServer.size() ==0 ) {
+			errors.add("- enter the server(s) where Unplugged may run");
+		}
+		
+		if (errors.size()>0) {
+			Utils.addErrorMessage("Please correct the following errors:<br />" + Utils.join(errors, "<br />"));
+		}
+		
+		return errors.size()==0;
+	}
+	
 	/*
 	 * Save the settings back to the database
 	 */
@@ -95,15 +158,68 @@ public class Settings implements Serializable {
 		
 		boolean saved = false;
 		
+		boolean licenseUpdated = false;
+		
 		Database dbCurrent = null;
 		Document docSettings = null;
+		Document docPM = null;
+		Agent settingsAgent = null;
 		
 		try {
 			
-			dbCurrent = ExtLibUtil.getCurrentDatabase();
+			//perform validations
+			if ( !validate() ) {
+				return false;
+			}
+			
+			Session session = ExtLibUtil.getCurrentSession();
+			dbCurrent = session.getCurrentDatabase();
+			
+			if (editLicense) {
+				
+				if ( !licenseKey.equals(licenseKey_in) || !licenseNumber.equals( licenseNumber_in) ) {
+					
+					//license changed - store new license...
+					docPM = dbCurrent.createDocument();
+					settingsAgent = dbCurrent.getAgent("websettings");
+					
+					docPM.replaceItemValue("NewKey", licenseKey);
+					docPM.replaceItemValue("NewLicenseNumber", licenseNumber);
+					
+					settingsAgent.runWithDocumentContext(docPM);
+
+					//check for errors and read updated settings
+					if (docPM.getItemValueString("Status").equals("Invalid") ) {
+						
+						Utils.addErrorMessage("The license key and/or number you have entered are not correct. Settings not saved.");
+						return false;
+						
+					} else {
+						
+						licenseUpdated = true;
+					}
+					
+					readLicenseSettings(docPM);
+					
+				}
+				
+				editLicense = false;
+			}
+			
+			
+			//convert server names to canonical form
 			docSettings = dbCurrent.getProfileDocument("(settings)", "(unpluggedconfig)");
 			
-			docSettings.replaceItemValue("LicensedServers", licensedServer);
+			Vector<String> licensedServersCanonical = new Vector<String>();
+			for (String serverName : licensedServer) {
+				Name n = session.createName(serverName);
+				licensedServersCanonical.add( n.getCanonical());
+				n.recycle();
+			}
+			
+			Item s = docSettings.replaceItemValue("LicensedServers", licensedServersCanonical);
+			s.setNames(true);
+			Utils.recycle(s);
 			
 			docSettings.replaceItemValue("MaxRespSize", maxResponseSize);
 			
@@ -126,17 +242,26 @@ public class Settings implements Serializable {
 		
 			saved = docSettings.save();
 			
-			//reload the configuration bean (we read information from it on the dashboard
-			Configuration.get().reload();
+			if (saved) {
+				
+				if (licenseUpdated ) {
+					Utils.addInfoMessage( "License has been updated. Settings have been saved" );
+				} else {
+					Utils.addInfoMessage( "Settings have been saved" );
+				}
+				
+				//reload the configuration bean (we read information from it on the dashboard)
+				Configuration.get().reload();
+				
+			}
 			
 			
 		} catch (Exception e) {
 			
 			DebugToolbar.get().error(e);
-			
 		} finally {
 			
-			Utils.recycle(docSettings);
+			Utils.recycle(docSettings, settingsAgent, docPM);
 		}
 		
 		return saved;
@@ -146,9 +271,15 @@ public class Settings implements Serializable {
 	public String getLicenseKey() {
 		return licenseKey;
 	}
-
-	public void setLicenseKey(String licenseNumber) {
-		this.licenseKey = licenseNumber;
+	public void setLicenseKey(String to) {
+		this.licenseKey = to;
+	}
+	
+	public String getLicenseNumber() {
+		return licenseNumber;
+	}
+	public void setLicenseNumber(String to) {
+		this.licenseNumber = to;
 	}
 
 	public int getLicenseEnabledUsers() {
@@ -167,19 +298,19 @@ public class Settings implements Serializable {
 		this.licenseExpirationDate = licenseExpirationDate;
 	}
 
-	public Vector<String> getLicensedServer() {
+	public Object getLicensedServer() {
 		return licensedServer;
 	}
 
-	public void setLicensedServer(Vector<String> licensedServer) {
-		this.licensedServer = licensedServer;
+	@SuppressWarnings("unchecked")
+	public void setLicensedServer(Object licensedServer) {
+		this.licensedServer = Utils.objectToVector( licensedServer);
 	}
 
-	public int getMaxResponseSize() {
-		return maxResponseSize;
+	public Double getMaxResponseSize() {
+		return Double.valueOf(maxResponseSize);
 	}
-
-	public void setMaxResponseSize(int maxResponseSize) {
+	public void setMaxResponseSize(Double maxResponseSize) {
 		this.maxResponseSize = maxResponseSize;
 	}
 
@@ -191,12 +322,13 @@ public class Settings implements Serializable {
 		this.logLogin = logLogin;
 	}
 
-	public Vector<String> getLogLoginTypes() {
+	public Object getLogLoginTypes() {
 		return logLoginTypes;
 	}
 
-	public void setLogLoginTypes(Vector<String> logLoginTypes) {
-		this.logLoginTypes = logLoginTypes;
+	@SuppressWarnings("unchecked")
+	public void setLogLoginTypes( Object logLoginTypes) {
+		this.logLoginTypes = Utils.objectToVector( logLoginTypes );;
 	}
 
 	public String getLogPush() {
@@ -207,12 +339,13 @@ public class Settings implements Serializable {
 		this.logPush = logPush;
 	}
 
-	public Vector<String> getLogPushTypes() {
+	public Object getLogPushTypes() {
 		return logPushTypes;
 	}
 
-	public void setLogPushTypes(Vector<String> logPushTypes) {
-		this.logPushTypes = logPushTypes;
+	@SuppressWarnings("unchecked")
+	public void setLogPushTypes(Object logPushTypes) {
+		this.logPushTypes = Utils.objectToVector( logPushTypes );
 	}
 
 	public String getLogPushNotifyUser() {
@@ -231,12 +364,12 @@ public class Settings implements Serializable {
 		this.logPull = logPull;
 	}
 
-	public Vector<String> getLogPullTypes() {
+	public Object getLogPullTypes() {
 		return logPullTypes;
 	}
-
-	public void setLogPullTypes(Vector<String> logPullTypes) {
-		this.logPullTypes = logPullTypes;
+	@SuppressWarnings("unchecked")
+	public void setLogPullTypes(Object logPullTypes) {
+		this.logPullTypes = Utils.objectToVector( logPullTypes );;
 	}
 
 	public String getLogPullCopyNoteOnFailure() {
@@ -261,6 +394,14 @@ public class Settings implements Serializable {
 
 	public void setEditable(boolean isEditable) {
 		this.isEditable = isEditable;
+	}
+
+	public boolean isEditLicense() {
+		return editLicense;
+	}
+
+	public void setEditLicense(boolean editLicense) {
+		this.editLicense = editLicense;
 	}
 	
 }

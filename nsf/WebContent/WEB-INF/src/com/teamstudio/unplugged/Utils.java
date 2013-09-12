@@ -9,6 +9,7 @@ import java.util.Vector;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 
 import eu.linqed.debugtoolbar.DebugToolbar;
@@ -48,7 +49,6 @@ public class Utils {
 	public static void recycle(Object... dominoObjects) {
 	    for (Object dominoObject : dominoObjects) {
 	        if (null != dominoObject) {
-	        	
 	            if (dominoObject instanceof Base) {
 	                try {
 	                    ( (Base) dominoObject).recycle();
@@ -98,6 +98,10 @@ public class Utils {
 		
 	}
 	
+	/*
+	 * Read the value from a DateTime field from a document. Returns 0 if the
+	 * field wasn't field/ doesn't contain a date 
+	 */
 	public static Date readDate( Document doc, String itemName) {
 		
 		Item itDate = null;
@@ -129,7 +133,7 @@ public class Utils {
 	}
 	
 	/*
-	 * Retrieve a documennt from the current database using either a Note- or Universal ID 
+	 * Retrieve a document from the current database using either a Note- or Universal ID 
 	 */
 	public static Document getDocument(String id) {
 		
@@ -156,14 +160,17 @@ public class Utils {
 	 * Function to deal with multi-value fields and bean-bindings
 	 */
 	@SuppressWarnings("unchecked")
-	public static Vector objectToVector(Object in, String t) {
+	public static Vector objectToVector(Object in) {
 		
 		Vector result = null;
 		
 		if (in instanceof String) {
-			
+		
 			result = new Vector();
-			result.add(in);
+			
+			if (StringUtil.isNotEmpty( (String) in) ) {
+				result.add(in);
+			}
 
 		} else if (in instanceof List) {
 			
@@ -199,5 +206,50 @@ public class Utils {
 		return sb.toString();
 		
 	}
+	
+	/*
+	 * Case insensitve contains function for Lists of String
+	 */
+	public static boolean containsIgnoreCase(List<String> in, String searchValue) {
+		Iterator<String> it = in.iterator();
+		while (it.hasNext()) {
+			if (it.next().equalsIgnoreCase(searchValue)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Checks if a pager should be visible (has more than 1 page).
+	 */
+	public static boolean isPagerVisible( com.ibm.xsp.component.xp.XspPager pager ) {
+		com.ibm.xsp.component.UIPager.PagerState state = pager.createPagerState();
+		return state.getRowCount() > state.getRows(); 
+	}
+	
+	/*
+	 * Abbreviates a notes or LDAP name (string with syntax XX=value/XX=value/XX=value
+	 */
+	public static String getAbbreviatedName(String in) {
+		
+		if (in.indexOf("/") == -1 || in.indexOf("=") ==-1) {
+			return in;
+		}
+		
+		String[] comps = in.split("/");
+		StringBuilder sb = new StringBuilder();
+		int els = comps.length;
+		
+		for (int i=0; i<els; i++) {
+			sb.append( comps[i].substring( comps[i].indexOf("=")+1 ) );
+			if (i<els-1) {
+				sb.append("/");
+			}
+		}
+		
+		return sb.toString();
+	}
+
 	
 }

@@ -9,37 +9,64 @@
 		<h1>Device</h1>
 	</div>
 
-	<xp:table>
-		<xp:tr>
-			<xp:td>
-				<xp:label value="User name:" id="userName_Label1" for="userName1"></xp:label>
-			</xp:td>
+	<xp:table styleClass="lotusFormTable lotusForm">
+		<tr class="lotusFormFieldRow">
+			<td class="lotusFormLabel">
+				<xp:label value="Username (created by):" id="userName_Label1" for="userName1"></xp:label>
+			</td>
 			<xp:td>
 				<xp:inputText value="#{docDevice.UserName}" id="userName1"></xp:inputText>
 			</xp:td>
+		</tr>
+		<xp:tr styleClass="lotusFormFieldRow">
+			<td class="lotusFormLabel">
+				<xp:label value="Status:" id="active_Label1" for="active1"></xp:label>
+			</td>
+			<td class="radioGroup">
+				<xp:radioGroup id="radioGroup1" value="#{docDevice.Active}">
+					<xp:selectItem itemLabel="Enabled" itemValue="1"></xp:selectItem>
+					<xp:selectItem itemLabel="Disabled" itemValue="0"></xp:selectItem>
+				</xp:radioGroup>
+			</td>
 		</xp:tr>
-		<xp:tr>
-			<xp:td>
-				<xp:label value="Active:" id="active_Label1" for="active1"></xp:label>
-			</xp:td>
-			<xp:td>
-				<xp:inputText value="#{docDevice.Active}" id="active1"></xp:inputText>
-			</xp:td>
-		</xp:tr>
-		<xp:tr>
-			<xp:td>
-				<xp:label value="I d:" id="iD_Label1" for="iD1"></xp:label>
-			</xp:td>
+		<xp:tr styleClass="lotusFormFieldRow">
+			<td class="lotusFormLabel">
+				<xp:label value="Device ID:" id="iD_Label1" for="iD1"></xp:label>
+			</td>
 			<xp:td>
 				<xp:inputText value="#{docDevice.ID}" id="iD1"></xp:inputText>
 			</xp:td>
 		</xp:tr>
+		<xp:tr>
+		
+			<td class="lotusFormFooter" colspan="3">
+							
+				<!-- remove -->
+				<xp:button value="Delete" id="button3" rendered="#{javascript:!docDevice.isNewNote()}">
+					<i class="glyphicons unp-glyph-icon remove_2" />
+			
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusContent">
+						<xp:this.action><![CDATA[#{javascript:var n:NotesName = session.createName( docDevice.getItemValueString("UserName") );
+						var shortId = com.teamstudio.unplugged.Device.getShortId( docDevice.getItemValueString("ID") ); 
+						if (docDevice.getDocument().remove(true) ){
+							configBean.reloadStatistics();
+						
+							com.teamstudio.unplugged.Utils.addInfoMessage("Device for user " + n.getAbbreviated() + " with id " + shortId + " has been removed");
+							getComponent("dynamicContent1").show("devices") ;
+						}}]]></xp:this.action>
+						<xp:this.script><![CDATA[return confirm("Are you sure you want to permanently delete this device?");]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+				
+				<!-- existing docs, read mode: back to view -->
+				<xp:link escape="true" text="Back to list" id="link2" rendered="#{javascript:!docDevice.isEditable()}">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial" immediate="true" refreshId="dynamicContent1">
+						<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("devices")}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+			
+			</td>
+		</xp:tr>
 	</xp:table>
 
-	<xc:ccButtons dataSource="#{docDevice}" isNew="#{javascript:docDevice.isNewNote()}" 
-		isEditable="#{javascript:docDevice.isEditable()}"
-		dataSourceName="docDevice"
-		typeName="Device" listContentKey="devices">
-
-	</xc:ccButtons>
 </xp:view>

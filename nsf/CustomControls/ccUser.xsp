@@ -2,117 +2,178 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex" xmlns:xc="http://www.ibm.com/xsp/custom">
 
 	<xp:this.data>
-		<xp:dominoDocument var="docUser" formName="User"></xp:dominoDocument>
+		<xe:objectData createObject="#{javascript:new com.teamstudio.unplugged.User()}" var="user"></xe:objectData>
 	</xp:this.data>
 
 	<div class="lotusHeader">
-		<xp:text escape="true" tagName="h1" id="computedField1">
-			<xp:this.value><![CDATA[#{javascript:if (docUser.isNewNote() ) {
+		<xp:text escape="false" tagName="h1" id="computedField1">
+			<xp:this.value><![CDATA[#{javascript:if (user.isNew() ) {
 	return "New user";
 } else {
 
-	var user = docUser.getItemValueString("userName");
-	var nm = session.createName(user);
-	return nm.getAbbreviated();
+	return "User <b>" + user.getAbbreviatedName() + "</b>";
 	
 }}]]></xp:this.value>
 		</xp:text>
 	</div>
+	
+	<xp:panel readonly="#{javascript:!user.isEditable()}">
 
-	<xp:messages id="messages1"></xp:messages>
-
-	<table class="lotusFormTable lotusForm">
-		<tbody>
-
-			<tr class="lotusFormFieldRow">
-				<td class="lotusFormLabel" style="width: 20%">
-					<label>Username *:</label>
-				</td>
-				<td>
-
-					<xp:inputText id="inputUserName" required="true" value="#{docUser.UserName}">
-
-						<xp:typeAhead mode="full" minChars="1" preventFiltering="true">
-							<xp:this.valueList><![CDATA[#{javascript:getComponent("namePicker1").getTypeAheadValue(this)}]]></xp:this.valueList>
-						</xp:typeAhead>
-					</xp:inputText>
-					<xe:namePicker id="namePicker1" for="inputUserName">
-						<xe:accordion id="accordion1"></xe:accordion>
-						<xe:this.dataProvider>
-							<xe:dominoNABNamePicker></xe:dominoNABNamePicker>
-						</xe:this.dataProvider>
-					</xe:namePicker>
-				</td>
-			</tr>
-
-			<tr class="lotusFormFieldRow">
-				<td class="lotusFormLabel">
-					<label>Status:</label>
-				</td>
-				<td>
-					<xp:radioGroup id="radioGroup3" value="#{docUser.Active}" defaultValue="1">
-						<xp:selectItem itemLabel="Enabled" itemValue="1"></xp:selectItem>
-						<xp:selectItem itemLabel="Disabled" itemValue="0"></xp:selectItem>
-					</xp:radioGroup>
-				</td>
-			</tr>
-
-			<tr class="lotusFormFieldRow">
-				<td class="lotusFormLabel">
-					<label>Profiles:</label>
-				</td>
-				<td>
-					<xp:checkBoxGroup id="checkBoxGroup1" value="#{docUser.Profiles}">
-						<xp:selectItems>
-							<xp:this.value><![CDATA[#{javascript:var lu = @DbColumn( @DbName(), "Profiles", 1);
+		<table class="lotusFormTable lotusForm">
+			<tbody>
+	
+				<tr class="lotusFormFieldRow">
+					<td class="lotusFormLabel" style="width: 20%">
+						<label>Username *:</label>
+					</td>
+					<td>
 					
-					return lu;}]]></xp:this.value>
-						</xp:selectItems>
-					</xp:checkBoxGroup>
-				</td>
-			</tr>
+						<xp:text escape="false" rendered="#{javascript:!user.isEditable()}" disableTheme="true" value="#{javascript:user.getAbbreviatedName()}"></xp:text>
 
-			<tr class="lotusFormFieldRow">
-				<td class="lotusFormLabel">
-					<label>Sync device log:</label>
-				</td>
-				<td>
-					<xp:radioGroup id="radioGroup1" value="#{docUser.DevicePushRepLog}" defaultValue="0">
-						<xp:selectItem itemLabel="Yes" itemValue="1"></xp:selectItem>
-						<xp:selectItem itemLabel="No" itemValue="0"></xp:selectItem>
-					</xp:radioGroup>
-
-				</td>
-			</tr>
-
-			<tr class="lotusFormFieldRow">
-				<td class="lotusFormLabel">
-					<label>User can create devices:</label>
-				</td>
-				<td>
-					<xp:radioGroup id="radioGroup2" value="#{docUser.CanCreateDevices}" defaultValue="1">
-						<xp:selectItem itemLabel="Yes" itemValue="1"></xp:selectItem>
-						<xp:selectItem itemLabel="No" itemValue="0"></xp:selectItem>
-					</xp:radioGroup>
-
-				</td>
-			</tr>
-
-			<tr>
-				<td class="lotusFormFooter" colspan="3">
-
-					<xc:ccButtons dataSource="#{docUser}" dataSourceName="docUser" listContentKey="users" isNew="#{javascript:docUser.isNewNote()}"
-						isEditable="#{javascript:docUser.isEditable()}" typeName="User">
-					</xc:ccButtons>
-
-				</td>
-			</tr>
-
-		</tbody>
-	</table>
+						<xp:inputText rendered="#{javascript:user.isEditable()}"  id="inputUserName" required="true" value="#{user.userName}" style="width: 250px; height: 18px">
+							<xp:this.validators>
+								<xp:validateRequired message="Select a user or enter a username directly"></xp:validateRequired>
+							</xp:this.validators>
+							<xp:typeAhead mode="full" minChars="1" preventFiltering="true">
+								<xp:this.valueList><![CDATA[#{javascript:getComponent("namePicker6").getTypeAheadValue(this)}]]></xp:this.valueList>
+							</xp:typeAhead>
+						</xp:inputText>
 	
-	<xc:ccUserDevices userName="#{docUser.UserName}" />
+						<xe:namePicker id="namePicker6" for="inputUserName" pickerText="Select">
+							<xe:this.dataProvider>
+								<xe:namePickerAggregator>
+									<xe:this.dataProviders>
+										<xe:dominoNABNamePicker></xe:dominoNABNamePicker>
+									</xe:this.dataProviders>
+								</xe:namePickerAggregator>
+							</xe:this.dataProvider>
+						</xe:namePicker>
 	
-	<xc:ccUserApplications userName="#{docUser.UserName}" profiles="#{docUser.Profiles}" />
+					</td>
+				</tr>
+	
+				<tr class="lotusFormFieldRow">
+					<td class="lotusFormLabel">
+						<label>Status:</label>
+					</td>
+					<td class="radioGroup">
+						<xp:radioGroup id="radioGroup3" value="#{user.enabled}" defaultValue="true">
+							<xp:selectItem itemLabel="Enabled" itemValue="true"></xp:selectItem>
+							<xp:selectItem itemLabel="Disabled" itemValue="false"></xp:selectItem>
+						</xp:radioGroup>
+					</td>
+				</tr>
+	
+				<tr class="lotusFormFieldRow">
+					<td class="lotusFormLabel">
+						<label>Profiles:</label>
+					</td>
+					<td class="checkBoxGroup">
+						<xp:checkBoxGroup id="checkBoxGroup1" value="#{user.profiles}">
+							<xp:selectItems>
+								<xp:this.value><![CDATA[#{javascript:var lu = @DbColumn( @DbName(), "Profiles", 1);
+						
+						return lu;}]]></xp:this.value>
+							</xp:selectItems>
+						</xp:checkBoxGroup>
+						<xp:div styleClass="subOption" rendered="#{javascript:user.isEditable()}">
+							Create a new profile:<xp:inputText style="margin-left:5px" id="inputText4" value="#{user.newProfile}"></xp:inputText>
+						</xp:div>
+					</td>
+				</tr>
+	
+				<tr class="lotusFormFieldRow">
+					<td class="lotusFormLabel">
+						<label>Sync device log:</label>
+					</td>
+					<td class="radioGroup">
+						<xp:radioGroup id="radioGroup1" value="#{user.syncXPagesEngineLog}" defaultValue="false">
+							<xp:selectItem itemLabel="Yes" itemValue="true"></xp:selectItem>
+							<xp:selectItem itemLabel="No" itemValue="false"></xp:selectItem>
+						</xp:radioGroup>
+	
+					</td>
+				</tr>
+	
+				<tr class="lotusFormFieldRow">
+					<td class="lotusFormLabel">
+						<label>User can create devices:</label>
+					</td>
+					<td class="radioGroup">
+						<xp:radioGroup id="radioGroup2" value="#{user.canCreateDevices}" defaultValue="true">
+							<xp:selectItem itemLabel="Yes" itemValue="true"></xp:selectItem>
+							<xp:selectItem itemLabel="No" itemValue="false"></xp:selectItem>
+						</xp:radioGroup>
+	
+					</td>
+				</tr>
+	
+				<tr>
+					<td class="lotusFormFooter" colspan="3">
+					
+						<!-- edit -->
+						<xp:button value="Edit" id="button2" rendered="#{javascript:!user.isEditable()}">
+							<i class="glyphicons unp-glyph-icon pencil" />
+							<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusContent">
+								<xp:this.action><![CDATA[#{javascript:user.setEditable(true);
+												}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:button>
+					
+						<!-- save -->
+						<xp:button value="Save" id="button1" rendered="#{javascript:user.isEditable()}">
+							<i class="glyphicons unp-glyph-icon floppy_disk" />
+					
+							<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusContent">
+								<xp:this.action><![CDATA[#{javascript:if (user.save() ){
+									getComponent("dynamicContent1").show("users"); 
+								}}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:button>
+						
+						<!-- remove -->
+						<xp:button value="Delete" id="button3" rendered="#{javascript:!user.isNew()}">
+							<i class="glyphicons unp-glyph-icon remove_2" />
+					
+							<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusContent">
+								<xp:this.action><![CDATA[#{javascript:if (user.remove() ){
+									getComponent("dynamicContent1").show("users") ;
+								}}]]></xp:this.action>
+								<xp:this.script><![CDATA[return confirm("Are you sure you want to permanently delete this user?");]]></xp:this.script>
+							</xp:eventHandler>
+						</xp:button>
+						
+						<!-- new docs: cancel returns to view -->
+						<xp:link escape="true" text="Cancel" id="link3" rendered="#{javascript:user.isNew()}">
+							<xp:eventHandler event="onclick" submit="true" refreshMode="partial" immediate="true" refreshId="dynamicContent1">
+								<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("users")}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+					
+						<!-- existing docs, read mode: back to view -->
+						<xp:link escape="true" text="Back to list" id="link2" rendered="#{javascript:!user.isEditable()}">
+							<xp:eventHandler event="onclick" submit="true" refreshMode="partial" immediate="true" refreshId="dynamicContent1">
+								<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("users")}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+					
+						<!-- existing docs, edit mode: back to read mode -->
+						<xp:link escape="true" text="Cancel" id="link1">
+							<xp:this.rendered><![CDATA[#{javascript:!user.isNew() && user.isEditable()}]]></xp:this.rendered>
+							<xp:eventHandler event="onclick" submit="true" refreshMode="partial" immediate="true" refreshId="dynamicContent1">
+								<xp:this.action><![CDATA[#{javascript:user.setEditable(false);}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+	
+					</td>
+				</tr>
+	
+			</tbody>
+		</table>
+	</xp:panel>
+	
+	<xc:ccUserDevices userName="#{user.userName}" rendered="#{javascript:!user.isNew()}" />
+	
+	<xc:ccUserApplications user="#{user}" rendered="#{javascript:!user.isNew()}" />
 
 </xp:view>

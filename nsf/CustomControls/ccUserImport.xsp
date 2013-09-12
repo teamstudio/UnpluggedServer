@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<xp:this.data>
+		<xe:objectData createObject="#{javascript:new com.teamstudio.unplugged.UserImport()}" var="userImport"></xe:objectData>
+	</xp:this.data>
 
 	<xp:this.acl>
 		<xp:acl>
@@ -11,12 +15,10 @@
 			</xp:this.entries>
 		</xp:acl>
 	</xp:this.acl>
-	
+
 	<div class="lotusHeader">
 		<h1>User import</h1>
 	</div>
-
-	//TODO: Only user's with Editor ACL access
 
 	<table class="lotusFormTable lotusForm">
 		<tbody>
@@ -27,8 +29,17 @@
 				</td>
 				<td>
 
-					<xp:fileUpload id="fileUpload1"></xp:fileUpload>
+					<xp:fileUpload id="fileUpload1" value="#{userImport.batchFile}"></xp:fileUpload>
 
+				</td>
+			</tr>
+
+			<tr class="lotusFormFieldRow">
+				<td class="lotusFormLabel">
+					<label>Import log:</label>
+				</td>
+				<td>
+					<xp:text id="textArea" escape="false" value="#{userImport.log}" />
 				</td>
 			</tr>
 
@@ -36,8 +47,10 @@
 				<td class="lotusFormFooter" colspan="3">
 
 					<xp:button value="Process batch file" id="button1">
-						<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
-							<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("users");}]]></xp:this.action>
+						<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript:if ( userImport.processBatchFile() ) { 
+							//getComponent("dynamicContent1").show("users");
+							}}]]></xp:this.action>
 						</xp:eventHandler>
 					</xp:button>
 
@@ -52,5 +65,8 @@
 			</tr>
 		</tbody>
 	</table>
+
+
+
 
 </xp:view>

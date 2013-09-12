@@ -10,6 +10,7 @@
 			options.push( { label : "Dashboard", id : "dashboard", count : null, icon : "charts" } );
 options.push( { label : "Applications", id : "applications", count : null, icon : "list" } );
 options.push( { label : "Users", id : "users", count : null, icon : "group"  } );
+options.push( { label : "Profiles", id : "profiles", count : null, icon : "notes"  } );
 options.push( { label : "Devices", id : "devices", count : null, icon : "ipad" } );
 options.push( { label : "Settings", id : "settings", count : null, icon : "cogwheel" } );
 return options;}]]></xp:this.value>
@@ -34,39 +35,38 @@ return options;}]]></xp:this.value>
 			<div class="lotusMenuSection" />
 		</li>
 		
-		<li>
+		
+		<xp:panel tagName="li" readonly="true" 
+			styleClass="#{javascript:(currentUserBean.getSelectedMenuOption().indexOf('dataSyncLogs')==0 ? 'lotusSelected' : '')}">
 			<xp:link escape="true" text="Data synchronizer logs" id="link1">
-				<i class="glyphicons notes" />
+				<i class="glyphicons notes_2" />
 				
 				<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusContent" immediate="true">
-					<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("dataSyncLogs")}]]></xp:this.action>
+					<xp:this.action><![CDATA[#{javascript:currentUserBean.setSelectedMenuOption("dataSyncLogs");
+					getComponent("dynamicContent1").show("dataSyncLogs")}]]></xp:this.action>
 				</xp:eventHandler></xp:link>
-		</li>
-		
-		<li>
-			<div class="lotusMenuSection" />
-		</li>
-		
-		<li>
+		</xp:panel>
+
+		<xp:panel tagName="li" readonly="true" 
+			styleClass="#{javascript:(currentUserBean.getSelectedMenuOption().indexOf('errorLogs')==0 ? 'lotusSelected' : '')}">
 			<xp:link escape="true" text="XPages engine logs" id="link5">
-				<i class="glyphicons notes" />
+				<i class="glyphicons notes_2" />
 				<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusContent" immediate="true">
-					<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("errorLogs")}]]></xp:this.action>
+					<xp:this.action><![CDATA[#{javascript:currentUserBean.setSelectedMenuOption("errorLogs");
+					getComponent("dynamicContent1").show("errorLogs")}]]></xp:this.action>
 				</xp:eventHandler>
 			</xp:link>
-		</li>
+		</xp:panel>
 		
-		<li>
-			<div class="lotusMenuSection" />
-		</li>
-		
-		<li>
+		<xp:panel tagName="li" readonly="true" 
+			styleClass="#{javascript:(currentUserBean.getSelectedMenuOption().indexOf('mailLogs')==0 ? 'lotusSelected' : '')}">
 			<xp:link escape="true" text="Mail logs" id="link2">
-				<i class="glyphicons notes" />
+				<i class="glyphicons notes_2" />
 			<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusContent" immediate="true">
-				<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("mailLogs")}]]></xp:this.action>
+				<xp:this.action><![CDATA[#{javascript:currentUserBean.setSelectedMenuOption("mailLogs");
+				getComponent("dynamicContent1").show("mailLogs")}]]></xp:this.action>
 			</xp:eventHandler></xp:link>
-		</li>
+		</xp:panel>
 		
 	</ul>
 

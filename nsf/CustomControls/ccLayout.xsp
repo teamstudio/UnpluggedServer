@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
 
-	<xc:ccDebugToolbar defaultCollapsed="false" collapseTo="right"></xc:ccDebugToolbar>
+	<xc:ccDebugToolbar defaultCollapsed="true" collapseTo="right" loaded="${currentUserBean.debug}"></xc:ccDebugToolbar>
 
 	<div class="lotusFrame">
+	
 		<div class="lotusBanner" role="banner">
 			<div class="lotusRightCorner">
 				<div class="lotusInner">
@@ -11,9 +12,12 @@
 					<!-- app logo -->
 					<div class="lotusLogo">
 						
-						<xp:link escape="true" text="" id="link3" value="#{javascript:'/.ibmxspres/domino' + configBean.getDbUrl()}" title="Teamstudio Unplugged">
+						<xp:link escape="true" text="" id="link3" value="" title="Teamstudio Unplugged">
 							<xp:image url="/unplugged_inverted@2x.png" alt="Teamstudio" id="image1" style="height:36px; width: 190px;"></xp:image>
-						</xp:link>
+							<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+								<xp:this.action><![CDATA[#{javascript:currentUserBean.setSelectedMenuOption("dashboard");
+facesContext.getExternalContext().redirect(configBean.getDbUrl() );}]]></xp:this.action>
+							</xp:eventHandler></xp:link>
 					</div>
 
 					<ul class="lotusInlinelist lotusUtility">
@@ -29,35 +33,8 @@
 
 				</div>
 			</div>
-		</div>
-
-		<!--<div class="lotusTitleBar">
-			<div class="lotusRightCorner">
-				<div class="lotusInner">
-					<h2 class="lotusEllipsis" title="Unplugged">Unplugged</h2>
-				</div>
-			</div>
-		</div>
-
-		--><!--<div class="lotusPlaceBar">
-			<div class="lotusRightCorner">
-			<div class="lotusInner"> 
-			<h2>Applications</h2>
 			
-			<div class="lotusBtnContainer">
-			<span class="lotusBtn">
-			<a href="javascript:;">Customize</a>
-			</span>
-			<span class="lotusBtn">
-			<a href="javascript:;">More Actions
-			<img class="lotusArrow lotusDropDownSprite" src="../../css/images/blank.gif" alt="" aria-label="show menu" /><span class="lotusAltText">&#x25bc;</span></a>
-			</span>
-			</div>
-			</div>
-			</div>
-			</div>
-			
-		-->
+		</div>
 
 		<xp:div styleClass="lotusMain" id="lotusMain">
 
@@ -75,6 +52,8 @@
 			</div>
 
 			<xp:div styleClass="lotusContent" role="main" id="lotusContent">
+			
+				<xc:ccMessages></xc:ccMessages>
 
 				<xp:callback></xp:callback>
 

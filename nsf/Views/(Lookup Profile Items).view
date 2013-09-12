@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<view name='(Lookup Profile Items)' alias='ProfileItemsLU' xmlns='http://www.lotus.com/dxl'
+ version='9.0' replicaid='C1257BE1003E4E81' hide='web' showinmenu='false'
+ publicaccess='false' designerversion='8.5.3' unreadmarks='none' onopengoto='lastopened'
+ onrefresh='displayindicator' headers='beveled' opencollapsed='false' showresponsehierarchy='true'
+ showmargin='true' shrinkrows='false' extendlastcolumn='false' showhierarchies='false'
+ unreadcolor='black' rowlinecount='1' headerlinecount='1' rowspacing='1' bgcolor='white'
+ altrowcolor='#efefef' totalscolor='black' headerbgcolor='white' boldunreadrows='false'
+ evaluateactions='false' allownewdocuments='false' allowcustomizations='true'
+ hidemarginborder='false' marginwidth='0px' marginbgcolor='white' uniquekeys='false'>
+<noteinfo noteid='506' unid='811B7611B7B844A4C1257BE3004128B6' sequence='9'>
+<created><datetime dst='true'>20130911T135142,62+02</datetime></created>
+<modified><datetime dst='true'>20130911T140433,81+02</datetime></modified>
+<revised><datetime dst='true'>20130911T140433,80+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130911T140433,80+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130911T135142,68+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT (Form="UserDatabase" : "User") &amp; Profiles != ""</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='Profiles' width='10'
+ resizable='true' separatemultiplevalues='true' sortnoaccent='true' sortnocase='true'
+ showaslinks='false' categorized='true' twisties='true'><font style='bold'/><columnheader
+ title='Profiles'><font size='9pt' style='bold'/></columnheader></column>
+<column sort='ascending' hidedetailrows='false' itemname='Form' width='10'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='false' sortnocase='true'
+ showaslinks='false'><columnheader title='Form'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='Active' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='Active'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='$2' width='17.6250' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='Path/ UserName'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>@If(
+	Form="UserDatabase"; Path; UserName)</formula></code></column>
+<column hidedetailrows='false' itemname='Server' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='Server'><font size='9pt' style='bold'/></columnheader></column></view>
+

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xe:dynamicViewPanel id="dynamicViewPanel1" var="rowData" dataTableStyleClass="lotusTable" 
+		rows="20">
+	
+		<xe:this.data>
+			<xp:dominoView 
+				var="view1" 
+				databaseName="#{configBean.unpluggedLogPath}" 
+				viewName="#{compositeData.viewName}"></xp:dominoView>
+		</xe:this.data>
+
+		<xp:eventHandler event="onColumnClick" submit="true" refreshMode="complete">
+			<xp:this.action><![CDATA[#{javascript:
+						var url="index.xsp?to=messageLog&action=openDocument&documentId=" + rowData.getNoteID();
+context.redirectToPage(url);}]]></xp:this.action>
+		</xp:eventHandler>
+
+		<xp:this.facets>
+			<xp:pager layout="Previous Group Next" partialRefresh="true" id="pager1" xp:key="footer" for="dynamicViewPanel1"
+				rendered="#{javascript:com.teamstudio.unplugged.Utils.isPagerVisible(this)}">
+			</xp:pager>
+		</xp:this.facets>
+
+	</xe:dynamicViewPanel>
+
+</xp:view>

@@ -1,93 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex" xmlns:xc="http://www.ibm.com/xsp/custom">
 
 	<div class="lotusHeader">
 		<h1>Error logs</h1>
 	</div>
 
-	<xp:tabbedPanel id="tabbedPanel1" selectedTab="#{currentUserBean.activeErrorLogTab}" partialRefresh="true" refreshId="tabbedPanel1" partialExecute="true">
-	
+	<xp:tabbedPanel id="tabbedPanel1" selectedTab="#{currentUserBean.activeErrorLogTab}" partialRefresh="true" refreshId="tabbedPanel1"
+		partialExecute="true">
+
 		<xp:tabPanel label="By user" id="tabPanel1">
 			<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="tabbedPanel1">
 				<xp:this.action><![CDATA[#{javascript:currentUserBean.setActiveErrorLogTab('tabPanel1');}]]></xp:this.action>
 			</xp:eventHandler>
-	
-			
-			<xe:dynamicViewPanel id="dynamicViewPanel1" var="rowData">
-				<xe:this.data>
-					<xp:dominoView var="view1" 
-						databaseName="#{configBean.unpluggedLogPath}" 
-						viewName="Client Logs by User"></xp:dominoView>
-				</xe:this.data>
-				
-				<xp:eventHandler event="onColumnClick" submit="true" refreshMode="complete">	
-					<xp:this.action><![CDATA[#{javascript:
-						var url="index.xsp#content=messageLog&action=openDocument&documentId=" + rowData.getNoteID();
-context.redirectToPage(url);}]]></xp:this.action>
-				</xp:eventHandler>
-			</xe:dynamicViewPanel>
+
+			<xc:ccDynamicLogView viewName="Client Logs by User" />
 		</xp:tabPanel>
-		
+
 		<xp:tabPanel label="By database" id="tabPanel2">
 			<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="tabbedPanel1">
 				<xp:this.action><![CDATA[#{javascript:currentUserBean.setActiveErrorLogTab('tabPanel2');}]]></xp:this.action>
 			</xp:eventHandler>
-		
-			<xe:dynamicViewPanel id="dynamicViewPanel2" var="rowData">
-				<xe:this.data>
-					<xp:dominoView var="view1" 
-						databaseName="#{configBean.unpluggedLogPath}" 
-						viewName="Client Logs by Database"></xp:dominoView>
-				</xe:this.data>
-				
-				<xp:eventHandler event="onColumnClick" submit="true" refreshMode="complete">	
-					<xp:this.action><![CDATA[#{javascript:
-						var url="index.xsp#content=messageLog&action=openDocument&documentId=" + rowData.getNoteID();
-context.redirectToPage(url);}]]></xp:this.action>
-				</xp:eventHandler>
-			</xe:dynamicViewPanel>
+
+			<xc:ccDynamicLogView viewName="Client Logs by Database" />
+
 		</xp:tabPanel>
-		
+
 		<xp:tabPanel label="By type" id="tabPanel3">
 			<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="tabbedPanel1">
 				<xp:this.action><![CDATA[#{javascript:currentUserBean.setActiveErrorLogTab('tabPanel3');}]]></xp:this.action>
 			</xp:eventHandler>
-		
-			<xe:dynamicViewPanel id="dynamicViewPanel3" var="rowData">
-				<xe:this.data>
-					<xp:dominoView var="view1" 
-						databaseName="#{configBean.unpluggedLogPath}" 
-						viewName="Client Logs by Type"></xp:dominoView>
-				</xe:this.data>
-				
-				<xp:eventHandler event="onColumnClick" submit="true" refreshMode="complete">	
-					<xp:this.action><![CDATA[#{javascript:
-						var url="index.xsp#content=messageLog&action=openDocument&documentId=" + rowData.getNoteID();
-context.redirectToPage(url);}]]></xp:this.action>
-				</xp:eventHandler>
-			</xe:dynamicViewPanel>
+
+			<xc:ccDynamicLogView viewName="Client Logs by Type" />
+
 		</xp:tabPanel>
-		
+
 		<xp:tabPanel label="By error" id="tabPanel4">
 			<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="tabbedPanel1">
 				<xp:this.action><![CDATA[#{javascript:currentUserBean.setActiveErrorLogTab('tabPanel4');}]]></xp:this.action>
 			</xp:eventHandler>
-		
-			<xe:dynamicViewPanel id="dynamicViewPanel4" var="rowData">
-				<xe:this.data>
-					<xp:dominoView var="view1" 
-						databaseName="#{configBean.unpluggedLogPath}" 
-						viewName="Client Logs by Error"></xp:dominoView>
-				</xe:this.data>
-				
-				<xp:eventHandler event="onColumnClick" submit="true" refreshMode="complete">	
-					<xp:this.action><![CDATA[#{javascript:
-						var url="index.xsp#content=messageLog&action=openDocument&documentId=" + rowData.getNoteID();
-context.redirectToPage(url);}]]></xp:this.action>
-				</xp:eventHandler>
-			</xe:dynamicViewPanel>
+
+			<xc:ccDynamicLogView viewName="Client Logs by Error" />
+
 		</xp:tabPanel>
-		
+
 	</xp:tabbedPanel>
-	
+
 </xp:view>

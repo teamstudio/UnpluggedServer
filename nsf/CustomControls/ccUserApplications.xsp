@@ -1,164 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
 
-	<xp:this.data>
-		<xp:dominoView var="vwAppsByAssignment" viewName="Dbs"></xp:dominoView>
-	</xp:this.data>
-	
-	<xp:div id="apps" rendered="#{javascript:!docUser.isNewNote()}" styleClass="lotusSection" style="margin-top: 20px;">
-		<h2><span class="lotusLeft">Applications</span></h2>
-		
+	<xp:div id="apps" styleClass="lotusSection" style="margin-top: 20px;">
+		<h2>
+			<span class="lotusLeft">Applications</span>
+		</h2>
+
 		<div class="lotusSectionBody">
-		
+
 			<xp:text escape="true" id="computedField2" value="No applications have been assigned to this user">
 				<xp:this.rendered><![CDATA[#{javascript:getComponent("dataTable1").getRowCount()==0}]]></xp:this.rendered>
 			</xp:text>
-			
-				<xp:dataTable id="dataTable1" rows="30" var="app" styleClass="lotusTable" headerClass="lotusSort"
-					rowClasses="even,odd">
-					<xp:this.rendered><![CDATA[#{javascript:getComponent("dataTable1").getRowCount()>0}]]></xp:this.rendered>
-			
-					<xp:this.value><![CDATA[#{javascript:var userApps = [];
-					
-			try {
-			
-			var userName = compositeData.userName
-			var userNameAbbr = @Name("[Abbreviate]", userName);
-			
-			var vec = vwAppsByAssignment.getAllEntriesByKey( userNameAbbr, true);
-	
-			var ve:NotesViewEntry = vec.getFirstEntry();
-			while (null != ve) {
-			
-				var colValues = ve.getColumnValues();
-				var server = colValues.get(2);
-				var path = colValues.get(3);
-				var active = (colValues.get(1).indexOf('enabled')>-1);
-				
-				userApps.push( {
-					"server" : server,
-					"path" : path,
-					"active" : active,
-					"name" : configBean.getAppName(server, path),
-					"unid" : ve.getUniversalID()
-				});
-			
-				var tmp = vec.getNextEntry(ve);
-				ve.recycle();
-				ve = tmp;
-			}
-			
-			vec.recycle();
-			
-			var profiles = compositeData.profiles;
-			
-			dBar.debug("t " + typeof profiles);
-			
-			for (var i=0; i < profiles.length; i++) {
-				if (profiles[i].length>0) {
-				
-					dBar.debug("profile: " + profiles[i] );
-				
-					var vec = vwAppsByAssignment.getAllEntriesByKey( profiles[i], true);
-					var ve:NotesViewEntry = vec.getFirstEntry();
-					while (null != ve) {
-					
-						var colValues = ve.getColumnValues();
-						var server = colValues.get(2);
-						var path = colValues.get(3);
-						var active = (colValues.get(1).indexOf('enabled')>-1);
-									
-						userApps.push( {
-							"server" : server,
-							"path" : path,
-							"active" : active,
-							"name" : configBean.getAppName(server, path),
-							"unid" : ve.getUniversalID()
-						});
-					
-						var tmp = vec.getNextEntry(ve);
-						ve.recycle();
-						ve = tmp;
-					}
-					
-					vec.recycle();
-				}
-			}
-			
-			/*
-			userApps.sort(function (a, b) {
-			if (a.naam < b.naam)
-			     return -1;
-			  if (a.naam > b.naam)
-			    return 1;
-			  return 0;
-				
-			});*/
-			
-			
-			} catch (e) {
-				dBar.error(e);
-			}
-			
-			return userApps;
-			}]]></xp:this.value>
-			
+
+			<xp:dataTable id="dataTable1" rows="30" var="app" styleClass="lotusTable" headerClass="lotusSort" rowClasses="even,odd">
+				<xp:this.rendered><![CDATA[#{javascript:getComponent("dataTable1").getRowCount()>0}]]></xp:this.rendered>
+
+				<xp:this.value><![CDATA[#{javascript:compositeData.user.getApplications();}]]></xp:this.value>
+
 				<xp:column id="column3" styleClass="lotusFirstCell" style="width: 25px;">
-					
-					<xp:link escape="true" text="" id="link1" title="Click to enable/ disable">
-					
-						<xp:text tagName="i" id="icon" escape="false" disableTheme="false">
-							<xp:this.styleClass>
-							<![CDATA[#{javascript:"glyphicons unp-glyph-icon " + (app.active ? "unp-glyph-green ok_2" : "unp-glyph-red remove_2")}
-							]]>
-							</xp:this.styleClass>
-						</xp:text>
-				
-						<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="apps">
-							<xp:this.action><![CDATA[#{javascript:if ( configBean.toggleActive( database.getDocumentByUNID( app.unid) )) {
-							vwAppsByAssignment.refresh();
-							}}]]></xp:this.action>
-						</xp:eventHandler>
-					</xp:link>
+
+					<xc:ccToggleActive itemLabel="application" targetId="#{javascript:app.getUnid()}" refreshId="apps"
+						isEnabled="#{javascript:app.getEnabled()=='true'}">
+					</xc:ccToggleActive>
 					
 				</xp:column>
-				
+
 				<xp:column id="column4">
 					<xp:this.facets>
 						<xp:text xp:key="header" value="Title" />
 					</xp:this.facets>
-					
+
 					<xp:link escape="true" text="#{app.name}" id="link2">
 						<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
 							<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1")
 	.show("application", {
-		documentId : app.unid,
+		documentId : app.getUnid(),
 		action : 'openDocument'
 })}]]></xp:this.action>
 						</xp:eventHandler>
 					</xp:link>
-	
+
 				</xp:column>
-				
+
 				<xp:column id="column1">
 					<xp:this.facets>
 						<xp:text xp:key="header" value="Server" />
 					</xp:this.facets>
-	
-					<xp:text value="#{javascript:(app.server.length>0 ? app.server : '(current server)')}" />
+
+					<xp:text value="#{javascript:(app.getServer().length>0 ? app.getServer() : '(current server)')}" />
 				</xp:column>
-				
+
 				<xp:column id="column2">
 					<xp:this.facets>
 						<xp:text xp:key="header" value="Path" />
 					</xp:this.facets>
-	
+
 					<xp:text value="#{app.path}" />
 				</xp:column>
-					
+
 			</xp:dataTable>
 		</div>
 	</xp:div>
-
-
 </xp:view>

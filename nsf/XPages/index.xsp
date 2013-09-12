@@ -14,9 +14,11 @@
 				<xc:ccUsers xp:key="users" />
 				<xc:ccUser xp:key="user" />
 				<xc:ccUserImport xp:key="userImport" />
+				
+				<xc:ccProfiles xp:key="profiles" />
 
 				<xc:ccDevices xp:key="devices" />
-				<xc:ccDevices xp:key="device" />
+				<xc:ccDevice xp:key="device" />
 				
 				<xc:ccSettings xp:key="settings" />
 

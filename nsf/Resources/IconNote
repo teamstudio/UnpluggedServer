@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note default='true' class='icon' xmlns='http://www.lotus.com/dxl' version='9.0'
  replicaid='C1257BE1003E4E81'>
-<noteinfo noteid='126' unid='98D70C5519CED964852576D6006AFB3A' sequence='152'>
+<noteinfo noteid='126' unid='98D70C5519CED964852576D6006AFB3A' sequence='156'>
 <created><datetime>20100226T142831,30-05</datetime></created>
-<modified><datetime dst='true'>20130909T132039,51+02</datetime></modified>
-<revised><datetime dst='true'>20130909T132039,49+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130909T132039,49+02</datetime></lastaccessed>
+<modified><datetime dst='true'>20130912T134448,10+02</datetime></modified>
+<revised><datetime dst='true'>20130912T134448,08+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130912T134448,08+02</datetime></lastaccessed>
 <addedtofile><datetime dst='true'>20130909T132033,58+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Teamstudio Template Development/O=Teamstudio Inc.</name><name
 >CN=Mark Leusink/O=LinQed</name></updatedby>
@@ -36,5 +36,5 @@ REREHkRERERERERERERERERE4Q==
 <item name='$FlagsNoRefresh'><text/></item>
 <item name='$Daos'><text>0</text></item>
 <item name='$TITLE'><text>Teamstudio Unplugged 2.4 DEV
-#2Teamstudio Unplugged 2.4</text></item></note>
+#1Teamstudio Unplugged 2.x DEV</text></item></note>
 

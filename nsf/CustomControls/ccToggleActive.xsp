@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	<xp:link escape="true" text="" id="link2" title="Click to enable/disable">
+	
+		<xp:text tagName="i" id="icon" escape="false" disableTheme="false">
+			<xp:this.styleClass>
+				<![CDATA[#{javascript:"glyphicons unp-glyph-icon " + (compositeData.isEnabled ? "unp-glyph-green ok_2" : "unp-glyph-red remove_2")}
+			]]>
+			</xp:this.styleClass>
+		</xp:text>
+		
+		<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="#{compositeData.refreshId}">
+			<xp:this.action><![CDATA[#{javascript:configBean.toggleActive( compositeData.targetId || compositeData.targetDoc ) }]]></xp:this.action>
+			<xp:this.script><![CDATA[var isEnabled = "#{javascript:compositeData.isEnabled}";
+	
+	return (isEnabled=='true' ? confirm("Are you sure you want to disable this #{javascript:compositeData.itemLabel}?") : true);
+	]]></xp:this.script>
+
+		</xp:eventHandler>
+
+	</xp:link>
+
+
+</xp:view>

@@ -1,38 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" readonly="true">
 
-	<xp:div rendered="#{javascript:facesContext.getMessages().hasNext()}" >
+	<xp:repeat id="repeatMsgs" rows="30" var="curMsg"
+			indexVar="curIndex">
+			<xp:this.value><![CDATA[#{javascript:var m = [];
+var sm = facesContext.getMessages();
 
-		<xp:this.styleClass><![CDATA[#{javascript:var msg:javax.faces.application.FacesMessage = facesContext.getMessages().next();
-var sev = msg.getSeverity();
+while (sm.hasNext()) {
+	var msg = sm.next();
+	var sev = msg.getSeverity();
+	
+	if (sev.equals( javax.faces.application.FacesMessage.SEVERITY_INFO ) ) {
+		
+		m.push( {id: "x", text: msg.getSummary(), type : "info" } );
+		
+	} else if (sev.equals( javax.faces.application.FacesMessage.SEVERITY_WARN ) ) {
+		
+		m.push( {id: "x", text: msg.getSummary(), type : "warning" } );
+		
+	} else if (sev.equals( javax.faces.application.FacesMessage.SEVERITY_ERROR ) ||
+		sev.equals( javax.faces.application.FacesMessage.SEVERITY_FATAL ) ) {
 
-var alertTypeClass = "";
+		m.push( {id: "x", text: msg.getSummary(), type : "error" } );
+	
+	} else {
+	
+		m.push( {id: "x", text: msg.getSummary(), type : "info" } );
+	}
 
-if ( sev == javax.faces.application.FacesMessage.SEVERITY_INFO ) {
-	alertTypeClass ="lotusInfo";
-} else if ( sev == javax.faces.application.FacesMessage.SEVERITY_ERROR ) {
-alertTypeClass ="lotusError";
 }
 
-"lotusMessage " + alertTypeClass}]]></xp:this.styleClass>
+return m;}]]></xp:this.value>
 
-		<a class="close" data-dismiss="alert" href="#">&#215;</a>
+			<xp:panel id="msg" style="margin-bottom: 15px; padding: 7px" readonly="true">
 
-		<xp:repeat id="repeat1" rows="30" var="message" disableOutputTag="true">
+				<xp:this.styleClass><![CDATA[#{javascript:switch (curMsg.type) {
+	case "confirm":
+		return "lotusMessage lotusChunk lotusConfirm";
+		break;
+	case "warning":
+		return "lotusMessage lotusChunk lotusWarning";
+		break;
+	case "error":
+		return "lotusMessage lotusChunk";
+		break;		
+	default: 		//info
+		return "lotusMessage lotusChunk lotusInfo"	;
+		break;	
+}}]]></xp:this.styleClass>
 
-			<xp:this.value><![CDATA[#{javascript:var it = facesContext.getMessages();
+				<div style="display:inline-block; width: 20px; vertical-align:top">
+		
+					<xp:text tagName="i" >
+						<xp:this.styleClass><![CDATA[#{javascript:var alertTypeClass = "";
+			
+			if ( curMsg.type == "info" ) {
+				alertTypeClass ="circle_info";
+			} else if ( curMsg.type == "warning" ) {
+				alertTypeClass ="circle_exclamation_mark";
+			} else if ( curMsg.type == "error" ) {
+				alertTypeClass ="circle_remove";
+ 			}
+			
+			"glyphicons " + alertTypeClass + " unp-glyph-icon unp-glyph-grey"}]]></xp:this.styleClass>
+					
+					</xp:text>
+		
+				</div>
 
-var m = new java.util.Vector();
+				<div style="display:inline-block; margin-left: 3px;">
+					<xp:text escape="false"
+						value="#{javascript:curMsg.text}" disableTheme="true">
+					</xp:text>
+				</div>
+				<xp:br>
+					<xp:this.rendered><![CDATA[#{javascript:curIndex+1 < getComponent("repeatMsgs").getRowCount()}]]></xp:this.rendered>
+				</xp:br>
 
-while(it.hasNext()) {
-m.add(it.next());
-}
-
-return m;
-}]]></xp:this.value>
-			<xp:text escape="false" id="computedField1" value="#{message.summary}"></xp:text><br />
+				<xp:link escape="true" styleClass="lotusDelete" text="" title="Close this message"
+					id="link1" disableTheme="true">
+					<img src="/oneuiv2/images/blank.gif" alt="sluiten" />
+					<span class="lotusAltText">X</span>
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[dojo.fadeOut( {
+       node:"#{id:msg}",
+        onEnd: function(node) {
+        	dojo.destroy(node);
+                }
+}).play();		]]></xp:this.script>
+					</xp:eventHandler></xp:link>
+			</xp:panel>
 		</xp:repeat>
 
-	</xp:div>
+		<xp:scriptBlock id="scriptBlock1">
+			<xp:this.value><![CDATA[XSP.scrollWindow = function scrollWindow(x,y) {
+	//scrolling disabled
+}]]></xp:this.value>
+		</xp:scriptBlock>
+
 
 </xp:view>
+

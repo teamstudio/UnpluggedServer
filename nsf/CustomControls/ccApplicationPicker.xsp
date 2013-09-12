@@ -24,7 +24,7 @@
 
 						<xp:text value=".." />
 
-						<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="entries" disableValidators="true">
+						<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="entries" disableValidators="true" execMode="partial" execId="entries">
 							<xp:this.action><![CDATA[#{javascript:var currentFolder = viewScope.get("appPickerFolder");
 							viewScope.put("appPickerFolder", @Left(currentFolder, "\\") );}]]></xp:this.action>
 						</xp:eventHandler>
@@ -45,7 +45,7 @@
 
 							<xp:text value="#{entry.name}" />
 
-							<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="entries" disableValidators="true">
+							<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="entries" disableValidators="true"  execMode="partial" execId="entries">
 								<xp:this.action><![CDATA[#{javascript:viewScope.put("appPickerFolder", entry.getPath() )}]]></xp:this.action>
 							</xp:eventHandler>
 
@@ -62,6 +62,7 @@
 									<xp:this.script><![CDATA[
 									var fullPath = "#{javascript:entry.escapedPath}";
 									dojo.byId("#{id:inputAppPath}").value = fullPath;
+									dojo.byId("#{id:inputAppServer}").value = "";
 									XSP.closeDialog('#{id:dialog1}')]]></xp:this.script>
 								</xp:eventHandler>
 
@@ -75,7 +76,5 @@
 		</xp:div>
 
 	</xe:dialog>
-
-
 
 </xp:view>

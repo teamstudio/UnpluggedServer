@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='utf-8'?>
+<agent name='(web settings)' alias='(websettings)' xmlns='http://www.lotus.com/dxl'
+ version='9.0' replicaid='C1257BE1003E4E81' hide='v3' runaswebuser='true'
+ publicaccess='false' designerversion='8.5.3'>
+<noteinfo noteid='57e' unid='0D226147045E4E9CC1257BE40046189A' sequence='1'>
+<created><datetime dst='true'>20130912T144538,18+02</datetime></created>
+<modified><datetime dst='true'>20130912T144539,31+02</datetime></modified>
+<revised><datetime dst='true'>20130912T144539,30+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130912T144539,30+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130912T144539,30+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt Vargish/O=Teamstudio</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<designchange><datetime dst='true'>20130911T082515,28-04</datetime></designchange>
+<trigger type='agentlist'/>
+<documentset type='runonce'/><code event='options'><lotusscript>Option Public
+Option Declare
+
+
+</lotusscript></code><code event='declarations'><lotusscript>Dim gEvalReturn As Variant
+
+
+
+</lotusscript></code><code event='initialize'><lotusscript>Sub Initialize
+	Dim s As New NotesSession
+	Dim db As NotesDatabase
+	Set db = s.currentdatabase
+	
+	Dim docContext As NotesDocument
+	Set docContext = s.Documentcontext
+	Dim docSettings As NotesDocument
+	Set docSettings = getSettingsDocument()
+	
+	Dim sKey As String, sLN As String, sAction As String
+	Dim isUpdate As Boolean
+	
+	If (docContext.Hasitem("NewLicenseNumber") And docContext.Hasitem("NewKey")) Then 
+		'if it's an update lets get the entered key &amp; license off the doc and remove the values
+		isUpdate = True
+		sKey =  docContext.Getitemvalue("NewKey")(0)
+		sLN = docContext.Getitemvalue("NewLicenseNumber")(0)
+		docContext.Removeitem("NewLicenseNumber")
+		docContext.Removeitem("NewKey")
+		docContext.Replaceitemvalue "Action", "Update"
+	Else
+		'query the current key
+		sKey= docSettings.SKIKEY(0)
+		sLN = docSettings.SKILN(0)
+		docContext.Replaceitemvalue "Action", "Query"
+	End If
+	
+	
+	If sLN&lt;&gt;"" And sKey&lt;&gt;"" Then
+		Dim licenseInfo As Variant
+		
+		docContext.Replaceitemvalue "LicenseNumber", sLN
+		'we may not want to return this thru web interface to make it harder to grab the key 
+		docContext.Replaceitemvalue "Key", sKey 
+ 
+		On Error GoTo returnInvalid
+		Set licenseInfo = readLicense(sKey, sLN)
+		On Error GoTo 0
+		
+		If Not licenseInfo.isValid Then
+			
+			docContext.Replaceitemvalue "Status", "Invalid" 
+		
+		else
+		
+			If (isUpdate) Then
+				docSettings.Replaceitemvalue "SKIKEY", sKey
+				docSettings.Replaceitemvalue "SKILN", sLN
+				If(Not docSettings.save( True, False )) Then
+					docContext.Replaceitemvalue "Status", "Error saving settings"
+				End If
+			End If
+			
+			docContext.Replaceitemvalue "LicensedUsers", licenseInfo.LicensedUsers
+			
+			If Not licenseInfo.IsPermanentKey Then
+				docContext.Replaceitemvalue "Expires", licenseInfo.LSExpirationDate
+			Else
+				docContext.Replaceitemvalue "Expires", ""
+			End If
+			
+		End If
+		
+	Else
+
+		docContext.Replaceitemvalue "Status", "Empty" 
+		
+	End If
+
+
+	
+exitSub:
+	
+	Exit Sub
+	
+returnInvalid:
+	
+	docContext.Replaceitemvalue "Status", "Invalid"
+	Resume exitSub
+	
+End Sub
+
+
+
+</lotusscript></code><code event='getSettingsDocument'><lotusscript>Private Function getSettingsDocument() As NotesDocument
+	Execute({
+		Use "LibUnplugged" : set gEvalReturn = getSettings()
+	})
+	Set getSettingsDocument = gEvalReturn
+	Set gEvalReturn = Nothing
+End Function
+
+
+
+</lotusscript></code><code event='readLicense'><lotusscript>Private Function readLicense(key As String, licenseNo As String) As Variant
+	'MsgBox "lic = " &amp;  licenseNo &amp; " key = " &amp; key
+	Execute({
+		Use "libSKI" : set gEvalReturn = GetSerialKeyInfo("} &amp; key &amp; {", "} &amp; licenseNo &amp; {")
+	})
+	Set readLicense = gEvalReturn
+	Set gEvalReturn = nothing
+	Exit Function
+End Function</lotusscript></code>
+<rundata processeddocs='0' exitcode='0'>
+<agentmodified><datetime dst='true'>20130911T082513,85-04</datetime></agentmodified>
+<agentrun><datetime dst='true'>20130911T082824,50-04</datetime></agentrun>
+<runlog>Started running agent 'web settings|websettings' on 09/11/2013 08:28:24 AM
+Ran LotusScript code
+Done running agent 'web settings|websettings' on 09/11/2013 08:28:24 AM
+</runlog></rundata></agent>
+

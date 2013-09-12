@@ -2,9 +2,8 @@
  * Unplugged logo green: #55ba47
  * darker: #2c7d20
  */
-
 body.lotusui {
-	font:75%/1.5em Arial, Helvetica, sans-serif;
+	font: 75%/ 1.5em Arial, Helvetica, sans-serif;
 }
 
 .lotusui .lotusContent {
@@ -12,7 +11,7 @@ body.lotusui {
 }
 
 table tr {
-	vertical-align:top;
+	vertical-align: top;
 }
 
 .lotusBanner {
@@ -31,127 +30,181 @@ table tr {
 	overflow: hidden;
 	background: #222;
 	background: -moz-linear-gradient(top, #474747 0%, #111 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #474747), color-stop(100%, #111));
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#474747', endColorstr='#111111', GradientType=0);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #474747),
+		color-stop(100%, #111) );
+	filter: progid : DXImageTransform.Microsoft.gradient ( startColorstr =
+		'#474747', endColorstr = '#111111', GradientType = 0 );
 }
 
-.lotusMenu li.lotusSelected a, .portlet-menu li.lotusSelected a, .lotusMenu h3.lotusSelected, .portlet-menu h3.lotusSelected {
+.lotusMenu li.lotusSelected a,.portlet-menu li.lotusSelected a,.lotusMenu h3.lotusSelected,.portlet-menu h3.lotusSelected
+	{
 	color: #fff !important;
 	margin: 0;
 	padding-left: 20px;
 	background-color: #55ba47;
 	background-image: -moz-linear-gradient(#55ba47 0%, #2c7d20 100%);
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#55ba47), to(#2c7d20));
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#55ba47),
+		to(#2c7d20) );
 	border-width: 1px 0;
 	border-color: #43a536;
 }
 
-.lotusBanner ul.lotusUtility li a, .lotusBanner ul li span.lotusUser {
-padding: 40px 8px 0 8px;
+.lotusBanner ul.lotusUtility li a,.lotusBanner ul li span.lotusUser {
+	padding: 40px 8px 0 8px;
 }
 
 li a img {
 	margin-right: 6px !important;
 	width: 16px;
-	height: 16px;	
+	height: 16px;
 }
 
 table.lotusFormTable td:first-child {
-	width: 15%;	
+	width: 15%;
+}
+
+table.lotusFormTable div.subOption {
+	margin-top: 10px;
+	margin-left: 15px;
 }
 
 .lotusForm h2 {
-	margin: 15px 15px 10px 15px;
+	margin: 7px 10px;
+}
+
+table.lotusFormTable {
+	padding-top:5px;
+}
+
+/*style for radio/ checkbox*/
+table.xspCheckBox,table.xspRadioButton,.checkBoxGroup table,.radioGroup table
+	{
+	border-collapse: collapse;
+}
+
+table.xspRadioButton td,table.xspCheckBox td,.checkBoxGroup table td,.radioGroup table td
+	{
+	margin-bottom: 0;
+	padding-top: 0;
+	padding-bottom: 0 !important;
+}
+
+table.xspRadioButton td:first-child,table.xspCheckBox td:first-child,.checkBoxGroup table td:first-child,.radioGroup table td:first-child
+	{
+	padding-left: 0 !important;
 }
 
 /* reset width of checkboxes / radio buttons */
-.xspRadioButton label, .xspCheckBox label {
-	font-weight: normal !important;	
+.xspRadioButton label, .xspCheckBox label, label.xspCheckBox {
+	font-weight: normal !important;
 }
-.xspRadioButton td, .xspCheckBox td {
+
+.xspRadioButton td,.xspCheckBox td {
 	width: inherit !important;
 }
 
+table.xspCheckBox input,table.xspRadioButton input {
+	margin-right: 5px;
+}
+
 /* zebra style tables */
-tr.odd, .lotusAltRow {
+tr.odd,.lotusAltRow {
 	background: #eeeeee;
+}
+.lotusAltRow td {
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;	
 }
 
 /* icon in buttons */
-button > img, a > img {
+button>img,a>img {
 	margin-right: 7px;
 	width: 15px;
-	height: 15px;	
+	height: 15px;
 }
 
 /*box for apps*/
 div.box {
 	border: 1px solid #ccc;
-	margin-bottom:10px;
+	margin-bottom: 10px;
 }
+
 div.box .header {
-	padding: 7px;
+	padding: 6px;
 	background: #eee;
 	border-bottom: 1px solid #ccc;
 }
-div.box .users {
-	padding: 7px;
+
+div.box .body {
+	padding: 6px;
 }
+
 div.box table {
-	border:0;
-	margin:0;
-	padding:0;
+	border: 0;
+	margin: 0;
+	padding: 0;
 	border-spacing: 0;
 	border-collapse: collapse;
 }
+
 div.box td {
 	padding: 0 5px 0 0;
 }
 
 .input-small {
-	width: 70px;	
+	width: 70px;
 }
 
 /*alignment of Glyphicons*/
 .lotusMenu li {
-	padding: 5px 0;	
+	padding: 5px 0;
 }
+
 .lotusMenu li a {
 	line-height: 18px !important;
-
 }
+
 .lotusMenu .glyphicons {
 	padding-left: 44px;
 	margin-top: -23px;
 }
 
 i.unp-glyph-icon {
-	padding-left: 20px;	
+	padding-left: 18px;
 }
+
 i.unp-glyph-icon:before {
 	font-size: 16px;
 	line-height: 0;
 }
+
 /*colored glyphicons*/
 i.unp-glyph-green:before {
 	color: #55ba47;
 }
+
 i.unp-glyph-red:before {
 	color: red;
 }
+
 i.unp-glyph-gold:before {
-	color: #E2D10D;
+	color: #f5cb22;
 }
+
 i.unp-glyph-blue:before {
 	color: blue;
 }
 
+i.unp-glyph-grey:before {
+	color: #333;
+}
+
 /*app picker dialog*/
 .unpDialogPicker {
- 	height: 25em;
- 	overflow:auto;
- 	overflow-x:hidden;
- 	margin: 10px;"
+	height: 25em;
+	overflow: auto;
+	overflow-x: hidden;
+	margin: 10px; "
 	padding: 3px;
 	border: 1px solid #b7b7b7;
 	cursor: pointer;
@@ -159,30 +212,41 @@ i.unp-glyph-blue:before {
 	overflow-x: hidden;
 	-moz-scrollbars-horizontal: none;
 }
+
 .unpDialogPicker ul {
-	margin:0;
+	margin: 0;
 	padding-left: 0;
 }
+
 .unpDialogPicker li {
 	
 }
+
 .unpDialogPicker li a {
-	display:block;	
+	display: block;
 	padding-left: 4px;
 	line-height: 24px;
 }
+
 .unpDialogPicker li.odd {
 	background: #eeeeee;
 }
 
+.unpDialogPicker i {
+	padding-right: 5px;
+}
+
+input.wide {
+	width: 150px;
+}
+
 /*dashboard info boxes */
 .infobox {
-  display: inline-block;
-  width: 165px;
-  height: 52px;
-  color: #555;
-  background-color: #FFF;
-  
+	display: inline-block;
+	width: 165px;
+	height: 52px;
+	color: #555;
+	background-color: #FFF;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
@@ -190,35 +254,51 @@ i.unp-glyph-blue:before {
 	-webkit-box-shadow: 0 2px 5px #eee;
 	-moz-box-shadow: 0 2px 5px #eee;
 	box-shadow: 0 2px 5px #eee;
-  margin: -1px 20px 20px -1px;
-  padding: 8px 3px 6px 9px;
-  border: 1px solid #ccc;
-  vertical-align: middle;
-  text-align: left;
-  position: relative;
+	margin: -1px 20px 20px -1px;
+	padding: 8px 3px 6px 9px;
+	border: 1px solid #ccc;
+	vertical-align: middle;
+	text-align: left;
+	position: relative;
+	cursor: pointer;
 }
+
 .infobox>.infobox-icon {
 	display: inline-block;
 	vertical-align: top;
 	width: 33px;
 	padding-left: 9px;
 }
-.infobox > .infobox-data {
-  display: inline-block;
-  border: none;
-  border-top-width: 0;
-  font-size: 13px;
-  text-align: left;
-  line-height: 21px;
-  min-width: 80px;
-  padding-left: 8px;
-  position: relative;
-  top: 0;
+
+.infobox>.infobox-data {
+	display: inline-block;
+	border: none;
+	border-top-width: 0;
+	font-size: 13px;
+	text-align: left;
+	line-height: 21px;
+	min-width: 80px;
+	padding-left: 8px;
+	position: relative;
+	top: 0;
 }
-.infobox > .infobox-data > .infobox-data-number {
-  display: block;
-  font-size: 22px;
-  margin: 2px 0 4px;
-  position: relative;
-  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.15);
+
+.infobox>.infobox-data>.infobox-data-number {
+	display: block;
+	font-size: 22px;
+	margin: 2px 0 4px;
+	position: relative;
+	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.15);
 }
+
+/*wrap the items in a listtextbox*/
+.listTextBoxWrap .lotusFilters > span {
+	float: left;
+}
+.listTextBoxWrap span + a > img {
+	float: left;
+}
+
+.dijitTextBox + a {
+	margin-left: 10px;	
+} 

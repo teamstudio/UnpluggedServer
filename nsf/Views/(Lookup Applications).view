@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='utf-8'?>
+<view name='(Lookup Applications)' alias='AppsLU' xmlns='http://www.lotus.com/dxl'
+ version='9.0' replicaid='C1257BE1003E4E81' hide='web' showinmenu='false'
+ publicaccess='false' designerversion='8.5.3' unreadmarks='none' onopengoto='lastopened'
+ onrefresh='displayindicator' headers='beveled' opencollapsed='false' showresponsehierarchy='true'
+ showmargin='true' shrinkrows='true' extendlastcolumn='true' showhierarchies='false'
+ unreadcolor='black' rowlinecount='9' headerlinecount='1' rowspacing='1' bgcolor='white'
+ altrowcolor='#efefef' totalscolor='black' headerbgcolor='white' boldunreadrows='false'
+ evaluateactions='false' allownewdocuments='false' allowcustomizations='false'
+ hidemarginborder='true' marginwidth='10px 0px 0px' marginbgcolor='white'
+ uniquekeys='false'>
+<noteinfo noteid='516' unid='E27F8CFF43895807C1257BE300454293' sequence='13'>
+<created><datetime dst='true'>20130911T143630,27+02</datetime></created>
+<modified><datetime dst='true'>20130911T165131,76+02</datetime></modified>
+<revised><datetime dst='true'>20130911T165131,75+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130911T165131,75+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130911T143631,41+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT Form = "UserDatabase"</formula></code>
+<actionbar bgcolor='white' bordercolor='black'>
+<actionbuttonstyle bgcolor='white'/><font color='system'/><border style='solid'
+ width='0px 0px 1px'/>
+<sharedactionref id='2'>
+<action title='New Application'><imageref name='userdevicesnew.gif'/><code
+ event='click'><formula>@Command([Compose];"UserDatabase")</formula></code><code
+ event='hidewhen'><formula>(!@IsMember("[Admin]";@UserRoles))</formula></code><code
+ event='label'><formula>"New Application"</formula></code></action></sharedactionref>
+<sharedactionref id='8'>
+<action title='Profiles...\+  Add profiles to selected' align='right'><imageref
+ name='profiles.gif'/><code event='click'><formula>@Command([RunAgent];"ProfileAddToSel")</formula></code></action></sharedactionref>
+<sharedactionref id='9'>
+<action title='Profiles...\-  Remove profiles from selected' align='right'><imageref
+ name='profiles.gif'/><code event='click'><formula>@Command([RunAgent];"(ProfileRemoveFromSel)")</formula></code></action></sharedactionref>
+<action title='_Edit Document' showinbar='false' systemcommand='edit'/>
+<action title='_Print...' showinbar='false' systemcommand='print'/>
+<action title='_Delete' showinbar='false' systemcommand='delete'/>
+<action title='C_ut' showinbar='false' systemcommand='cut'/>
+<action title='_Copy' showinbar='false' systemcommand='copy'/>
+<action title='Copy as Document _Link' showinbar='false' systemcommand='copyasdoclink'/>
+<action title='Copy as _Table' showinbar='false' systemcommand='copyastable'/>
+<action title='P_aste' showinbar='false' systemcommand='paste'/>
+<action title='_Open' showinbar='false' systemcommand='open'/>
+<sharedactionref id='4'>
+<action title='Disable' showinrightbuttonmenu='true' align='right'><imageref
+ name='Disabled.gif'/><code event='click'><formula>@Command([RunAgent]; "Disable")</formula></code><code
+ event='hidewhen'><formula>(!@IsMember("[Admin]";@UserRoles))</formula></code><code
+ event='label'><formula>"Disable"</formula></code></action></sharedactionref>
+<sharedactionref id='5'>
+<action title='Enable' showinrightbuttonmenu='true' align='right'><imageref
+ name='Enabled.gif'/><code event='click'><formula>@Command([RunAgent]; "Enable")</formula></code><code
+ event='hidewhen'><formula>(!@IsMember("[Admin]";@UserRoles))</formula></code><code
+ event='label'><formula>"Enable"</formula></code></action></sharedactionref></actionbar>
+<column sort='ascending' hidedetailrows='false' itemname='$5' width='6' resizable='true'
+ separatemultiplevalues='true' sortnoaccent='false' sortnocase='true' showaslinks='false'
+ categorized='true' twisties='true'><font style='bold'/><columnheader title='server'><font
+ size='9pt' style='bold'/></columnheader><numberformat legacy='true' format='general'
+ varying='true' punctuated='false' parens='false' percent='false' bytes='false'/><code
+ event='value'><formula>@If(Server!=""; Server; " Current server")</formula></code><twistieimage
+><imageref database='0000000000000000' name='ui_expand.gif'/></twistieimage></column>
+<column sort='ascending' hidedetailrows='false' itemname='Path' width='15.6250'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='false' sortnocase='true'
+ showaslinks='false'><font color='#002f80' style='bold'/><columnheader title='path'><font
+ size='9pt' style='bold'/></columnheader><numberformat legacy='true' format='general'
+ varying='true' punctuated='false' parens='false' percent='false' bytes='false'/><twistieimage
+><imageref database='0000000000000000' name='ui_expand.gif'/></twistieimage></column>
+<column hidedetailrows='false' itemname='Active' width='8.3750' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'
+ showasicons='true'><columnheader title='Active'><font size='9pt' style='bold'/></columnheader><numberformat
+ legacy='true' format='general' varying='true' punctuated='false' parens='false'
+ percent='false' bytes='false'/></column>
+<column hidedetailrows='false' itemname='AutoLaunchApp' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='AutoLaunchApp'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' listseparator='comma' itemname='$3' width='28'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='false'><columnheader title='Assigned To'><font size='9pt' style='bold'/></columnheader><numberformat
+ legacy='true' format='general' varying='true' punctuated='false' parens='false'
+ percent='false' bytes='false'/><code event='value'><formula>@Trim(Profiles:@Name([Abbreviate];UserName))</formula></code><twistieimage
+><imageref database='0000000000000000' name='ui_expand.gif'/></twistieimage></column>
+<column hidedetailrows='false' itemname='ShowOnWS' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='ShowOnWS'><font size='9pt' style='bold'/></columnheader></column></view>
+

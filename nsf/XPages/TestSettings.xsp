@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+
+	<xp:button value="Run Agent" id="button1">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action><![CDATA[#{javascript:var newDoc:NotesDocument = database.createDocument();
+var agent:NotesAgent = database.getAgent("CSVImport");
+
+newDoc.replaceItemValue("Path", "c:\\temp\\import_batch.csv");
+
+if(agent!=null){
+	agent.runWithDocumentContext(newDoc);
+	var msg = "";
+	for(itm in newDoc.getItems()){
+		var type = itm.getType();
+		var vVal;
+		var sVal = "";
+		if(lotus.domino.Item.TEXT==type){
+			sVal = itm.getValueString();
+		}else if(lotus.domino.Item.NUMBERS==type){
+			vVal = itm.getValueInteger();
+			sVal = "" + vVal;
+		}else if(lotus.domino.Item.DATETIMES==type){
+			vVal = itm.getDateTimeValue();
+			sVal = vVal.getLocalTime();
+		}
+		
+	
+		msg += itm.getName() + " = " + sVal + "\n";
+	}
+	
+	getComponent("ta").setValue(msg);
+
+}}]]></xp:this.action>
+		</xp:eventHandler></xp:button>
+	<xp:br></xp:br>
+	<xp:br></xp:br>response:
+	<xp:br></xp:br>
+	
+	<xp:br></xp:br>
+	<xp:inputTextarea id="ta"
+		style="width:545.0px;height:131.0px">
+	</xp:inputTextarea></xp:view>

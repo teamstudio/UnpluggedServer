@@ -4,7 +4,28 @@
 	<div class="lotusHeader">
 		<h1>Dashboard</h1>
 	</div>
+	
+	<!-- apps -->
+	<xp:div styleClass="infobox" id="infoboxApps">
+		<div class="infobox-icon">
+			<i class="glyphicons list" />
+		</div>
+		
+		<div class="infobox-data">
+			<xp:text styleClass="infobox-data-number" disableTheme="true" escape="true" 
+				id="computedField6" value="#{configBean.numApps}"></xp:text>
+			<div class="infobox-content">apps&#160;(
+				<xp:text disableTheme="true" escape="false" value="#{configBean.numAppsActive}"></xp:text>
+		&#160;active)</div>
+		</div>
 
+		<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusMain">
+			<xp:this.action><![CDATA[#{javascript:currentUserBean.setSelectedMenuOption("applications");
+			getComponent("dynamicContent1").show("applications")}]]></xp:this.action>
+		</xp:eventHandler>
+	</xp:div>
+
+	<!-- users -->
 	<xp:div styleClass="infobox" id="infoboxUsers">
 		<div class="infobox-icon">
 			<i class="glyphicons group" />
@@ -19,11 +40,13 @@
 			</div>
 		</div>
 		
-		<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
-			<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("users")}]]></xp:this.action>
+		<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusMain">
+			<xp:this.action><![CDATA[#{javascript:currentUserBean.setSelectedMenuOption("users");
+			getComponent("dynamicContent1").show("users")}]]></xp:this.action>
 		</xp:eventHandler>
 	</xp:div>
 	
+	<!-- devices -->
 	<xp:div styleClass="infobox" id="infoboxDevices">
 		<div class="infobox-icon">
 			<i class="glyphicons ipad" />
@@ -37,31 +60,33 @@
 		&#160;active)</div>
 		</div>
 
-		<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
-			<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("devices")}]]></xp:this.action>
+		<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusMain">
+			<xp:this.action><![CDATA[#{javascript:currentUserBean.setSelectedMenuOption("devices");
+			getComponent("dynamicContent1").show("devices")}]]></xp:this.action>
 		</xp:eventHandler>
 	</xp:div>
 	
 	<br />
 	
-	<xp:div styleClass="infobox" id="infoboxApps">
+	<!-- profiles -->
+	<xp:div styleClass="infobox" id="div2">
 		<div class="infobox-icon">
-			<i class="glyphicons list" />
+			<i class="glyphicons notes" />
 		</div>
 		
 		<div class="infobox-data">
 			<xp:text styleClass="infobox-data-number" disableTheme="true" escape="true" 
-				id="computedField6" value="#{configBean.numApps}"></xp:text>
-			<div class="infobox-content">apps&#160;(
-				<xp:text disableTheme="true" escape="false" value="#{configBean.numAppsActive}"></xp:text>
-		&#160;active)</div>
+				id="computedField4" value="#{configBean.numProfiles}"></xp:text>
+			<div class="infobox-content">profiles</div>
 		</div>
-
-		<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
-			<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("applications")}]]></xp:this.action>
+		
+		<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusMain">
+			<xp:this.action><![CDATA[#{javascript:currentUserBean.setSelectedMenuOption("profiles");
+			getComponent("dynamicContent1").show("profiles")}]]></xp:this.action>
 		</xp:eventHandler>
 	</xp:div>
 	
+	<!-- licensedUsers -->
 	<xp:div styleClass="infobox" id="div1">
 		<div class="infobox-icon">
 			<i class="glyphicons certificate" />
@@ -73,9 +98,30 @@
 			<div class="infobox-content">licensed users</div>
 		</div>
 		
-		<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
-			<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("settings")}]]></xp:this.action>
+		<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusMain">
+			<xp:this.action><![CDATA[#{javascript:currentUserBean.setSelectedMenuOption("settings");
+			getComponent("dynamicContent1").show("settings")}]]></xp:this.action>
 		</xp:eventHandler>
 	</xp:div>
+	
+	<!-- remaininig licenses -->
+	<xp:div styleClass="infobox" id="div4">
+		<div class="infobox-icon">
+			<i class="glyphicons certificate" />
+		</div>
+		
+		<div class="infobox-data">
+			<xp:text styleClass="infobox-data-number" disableTheme="true" escape="true" 
+				id="computedField7" value="#{configBean.licensesRemaining}"></xp:text>
+			<div class="infobox-content">licenses remaining</div>
+		</div>
+		
+		<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusMain">
+			<xp:this.action><![CDATA[#{javascript:currentUserBean.setSelectedMenuOption("settings");
+			getComponent("dynamicContent1").show("settings")}]]></xp:this.action>
+		</xp:eventHandler>
+	</xp:div>
+	
+	<br />
 
 </xp:view>

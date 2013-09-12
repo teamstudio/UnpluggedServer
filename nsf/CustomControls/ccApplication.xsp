@@ -6,11 +6,17 @@
 	</xp:this.data>
 	
 	<div class="lotusHeader">
-		<h1>Application</h1>
+		<xp:text escape="false" tagName="h1" id="computedField6">
+			<xp:this.value><![CDATA[#{javascript:if (app.isNew() ) {
+	return "New application";
+} else {
+
+	return "Application <b>" + (app.getName().length > 0 ? app.getName() : app.getPath() ) + "</b>";
+	
+}}]]></xp:this.value>
+		</xp:text>
 	</div>
-
-	<xp:messages id="messages1"></xp:messages>
-
+	
 	<xp:panel readonly="#{javascript:!app.isEditable()}">
 	
 		<xp:table styleClass="lotusFormTable lotusForm">
@@ -22,21 +28,18 @@
 				<td>
 
 					<div>
-						<div style="display: inline-block; width: 100px; vertical-align: top;">
-							<xc:ccApplicationPicker rendered="#{javascript:app.isEditable()}"></xc:ccApplicationPicker>
-						</div>
 
-						<xp:div style="display: inline-block;" id="appInfo">
+						<xp:div style="display: inline-block; width: 275px;" id="appInfo">
 							<xp:div>
 								<div>
-									<div style="display: inline-block; width: 60px;">Server:</div>
-									<div style="display: inline-block;">
+									<div style="display: inline-block; width: 50px; vertical-align:top">Server:</div>
+									<div style="display: inline-block; margin-bottom:2px;">
 									
-										<xp:inputText id="inputText1" value="#{app.server}" rendered="#{javascript:app.isEditable()}">
+										<xp:inputText id="inputAppServer" style="width: 200px" value="#{app.server}" rendered="#{javascript:app.isEditable()}">
 										</xp:inputText>
 
 										<xp:text escape="true" id="computedField3" rendered="#{javascript:!app.isEditable()}">
-											<xp:this.value><![CDATA[#{javascript:if (app.path.length==0) {
+											<xp:this.value><![CDATA[#{javascript:if (app.getServer().length==0) {
 	return "(current server)";
 } else {
 
@@ -47,13 +50,17 @@
 									</div>
 								</div>
 								<div>
-									<div style="display: inline-block; width: 60px;">Path:</div>
+									<div style="display: inline-block; width: 50px; vertical-align:top">Path:</div>
 									<div style="display: inline-block;">
-										<xp:inputText id="inputAppPath" value="#{app.path}" />
+										<xp:inputText id="inputAppPath" value="#{app.path}" style="width: 200px"  />
 									</div>
 								</div>
 							</xp:div>
 						</xp:div>
+						
+						<div style="display: inline-block; width: 100px; vertical-align: top;">
+							<xc:ccApplicationPicker rendered="#{javascript:app.isEditable()}"></xc:ccApplicationPicker>
+						</div>
 					</div>
 
 				</td>
@@ -63,14 +70,17 @@
 				<td class="lotusFormLabel">
 					<label>Profiles:</label>
 				</td>
-				<td>
-					<xp:checkBoxGroup id="checkBoxGroup1" value="#{app.profiles}">
+				<td class="checkBoxGroup">
+					
+					<xp:checkBoxGroup id="checkBoxGroup1" value="#{app.profiles}" >
 						<xp:selectItems>
 							<xp:this.value><![CDATA[#{javascript:var lu = @DbColumn( @DbName(), "Profiles", 1);
 	return lu;}]]></xp:this.value>
 						</xp:selectItems>
 					</xp:checkBoxGroup>
-					new profile: <xp:inputText id="inputText4" value="#{app.newProfile}"></xp:inputText>
+					<xp:div styleClass="subOption" rendered="#{javascript:app.isEditable()}">
+						Create a new profile:<xp:inputText style="margin-left:5px" id="inputText4" value="#{app.newProfile}"></xp:inputText>
+					</xp:div>
 				</td>
 			</tr>
 
@@ -78,28 +88,34 @@
 				<td class="lotusFormLabel">
 					<label>Users:</label>
 				</td>
-				<td>
+				<td class="listTextBoxWrap">
 
-					<xe:djextListTextBox id="djextListTextBox1" multipleSeparator="," multipleTrim="true" defaultValue="" value="#{app.users}"
-						displayLabel="true" title="Users">
-					</xe:djextListTextBox>
-					<xe:valuePicker id="valuePicker8" for="djextListTextBox1" pickerText="Add">
-						<xe:this.dataProvider>
-							<xe:dominoViewValuePicker viewName="UsersAll" labelColumn="UserName"></xe:dominoViewValuePicker>
-						</xe:this.dataProvider>
-					</xe:valuePicker>
+					<div>
+						<xe:djextListTextBox id="djextListTextBox1" multipleSeparator="," multipleTrim="true" defaultValue="" value="#{app.users}"
+							displayLabel="true" title="Users">
+						</xe:djextListTextBox>
+					</div>
+					
+					<div style="clear:both">
+						<xe:namePicker id="namePicker3"
+							for="djextListTextBox1" pickerText="Add">
+							<xe:this.dataProvider>
+								<xe:dominoViewNamePicker
+									viewName="UsersAll" labelColumn="UserName">
+								</xe:dominoViewNamePicker>
+							</xe:this.dataProvider>
+						</xe:namePicker>
+					</div>
+								
 				</td>
 			</tr>
-
-
-
 
 			<tr class="lotusFormFieldRow">
 				<td class="lotusFormLabel">
 					<label>Status:</label>
 				</td>
-				<td>
-					<xp:radioGroup id="radioGroup1" value="{app.enabled}">
+				<td class="radioGroup">
+					<xp:radioGroup id="radioGroup1" value="#{app.enabled}">
 						<xp:selectItem itemLabel="Enabled" itemValue="true"></xp:selectItem>
 						<xp:selectItem itemLabel="Disabled" itemValue="false"></xp:selectItem>
 					</xp:radioGroup>
@@ -111,7 +127,7 @@
 					<label>Selection formula:</label>
 				</td>
 				<td>
-					<xp:inputText id="inputText2" value="#{app.selectionFormula}"></xp:inputText>
+					<xp:inputText id="inputText2" value="#{app.selectionFormula}" style="width: 200px"></xp:inputText>
 				</td>
 			</tr>
 
@@ -119,15 +135,16 @@
 				<td class="lotusFormLabel">
 					<label>Device types:</label>
 				</td>
-				<xp:td id="tdDeviceTypes">
+				<xp:td id="tdDeviceTypes" styleClass="radioGroup">
 					<xp:radioGroup id="radioGroup2" value="#{app.sendToAllDevices}">
 						<xp:selectItem itemLabel="All device types" itemValue="true"></xp:selectItem>
 						<xp:selectItem itemLabel="Selected types only" itemValue="false"></xp:selectItem>
 						<xp:eventHandler event="onchange" submit="true" refreshMode="partial" refreshId="tdDeviceTypes" disableValidators="true"></xp:eventHandler>
 					</xp:radioGroup>
 
-					<xp:div rendered="#{javascript:!app.getSendToAllDevices().equals('true')}">
-						Choose device types that should receive the application:
+					<xp:div rendered="#{javascript:!app.getSendToAllDevices().equals('true')}"
+						styleClass="subOption">
+						Device types that should receive the application:
 						<br />
 						<xp:checkBoxGroup id="checkBoxGroup2" value="#{app.deviceTypesEnabled}">
 							<xp:selectItem itemLabel="iOS (iPhone, iPad)" itemValue="3"></xp:selectItem>
@@ -143,7 +160,7 @@
 				<td class="lotusFormLabel">
 					<label>Attachments:</label>
 				</td>
-				<xp:td id="tdSendAttachments">
+				<xp:td id="tdSendAttachments" styleClass="radioGroup">
 					<xp:radioGroup id="radioGroup3" value="#{app.sendAttachments}">
 						<xp:selectItem itemLabel="Send to device" itemValue="true"></xp:selectItem>
 						<xp:selectItem itemLabel="Do not send to device" itemValue="false"></xp:selectItem>
@@ -152,8 +169,9 @@
 						</xp:eventHandler>
 					</xp:radioGroup>
 
-					<xp:div rendered="#{javascript:app.getSendAttachments().equals('true')}">
-						Attachment types to send: &#160;
+					<xp:div rendered="#{javascript:app.getSendAttachments().equals('true')}"
+						styleClass="subOption">
+						Extensions of file types to (blank for all): &#160;
 						<xp:inputText id="inputText3" value="#{app.attachmentExtensions}" multipleSeparator=","></xp:inputText>
 					</xp:div>
 
@@ -165,7 +183,7 @@
 				<td class="lotusFormLabel">
 					<label>Show on workspace:</label>
 				</td>
-				<td>
+				<td class="radioGroup">
 					<xp:radioGroup id="radioGroup4" value="#{app.showOnWorkspace}">
 						<xp:selectItem itemLabel="Yes" itemValue="true"></xp:selectItem>
 						<xp:selectItem itemLabel="No" itemValue="false"></xp:selectItem>
@@ -177,7 +195,7 @@
 				<td class="lotusFormLabel">
 					<label>Auto launch when Unplugged starts:</label>
 				</td>
-				<td>
+				<td class="radioGroup">
 					<xp:radioGroup id="radioGroup5" value="#{app.autoLaunch}">
 						<xp:selectItem itemLabel="Yes" itemValue="true"></xp:selectItem>
 						<xp:selectItem itemLabel="No" itemValue="false"></xp:selectItem>
@@ -188,9 +206,60 @@
 			<tr>
 				<td class="lotusFormFooter" colspan="3">
 
-					<xc:ccButtons dataSource="#{app}" dataSourceName="app" listContentKey="applications" isNew="#{javascript:app.isNew()}"
-						isEditable="#{javascript:app.isEditable()}" typeName="Application">
-					</xc:ccButtons>
+					<!-- edit -->
+					<xp:button value="Edit" id="button2" rendered="#{javascript:!app.isEditable()}">
+						<i class="glyphicons unp-glyph-icon pencil" />
+						<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusContent">
+							<xp:this.action><![CDATA[#{javascript:app.setEditable(true)}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+				
+					<!-- save -->
+					<xp:button value="Save" id="button1" rendered="#{javascript:app.isEditable()}">
+						<i class="glyphicons unp-glyph-icon floppy_disk" />
+				
+						<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusContent">
+							<xp:this.action><![CDATA[#{javascript:if (app.save() ){
+								getComponent("dynamicContent1").show("applications"); 
+							}}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+					
+					<!-- remove -->
+					<xp:button value="Delete" id="button3" rendered="#{javascript:!app.isNew()}">
+						<i class="glyphicons unp-glyph-icon remove_2" />
+				
+						<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusContent">
+							<xp:this.action><![CDATA[#{javascript:if (app.remove() ){
+								getComponent("dynamicContent1").show("applications") ;
+								viewScope.remove("serverTab");
+							}}]]></xp:this.action>
+							<xp:this.script><![CDATA[return confirm("Are you sure you want to permanently delete this application?");]]></xp:this.script>
+						</xp:eventHandler>
+					</xp:button>
+					
+					<!-- new docs: cancel returns to view -->
+					<xp:link escape="true" text="Cancel" id="link3" rendered="#{javascript:app.isNew()}">
+						<xp:eventHandler event="onclick" submit="true" refreshMode="partial" immediate="true" refreshId="dynamicContent1">
+							<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("applications")}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+				
+					<!-- existing docs, read mode: back to view -->
+					<xp:link escape="true" text="Back to list" id="link2" rendered="#{javascript:!app.isEditable()}">
+						<xp:eventHandler event="onclick" submit="true" refreshMode="partial" immediate="true" refreshId="dynamicContent1">
+							<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("applications")}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+				
+					<!-- existing docs, edit mode: back to read mode -->
+					<xp:link escape="true" text="Cancel" id="link1">
+						<xp:this.rendered><![CDATA[#{javascript:!app.isNew() && app.isEditable()}]]></xp:this.rendered>
+						<xp:eventHandler event="onclick" submit="true" refreshMode="partial" immediate="true" refreshId="dynamicContent1">
+							<xp:this.action><![CDATA[#{javascript:app.setEditable(false)}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+					
 
 				</td>
 			</tr>

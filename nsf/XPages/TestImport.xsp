@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+Fill out first two&#160;fields to set; leave empty to query current values<xp:br></xp:br>
+
+	<xp:br></xp:br>License Number:&#160;&#160;
+	<xp:inputText id="LN"></xp:inputText>
+	<xp:br></xp:br>
+		<xp:br></xp:br>
+	Key:&#160;&#160;&#160;<xp:inputText id="Key"></xp:inputText>
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+	<xp:button value="Run Agent" id="button1">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action><![CDATA[#{javascript:var newDoc:NotesDocument = database.createDocument();
+var agent:NotesAgent = database.getAgent("websettings");
+var key = getComponent("Key").getValue();
+var ln = getComponent("LN").getValue();
+
+if(key!="" && ln!=""){
+	newDoc.replaceItemValue("NewKey", key);
+	newDoc.replaceItemValue("NewLicenseNumber", ln);
+}
+
+if(agent!=null){
+	agent.runWithDocumentContext(newDoc);
+	var msg = "";
+	for(itm in newDoc.getItems()){
+		var type = itm.getType();
+		var vVal;
+		var sVal = "";
+		if(lotus.domino.Item.TEXT==type){
+			sVal = itm.getValueString();
+		}else if(lotus.domino.Item.NUMBERS==type){
+			vVal = itm.getValueInteger();
+			sVal = "" + vVal;
+		}else if(lotus.domino.Item.DATETIMES==type){
+			vVal = itm.getDateTimeValue();
+			sVal = vVal.getLocalTime();
+		}
+		
+	
+		msg += itm.getName() + " = " + sVal + "\n";
+	}
+	
+	getComponent("ta").setValue(msg);
+	getComponent("Key").setValue("");
+	getComponent("LN").setValue("");
+}}]]></xp:this.action>
+		</xp:eventHandler></xp:button>
+	<xp:br></xp:br>
+	<xp:br></xp:br>response:
+	<xp:br></xp:br>
+	
+	<xp:br></xp:br>
+	<xp:inputTextarea id="ta"
+		style="width:545.0px;height:131.0px">
+	</xp:inputTextarea></xp:view>

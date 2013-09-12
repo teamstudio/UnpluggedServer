@@ -9,66 +9,52 @@
 		<h1>Settings</h1>
 	</div>
 	
-	<xp:panel readonly="#{javascript:!settingsObj.isEditable()}">
+	<xp:panel readonly="#{javascript:!settingsObj.isEditable()}" id="settings">
 
 		<table class="lotusFormTable lotusForm">
 			<tbody>
 	
 				<tr>
 					<td colspan="3" class="lotusFormTitle">
-	
 						<h2>License</h2>
-	
 					</td>
 				</tr>
 	
 				<tr class="lotusFormFieldRow">
 					<td class="lotusFormLabel" style="width: 22%">
+						<label>License number:</label>
+					</td>
+					<td>
+						<xp:text escape="true" id="computedField1" value="#{settingsObj.licenseNumber}"
+							rendered="#{!settingsObj.editLicense}"></xp:text>
+
+						<xp:inputText style="width: 175px" 
+							id="inputLicenseNumber" 
+							value="#{settingsObj.licenseNumber}" rendered="#{settingsObj.editLicense}"
+						></xp:inputText>
+						
+						<xp:link value="" style="margin-left: 35px;" id="button3" text="Edit license">
+							<xp:this.rendered><![CDATA[#{javascript:settingsObj.isEditable() && !settingsObj.isEditLicense()}]]></xp:this.rendered>
+							<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="settings" immediate="true">
+								<xp:this.action><![CDATA[#{javascript:settingsObj.setEditLicense(true)}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+
+
+					</td>
+					
+				</tr>
+				
+				<xp:tr styleClass="lotusFormFieldRow"
+					rendered="#{settingsObj.editLicense}">
+					<td class="lotusFormLabel" style="width: 22%">
 						<label>License key:</label>
 					</td>
 					<td>
-						<xp:text escape="true" id="computedField1" value="#{settingsObj.licenseKey}"></xp:text>
-	
-						<!--<xp:button value="Update" id="button1">
-							<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dialog1">
-							<xp:this.action><![CDATA[#{javascript:getComponent("dialog1").show();}]]></xp:this.action>
-							</xp:eventHandler></xp:button>
-							
-							<xe:dialog id="dialog1" title="Update license information">
-							
-							<table>
-							<tbody>
-							<tr>
-							<td>License number:</td>
-							<td>
-							<xp:inputText id="inputLicenseNumber"></xp:inputText>
-							</td>
-							</tr>
-							<tr>
-							<td>Key:</td>
-							<td>
-							<xp:inputText id="inputKey"></xp:inputText>
-							</td>
-							</tr>
-							</tbody>
-							</table>
-							
-							<xp:button value="Ok" id="button2">
-							<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusMain">
-							<xp:this.action><![CDATA[#{javascript:getComponent("dialog1").hide();}]]></xp:this.action>
-							</xp:eventHandler>
-							</xp:button>
-							<xp:link escape="true" text="Cancel" id="link1">
-							<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dialog1">
-							<xp:this.action><![CDATA[#{javascript:getComponent("dialog1").hide();}]]></xp:this.action>
-							</xp:eventHandler>
-							</xp:link>
-							</xe:dialog>
-							
-							
-						-->
+						<xp:inputText style="width: 175px" id="inputLicenseKey" value="#{settingsObj.licenseKey}"></xp:inputText>
 					</td>
-				</tr>
+				</xp:tr>
+				
 				<tr class="lotusFormFieldRow">
 					<td class="lotusFormLabel">
 						<label>Enabled users:</label>
@@ -82,7 +68,7 @@
 					</td>
 				</tr>
 				<tr class="lotusFormFieldRow">
-					<td class="lotusFormLabel">Expires:</td>
+					<td class="lotusFormLabel">Expiration date:</td>
 					<td>
 						<xp:text escape="true" id="computedField3" value="#{settingsObj.licenseExpirationDate}">
 							<xp:this.converter>
@@ -91,7 +77,7 @@
 						</xp:text>
 					</td>
 				</tr>
-	
+				
 				<tr>
 					<td colspan="3" class="lotusFormTitle">
 						<h2>Servers</h2>
@@ -101,10 +87,28 @@
 				<tr class="lotusFormFieldRow">
 					<td class="lotusFormLabel">Licensed servers:</td>
 					<td>
-						<xp:inputTextarea id="inputTextarea1" value="#{settingsObj.licensedServer}" style="width: 250px;">
+						<xp:inputTextarea id="inputTextarea1" value="#{settingsObj.licensedServer}" style="width: 250px;"
+							rendered="#{javascript:settingsObj.isEditable()}">
 							<xp:this.multipleSeparator><![CDATA[#{javascript:"\n"}]]></xp:this.multipleSeparator>
 						</xp:inputTextarea>
-	
+						
+						<xp:text escape="false" disableTheme="true" rendered="#{javascript:!settingsObj.isEditable()}"
+							value="#{settingsObj.licensedServer}">
+
+							<xp:this.converter>
+								<xp:customConverter getAsObject="#{javascript:return value;}">
+									<xp:this.getAsString><![CDATA[#{javascript:var n = [];
+						var it = value.iterator();
+						while (it.hasNext() ) {
+						n.push( @Name("[ABBREVIATE]", it.next())  );
+						}
+						return n.join("<br />");
+						}]]></xp:this.getAsString>
+								</xp:customConverter>
+							</xp:this.converter>
+						</xp:text>
+						
+						
 					</td>
 				</tr>
 	
@@ -113,78 +117,88 @@
 						<h2>Synchronization Logging</h2>
 					</td>
 				</tr>
-	
+				
 				<tr class="lotusFormFieldRow">
 					<td class="lotusFormLabel">
 						<label>Login:</label>
 					</td>
-					<td>
+					<td class="radioGroup">
 	
 						<xp:radioGroup id="radioGroup1" value="#{settingsObj.logLogin}" defaultValue="0" layout="lineDirection">
 							<xp:selectItem itemLabel="Off" itemValue="0"></xp:selectItem>
 							<xp:selectItem itemLabel="All" itemValue="1"></xp:selectItem>
 							<xp:selectItem itemLabel="Errors only" itemValue="2"></xp:selectItem>
+							<xp:eventHandler event="onchange" submit="true" refreshMode="partial" refreshId="settings" disableValidators="true"></xp:eventHandler>
 						</xp:radioGroup>
-
-						<xp:checkBoxGroup id="checkBoxGroup1" value="#{settingsObj.logLoginTypes}" layout="lineDirection">
-							<xp:selectItem itemLabel="Requests" itemValue="2"></xp:selectItem>
-							<xp:selectItem itemLabel="Responses" itemValue="4"></xp:selectItem>
-							<xp:selectItem itemLabel="Debug Info" itemValue="8"></xp:selectItem>
-						</xp:checkBoxGroup>
+						
+						<xp:div styleClass="subOption" rendered="#{javascript:!settingsObj.getLogLogin().equals('0')}">
+							<xp:checkBoxGroup id="checkBoxGroup1" value="#{settingsObj.logLoginTypes}" layout="lineDirection">
+								<xp:selectItem itemLabel="Requests" itemValue="2"></xp:selectItem>
+								<xp:selectItem itemLabel="Responses" itemValue="4"></xp:selectItem>
+								<xp:selectItem itemLabel="Debug Info" itemValue="8"></xp:selectItem>
+							</xp:checkBoxGroup>
+						</xp:div>
 	
 	
 					</td>
 				</tr>
-	
+				
 				<tr class="lotusFormFieldRow">
 					<td class="lotusFormLabel">
 						<label>Push:</label>
 						<br />
-						<div class="lotusMeta">(device sends updates)</div>
+						<div class="lotusMeta" style="font-weight: normal">(device sends updates)</div>
 					</td>
-					<td>
+					<td class="radioGroup">
 	
 						<xp:radioGroup id="radioGroup2" value="#{settingsObj.logPush}" defaultValue="0" layout="lineDirection">
 							<xp:selectItem itemLabel="Off" itemValue="0"></xp:selectItem>
 							<xp:selectItem itemLabel="All" itemValue="1"></xp:selectItem>
 							<xp:selectItem itemLabel="Errors only" itemValue="2"></xp:selectItem>
+							<xp:eventHandler event="onchange" submit="true" refreshMode="partial" refreshId="settings" disableValidators="true"></xp:eventHandler>
 						</xp:radioGroup>
 	
-						<xp:checkBoxGroup id="checkBoxGroup2" value="#{settingsObj.logPushTypes}" layout="lineDirection">
-							<xp:selectItem itemLabel="Requests" itemValue="2"></xp:selectItem>
-							<xp:selectItem itemLabel="Responses" itemValue="4"></xp:selectItem>
-							<xp:selectItem itemLabel="Debug Info" itemValue="8"></xp:selectItem>
-						</xp:checkBoxGroup>
+						<xp:div styleClass="subOption" rendered="#{javascript:!settingsObj.getLogPush().equals('0')}">
+							<xp:checkBoxGroup id="checkBoxGroup2" value="#{settingsObj.logPushTypes}" layout="lineDirection">
+								<xp:selectItem itemLabel="Requests" itemValue="2"></xp:selectItem>
+								<xp:selectItem itemLabel="Responses" itemValue="4"></xp:selectItem>
+								<xp:selectItem itemLabel="Debug Info" itemValue="8"></xp:selectItem>
+							</xp:checkBoxGroup>
+						</xp:div>
 	
-						<xp:checkBox text="Email user on update conflict" id="checkBox2" value="#{settingsObj.logPushNotifyUser}" checkedValue="1"
+						<xp:checkBox style="margin-top: 10px" text="Email user on update conflict" id="checkBox2" value="#{settingsObj.logPushNotifyUser}" checkedValue="1"
 							uncheckedValue="0">
 						</xp:checkBox>
 	
 	
 					</td>
 				</tr>
-	
+				
 				<tr class="lotusFormFieldRow">
 					<td class="lotusFormLabel">
 						<label>Pull:</label>
 						<br />
-						<div class="lotusMeta">(device retrieves updates)</div>
+						<div class="lotusMeta" style="font-weight: normal">(device retrieves updates)</div>
 					</td>
-					<td>
+					<td class="radioGroup">
 	
 						<xp:radioGroup id="radioGroup3" value="#{settingsObj.logPull}" defaultValue="0" layout="lineDirection">
 							<xp:selectItem itemLabel="Off" itemValue="0"></xp:selectItem>
 							<xp:selectItem itemLabel="All" itemValue="1"></xp:selectItem>
 							<xp:selectItem itemLabel="Errors only" itemValue="2"></xp:selectItem>
+							<xp:eventHandler event="onchange" submit="true" refreshMode="partial" refreshId="settings" disableValidators="true"></xp:eventHandler>
 						</xp:radioGroup>
 	
-						<xp:checkBoxGroup id="checkBoxGroup3" value="#{settingsObj.logPullTypes}" layout="lineDirection">
-							<xp:selectItem itemLabel="Requests" itemValue="2"></xp:selectItem>
-							<xp:selectItem itemLabel="Responses" itemValue="4"></xp:selectItem>
-							<xp:selectItem itemLabel="Debug Info" itemValue="8"></xp:selectItem>
-						</xp:checkBoxGroup>
+						<xp:div styleClass="subOption" rendered="#{javascript:!settingsObj.getLogPull().equals('0')}">
+							<xp:checkBoxGroup id="checkBoxGroup3" value="#{settingsObj.logPullTypes}" layout="lineDirection"
+													>
+								<xp:selectItem itemLabel="Requests" itemValue="2"></xp:selectItem>
+								<xp:selectItem itemLabel="Responses" itemValue="4"></xp:selectItem>
+								<xp:selectItem itemLabel="Debug Info" itemValue="8"></xp:selectItem>
+							</xp:checkBoxGroup>
+						</xp:div>
 	
-						<xp:checkBox text="Copy active note to log on failure" id="checkBox1" value="#{settingsObj.logPullCopyNoteOnFailure}"
+						<xp:checkBox style="margin-top: 10px" text="Copy active note to log on failure" id="checkBox1" value="#{settingsObj.logPullCopyNoteOnFailure}"
 							checkedValue="1" uncheckedValue="0">
 						</xp:checkBox>
 	
@@ -195,9 +209,9 @@
 					<td class="lotusFormLabel">
 						<label>Mail:</label>
 						<br />
-						<div class="lotusMeta">(device sends pending mail)</div>
+						<div class="lotusMeta" style="font-weight: normal">(device sends pending mail)</div>
 					</td>
-					<td>
+					<td class="radioGroup">
 	
 						<xp:radioGroup id="radioGroup4" value="#{settingsObj.logMail}" defaultValue="0" layout="lineDirection">
 							<xp:selectItem itemLabel="Off" itemValue="0"></xp:selectItem>
@@ -207,7 +221,7 @@
 	
 					</td>
 				</tr>
-	
+				
 				<tr>
 					<td colspan="3" class="lotusFormTitle">
 						<h2>Advanced</h2>
@@ -221,20 +235,21 @@
 							<xp:this.converter>
 								<xp:convertNumber type="number" integerOnly="true"></xp:convertNumber>
 							</xp:this.converter>
-						</xp:inputText>
-						KB
+						</xp:inputText>&#160;KB
 						<br />
 						(default value if not entered: 256 KB)
 					</td>
 				</tr>
 	
+				
+				<!-- actions -->
 				<tr>
 					<td class="lotusFormFooter" colspan="3">
 	
 						<xp:button value="Edit" id="button1" rendered="#{!settingsObj.editable}">
 							<i class="glyphicons unp-glyph-icon pencil" />
 						
-							<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
+							<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusContent">
 								<xp:this.action><![CDATA[#{javascript:settingsObj.setEditable(true);
 								}]]></xp:this.action>
 							</xp:eventHandler>
@@ -243,7 +258,7 @@
 						<xp:button value="Save" id="button2" rendered="#{settingsObj.editable}">
 							<i class="glyphicons unp-glyph-icon floppy_disk" />
 						
-							<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
+							<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusContent">
 								<xp:this.action><![CDATA[#{javascript:if (settingsObj.save() ){
 									settingsObj.setEditable(false);
 								}}]]></xp:this.action>
@@ -258,7 +273,6 @@
 	
 					</td>
 				</tr>
-	
 	
 			</tbody>
 		</table>
